@@ -1,0 +1,366 @@
+{
+  name: "The Judge",
+  description: "Look here at this little town, this candleflame in the darkness. Its very existence is an act of courage and faith. And Aratis has charged you to keep it: to settle its disputes; to chronicle its tales; to defend it from darkness and ruin. Take up your hammer, Judge. Your town needs you.",
+  backgrounds: [
+    {
+      name: "Legacy",
+      description: [
+        { flavor: "<p>You are the latest in a long line of Judges—born here, apprenticed to the prior Judge, and charged with the passing of the mantle. The Chronicle is a rich repository of lore, but there's no index, so good luck finding anything.</p>" },
+        { crunch: "<p>When you <strong><em>Know Things about the people or history of Stonetop</em></strong>, you have advantage.</p>" },
+        { crunch: "<p>When you <strong><em>spend days, weeks, or months poring over the Chronicle</em></strong>, ask the GM a question, and the GM will tell you what you learn in that time.</p>" },
+      ],
+    },
+    {
+      name: "Missionary",
+      description: [
+        { flavor: "<p>You are part of a larger order of Judges, sent here to protect the flickering flame of civilization. The Chronicle is relatively new; your position in town is far from certain. Add these Judges to the Neighbors section of the steading playbook (pick 2 more):</p>" },
+        {
+          checklist: {
+            optionsPrecheckable: [
+              { text: "Devin (from Marshedge)", prechecked: true },
+              { text: "Haeris (from Gordin's Delve)", prechecked: true },
+              { text: "Isalde (from the Manmarch)" },
+              { text: "Rahat (from Lygos)" },
+              { text: "Tejisha (from Barrier Pass)" },
+              { text: "Unz (from the Hillfolk)" },
+            ],
+          },
+        },
+        { crunch: "<p>When you <strong><em>call upon the Judge of another steading for aid or information</em></strong>, they are oathbound to give it. You are likewise oathbound to support them.</p>" },
+        { crunch: "<p>You have an aviary in addition to your usual choice of special possessions. When you <strong><em>send a message via trained bird</em></strong>, as is the way of the Judges of your order, the GM will tell you if and when you receive a response, and what it says.</p>" },
+      ],
+      grantsPossession: "Aviary",
+    },
+    {
+      name: "Prophet",
+      description: [
+        { flavor: "<p>The line of Judges was broken long ago, the Chronicle lost or fallen into ruin. Aratis has called you personally to her service through dreams, omens, and visions. Some in town resent the authority you've assumed.</p>" },
+        { crunch: "<p>When you <strong><em>spend a few days communing with Aratis about a threat facing Stonetop or civilization as a whole</em></strong>, roll +WIS: <strong>on a 7+</strong>, Aratis reveals the course of action she would have you take; <strong>on a 10+</strong>, you also hold 2 Sanction. While <strong><em>acting on her orders</em></strong>, spend 1 Sanction to add +1 to a roll you just made.</p>" },
+        {
+          has: { name: "Sanction", canBe: 2, start: "empty" },
+        },
+      ],
+    },
+  ],
+  instinct: [
+    {
+      name: "Ambition",
+      description: "To increase your status or influence.",
+    },
+    {
+      name: "Dispassion",
+      description: "To disregard emotion or sentiment.",
+    },
+    {
+      name: "Harmony",
+      description: "To seek a path that makes everyone happy.",
+    },
+    {
+      name: "Orthodoxy",
+      description: "To strictly adhere to rules and traditions.",
+    },
+    {
+      name: "Zeal",
+      description: "To judge quickly and without doubt.",
+    },
+  ],
+  appearance: [
+    { tag: "Age", items: ["eager youth", "in my prime", "showing my years"] },
+    { tag: "Voice", items: ["calm voice", "booming voice", "a voice that carries"] },
+    { tag: "Build", items: ["hard body", "powerful frame", "slim", "well-fed"] },
+    { tag: "Clothing", items: ["polished gear", "robes of office", "modest clothes"] },
+  ],
+  origin: [
+    {
+      location: "Stonetop",
+      naming: ["Arianrhod", "Caerwyn", "Einion", "Eleri", "Magda", "Nerys", "Trahaern", "Trefor"],
+    },
+    {
+      location: "Barrier Pass",
+      naming: ["Arinasai", "Bortachikhan", "Khadagan", "Khojin", "Odval", "Usun", "Yesui", "Yul"],
+    },
+    {
+      location: "Gordin's Delve",
+      naming: "Pick a name from any list",
+    },
+    {
+      location: "Marshedge",
+      naming: ["Briget", "Comhall", "Elnor", "Liadain", "Mirdach", "Onghus", "Somha", "Toal"],
+    },
+    {
+      location: "Lygos or some other southern town",
+      naming: ["Abrim", "Cassander", "Despina", "Hypatta", "Morecai", "Nomika", "Sofia", "Yose"],
+    },
+  ],
+  statModifiers: [2, 1, 1, 0, 0, -1],
+  damage: "d6",
+  hp: 20,
+  specialPossessions: {
+    pickNote: "Pick 1, in addition to your symbol of authority and scribe's kit",
+    pickCount: 1,
+    options: [
+      {
+        name: "Your symbol of authority",
+        description: "(pick 1):",
+        preselected: true,
+        pick: [
+          "◇◇ Black iron maul, utterly immune to all magic (<em>close, forceful, awkward</em>, +1 damage)",
+          "◇◇ Makerglass shield, etched with Aratis's symbol (<em>indestructible</em>, +1 armor, +1 Readiness on a Defend 7+)",
+          "◇ Helm set with a dark ice \"jewel.\" Grants advantage to resist mind-affecting magic.",
+        ],
+      },
+      {
+        name: "Scribe's tools",
+        description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
+        preselected: true,
+      },
+      {
+        name: "Aviary",
+        description: "thick gloves, bird hoods, tethers, seed, ◇ messenger birds, ◇ birdcages, etc.",
+      },
+      {
+        name: "Carpenter's tools",
+        description: "chisels, files, nails, pitch, ◇ prybars, ◇ saws, ◇◇ firkins, barrels, etc.",
+      },
+      {
+        name: "Engineer's tools",
+        description: "rulers, tapes, rods, plumb-bobs, ◇ tripods, ◇ block & tackles, wheelbarrow, etc.",
+      },
+      {
+        name: "Smithy",
+        description: "(or access to it): iron goods, ingots, thick gloves, ◇ tongs, ◇ bellows, an anvil, etc.",
+      },
+    ],
+  },
+  startingMovesNote: "You start with Censure, Chronicler of Stonetop, plus 2 more of your choice.",
+  startingMoveChoices: 2,
+  grantsMoves: ["Censure", "Chronicler of Stonetop"],
+  moves: [
+    {
+      name: "Aegis of Faith",
+      description: "<p>When you <strong><em>wield a shield</em></strong>, it can turn away spells, magical effects, and insubstantial attacks as if they were physical blows.</p>",
+    },
+    {
+      name: "Armored",
+      description: "<p>When you <strong><em>carry a shield</em></strong>, mark only ◆ (instead of ◆◆). Also, you can ignore the <em>cumbersome</em> tag on any armor you wear.</p><p>If you take this move at the start of play, add an ◇◇ iron hauberk, ◇◇ bronze cuirass, or ◇◇ scale coat to your inventory (all are 2 armor, <em>warm, cumbersome</em>).</p>",
+    },
+    {
+      name: "Bear Witness",
+      description: "<p>When you <strong><em>speak the truth with conviction and candor</em></strong>, none can doubt you. They might deny what you say, but in their hearts they recognize the truth.</p>",
+    },
+    {
+      name: "Break Bread",
+      description: "<p>When you <strong><em>share a proper meal with someone and each of you eats their fill</em></strong>, each of you recovers 1d8 (extra) HP.</p>",
+    },
+    {
+      name: "Bulwark",
+      description: "<p>When you <strong><em>Defend</em></strong>, you can spend 1 Readiness to stand fast, holding your position despite what befalls you.</p>",
+    },
+    {
+      name: "Censure",
+      description: "<p>When you <strong><em>first denounce an individual in your presence as an agent of chaos or anathema to civilization</em></strong>, they pick 1:</p><ul><li>They are ashamed, and act accordingly</li><li>They are doubtful, and hesitate, pause</li><li>They are afraid, and seek to escape</li><li>They are enraged, and lash out predictably (the next roll against them has advantage)</li></ul>",
+    },
+    {
+      name: "Castigate",
+      description: "<p>When you <strong><em>Censure someone</em></strong>, your voice deals 1d4 damage to them (<em>near, loud</em>, ignores armor).</p>",
+      requirement: {
+        level: 2,
+        moves: ["Censure"],
+      },
+    },
+    {
+      name: "Chronicler of Stonetop",
+      description: "<p>When you <strong><em>write up detailed session notes and share them with the other players</em></strong>, hold +1 Diligence.</p><p>You can spend 1 Diligence at any time to add +1 to a roll that you or a fellow player just made.</p>",
+      resource: { name: "Diligence", canBe: 3, start: "empty" },
+    },
+    {
+      name: "For the Greater Good",
+      description: "<p>When you <strong><em>Persuade someone to act in defense of their community or civilization at large</em></strong>, you have advantage.</p>",
+    },
+    {
+      name: "Hound of Aratis",
+      description: "<p>When you <strong><em>Seek Insight</em></strong>, you can always ask \"What here is tainted by chaos?\" for free, even on a 6-.</p>",
+    },
+    {
+      name: "Like a Dog with a Bone",
+      description: "<p>When you <strong><em>attack something you know to be tainted by chaos</em></strong>, deal +1d6 damage.</p>",
+      requirement: {
+        moves: ["Hound of Aratis"],
+      },
+    },
+    {
+      name: "Improved Stat",
+      description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
+      maxPicks: 3,
+    },
+    {
+      name: "Knowledge is Power",
+      description: "<p>When you <strong><em>roll 10+ to Know Things</em></strong>, you or an ally gain advantage on the next roll to act on what you learn.</p>",
+    },
+    {
+      name: "Many Hands Make Light Work",
+      description: "<p>When you <strong><em>jump in to help another character who just rolled</em></strong>, tell us how and ask the GM what else is required or what the consequences will be. If you accept, increase your ally's roll by +1.</p>",
+    },
+    {
+      name: "A Bundle of Sticks Unbroken",
+      description: "<p>When you <strong><em>Struggle as One</em></strong>, you and one ally of your choice have advantage.</p>",
+      requirement: {
+        moves: [
+          "Many Hands Make Light Work",
+        ],
+      },
+    },
+    {
+      name: "The Hammer and the Book",
+      description: "<p>When you <strong><em>strike a thing of supernatural chaos</em></strong>, roll +WIS: <strong>on a 10+</strong>, deal your damage and choose 1 from the list below; <strong>on a 7-9</strong>, deal damage and choose 1, but you also expose yourself to harm or unwanted attention.</p><ul><li>Deal +1d6 damage</li><li>Ignore the thing's armor or other defenses</li><li>Suppress one of its unnatural powers</li><li>Force it from its host</li></ul>",
+    },
+    {
+      name: "Truth or Consequences",
+      description: "<p>When you <strong><em>look into someone's eyes and gaze upon their soul</em></strong>, you can ask their player, \"Are you lying or hiding something from me?\" and get an honest answer. If the answer is \"Yes,\" you have advantage on your next roll against them.</p><p>When you <strong><em>lie or otherwise deceive someone through words</em></strong>, you have disadvantage on your next roll against them.</p>",
+    },
+    {
+      name: "Binding Arbitration",
+      description: "<p>When you <strong><em>bear witness to someone's promise or oath</em></strong>, henceforth you may ask their player if they have kept their word. They must answer honestly. The character need not be present. If <strong><em>they have broken their word</em></strong>, you gain advantage on all rolls against them until they admit their wrong and suffer an appropriate consequence (your call).</p>",
+      requirement: {
+        moves: ["Truth or Consequences"],
+      },
+    },
+    {
+      name: "Vision Unclouded",
+      description: "<p>When you <strong><em>Seek Insight</em></strong>, you can always ask \"What here is hidden by illusion or magic?\" for free, even on a 6-.</p>",
+    },
+    {
+      name: "Well-Read",
+      description: "<p>When you <strong><em>name the source in which you read about the matter at hand</em></strong>, roll +WIS to Know Things instead of +INT.</p>",
+    },
+    {
+      name: "A Mighty Rampart",
+      description: "<p>When you <strong><em>hold Readiness (from Defend)</em></strong>, you cannot be forced from your position. Also, you can spend 1 Readiness to completely ignore the effects/damage of an attack that you suffer.</p>",
+      requirement: {
+        level: 6,
+      },
+      replaces: "Bulwark",
+    },
+    {
+      name: "Armistice",
+      description: "<p>When you <strong><em>approach an enemy to negotiate in good faith</em></strong>, they will at least hear you out. Even the most debased and savage foe will delay violence until you've had your say.</p>",
+      requirement: {
+        level: 6,
+        moves: ["Bear Witness"],
+      },
+    },
+    {
+      name: "Condemn",
+      description: "<p>When you <strong><em>Censure someone</em></strong>, they are marked with a mystical brand that cannot be removed or hidden until you dismiss it. Any intelligent creature who sees the mark recognizes the bearer as an agent of chaos and anathema to civilization.</p>",
+      requirement: {
+        level: 6,
+        moves: ["Censure"],
+      },
+    },
+    {
+      name: "Proclamation",
+      description: "<p>When you <strong><em>Censure</em></strong>, you may denounce a group or faction as long as you can clearly identify them. Apply the effects of Censure to every member of that group, regardless of distance.</p>",
+      requirement: {
+        level: 6,
+        moves: ["Condemn"],
+      },
+    },
+    {
+      name: "Mirrorshield",
+      description: "<p>When you <strong><em>Defend with a shield</em></strong>, you can spend 1 Readiness to intercept a magical force and redirect it to a different target (or none).</p>",
+      requirement: {
+        level: 6,
+        moves: ["Aegis of Faith"],
+      },
+    },
+    {
+      name: "Superior Stat",
+      description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
+      requirement: {
+        level: 6,
+      },
+    },
+    {
+      name: "The Tower Eternal",
+      description: "<p>When you <strong><em>Defy Danger against magic</em></strong>, treat a result of 6- as a 7-9.</p>",
+      requirement: {
+        level: 6,
+      },
+    },
+  ],
+  backstory: [
+    {
+      name: "The Chronicle",
+      list: [
+        {
+          text: "<p>The Judge of Aratis is charged with maintaining the Chronicle, a history of the community, its people, their knowledge, and their traditions. The nature of the lore contained in the Chronicle depends on your Background, but it is more than a mere book; it is a physical place. Decide on its physical structure.</p>",
+        },
+        {
+          text: "<p>On the plus side, it… (choose 3)</p>",
+        },
+        {
+          choices: [
+            "… is a sturdy vault from the time of the Makers.",
+            "… has plenty of room to grow.",
+            "… is hidden underground.",
+            "… has but one entrance, magically sealed.",
+            "… bears minor magics to preserve its contents.",
+            "… is warded against spirits and magic.",
+            "… includes your living quarters & office.",
+          ],
+        },
+        {
+          text: "<p>But alas, it… (choose 2)</p>",
+        },
+        {
+          choices: [
+            "… sits on the outskirts, near the Old Wall.",
+            "… is cramped, chaotic, and overflowing.",
+            "… is little more than a crude cellar.",
+            "… seems to be haunted.",
+            "… contains a few dangerous artifacts.",
+          ],
+        },
+        {
+          text: "<p>Mark the location of the Chronicle on the Stonetop Playbook map.</p>",
+        },
+      ],
+    },
+    {
+      name: "The Lawkeeper",
+      list: [
+        {
+          text: "<p>Her Judges say that Aratis has been with humanity since they first stacked one stone upon another and called it home.</p>",
+        },
+        {
+          text: "<p>In Stonetop's Pavilion of the Gods, Aratis's shrine is… (pick 1)</p>",
+        },
+        {
+          choices: [
+            "… a hub of the community, a place of frequent rites, petitions, and celebrations",
+            "… used only on high holidays, for each home keeps its own shrine above the hearth",
+            "… neglected by most, tended only by you and a handful of believers",
+            "… a grim place of judgement and punishment, shunned by all but her chosen",
+            "… newly established, cramped and spare",
+          ],
+        },
+        {
+          text: "<p>Of her true disciples, Aratis demands… (choose 3)</p>",
+        },
+        {
+          choices: [
+            "… truth, honesty, and forthrightness",
+            "… hospitality, freely given to all who ask for it",
+            "… the punishment of thieves & oathbreakers",
+            "… adherence to strict rules of diet and dress",
+            "… respect for authority, property, and rank",
+          ],
+        },
+      ],
+    },
+  ],
+  intro: {
+    name: "Introductions",
+    text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong><em>describe the Chronicle</em></strong>. Then, <strong><em>tell us about Aratis and her shrine</em></strong>, and what she demands of her true disciples.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Who is your closest kin?</li><li>Who is your lover/spouse/betrothed?</li><li>Who is your apprentice?</li><li>Who is the wisest of the town elders?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you is a true disciple of Aratis?</li><li>Which one of you is my closest confidant?</li><li>Which one of you has stood beside me in battle against unnatural chaos?</li><li>Against which of you have I passed judgement?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+  },
+}

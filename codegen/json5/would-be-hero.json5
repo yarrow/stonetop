@@ -1,0 +1,362 @@
+{
+  name: "The Would-be Hero",
+  description: "Most people hope for a quiet life. They spend their days a-worrying: about a leaky roof, a sick child, their crops. But you aren't like most people—you're on a different path. A path to adventure! There's greatness in you. Let's hope you live long enough for everyone else to see it.",
+  backgrounds: [
+    {
+      name: "Impetuous Youth",
+      description: [
+        { flavor: "<p>Stonetop has always been home, but you chafe at the demands of mundane life and have always longed for more. Excitement! Danger!</p>" },
+        { crunch: "<p>When you <strong><em>make a move and come up short</em></strong>, you can give it your all and turn a 6- into a 7-9, a 7-9 into a 10+, and (if it matters), a 10-11 into a 12+. But if you do, pick 1 (the GM will fill in the details):</p><ul><li>You get hurt (2d4 damage and an actual injury)</li><li>You cause collateral damage, endanger others, or otherwise escalate the situation</li><li>Something on your person is lost or breaks</li></ul>" },
+      ],
+    },
+    {
+      name: "Driven",
+      description: [
+        { flavor: "<p>You once led a simple life, but something happened. Something changed you, burdened you with terrible purpose. What was it? Choose 1:</p>" },
+        {
+          checklist: {
+            options: [
+              "A loved one was killed or abducted",
+              "Someone gave their life to save you",
+              "Your idol sacrificed themselves to save many",
+              "You stumbled upon a dark mystery",
+              "You must make amends for a terrible mistake",
+            ],
+          },
+        },
+        { crunch: "<p>You always have the option to Burn Brightly; you can spend 2 XP after you roll to add +1, even if you don't have enough XP to level.</p>" },
+      ],
+    },
+    {
+      name: "Destined",
+      description: [
+        { flavor: "<p>Fate has laid her hand upon you. Choose 3-4 of the items below to describe your destiny:</p>" },
+        {
+          checklist: {
+            rows: [
+              { tag: "Portents", items: ["anointed", "marked at birth", "your coming foretold"] },
+              { tag: "Actions", items: ["destroy", "discover", "free", "protect", "restore", "unify"] },
+              { tag: "Elements", items: ["earth & stone", "darkness", "fire", "ice", "light", "water"] },
+              { tag: "History", items: ["blood", "civilization", "life", "storms", "war"] },
+              { tag: "Mysteries", items: ["the Fae", "the gods", "the Makers", "the Stone", "the Things Below"] },
+            ],
+          },
+        },
+        { crunch: "<p>At <strong><em>the start of a session</em></strong>, roll +Omens: <strong>on a 7+</strong>, lose all Omens and the GM will describe a vision or portent that points toward your fate and/or clarifies your current situation; also, <strong>on a 10+</strong>, ask the GM a follow-up question and get a clear, helpful answer; <strong>on a 6-</strong>, don't mark XP, hold +1 Omen, and tell us of your recent nightmares or a troubling vision, and how your fears play into them.</p>" },
+        { crunch: "<p><strong><em>Until your destiny is fulfilled</em></strong>, treat a 6- on Death's Door as a 7-9, and a 7-9 as a 10+.</p>" },
+        {
+          has: { name: "Omens", canBe: 3, start: "empty" },
+        },
+      ],
+    },
+  ],
+  instinct: [
+    {
+      name: "Defiance",
+      description: "To refuse to back down, give up, give in.",
+    },
+    {
+      name: "Doubt",
+      description: "To question yourself, your actions, your worth.",
+    },
+    {
+      name: "Earnestness",
+      description: "To prove yourself, to yourself and others.",
+    },
+    {
+      name: "Optimism",
+      description: "To assume the best, and that things are simple.",
+    },
+    {
+      name: "Sacrifice",
+      description: "To put the needs/wants of others above your own.",
+    },
+  ],
+  appearance: [
+    { tag: "Age", items: ["still a child", "young & beautiful", "all grown up"] },
+    { tag: "Voice", items: ["confident voice", "earnest voice", "quiet voice"] },
+    { tag: "Build", items: ["big", "scrawny", "sinewy", "slender", "thick"] },
+    { tag: "Vibe", items: ["back unbowed", "jaw firmly set", "soulful eyes"] },
+  ],
+  origin: [
+    {
+      location: "Stonetop",
+      naming: ["Anwen", "Caradoc", "Dafyd", "Glenys", "Madoc", "Morwenna", "Siwan", "Wynfor"],
+    },
+    {
+      location: "Barrier Pass",
+      naming: ["Bala", "Cotota", "Ganzorig", "Gerelma", "Ibahka", "Jungshoi", "Mukhali", "Taichu"],
+    },
+    {
+      location: "The Steplands (Hillfolk)",
+      naming: ["Annic", "Cosette", "Denl", "Hugenne", "Jag", "Marc", "Oanz", "Sandre"],
+    },
+    {
+      location: "Gordin's Delve",
+      naming: "Pick a name from any list",
+    },
+    {
+      location: "Marshedge",
+      naming: ["Bridin", "Clian", "Engis", "Fearghul", "Lan", "Neasa", "Nill", "Una"],
+    },
+    {
+      location: "Lygos or some other point south",
+      naming: ["Chara", "Davud", "Korina", "Omid", "Parvaneh", "Tamir", "Takish", "Yannis"],
+    },
+  ],
+  statModifiers: [1, 0, 0, 0, 0, -1],
+  damage: "d6",
+  hp: 16,
+  specialPossessions: {
+    pickNote: "Pick 2",
+    pickCount: 2,
+    options: [
+      {
+        name: "A heap of expectations",
+        description: "of little use",
+      },
+      {
+        name: "A good dog",
+        description: ", follower (☐ <em>retriever</em> or ☐ <em>herder</em>, <em>keen-nosed, clever</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct to play; Cost: affection.",
+        pick: [
+          "retriever",
+          "herder",
+        ],
+      },
+      {
+        name: "Husbandry tools",
+        description: "brushes, muzzles, collars, feed, ◇ whips, ◇ bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
+      },
+      {
+        name: "Smithy",
+        description: "(or access to it): iron goods, ingots, thick gloves, ◇ tongs, ◇ bellows, an anvil, etc.",
+      },
+      {
+        name: "Stoneworker's tools",
+        description: "chisels, drills, ◇ prybars, ◇ spikes, ◇ block & tackles, wheelbarrow, etc.",
+      },
+      {
+        name: "Personal token, fraught with meaning",
+        description: ": (pick 1)",
+        pick: [
+          "◇◇ A shield, bearing ▁▁▁▁▁▁▁▁'s crest",
+          "◇ A wool cloak, woven just for you by ▁▁▁▁▁▁▁▁",
+          "A letter, spattered with tears & blood",
+          "A flute, a gift from someone you loved",
+          "A fine locket, holding a strand of hair",
+          "A tinderbox, lovingly engraved",
+        ],
+      },
+      {
+        name: "Tannery",
+        description: "(or access to it): lime, acid, salts, thick gloves, ◇ a boiled leather cuirass (1 armor), etc.",
+      },
+    ],
+  },
+  startingMovesNote: "You start with Anger is a Gift, Potential for Greatness, and 2 other moves of your choice.",
+  startingMoveChoices: 2,
+  grantsMoves: ["Anger is a Gift", "Potential for Greatness"],
+  moves: [
+    {
+      name: "Anger is a Gift",
+      description: "<p>When you <strong><em>burn with righteous anger</em></strong> (see Fear & Anger on back of playbook), hold 2 Resolve. You can spend your Resolve 1-for-1 to:</p><ul><li>Set aside fear and doubt to do what must be done</li><li>Act suddenly, catching them off-guard</li><li>Inspire allies or bystanders to follow your lead</li><li>Strike hard (+1d4 damage, <em>forceful</em>)</li><li>Keep your footing, position, and/or your course despite what befalls you</li></ul>",
+      resource: { name: "Resolve", canBe: 2, start: "empty" },
+    },
+    {
+      name: "Speak Truth to Power",
+      description: "<p>When you <strong><em>demand that someone does what is clearly good and right</em></strong>, you have advantage to Persuade. If they refuse, gain +1 Resolve.</p>",
+      requirement: {
+        moves: ["Anger is a Gift"],
+      },
+    },
+    {
+      name: "Better Part of Valor",
+      description: "<p>When you <strong><em>are outnumbered or facing a foe bigger than you</em></strong>, you have advantage to hide from, escape from, or sneak past them.</p>",
+    },
+    {
+      name: "I Get Knocked Down",
+      description: "<p>When you <strong><em>take damage despite your best efforts to avoid it</em></strong>, you can choose to halve the damage but pick 1 of the following:</p><ul><li>You lose something (footing, grip, etc.)</li><li>Something on your person breaks</li><li>You're out of it for a moment</li></ul><p>Whatever you choose, the GM will describe the details.</p>",
+    },
+    {
+      name: "But I Get Up Again",
+      description: "<p>When you <strong><em>use I Get Knocked Down</em></strong>, you have advantage on your next roll against whatever dealt the damage and your next blow against them does +1d4 damage.</p>",
+      requirement: {
+        moves: ["I Get Knocked Down"],
+      },
+    },
+    {
+      name: "Improved Stat",
+      description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
+      maxPicks: 3,
+    },
+    {
+      name: "In Over Your Head",
+      description: "<p>When <strong><em>another PC rescues you from danger</em></strong>, mark XP.</p>",
+    },
+    {
+      name: "Iron Will",
+      description: "<p>When you <strong><em>are subject to mind control or magic that affects your feelings</em></strong>, you can take 1d4 damage (ignoring armor) to disregard its influence.</p>",
+    },
+    {
+      name: "Inquiring Minds",
+      description: "<p>When you <strong><em>seek out and receive honest advice</em></strong>, gain advantage on your next roll to follow that advice.</p>",
+    },
+    {
+      name: "Never Gonna Keep Me Down",
+      description: "<p>When you <strong><em>have 5 or fewer current HP</em></strong>, you impose disadvantage on any damage you take.</p><p>Once per session, when you <strong><em>are at Death's Door</em></strong>, don't roll. You get a 10+.</p>",
+      resource: { name: "Skip Death's Door", canBe: 1, start: "empty" },
+    },
+    {
+      name: "Potential for Greatness",
+      description: "<p>Once per level, <strong><em>when you roll a stat and get a 10+</em></strong>, mark one of the following (note the level during which you marked it). You don't have to mark them in order.</p>",
+      requirement: {
+        playbook: "The Would-be Hero",
+      },
+      checklist: {
+        optionsWithLevel: [
+          "Increase the stat you rolled by 1, to a max of +2",
+          "Increase the stat you rolled by 1, to a max of +2",
+          "Increase the stat you rolled by 1, to a max of +2",
+          "Increase the stat you rolled by 1, to a max of +2",
+          "Increase your max HP by 4",
+          "Increase your damage die to a d8",
+        ],
+      },
+    },
+    {
+      name: "Resourceful",
+      description: "<p>When you <strong><em>Defy Danger and roll a 6-</em></strong>, ask the GM a question from Seek Insight after they describe what happens. Gain advantage on your next roll to act on the answer.</p>",
+    },
+    {
+      name: "Something to Remember Me By",
+      description: "<p>When you <strong><em>spend Readiness (from Defend) to strike back at an attacker</em></strong>, you deal +1d4 damage and scar, mark, or diminish them in some way (the GM will say how, or ask you to).</p>",
+    },
+    {
+      name: "Tough Love",
+      description: "<p>When you <strong><em>honestly think another PC is in the wrong and call them on it</em></strong>, they have disadvantage on any rolls against you until you two work it out.</p>",
+    },
+    {
+      name: "Underestimated",
+      description: "<p>As long as you <strong><em>avoid overt hostility</em></strong>, no enemy will consider you a threat.</p><p>When you <strong><em>first make your move against an enemy who underestimates you</em></strong>, you have advantage.</p>",
+    },
+    {
+      name: "Up With People",
+      description: "<p>When you <strong><em>converse with someone</em></strong> (PC or NPC) you can hold 2 Rapport with them. If you do, they hold 1 Rapport with you. During the conversation, either of you can spend 1 Rapport to ask the other player one of the following and get an honest answer.</p><ul><li>What weighs you down or holds you back?</li><li>What drives you forward?</li><li>What lesson would you have me learn?</li><li>What do you think of me, truly?</li></ul>",
+      resource: [
+        { name: "Your Rapport", canBe: 2, start: "empty" },
+        { name: "Their Rapport", canBe: 1, start: "empty" },
+      ],
+    },
+    {
+      name: "Versatile",
+      description: "<p>Choose a move from any other playbook, as long as you meet its requirements. You can pick from a different playbook each time. You can't take Improved Stat or Superior Stat.</p>",
+      requirement: {
+        level: 2,
+        playbook: "The Would-be Hero",
+      },
+      maxPicks: 4,
+    },
+    {
+      name: "A Force to Be Reckoned With",
+      description: "<p>Any intelligent creature who looks you in the eye or hears the steel in your voice instinctively knows that you are a force to be reckoned with, and treats you appropriately.</p><p>When you <strong><em>Defy Danger against something trying to harm or constrain you</em></strong>, on a 12+ you turn the tables on them (the GM will say how, or ask you to).</p>",
+      requirement: {
+        level: 6,
+      },
+      replaces: "Underestimated",
+    },
+    {
+      name: "Big Damn Hero",
+      description: "<p>When you <strong><em>first leap into danger to protect someone</em></strong>, don't roll to Defend. Instead, treat it as though you rolled a 10+.</p><p>When you <strong><em>Defend</em></strong>, you can spend 1 Readiness to lock eyes with an attacker; they have disadvantage on damage rolls against you and your ward for the rest of the fight.</p>",
+      requirement: {
+        level: 6,
+      },
+      replaces: "In Over Your Head",
+    },
+    {
+      name: "Superior Stat",
+      description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
+      requirement: {
+        moves: [
+          "all 6 marks in Potential for Greatness",
+        ],
+      },
+    },
+    {
+      name: "Undaunted",
+      description: "<p>When you <strong><em>are outnumbered or facing a foe bigger than you</em></strong>, you get +1 armor and deal +1d6 damage.</p>",
+      requirement: {
+        level: 6,
+      },
+      replaces: "Better Part of Valor",
+    },
+    {
+      name: "Voice of Experience",
+      description: "<p>When <strong><em>another PC comes to you for advice and you tell them what you think is best</em></strong>, they have advantage on their first roll to follow your advice.</p><p>When you <strong><em>Seek Insight</em></strong>, you can always ask, \"What is about to happen?\" for free, even on a 6-.</p>",
+      requirement: {
+        level: 6,
+      },
+      replaces: "Inquiring Minds",
+    },
+  ],
+  movesFootnote: "The first time you use any move marked with an asterisk (*), cross off \"Would-be\" on the front page.",
+  backstory: [
+    {
+      name: "Fear & anger",
+      list: [
+        {
+          text: "<p>What do you fear most? (choose 1, maybe 2)</p>",
+        },
+        {
+          choices: [
+            "Fire, burning, the smell of charred flesh",
+            "That they won't take you seriously",
+            "That you really aren't cut out for this",
+            "The death of your family or loved ones",
+            "Being alone and helpless",
+            "Violence, bloodshed, and pain",
+            "Monsters",
+            "What you're capable of",
+            "What you must do",
+          ],
+        },
+        {
+          text: "<p>What makes you burn with righteous anger? (choose 2, maybe 3)</p>",
+        },
+        {
+          choices: [
+            "Bullying, slavery, and oppression",
+            "Wanton cruelty and unnecessary suffering",
+            "Injustice and inequality",
+            "Cowardice, treachery, and selfishness",
+            "The despoiling of beauty and innocence",
+            "Threats to your loved ones",
+            "Violence to children, animals, the innocent",
+            "Perversions of nature",
+          ],
+        },
+        {
+          text: "<p>When did your fear or anger last cause you trouble?</p>",
+        },
+        {
+          text: "<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>",
+        },
+        {
+          text: "<p>What did you do?</p>",
+        },
+        {
+          text: "<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>",
+        },
+        {
+          text: "<p>How did it turn out?</p>",
+        },
+        {
+          text: "<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>",
+        },
+      ],
+    },
+  ],
+  intro: {
+    name: "Introductions",
+    text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>tell us of your fear & anger</strong>, and of the last time they caused you trouble.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Whose heart do you hope to win?</li><li>Who is counting on you?</li><li>Who quietly understands the path you are on?</li><li>Who do you intend to prove wrong?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you is my closest, truest friend?</li><li>Which one of you believes in me, despite it all?</li><li>Which one of you has promised to teach me?</li><li>Which one of you have I hurt, through what I have done or what I've failed to do?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+  },
+}

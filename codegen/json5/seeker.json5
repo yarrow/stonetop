@@ -1,0 +1,374 @@
+{
+  name: "The Seeker",
+  description: "Look at us. Huddling behind our walls, hearing evil in every passing noise. Cowards, all. All, but you. You fear not the unknown. You plunge into it, searching. Grasping at what has been lost. What will you find, o Seeker? Signs of a bright new age? Or signs of our doom?",
+  backgrounds: [
+    {
+      name: "Patriot",
+      description: [
+        { flavor: "<p>These people are family. Chaos grows all around, but you'll be damned if you'll let your family come to harm. Damned indeed.</p>" },
+        { flavor: "<p>You have sought out and embraced dark power to protect that which you hold dear. Or perhaps that power fell upon you, and you took it up for the greater good. Either way, you seek more.</p>" },
+        { flavor: "<p>You start with the Let's Make a Deal move and are Well Versed in the Things Below. You've also acquired 1 major arcanum:</p>" },
+        {
+          checklist: {
+            options: [
+              "◇ The Hec'tumel Codex",
+              "◇ The Red Scepter",
+              "◇ The Staff of the Lidless Orb",
+            ],
+          },
+        },
+      ],
+      grantsMoves: ["Let's Make a Deal"],
+      grantsTopic: "The Things Below",
+    },
+    {
+      name: "Antiquarian",
+      description: [
+        { flavor: "<p>The past has buried many secrets, and you are determined to dig them up. Years of study across the land have led you here, and you are convinced that this town holds the key to your greatest discoveries. What is it you hope to find? What is it that keeps you here?</p>" },
+        { flavor: "<p>In any case, your travels and studies mean that you start with the Polyglot move and that you are Well Versed in the Makers and their arts. You've also acquired 1 major arcanum:</p>" },
+        {
+          checklist: {
+            options: [
+              "◇ Noruba's Ice Sphere",
+              "◇ The Azure Hand",
+              "◇◇ The Mindgem",
+            ],
+          },
+        },
+      ],
+      grantsMoves: ["Polyglot"],
+      grantsTopic: "The Makers and their arts",
+    },
+    {
+      name: "Witch Hunter",
+      description: [
+        { flavor: "<p>You've dedicated your life to rooting out and destroying horrors and their servants. What set you down this path? What did you sacrifice to walk it? What led you to call Stonetop home?</p>" },
+        { flavor: "<p>Regardless, you start with the Everything Bleeds move and are Well Versed in (pick 1) the Fae, the Things Below, or the Last Door and what lies beyond. You've also acquired 1 major arcanum:</p>" },
+        {
+          checklist: {
+            options: [
+              "◇ The Demonhide Cloak",
+              "The Redwood Effigy",
+              "◇◇ The Twisted Spear",
+            ],
+          },
+        },
+      ],
+      grantsMoves: ["Everything Bleeds"],
+      grantsTopic: ["the Fae", "the Things Below", "the Last Door"],
+    },
+  ],
+  instinct: [
+    {
+      name: "Cunning",
+      description: "To scheme, manipulate, and plot.",
+    },
+    {
+      name: "Curiosity",
+      description: "To seek answers that maybe you oughtn't.",
+    },
+    {
+      name: "Hubris",
+      description: "To assume you know best, that you can't fail.",
+    },
+    {
+      name: "Mystery",
+      description: "To avoid straight answers; to keep secrets.",
+    },
+    {
+      name: "Vision",
+      description: "To think big and pursue grandiose goals.",
+    },
+  ],
+  appearance: [
+    { tag: "Age", items: ["curiously young", "world-weary", "bent with years"] },
+    { tag: "Voice", items: ["haunted voice", "rich voice", "whispery"] },
+    { tag: "Hands", items: ["ink-stained fingers", "sinewy hands", "soft hands"] },
+    { tag: "Build", items: ["bony limbed", "lean & lanky", "short", "thick-set"] },
+  ],
+  origin: [
+    {
+      location: "Stonetop",
+      naming: ["Alis", "Dylan", "Eilwen", "Gerlt", "Gwenda", "Macsen", "Mirgan", "Owena", "Taliesyn", "Twymor"],
+    },
+    {
+      location: "Barrier Pass",
+      naming: ["Bayanaganengri", "Chakha", "Jetei", "Moog", "Narengawa", "Ogul", "Ozbeg", "Solongo"],
+    },
+    {
+      location: "The Steplands (Hillfolk)",
+      naming: ["Anook", "Anxo", "Dors", "Jory", "Mari", "Padg", "Pons", "Silf"],
+    },
+    {
+      location: "Gordin's Delve",
+      naming: "Pick a name from any list",
+    },
+    {
+      location: "Marshedge",
+      naming: ["Aiden", "Barrfind", "Caolan", "Ciara", "Deirbhile", "Moirin", "Tiern", "Reamann"],
+    },
+    {
+      location: "Lygos or some other point south",
+      naming: ["Dana", "Eliana", "Erez", "Fikri", "Isra", "Persefoni", "Spiro", "Vahid"],
+    },
+  ],
+  statModifiers: [2, 1, 1, 0, 0, -1],
+  damage: "d6",
+  hp: 16,
+  specialPossessions: {
+    pickNote: "Pick 2, in addition to your scribe's tools",
+    pickCount: 2,
+    options: [
+      {
+        name: "Scribe's tools",
+        description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
+        preselected: true,
+      },
+      {
+        name: "Books & scrolls",
+        description: "(○○○○○ uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
+        resource: { name: "Uses", canBe: 5, start: "empty" },
+      },
+      {
+        name: "Distillery",
+        description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
+        resource: { name: "Skins of fine whisky", canBe: 2, start: "full" },
+      },
+      {
+        name: "Engineer's tools",
+        description: "rulers, tapes, rods, plumb-bobs, ◇ tripods, ◇ block & tackles, wheelbarrow, etc.",
+      },
+      {
+        name: "Laboratory",
+        description: "chemics, reagents, vials, measures, ◇ scales, ◇ decanters, etc. Every season, produce d4-1 uses of ◇ naphtha (<em>thrown, area, dangerous</em>, ignores armor).",
+      },
+      {
+        name: "Paraphernalia",
+        description: "crystals, incense, talismans, blood, bone, horn, eye of newt, ◇ braziers, ◇◇ a cauldron, etc.",
+      },
+      {
+        name: "Trade contacts",
+        description: "small amounts of salt, glass, silk, spice, medicinal herbs, pigments, ivory, etc.",
+      },
+    ],
+  },
+  startingMovesNote: "You start with Well Versed, Work With What You've Got, plus 1 from your Background.",
+  startingMoveChoices: 0,
+  grantsMoves: ["Well Versed", "Work With What You've Got"],
+  moves: [
+    {
+      name: "Attuned",
+      description: "<p>When you <strong><em>Seek Insight</em></strong>, you can always ask, \"What here is infused with magic?\" for free, even on a 6-.</p>",
+    },
+    {
+      name: "Conduit of Power",
+      description: "<p>When you <strong><em>would mark a Consequence from a major arcanum</em></strong>, you can mark 1 use here instead, with no negative effect. (There is no reset)</p>",
+      resource: { name: "Evade consequence", canBe: 3, start: "empty" },
+    },
+    {
+      name: "Countermeasures",
+      description: "<p>When you <strong><em>witness a magical effect</em></strong>, you may ask the GM, \"How can this be countered or interrupted?\" and get an honest answer. You or an ally gain advantage on your next roll to act on the answer.</p>",
+    },
+    {
+      name: "Everything Bleeds",
+      description: "<p>When you <strong><em>exploit an unnatural foe's specific weakness or vulnerability</em></strong>, deal +1d6 damage.</p>",
+    },
+    {
+      name: "Everything Burns",
+      description: "<p>When you <strong><em>inspect a work of artifice or magic for a fatal flaw</em></strong>, roll +INT: <strong>on a 7+</strong>, the GM will reveal the best way to destroy/sabotage it; <strong>on a 10+</strong>, you or an ally also gain advantage to act on the info.</p>",
+    },
+    {
+      name: "Improved Stat",
+      description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
+      maxPicks: 3,
+    },
+    {
+      name: "Initiate of the Secret Arts",
+      description: "<p>You have a \"Sacred Pouch\" (3 Stock, <em>magical</em>), as per the Blessed, but with no remarkable traits. Each time you take this move, choose a Blessed move for which you otherwise qualify. (You can't take Improved Stat or Superior Stat.)</p>",
+      requirement: {
+        level: 2,
+        playbook: "The Seeker",
+      },
+      maxPicks: 3,
+    },
+    {
+      name: "Let's Make a Deal",
+      description: "<p>When you <strong><em>Seek Insight</em></strong>, add \"What do they really want or need?\" to the list of questions. When you <strong><em>Persuade by offering them something that you know they want or need</em></strong>, treat a 7-9 as a 10+.</p>",
+    },
+    {
+      name: "Logbook",
+      description: "<p>You have a logbook (2 uses, <em>slow</em>) that doesn't take up space in your inventory. When you (and only you) <strong><em>consult your logbook and expend a use</em></strong>, you can ignore a Know Things roll you just made and treat the result as a 10+. When <strong><em>the Seasons Change</em></strong>, reset your logbook to 2 uses.</p>",
+      resource: { name: "Uses", canBe: 2, start: "empty" },
+    },
+    {
+      name: "Magpie",
+      description: "<p>When you <strong><em>Have What You Need</em></strong>, you can produce something strange, specific, maybe even valuable or a little bit magical, but if you do, tell us where you got it and 2 of the following:</p><ul><li>How it's not quite right, but maybe it'll do?</li><li>The trouble you caused back home by getting it</li><li>Why using it will draw unwanted attention</li><li>That it's the only thing like this that you've got, and why it'll only work the one time</li></ul>",
+    },
+    {
+      name: "Never at a Loss",
+      description: "<p>When you <strong><em>Know Things and roll a 6-</em></strong>, you may choose to not mark XP. If you don't mark XP, the worst that happens is that the GM tells you nothing interesting or useful about the subject, but instead tells you how you could learn more.</p>",
+    },
+    {
+      name: "Polyglot",
+      description: "<p>When you <strong><em>first encounter a living language in play</em></strong>, describe your proficiency with it (if any) and how you came to acquire it.</p><p>When you <strong><em>Know Things about any script, text, runes or symbols that you encounter</em></strong>, you have advantage.</p>",
+    },
+    {
+      name: "Cryptologist",
+      description: "<p>When you <strong><em>study encoded, forgotten, or arcane marks or writing</em></strong>, roll +INT: <strong>on a 10+</strong>, you can fully decipher them in just a few minutes; <strong>on a 7-9</strong>, you get the gist in a few minutes, but fully deciphering them will take you an hour or so.</p>",
+      requirement: {
+        moves: ["Polyglot"],
+      },
+    },
+    {
+      name: "Quick Study",
+      description: "<p>When you <strong><em>study something magical that should take months to understand</em></strong>, it instead takes mere weeks. If it should take weeks, it takes days. If it should take days, it takes only a few hours.</p>",
+    },
+    {
+      name: "Safety First",
+      description: "<p>When you <strong><em>spend an hour or so preparing your mystical defenses</em></strong>, hold 2 Protection. When you <strong><em>are affected by harmful magic</em></strong>, spend 1 Protection either to gain advantage on any roll to resist it or to halve its damage/effects.</p>",
+      resource: { name: "Protection", canBe: 2, start: "empty" },
+    },
+    {
+      name: "Sage Advice",
+      description: "<p>When <strong><em>another PC asks you for guidance</em></strong>, they get advantage on their next roll to follow your advice.</p>",
+    },
+    {
+      name: "Well Versed",
+      description: "<p>Mark 1 topic, in addition to the one noted in your Background. Each additional time you take this move, mark 2 more topics.</p><p>When you <strong><em>Know Things about one of your topics</em></strong>, you can ask the GM a follow-up question of your choice (even on a 6-).</p>",
+      maxPicks: 3,
+      checklist: {
+        options: [
+          "The Last Door, death, and the undead",
+          "The civilizations of humanity",
+          "The Fae and their strange ways",
+          "The Makers and their arts",
+          "The primordial powers",
+          "The Things Below",
+          "The wild world and its spirits",
+        ],
+      },
+    },
+    {
+      name: "Work With What You've Got",
+      description: "<p>When you <strong><em>cleverly use your environment to harm or impede your foe(s)</em></strong>, roll +INT: <strong>on a 10+</strong>, pick 2; <strong>on a 7-9</strong>, pick 1:</p><ul><li>Interrupt or thwart their action(s)</li><li>Create an opportunity that grants you or an ally advantage on the next roll to exploit it</li><li>Deal damage appropriate to the source (d4 for bruises/scrapes, d6 for bloodshed, d8 if it'd break bones, d10 if it'd kill a common person)</li></ul>",
+    },
+    {
+      name: "Arcane Adept",
+      description: "<p>When you <strong><em>wish to invent a spell or magical effect</em></strong>, detail its workings with the GM and Make a Plan to invent it. If you like, pick one requirement and ask the GM to provide an alternative (for example \"first you must ▁▁▁▁▁▁▁▁\" could become \"first you must ▁▁▁▁▁▁▁▁, or it will take months\").</p>",
+      requirement: {
+        level: 6,
+      },
+    },
+    {
+      name: "Deep Insight",
+      description: "<p>When you <strong><em>Seek Insight about something magical</em></strong>, you may ask one additional question, not limited to the list. Even on a 6-, you get to ask this question.</p>",
+      requirement: {
+        level: 6,
+        moves: ["Attuned"],
+      },
+    },
+    {
+      name: "Improvise",
+      description: "<p>When you <strong><em>wish to use an arcanum's move or option without having unlocked it</em></strong>, ask the GM what fool risk(s) it requires and/or what consequence(s) you'll incur. If you go for it, roll +INT: <strong>on a 7+</strong>, you get it to work this once—trigger the move or use the option as if you'd unlocked it; and <strong>on a 10+</strong>, also mark one step towards unlocking the arcanum's mysteries.</p>",
+      requirement: {
+        level: 6,
+        moves: ["Quick Study"],
+      },
+    },
+    {
+      name: "Superior Stat",
+      description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
+      requirement: {
+        level: 6,
+      },
+    },
+    {
+      name: "Mind Over Magic",
+      description: "<p>When you <strong><em>roll to study or use an arcanum</em></strong>, you can roll +INT instead of the stat you'd normally roll.</p>",
+      requirement: {
+        level: 6,
+      },
+    },
+    {
+      name: "Overchannel",
+      description: "<p>When you <strong><em>would mark a Consequence from a major arcanum</em></strong>, you may mark a debility instead.</p>",
+      requirement: {
+        level: 6,
+        moves: ["Conduit of Power"],
+      },
+    },
+    {
+      name: "Proof Against Detection",
+      description: "<p>When you <strong><em>hold Protection</em></strong>, you can't be scried upon or sensed by magical means, and have advantage to Defy Danger by being stealthy.</p>",
+      requirement: {
+        level: 6,
+        moves: ["Safety First"],
+      },
+    },
+  ],
+  backstory: [
+    {
+      name: "Collection",
+      list: [
+        {
+          text: "<p>In your travels and investigations you have acquired arcana—artifacts of power and mystery.</p>",
+        },
+      ],
+    },
+    {
+      name: "Major Arcana",
+      list: [
+        {
+          text: "<p>Your Background grants you 1 major arcanum. Answer at least 2 questions about it:</p>",
+        },
+        {
+          choices: [
+            "Where did you acquire it?",
+            "From whose grasp did you wrest it?",
+            "Who else wants it?",
+            "What did it cost you?",
+          ],
+        },
+        {
+          text: "<p>You've begun to unlock the mysteries of your major arcanum; mark 1 ☐ or ○ on the front of its insert.</p>",
+        },
+        {
+          text: "<p>When and how did that happen?</p>",
+        },
+        {
+          text: "<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>",
+        },
+      ],
+    },
+    {
+      name: "Minor Arcana",
+      list: [
+        {
+          text: "<p>Ask the GM for the minor arcana cards. Draw 3 at random and review both sides.</p>",
+        },
+        {
+          text: "<p>Choose one whose secrets you have unlocked. If it's portable, you either keep it on your person or hidden away somewhere safe. Where is it now? How did you come to master it?</p>",
+        },
+        {
+          text: "<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>",
+        },
+        {
+          text: "<p>Choose another, which you have not yet mastered. It is either in your possession or in a secret place known only to you. Where is it? How did you find it?</p>",
+        },
+        {
+          text: "<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>",
+        },
+        {
+          text: "<p>The third you have not yet found, but you have a lead on it. Give the card back to the GM, but make note of it below. During play, ask the GM what you know about it.</p>",
+        },
+        {
+          text: "<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>",
+        },
+      ],
+    },
+  ],
+  intro: {
+    name: "Introductions",
+    text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>describe your major arcana</strong>. Tell us your answers to the questions you chose. Then, <strong>tell us about your minor arcana</strong>, too.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Who is your closest kin?</li><li>Who is your spouse/lover/betrothed?</li><li>Whom do you trust, even more than yourself?</li><li>Whom do you secretly watch over, and why?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you led me to a key discovery?</li><li>Which one of you has been at my side the entire way?</li><li>Which one of you most fears the path I tread?</li><li>Which one of you is keeping secrets from me?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+  },
+}

@@ -1,0 +1,12 @@
+[workspace]
+resolver = "2"
+members = ["codegen","xtask"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["John Fritz <yarrow.angelweed@gmail.com>"]
+license = "GPL-3.0-only"
+
+[workspace.dependencies]
+anyhow = "1"
