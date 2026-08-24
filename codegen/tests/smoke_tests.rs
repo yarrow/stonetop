@@ -1,4 +1,3 @@
-use codegen;
 use std::fs;
 use std::path::Path;
 
@@ -12,7 +11,7 @@ fn json5_playbook(playbook_name: &str) -> Result<Playbook> {
         .join(playbook_name)
         .with_added_extension("json5");
     let source =
-        fs::read_to_string(&path).with_context(|| format!("when reading {}", &path.display()))?;
+        fs::read_to_string(&path).with_context(|| format!("when reading {}", path.display()))?;
     playbook_from_str(&source).with_context(|| "when parsing {playbook_name}")
 }
 
