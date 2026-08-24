@@ -8,3 +8,5 @@ publish = false
 
 [dependencies]
 anyhow.workspace = true
+which = "8.0.5"
+xshell = "0.2.7"
