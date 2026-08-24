@@ -9,12 +9,12 @@ pub struct Playbook {
     pub instinct: Vec<Instinct>,
     pub appearance: Vec<TaggedRow>,
     pub origin: Vec<Origin>,
-    pub stat_modifiers: Vec<i64>,
+    pub stat_modifiers: Vec<i8>,
     pub damage: String,
-    pub hp: i64,
+    pub hp: u8,
     pub special_possessions: SpecialPossessions,
     pub starting_moves_note: String,
-    pub starting_move_choices: i64,
+    pub starting_move_choices: u8,
     pub grants_moves: Vec<Grant>,
     pub moves: Vec<Move>,
     pub moves_footnote: Option<String>,
@@ -109,7 +109,7 @@ pub struct Origin {
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct SpecialPossessions {
     pub pick_note: String,
-    pub pick_count: i64,
+    pub pick_count: u8,
     pub options: Vec<SpecialPossession>,
 }
 
@@ -156,14 +156,14 @@ pub struct Move {
     pub description: String,
     pub requirement: Option<Requirement>,
     #[serde(default = "one")]
-    pub max_picks: i64,
+    pub max_picks: u8,
     #[serde(default, deserialize_with = "one_or_many")]
     pub resource: Vec<Resource>,
     pub replaces: Option<String>,
     pub checklist: Option<MoveChecklist>,
 }
 
-fn one() -> i64 {
+fn one() -> u8 {
     1
 }
 
@@ -194,7 +194,7 @@ pub enum MoveChecklist {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Requirement {
-    pub level: Option<i64>,
+    pub level: Option<u8>,
     #[serde(default)]
     pub moves: Vec<String>,
     pub playbook: Option<String>,
@@ -203,7 +203,7 @@ pub struct Requirement {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CanBe {
-    Max(i64),
+    Max(u8),
     Labels(Vec<String>),
 }
 
