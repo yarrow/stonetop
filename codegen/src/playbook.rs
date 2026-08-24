@@ -1,202 +1,223 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Deserializer, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Playbook {
-    pub appearance: Vec<Appearance>,
-    pub backgrounds: Vec<Background>,
-    pub backstory: Vec<Backstory>,
-    pub damage: String,
+    pub name: String,
     pub description: String,
-    pub grants_moves: Vec<GrantsElement>,
-    pub hp: i64,
+    pub backgrounds: Vec<Background>,
     pub instinct: Vec<Instinct>,
-    pub intro: Intro,
+    pub appearance: Vec<TaggedRow>,
+    pub origin: Vec<Origin>,
+    pub stat_modifiers: Vec<i64>,
+    pub damage: String,
+    pub hp: i64,
+    pub special_possessions: SpecialPossessions,
+    pub starting_moves_note: String,
+    pub starting_move_choices: i64,
+    pub grants_moves: Vec<Grant>,
     pub moves: Vec<Move>,
     pub moves_footnote: Option<String>,
-    pub name: String,
-    pub origin: Vec<Origin>,
-    pub special_possessions: SpecialPossessions,
-    pub starting_move_choices: i64,
-    pub starting_moves_note: String,
-    pub stat_modifiers: Vec<i64>,
+    pub intro: Intro,
+    pub backstory: Vec<Backstory>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Appearance {
-    pub items: Vec<String>,
-    pub tag: String,
-}
+// Background -------------------------------------------------------------
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Background {
-    pub description: Vec<Description>,
-    pub grants_moves: Option<Vec<GrantsElement>>,
-    pub grants_possession: Option<PurpleGrants>,
-    pub grants_topic: Option<PurpleGrants>,
     pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Description {
-    pub checklist: Option<DescriptionChecklist>,
-    pub crunch: Option<String>,
-    pub flavor: Option<String>,
-    pub has: Option<Has>,
+    pub description: Vec<BackgroundChunk>,
+    #[serde(default)]
+    pub grants_moves: Vec<Grant>,
+    pub grants_possession: Option<Grant>,
+    pub grants_topic: Option<Grant>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct DescriptionChecklist {
-    pub options: Option<Vec<String>>,
-    pub options_precheckable: Option<Vec<OptionsPrecheckable>>,
-    pub rows: Option<Vec<Appearance>>,
+pub enum BackgroundChunk {
+    Flavor(String),
+    Crunch(String),
+    Checklist(BackgroundChecklist),
+    Has(Resource),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct OptionsPrecheckable {
-    pub prechecked: Option<bool>,
-    pub text: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Has {
-    pub can_be: i64,
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct Resource {
     pub name: String,
-    pub start: Start,
+    pub can_be: CanBe,
+    pub start: EmptyFull,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "snake_case")]
-pub enum Start {
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub enum EmptyFull {
     Empty,
     Full,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum GrantsElement {
-    PurpleString(String),
-    StringArray(Vec<String>),
+#[serde(rename_all = "camelCase")]
+pub enum BackgroundChecklist {
+    Options(Vec<String>),
+    OptionsPrecheckable(Vec<PrecheckableOption>),
+    Rows(Vec<TaggedRow>),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum PurpleGrants {
-    PurpleString(String),
-    StringArray(Vec<String>),
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Backstory {
-    pub list: Vec<List>,
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct List {
-    pub choices: Option<Vec<String>>,
-    pub items: Option<Vec<String>>,
-    pub tag: Option<String>,
-    pub text: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Instinct {
-    pub description: String,
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Intro {
-    pub name: String,
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct PrecheckableOption {
+    #[serde(default)]
+    pub prechecked: bool,
     pub text: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Move {
-    pub checklist: Option<MoveChecklist>,
-    pub description: String,
-    pub max_picks: Option<i64>,
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct TaggedRow {
+    pub tag: String,
+    pub items: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged, rename_all = "camelCase")]
+pub enum Grant {
+    Simply(String),
+    ChooseOne(Vec<String>),
+}
+
+// Instinct, Origin, Special Possessions ----------------------------------
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct Instinct {
     pub name: String,
-    pub replaces: Option<String>,
-    pub requirement: Option<Requirement>,
-    pub resource: Option<ResourceUnion>,
+    pub description: String,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct Origin {
+    pub location: String,
+    pub naming: Naming,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct SpecialPossessions {
+    pub pick_note: String,
+    pub pick_count: i64,
+    pub options: Vec<SpecialPossession>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct SpecialPossession {
+    pub name: String,
+    pub description: String,
+    #[serde(default)]
+    pub preselected: bool,
+    pub resource: Option<Resource>,
+    #[serde(default)]
+    pub pick: Vec<String>,
+}
+// Backstory and Intro ----------------------------------------------------
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct Backstory {
+    pub list: Vec<BackstoryItem>,
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged, rename_all = "camelCase")]
+pub enum BackstoryItem {
+    Text { text: String },
+    Choices { choices: Vec<String> },
+    ChoiceRow(TaggedRow),
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct Intro {
+    pub name: String,
+    pub text: String,
+}
+// Move -------------------------------------------------------------------
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct Move {
+    pub name: String,
+    pub description: String,
+    pub requirement: Option<Requirement>,
+    #[serde(default = "one")]
+    pub max_picks: i64,
+    #[serde(default, deserialize_with = "one_or_many")]
+    pub resource: Vec<Resource>,
+    pub replaces: Option<String>,
+    pub checklist: Option<MoveChecklist>,
+}
+
+fn one() -> i64 {
+    1
+}
+
+#[derive(Deserialize, Debug)]
+#[serde(untagged)]
+enum OneOrMany<T> {
+    One(T),
+    Many(Vec<T>),
+}
+pub fn one_or_many<'de, D, T>(deserializer: D) -> Result<Vec<T>, D::Error>
+where
+    D: Deserializer<'de>,
+    T: Deserialize<'de>,
+{
+    let v = OneOrMany::deserialize(deserializer)?;
+    Ok(match v {
+        OneOrMany::One(val) => vec![val],
+        OneOrMany::Many(val) => val,
+    })
+}
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct MoveChecklist {
-    pub options: Option<Vec<String>>,
-    pub options_with_level: Option<Vec<String>>,
+pub enum MoveChecklist {
+    Options(Vec<String>),
+    OptionsWithLevel(Vec<String>),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Requirement {
     pub level: Option<i64>,
-    pub moves: Option<Vec<String>>,
+    #[serde(default)]
+    pub moves: Vec<String>,
     pub playbook: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum ResourceUnion {
-    HasArray(Vec<Has>),
-    ResourceClass(ResourceClass),
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct ResourceClass {
-    pub can_be: CanBe,
-    pub name: String,
-    pub start: Start,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
 pub enum CanBe {
-    Integer(i64),
-    StringArray(Vec<String>),
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Origin {
-    pub location: String,
-    pub naming: NamingUnion,
+    Max(i64),
+    Labels(Vec<String>),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum NamingUnion {
-    NamingClass(NamingClass),
-    PurpleString(String),
-    StringArray(Vec<String>),
+pub enum Naming {
+    Instructions(String),
+    Names(Vec<String>),
+    MixAndMatch(NameParts),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct NamingClass {
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct NameParts {
     pub intro: String,
-    pub name_parts: Vec<Appearance>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct SpecialPossessions {
-    pub options: Vec<OptionElement>,
-    pub pick_count: i64,
-    pub pick_note: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct OptionElement {
-    pub description: String,
-    pub name: String,
-    pub pick: Option<Vec<String>>,
-    pub preselected: Option<bool>,
-    pub resource: Option<ResourceClass>,
+    pub name_parts: Vec<TaggedRow>,
 }
