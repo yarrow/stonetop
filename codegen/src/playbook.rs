@@ -124,6 +124,7 @@ pub struct SpecialPossession {
     #[serde(default)]
     pub pick: Vec<String>,
 }
+
 // Backstory and Intro ----------------------------------------------------
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -147,6 +148,7 @@ pub struct Intro {
     pub title: String,
     pub text: String,
 }
+
 // Move -------------------------------------------------------------------
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
