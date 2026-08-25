@@ -97,12 +97,12 @@
       {
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: { name: "Skins of fine whisky", canBe: 2, start: "full" },
+        resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Hidden stash",
         description: "(○○○ uses): each use produces valuables worth a purse of silvers (Value 2)",
-        resource: { name: "Uses", canBe: 3, start: "full" },
+        resource: { hold: "Uses", canBe: 3, start: "full" },
       },
       {
         name: "Mummer's kit",
@@ -130,7 +130,7 @@
       name: "All in the Wrist",
       description: "<p>Any knife or dagger gets the <em>thrown</em> tag in your hands. Also, you keep a few iron throwing blades (<em>near</em>) on you; they don't take up space in your inventory. Reset your ammo whenever you Outfit.</p>",
       resource: {
-        name: "Throwing blades",
+        hold: "Throwing blades",
         canBe: ["out", "a few left", "plenty left"],
         start: "full",
       },
@@ -203,7 +203,7 @@
     {
       name: "Silver Tongued",
       description: "<p>When you <strong><em>use words to avoid suspicion or trouble</em></strong>, roll +CHA: <strong>on a 10+</strong>, hold 3 Nerve; <strong>on a 7-9</strong>, hold 1 Nerve. You may spend Nerve, 1-for-1, to:</p><ul><li>Move about or maneuver unchallenged</li><li>Withstand direct scrutiny or questioning</li><li>Direct suspicion or attention elsewhere</li></ul>",
-      resource: { name: "Nerve", canBe: 3, start: "empty" },
+      resource: { hold: "Nerve", canBe: 3, start: "empty" },
     },
     {
       name: "Under Your Skin",

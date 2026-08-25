@@ -127,12 +127,12 @@
       {
         name: "Books & scrolls",
         description: "(○○○○○ uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
-        resource: { name: "Uses", canBe: 5, start: "empty" },
+        resource: { hold: "Uses", canBe: 5, start: "empty" },
       },
       {
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: { name: "Skins of fine whisky", canBe: 2, start: "full" },
+        resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Engineer's tools",
@@ -163,7 +163,7 @@
     {
       name: "Conduit of Power",
       description: "<p>When you <strong><em>would mark a Consequence from a major arcanum</em></strong>, you can mark 1 use here instead, with no negative effect. (There is no reset)</p>",
-      resource: { name: "Evade consequence", canBe: 3, start: "empty" },
+      resource: { hold: "Evade consequence", canBe: 3, start: "empty" },
     },
     {
       name: "Countermeasures",
@@ -198,7 +198,7 @@
     {
       name: "Logbook",
       description: "<p>You have a logbook (2 uses, <em>slow</em>) that doesn't take up space in your inventory. When you (and only you) <strong><em>consult your logbook and expend a use</em></strong>, you can ignore a Know Things roll you just made and treat the result as a 10+. When <strong><em>the Seasons Change</em></strong>, reset your logbook to 2 uses.</p>",
-      resource: { name: "Uses", canBe: 2, start: "empty" },
+      resource: { hold: "Uses", canBe: 2, start: "empty" },
     },
     {
       name: "Magpie",
@@ -226,7 +226,7 @@
     {
       name: "Safety First",
       description: "<p>When you <strong><em>spend an hour or so preparing your mystical defenses</em></strong>, hold 2 Protection. When you <strong><em>are affected by harmful magic</em></strong>, spend 1 Protection either to gain advantage on any roll to resist it or to halve its damage/effects.</p>",
-      resource: { name: "Protection", canBe: 2, start: "empty" },
+      resource: { hold: "Protection", canBe: 2, start: "empty" },
     },
     {
       name: "Sage Advice",

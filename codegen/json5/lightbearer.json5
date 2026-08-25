@@ -9,7 +9,7 @@
         { flavor: "<p>Whatever the sign, your connection to Helior was clear early on. You've a place of honor in Stonetop, though it'd be a lie to say you don't make some uneasy.</p>" },
         { crunch: "<p>When <strong><em>one of your moves has you mark a debility</em></strong>, you may mark this background's circle instead, to no ill effect. Clear it when you Make Camp or Convalesce.</p>" },
         {
-          has: { name: "Avoid debility", canBe: 1, start: "empty" },
+          has: { hold: "Avoid debility", canBe: 1, start: "empty" },
         },
       ],
     },
@@ -19,7 +19,7 @@
         { flavor: "<p>They think of you as a self-important kook who comes through now and again, speaking in riddles and playing tricks with the light. Sure, they know there's something holy about you, but it's not like you're a priest or anything. Priests talk sense.</p>" },
         { crunch: "<p>When you <strong><em>go off a-wandering</em></strong>, hold 1 Enigma if you're gone for days, 2 if you're gone for weeks, or 3 if you're gone for months. At the very start of play, hold 3 Enigma. Spend Enigma 1-for-1 to:</p><ul><li>Return from your wandering exactly when and where you are needed, fully Outfitted</li><li>Know Things as if you rolled a 10+, drawing on what you learned while away</li><li>Have What You Need to produce an oddly specific yet mundane item of Value 1 or less</li></ul>" },
         {
-          has: { name: "Enigma", canBe: 3, start: "full" },
+          has: { hold: "Enigma", canBe: 3, start: "full" },
         },
       ],
     },
@@ -96,7 +96,7 @@
       {
         name: "Books & scrolls",
         description: "(○○○○○ uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
-        resource: { name: "Uses", canBe: 5, start: "empty" },
+        resource: { hold: "Uses", canBe: 5, start: "empty" },
       },
       {
         name: "Chandlery",
@@ -105,7 +105,7 @@
       {
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: { name: "Skins of fine whisky", canBe: 2, start: "full" },
+        resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Glassworks",
@@ -114,7 +114,7 @@
       {
         name: "Holy relics",
         description: "(○○○ uses): if you have one in inventory when you Invoke the Sun God, you can mark a use in lieu of choosing a consequence.",
-        resource: { name: "Uses", canBe: 3, start: "empty" },
+        resource: { hold: "Uses", canBe: 3, start: "empty" },
       },
       {
         name: "Luthier's tools",
@@ -183,7 +183,7 @@
     {
       name: "Piety",
       description: "<p>When you <strong><em>spend at least an hour in proper worship to Helior</em></strong>, hold 1 Blessing. Other faithful PCs who partake in this worship also hold 1 Blessing. At any time, you can spend 1 Blessing to add +1 to a roll you just made in pursuit of a righteous cause.</p>",
-      resource: { name: "Blessing", canBe: 1, start: "empty" },
+      resource: { hold: "Blessing", canBe: 1, start: "empty" },
     },
     {
       name: "Purifying Flames",

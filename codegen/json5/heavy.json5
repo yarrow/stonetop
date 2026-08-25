@@ -90,7 +90,7 @@
       {
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: { name: "Skins of fine whisky", canBe: 2, start: "full" },
+        resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Chirurgeon's tools",
@@ -182,7 +182,7 @@
       requirement: {
         moves: ["Hard to Kill"],
       },
-      resource: { name: "Keep fighting", canBe: 5, start: "empty" },
+      resource: { hold: "Keep fighting", canBe: 5, start: "empty" },
     },
     {
       name: "Musclebound",

@@ -107,7 +107,7 @@
         description: "(<em>far</em>, +1 damage, x piercing; ○ low ammo, ○ all out)",
         preselected: true,
         resource: {
-          name: "Arrows",
+          hold: "Arrows",
           canBe: ["all out", "low ammo", "plenty left"],
           start: "full",
         },
@@ -115,12 +115,12 @@
       {
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: { name: "Skins of fine whisky", canBe: 2, start: "full" },
+        resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Hideouts",
         description: "(○○○ uses): expend a use to have a well-stocked, safe shelter nearby; GM can veto.",
-        resource: { name: "Uses", canBe: 3, start: "empty" },
+        resource: { hold: "Uses", canBe: 3, start: "empty" },
       },
       {
         name: "Husbandry tools",
@@ -133,7 +133,7 @@
       {
         name: "Lay of the land",
         description: "(○○○ uses): expend a use to know where to find ▁▁▁▁▁▁▁▁, without having to Know Things; GM can veto.",
-        resource: { name: "Uses", canBe: 3, start: "empty" },
+        resource: { hold: "Uses", canBe: 3, start: "empty" },
       },
       {
         name: "Trapping gear",
@@ -148,7 +148,7 @@
     {
       name: "A Safe Place",
       description: "<p>When you <strong><em>select and prepare the party's camp site</em></strong>, hold 1 Precaution, or 2 Precaution if you are well-versed with this area and its dangers.</p><p>If trouble finds your camp site, you can spend 1 Precaution to reveal a simple defense, warning, or trick that you prepared in advance. If you do, tell us how you knew to make that specific preparation.</p>",
-      resource: { name: "Precaution", canBe: 2, start: "empty" },
+      resource: { hold: "Precaution", canBe: 2, start: "empty" },
     },
     {
       name: "Animal Companion",
@@ -293,7 +293,7 @@
       requirement: {
         level: 6,
       },
-      resource: { name: "Avoid debility", canBe: 1, start: "empty" },
+      resource: { hold: "Avoid debility", canBe: 1, start: "empty" },
     },
   ],
   backstory: [

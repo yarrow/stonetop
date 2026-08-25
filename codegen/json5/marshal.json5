@@ -97,7 +97,7 @@
       {
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: { name: "Skins of fine whisky", canBe: 2, start: "full" },
+        resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Engineer's tools",
@@ -162,7 +162,7 @@
     {
       name: "Front Line Leader",
       description: "<p>When you <strong><em>lead your crew into battle</em></strong>, hold 2 Presence. Spend Presence in lieu of your crew's Loyalty or as Readiness (as if you Defended them).</p>",
-      resource: { name: "Presence", canBe: 2, start: "empty" },
+      resource: { hold: "Presence", canBe: 2, start: "empty" },
     },
     {
       name: "Improved Stat",
@@ -183,7 +183,7 @@
       requirement: {
         moves: ["Read the Land"],
       },
-      resource: { name: "Surprise", canBe: 2, start: "empty" },
+      resource: { hold: "Surprise", canBe: 2, start: "empty" },
     },
     {
       name: "Set-Up Strike",
@@ -208,7 +208,7 @@
     {
       name: "Stentorian",
       description: "<p>When you <strong><em>raise your voice</em></strong>, it carries far and cuts through even the din of battle. When you <strong><em>go into battle</em></strong>, hold 2 Command. Spend 1 Command to shout an order or warning and pick 1:</p><ul><li>PCs get advantage on their next roll to do as you say</li><li>You have advantage to Order Followers or Deploy</li></ul>",
-      resource: { name: "Command", canBe: 2, start: "empty" },
+      resource: { hold: "Command", canBe: 2, start: "empty" },
     },
     {
       name: "Take the Measure",

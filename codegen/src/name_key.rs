@@ -1,6 +1,6 @@
 use regex::Regex;
 
-use crate::playbook::{Background, Backstory, Move, Playbook, Resource, SpecialPossession};
+use crate::playbook::{Background, Backstory, Move, Playbook, SpecialPossession};
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub struct NameType {
@@ -45,11 +45,4 @@ macro_rules! impl_name_key {
     };
 }
 
-impl_name_key!(
-    Playbook,
-    Background,
-    Resource,
-    SpecialPossession,
-    Backstory,
-    Move
-);
+impl_name_key!(Playbook, Background, SpecialPossession, Backstory, Move);

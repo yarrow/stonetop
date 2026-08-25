@@ -37,7 +37,7 @@
         { flavor: "<p>The line of Judges was broken long ago, the Chronicle lost or fallen into ruin. Aratis has called you personally to her service through dreams, omens, and visions. Some in town resent the authority you've assumed.</p>" },
         { crunch: "<p>When you <strong><em>spend a few days communing with Aratis about a threat facing Stonetop or civilization as a whole</em></strong>, roll +WIS: <strong>on a 7+</strong>, Aratis reveals the course of action she would have you take; <strong>on a 10+</strong>, you also hold 2 Sanction. While <strong><em>acting on her orders</em></strong>, spend 1 Sanction to add +1 to a roll you just made.</p>" },
         {
-          has: { name: "Sanction", canBe: 2, start: "empty" },
+          has: { hold: "Sanction", canBe: 2, start: "empty" },
         },
       ],
     },
@@ -171,7 +171,7 @@
     {
       name: "Chronicler of Stonetop",
       description: "<p>When you <strong><em>write up detailed session notes and share them with the other players</em></strong>, hold +1 Diligence.</p><p>You can spend 1 Diligence at any time to add +1 to a roll that you or a fellow player just made.</p>",
-      resource: { name: "Diligence", canBe: 3, start: "empty" },
+      resource: { hold: "Diligence", canBe: 3, start: "empty" },
     },
     {
       name: "For the Greater Good",

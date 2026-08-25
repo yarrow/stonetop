@@ -47,7 +47,7 @@ pub enum BackgroundChunk {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Resource {
-    pub name: String,
+    pub hold: String,
     pub can_be: CanBe,
     pub start: EmptyFull,
 }

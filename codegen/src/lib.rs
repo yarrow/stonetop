@@ -21,6 +21,7 @@ pub fn json5_playbook(playbook_name: &str) -> Result<Playbook> {
     playbook_from_str(&source).with_context(|| format!("when parsing {playbook_name}"))
 }
 
+#[must_use]
 pub fn playbook_names() -> Vec<String> {
     [
         "blessed",

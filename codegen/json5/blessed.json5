@@ -107,7 +107,7 @@
         name: "Sacred pouch (<em>magical</em>)",
         description: "see back page. Stock: ○○○",
         preselected: true,
-        resource: { name: "Stock", canBe: 3, start: "full" },
+        resource: { hold: "Stock", canBe: 3, start: "full" },
       },
       {
         name: "Apiary",
@@ -116,7 +116,7 @@
       {
         name: "Collected offerings",
         description: "(○○○ uses): Expend a use to produce something valuable to a spirit of the wild. Restore 1 use each season.",
-        resource: { name: "Uses", canBe: 3, start: "full" },
+        resource: { hold: "Uses", canBe: 3, start: "full" },
       },
       {
         name: "Goat herd",
@@ -177,7 +177,7 @@
     {
       name: "Rites of the Land",
       description: "<p>Once per season, when you <strong><em>oversee the sacred rites</em></strong>, hold 1 Favor. If you also sacrifice 1 Surplus, hold 4 Favor instead. Spend Favor in lieu of Stock, 1-for-1.</p><p>When you <strong><em>publicly sacrifice something or someone much-loved</em></strong>, either clear a steading debility or gain advantage when the steading next rolls +Fortunes.</p>",
-      resource: { name: "Favor", canBe: 4, start: "empty" },
+      resource: { hold: "Favor", canBe: 4, start: "empty" },
     },
     {
       name: "Spirit Tongue",

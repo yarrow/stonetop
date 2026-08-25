@@ -1,11 +1,11 @@
-//! Every named item (move, background, resource, ...) that appears in more
+//! Every named item (move, background, special possession, ...) that appears in more
 //! than one playbook must be identical everywhere it appears.
 
 use std::collections::hash_map::Entry;
 use std::collections::{HashMap, HashSet};
 
 use codegen::name_key::{NameKey, NameType};
-use codegen::playbook::{BackgroundChunk, Playbook};
+use codegen::playbook::Playbook;
 use codegen::{json5_playbook, playbook_names};
 
 #[derive(Default)]
@@ -47,23 +47,12 @@ fn visit_playbook(playbook: &Playbook, seen: &mut Seen) {
     seen.record(playbook);
     for background in &playbook.backgrounds {
         seen.record(background);
-        for chunk in &background.description {
-            if let BackgroundChunk::Has(resource) = chunk {
-                seen.record(resource);
-            }
-        }
     }
     for possession in &playbook.special_possessions.options {
         seen.record(possession);
-        if let Some(resource) = &possession.resource {
-            seen.record(resource);
-        }
     }
     for a_move in &playbook.moves {
         seen.record(a_move);
-        for resource in &a_move.resource {
-            seen.record(resource);
-        }
     }
     for backstory in &playbook.backstory {
         seen.record(backstory);
