@@ -113,6 +113,7 @@
       },
       {
         name: "Weapons of war",
+        key: "MarshalWeaponsOfWar",
         description: "choose up to 3 (now or later):",
         pick: [
           "◇ Sword, iron (<em>close</em>, +1 damage)",

@@ -45,4 +45,19 @@ macro_rules! impl_name_key {
     };
 }
 
-impl_name_key!(Playbook, Background, SpecialPossession, Backstory, Move);
+macro_rules! impl_name_key_with_override {
+    ($($t:ident),* $(,)?) => {
+        $(impl NameKey for $t {
+            fn name_and_type(&self) -> NameType {
+                let key = self.key.as_ref().unwrap_or(&self.name);
+                NameType {
+                    name: enumable(key),
+                    typ: stringify!($t).to_string(),
+                }
+            }
+        })*
+    };
+}
+
+impl_name_key!(Playbook, Background, Backstory);
+impl_name_key_with_override!(SpecialPossession, Move);

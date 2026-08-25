@@ -120,6 +120,8 @@ pub struct SpecialPossessions {
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct SpecialPossession {
     pub name: String,
+    #[serde(default)]
+    pub key: Option<String>,
     pub description: String,
     pub resource: Option<Resource>,
     #[serde(default)]
@@ -156,6 +158,8 @@ pub struct Intro {
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Move {
     pub name: String,
+    #[serde(default)]
+    pub key: Option<String>,
     pub description: String,
     pub requirement: Option<Requirement>,
     #[serde(default = "one")]
