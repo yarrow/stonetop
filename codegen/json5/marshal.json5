@@ -92,7 +92,7 @@
     options: [
       {
         name: "Chirurgeon's tools",
-        description: "catgut, straps, bandages, tubes, poultice, willow bark, ◇ bonesaws, etc.",
+        description: "catgut, straps, bandages, tubes, poultices, willow bark, ◇ bonesaws, etc.",
       },
       {
         name: "Distillery",

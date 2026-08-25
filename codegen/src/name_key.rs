@@ -2,6 +2,7 @@ use regex::Regex;
 
 use crate::playbook::{Background, Backstory, Move, Playbook, Resource, SpecialPossession};
 
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub struct NameType {
     pub name: String,
     pub typ: String,

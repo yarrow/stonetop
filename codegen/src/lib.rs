@@ -20,3 +20,20 @@ pub fn json5_playbook(playbook_name: &str) -> Result<Playbook> {
         .with_context(|| format!("when reading {}", path.display()))?;
     playbook_from_str(&source).with_context(|| format!("when parsing {playbook_name}"))
 }
+
+pub fn playbook_names() -> Vec<String> {
+    [
+        "blessed",
+        "fox",
+        "heavy",
+        "judge",
+        "lightbearer",
+        "marshal",
+        "ranger",
+        "seeker",
+        "would-be-hero",
+    ]
+    .iter()
+    .map(|s| s.to_string())
+    .collect()
+}
