@@ -110,6 +110,9 @@ pub struct Origin {
 pub struct SpecialPossessions {
     pub pick_note: String,
     pub pick_count: u8,
+    /// How many of the leading `options` the playbook starts with.
+    #[serde(default)]
+    pub preselected: u8,
     pub options: Vec<SpecialPossession>,
 }
 
@@ -118,8 +121,6 @@ pub struct SpecialPossessions {
 pub struct SpecialPossession {
     pub name: String,
     pub description: String,
-    #[serde(default)]
-    pub preselected: bool,
     pub resource: Option<Resource>,
     #[serde(default)]
     pub pick: Vec<String>,

@@ -101,11 +101,11 @@
   specialPossessions: {
     pickNote: "Pick 2, in addition to your composite bow",
     pickCount: 2,
+    preselected: 1,
     options: [
       {
         name: "◇ Composite bow",
         description: "(<em>far</em>, +1 damage, x piercing; ○ low ammo, ○ all out)",
-        preselected: true,
         resource: {
           hold: "Arrows",
           canBe: ["all out", "low ammo", "plenty left"],

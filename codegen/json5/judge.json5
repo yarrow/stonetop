@@ -98,11 +98,11 @@
   specialPossessions: {
     pickNote: "Pick 1, in addition to your symbol of authority and scribe's kit",
     pickCount: 1,
+    preselected: 2,
     options: [
       {
         name: "Your symbol of authority",
         description: "(pick 1):",
-        preselected: true,
         pick: [
           "◇◇ Black iron maul, utterly immune to all magic (<em>close, forceful, awkward</em>, +1 damage)",
           "◇◇ Makerglass shield, etched with Aratis's symbol (<em>indestructible</em>, +1 armor, +1 Readiness on a Defend 7+)",
@@ -112,7 +112,6 @@
       {
         name: "Scribe's tools",
         description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
-        preselected: true,
       },
       {
         name: "Aviary",
