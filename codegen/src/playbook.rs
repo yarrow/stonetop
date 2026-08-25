@@ -94,7 +94,7 @@ pub enum Grant {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Instinct {
-    pub name: String,
+    pub title: String,
     pub description: String,
 }
 
@@ -129,8 +129,8 @@ pub struct SpecialPossession {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Backstory {
-    pub list: Vec<BackstoryItem>,
     pub name: String,
+    pub list: Vec<BackstoryItem>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -144,7 +144,7 @@ pub enum BackstoryItem {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Intro {
-    pub name: String,
+    pub title: String,
     pub text: String,
 }
 // Move -------------------------------------------------------------------
