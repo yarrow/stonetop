@@ -111,6 +111,7 @@
       },
       {
         name: "Apiary",
+        keyPrefix: "Pb",
         description: "beeswax, candles (<em>close, area</em>, lasts ~1 hr), honey, ◇ bee smokers, ◇ hats & veils, etc.",
       },
       {
@@ -163,6 +164,7 @@
     },
     {
       name: "Improved Stat",
+      keyPrefix: "Pb",
       description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
       maxPicks: 3,
     },
@@ -252,6 +254,7 @@
     },
     {
       name: "Superior Stat",
+      keyPrefix: "Pb",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
       requirement: {
         level: 6,

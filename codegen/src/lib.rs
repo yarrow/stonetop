@@ -4,7 +4,7 @@
 )]
 use anyhow::{Context, Result};
 use playbook::Playbook;
-pub mod name_key;
+pub mod key;
 pub mod playbook;
 
 pub fn playbook_from_str(json5_source: &str) -> Result<Playbook> {

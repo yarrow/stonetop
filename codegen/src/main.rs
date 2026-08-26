@@ -1,11 +1,8 @@
 //use anyhow::Result;
-/*use codegen::name_key_prefix::NameKey;
+/*use codegen::key_prefix::Key;
 use codegen::playbook::Playbook;
 use codegen::playbook_from_str;
 use std::fs;
 use std::path::Path;
 */
-fn main() {
-    //let seeker = json5_playbook("seeker")?;
-    //println!("{seeker:#?}");
-}
+fn main() {}

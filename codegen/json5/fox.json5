@@ -92,10 +92,12 @@
       },
       {
         name: "Carpenter's tools",
+        keyPrefix: "Pf",
         description: "chisels, files, nails, pitch, ◇ prybars, ◇ saws, ◇◇ firkins, barrels, etc.",
       },
       {
         name: "Distillery",
+        keyPrefix: "Pf",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
         resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
@@ -110,14 +112,17 @@
       },
       {
         name: "Scribe's tools",
+        keyPrefix: "Pf",
         description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
       },
       {
         name: "Tannery",
+        keyPrefix: "Pf",
         description: "(or access to it): lime, acid, salts, thick gloves, ◇ a boiled leather cuirass (1 armor), etc.",
       },
       {
         name: "Trade contacts",
+        keyPrefix: "Pf",
         description: "small amounts of salt, glass, silk, spice, medicinal herbs, pigments, ivory, etc.",
       },
     ],
@@ -166,6 +171,7 @@
     },
     {
       name: "Improved Stat",
+      keyPrefix: "Pf",
       description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
       maxPicks: 3,
     },
@@ -256,6 +262,7 @@
     },
     {
       name: "Superior Stat",
+      keyPrefix: "Pf",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
       requirement: {
         level: 6,
