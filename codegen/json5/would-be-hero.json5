@@ -78,7 +78,7 @@
     { tag: "Build", items: ["big", "scrawny", "sinewy", "slender", "thick"] },
     { tag: "Vibe", items: ["back unbowed", "jaw firmly set", "soulful eyes"] },
   ],
-  origin: [
+  originChoices: [
     {
       location: "Stonetop",
       naming: ["Anwen", "Caradoc", "Dafyd", "Glenys", "Madoc", "Morwenna", "Siwan", "Wynfor"],
@@ -274,7 +274,7 @@
     },
     {
       name: "Superior Stat",
-      key: "WbhSuperiorStat",
+      keyPrefix: "Pw",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
       requirement: {
         moves: [

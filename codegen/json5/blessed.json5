@@ -69,7 +69,7 @@
     { tag: "Build", items: ["curvy", "strapping", "rail-thin", "solid", "willowy"] },
     { tag: "Clothing", items: ["ceremonial robes", "furs, leather", "work clothes"] },
   ],
-  origin: [
+  originChoices: [
     {
       location: "Stonetop",
       naming: ["Arwel", "Blodwen", "Brynmor", "Celyn", "Fflur", "Gwynn", "Tegwen", "Winned"],

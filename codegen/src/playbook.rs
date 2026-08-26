@@ -8,7 +8,7 @@ pub struct Playbook {
     pub backgrounds: Vec<Background>,
     pub instinct: Vec<Instinct>,
     pub appearance: Vec<TaggedRow>,
-    pub origin: Vec<Origin>,
+    pub origin_choices: Vec<Origin>,
     pub stats_to_assign: Vec<i8>,
     pub damage: String,
     pub hp: u8,
@@ -121,7 +121,7 @@ pub struct SpecialPossessions {
 pub struct SpecialPossession {
     pub name: String,
     #[serde(default)]
-    pub key: Option<String>,
+    pub key_prefix: Option<String>,
     pub description: String,
     pub resource: Option<Resource>,
     #[serde(default)]
@@ -159,7 +159,7 @@ pub struct Intro {
 pub struct Move {
     pub name: String,
     #[serde(default)]
-    pub key: Option<String>,
+    pub key_prefix: Option<String>,
     pub description: String,
     pub requirement: Option<Requirement>,
     #[serde(default = "one")]

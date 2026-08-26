@@ -86,7 +86,7 @@
     { tag: "Hands", items: ["ink-stained fingers", "sinewy hands", "soft hands"] },
     { tag: "Build", items: ["bony limbed", "lean & lanky", "short", "thick-set"] },
   ],
-  origin: [
+  originChoices: [
     {
       location: "Stonetop",
       naming: ["Alis", "Dylan", "Eilwen", "Gerlt", "Gwenda", "Macsen", "Mirgan", "Owena", "Taliesyn", "Twymor"],

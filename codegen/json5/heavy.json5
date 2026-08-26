@@ -54,7 +54,7 @@
     { tag: "Build", items: ["giant frame", "just ripped", "stocky", "wiry"] },
     { tag: "Marks", items: ["distinctive scars", "oft-broken nose", "missing bits"] },
   ],
-  origin: [
+  originChoices: [
     {
       location: "Stonetop",
       naming: ["Aerona", "Arthfael", "Cadmor", "Esyllt", "Pedr", "Rhonwen", "Terrwen", "Trystan"],
@@ -110,7 +110,7 @@
       },
       {
         name: "Weapons of war",
-        key: "HeavyWeaponsOfWar",
+        keyPrefix: "Ph",
         description: "choose up to 3 (now or later):",
         pick: [
           "◇ Sword, iron (<em>close</em>, +1 damage)",

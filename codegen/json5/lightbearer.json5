@@ -60,7 +60,7 @@
     { tag: "Vibe", items: ["beatific", "ethereal", "intense", "jovial", "serene"] },
     { tag: "Clothing", items: ["fine robes", "threadbare cloak", "working clothes"] },
   ],
-  origin: [
+  originChoices: [
     {
       location: "Stonetop",
       naming: ["Dai", "Eirian", "Eurig", "Haf", "Haul", "Hefin", "Hulwen", "Tesni"],

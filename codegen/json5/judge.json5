@@ -70,7 +70,7 @@
     { tag: "Build", items: ["hard body", "powerful frame", "slim", "well-fed"] },
     { tag: "Clothing", items: ["polished gear", "robes of office", "modest clothes"] },
   ],
-  origin: [
+  originChoices: [
     {
       location: "Stonetop",
       naming: ["Arianrhod", "Caerwyn", "Einion", "Eleri", "Magda", "Nerys", "Trahaern", "Trefor"],

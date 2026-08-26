@@ -49,9 +49,16 @@ macro_rules! impl_name_key_with_override {
     ($($t:ident),* $(,)?) => {
         $(impl NameKey for $t {
             fn name_and_type(&self) -> NameType {
-                let key = self.key.as_ref().unwrap_or(&self.name);
+                let mut name: String;
+                if let Some(prefix) = self.key_prefix.clone() {
+                    let mut key = prefix;
+                    key.push_str(&self.name);
+                    name = enumable(&key);
+                } else {
+                    name = enumable(&self.name);
+                }
                 NameType {
-                    name: enumable(key),
+                    name,
                     typ: stringify!($t).to_string(),
                 }
             }

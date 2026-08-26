@@ -69,7 +69,7 @@
     { tag: "Build", items: ["compact & sturdy", "long & lean", "wolfish"] },
     { tag: "Clothing", items: ["shaggy", "threadbare", "well-groomed"] },
   ],
-  origin: [
+  originChoices: [
     {
       location: "Stonetop",
       naming: ["Aran", "Bledyn", "Branwen", "Deryn", "Ifur", "Meinir", "Rhys", "Teagan"],

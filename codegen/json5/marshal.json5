@@ -57,7 +57,7 @@
     { tag: "Look", items: ["stern frown", "grim-set jaw", "knowing smirk"] },
     { tag: "Clothing", items: ["badge of office", "spit & polish", "timeworn gear"] },
   ],
-  origin: [
+  originChoices: [
     {
       location: "Stonetop",
       naming: ["Bethan", "Cadfael", "Ffraid", "Gwythyr", "Llewelyn", "Meredith", "Rhianna", "Urien"],
@@ -113,7 +113,7 @@
       },
       {
         name: "Weapons of war",
-        key: "MarshalWeaponsOfWar",
+        keyPrefix: "Pm",
         description: "choose up to 3 (now or later):",
         pick: [
           "◇ Sword, iron (<em>close</em>, +1 damage)",

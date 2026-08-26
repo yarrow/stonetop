@@ -30,7 +30,7 @@
                         "$ref": "#/definitions/Appearance"
                     }
                 },
-                "origin": {
+                "originChoices": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Origin"
@@ -94,7 +94,7 @@
                 "intro",
                 "moves",
                 "name",
-                "origin",
+                "originChoices",
                 "specialPossessions",
                 "startingMoveChoices",
                 "startingMovesNote",

@@ -57,7 +57,7 @@
     { tag: "Build", items: ["lithe", "heavyset", "gangly", "like a whippin' stick"] },
     { tag: "Pace", items: ["a light step", "a brisk stride", "more like a strut"] },
   ],
-  origin: [
+  originChoices: [
     {
       location: "Stonetop",
       naming: ["Bran", "Carwyn", "Delyth", "Elin", "Fion", "Geral", "Mair", "Rannon", "Vaughn", "Wynn"],
