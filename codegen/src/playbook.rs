@@ -9,7 +9,7 @@ pub struct Playbook {
     pub instinct: Vec<Instinct>,
     pub appearance: Vec<TaggedRow>,
     pub origin: Vec<Origin>,
-    pub stat_modifiers: Vec<i8>,
+    pub stats_to_assign: Vec<i8>,
     pub damage: String,
     pub hp: u8,
     pub special_possessions: SpecialPossessions,

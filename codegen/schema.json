@@ -36,7 +36,7 @@
                         "$ref": "#/definitions/Origin"
                     }
                 },
-                "statModifiers": {
+                "statsToAssign": {
                     "type": "array",
                     "items": {
                         "type": "integer"
@@ -98,7 +98,7 @@
                 "specialPossessions",
                 "startingMoveChoices",
                 "startingMovesNote",
-                "statModifiers"
+                "statsToAssign"
             ],
             "title": "Schema"
         },

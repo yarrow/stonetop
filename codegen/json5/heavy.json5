@@ -80,7 +80,7 @@
       naming: ["Arihl", "Akios", "Bhadur", "Seble", "Shahnaz", "Shay", "Tisi", "Zubin"],
     },
   ],
-  statModifiers: [2, 1, 1, 0, 0, -1],
+  statsToAssign: [2, 1, 1, 0, 0, -1],
   damage: "d10",
   hp: 20,
   specialPossessions: {

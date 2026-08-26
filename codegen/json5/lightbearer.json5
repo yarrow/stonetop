@@ -82,7 +82,7 @@
       naming: ["Arash", "Azar", "Hafiz", "Murat", "Roshan", "Shideh", "Zara", "Zohara"],
     },
   ],
-  statModifiers: [2, 1, 1, 0, 0, -1],
+  statsToAssign: [2, 1, 1, 0, 0, -1],
   damage: "d4",
   hp: 18,
   specialPossessions: {

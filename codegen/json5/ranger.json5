@@ -95,7 +95,7 @@
       naming: ["Ari", "Boriz", "Dimitra", "Gorhan", "Nitza", "Selen", "Todora", "Vasil"],
     },
   ],
-  statModifiers: [2, 1, 1, 0, 0, -1],
+  statsToAssign: [2, 1, 1, 0, 0, -1],
   damage: "d8",
   hp: 18,
   specialPossessions: {

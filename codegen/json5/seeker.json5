@@ -112,7 +112,7 @@
       naming: ["Dana", "Eliana", "Erez", "Fikri", "Isra", "Persefoni", "Spiro", "Vahid"],
     },
   ],
-  statModifiers: [2, 1, 1, 0, 0, -1],
+  statsToAssign: [2, 1, 1, 0, 0, -1],
   damage: "d6",
   hp: 16,
   specialPossessions: {

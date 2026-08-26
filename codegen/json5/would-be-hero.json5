@@ -104,7 +104,7 @@
       naming: ["Chara", "Davud", "Korina", "Omid", "Parvaneh", "Tamir", "Takish", "Yannis"],
     },
   ],
-  statModifiers: [1, 0, 0, 0, 0, -1],
+  statsToAssign: [1, 0, 0, 0, 0, -1],
   damage: "d6",
   hp: 16,
   specialPossessions: {

@@ -92,7 +92,7 @@
       naming: ["Abrim", "Cassander", "Despina", "Hypatta", "Morecai", "Nomika", "Sofia", "Yose"],
     },
   ],
-  statModifiers: [2, 1, 1, 0, 0, -1],
+  statsToAssign: [2, 1, 1, 0, 0, -1],
   damage: "d6",
   hp: 20,
   specialPossessions: {

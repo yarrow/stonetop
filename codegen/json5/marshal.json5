@@ -83,7 +83,7 @@
       naming: ["Ameer", "Calixta", "Hadar", "Kelila", "Sulaim", "Ursa", "Xandros"],
     },
   ],
-  statModifiers: [2, 1, 1, 0, 0, -1],
+  statsToAssign: [2, 1, 1, 0, 0, -1],
   damage: "d8",
   hp: 20,
   specialPossessions: {
