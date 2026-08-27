@@ -8,5 +8,5 @@ publish = false
 
 [dependencies]
 anyhow.workspace = true
+duct = "1.1.1"
 which = "8.0.5"
-xshell = "0.2.7"
