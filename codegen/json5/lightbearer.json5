@@ -7,9 +7,12 @@
       description: [
         { flavor: "<p>You were born in Stonetop, and that birth was marked by the God of Light. You were born during an eclipse, perhaps, or under the light of a bright new star? Maybe you bear a sun-shaped birthmark?</p>" },
         { flavor: "<p>Whatever the sign, your connection to Helior was clear early on. You've a place of honor in Stonetop, though it'd be a lie to say you don't make some uneasy.</p>" },
-        { crunch: "<p>When <strong><em>one of your moves has you mark a debility</em></strong>, you may mark this background's circle instead, to no ill effect. Clear it when you Make Camp or Convalesce.</p>" },
         {
-          has: { hold: "Avoid debility", canBe: 1, start: "empty" },
+          move: {
+            name: "From Auspicious Birth",
+            description: "<p>When <strong><em>one of your moves has you mark a debility</em></strong>, you may mark this background's circle instead, to no ill effect. Clear it when you Make Camp or Convalesce.</p>",
+            resource: { hold: "Avoid debility", canBe: 1, start: "empty" },
+          },
         },
       ],
     },
@@ -17,9 +20,12 @@
       name: "Itinerant Mystic",
       description: [
         { flavor: "<p>They think of you as a self-important kook who comes through now and again, speaking in riddles and playing tricks with the light. Sure, they know there's something holy about you, but it's not like you're a priest or anything. Priests talk sense.</p>" },
-        { crunch: "<p>When you <strong><em>go off a-wandering</em></strong>, hold 1 Enigma if you're gone for days, 2 if you're gone for weeks, or 3 if you're gone for months. At the very start of play, hold 3 Enigma. Spend Enigma 1-for-1 to:</p><ul><li>Return from your wandering exactly when and where you are needed, fully Outfitted</li><li>Know Things as if you rolled a 10+, drawing on what you learned while away</li><li>Have What You Need to produce an oddly specific yet mundane item of Value 1 or less</li></ul>" },
         {
-          has: { hold: "Enigma", canBe: 3, start: "full" },
+          move: {
+            name: "From Itinerant Mystic",
+            description: "<p>When you <strong><em>go off a-wandering</em></strong>, hold 1 Enigma if you're gone for days, 2 if you're gone for weeks, or 3 if you're gone for months. At the very start of play, hold 3 Enigma. Spend Enigma 1-for-1 to:</p><ul><li>Return from your wandering exactly when and where you are needed, fully Outfitted</li><li>Know Things as if you rolled a 10+, drawing on what you learned while away</li><li>Have What You Need to produce an oddly specific yet mundane item of Value 1 or less</li></ul>",
+            resource: { hold: "Enigma", canBe: 3, start: "full" },
+          },
         },
       ],
     },
@@ -28,7 +34,12 @@
       description: [
         { flavor: "<p>You once led a worldly life, full of fear and doubt, base pleasures and petty grudges. But something happened. Injury, illness, a brush with death. Or just a moment of such profound misery and self-loathing that you thought you could fall no further.</p>" },
         { flavor: "<p>There, in the dark, Helior's light shined upon you, igniting in your soul, lifting you and filling you with a profound sense of purpose.</p>" },
-        { crunch: "<p>When you <strong><em>Persuade a group by preaching charity, mercy, and hope and roll a 7+</em></strong>, aside from the usual effect, choose 1:</p><ul><li>Your name and your message spread</li><li>Someone approaches you, now or later, eager to know more</li></ul>" },
+        {
+          move: {
+            name: "From Soul on Fire",
+            description: "<p>When you <strong><em>Persuade a group by preaching charity, mercy, and hope and roll a 7+</em></strong>, aside from the usual effect, choose 1:</p><ul><li>Your name and your message spread</li><li>Someone approaches you, now or later, eager to know more</li></ul>",
+          },
+        },
       ],
     },
   ],

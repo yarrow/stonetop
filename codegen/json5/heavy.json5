@@ -6,15 +6,24 @@
       name: "Sheriff",
       description: [
         { flavor: "<p>You keep order in Stonetop and protect it from outside threats. It might not be anything official, but everyone knows you've got a cool head and the weight to back up your words.</p>" },
-        { crunch: "<p>When you <strong><em>bark an order or warning</em></strong>, roll +CHA: <strong>on a 7+</strong>, they must choose 1:</p><ul><li>Do what you say</li><li>Dig in/take cover/flee</li><li>Attack you</li></ul><p><strong>On a 10+</strong>, you can sense which one they're about to do and act first if you like; gain advantage if you do.</p>" },
+        {
+          move: {
+            name: "From Sheriff",
+            description: "<p>When you <strong><em>bark an order or warning</em></strong>, roll +CHA: <strong>on a 7+</strong>, they must choose 1:</p><ul><li>Do what you say</li><li>Dig in/take cover/flee</li><li>Attack you</li></ul><p><strong>On a 10+</strong>, you can sense which one they're about to do and act first if you like; gain advantage if you do.</p>",
+          },
+        },
       ],
     },
     {
       name: "Blood-Soaked Past",
       description: [
         { flavor: "<p>You left behind a life of violence and a name mothers used to scare their children. For whatever reason, the people of Stonetop took you (back?) in and treat you like one of their own.</p>" },
-        { crunch: "<p>When you <strong><em>Persuade using violence or threats against someone who knows your black reputation</em></strong>, you can roll +STR instead of +CHA. Also, if you take the Formidable move, you can choose to roll +CON instead of +CHA.</p>" },
-        { crunch: "<p>When you <strong><em>fight to kill without mercy or hesitation</em></strong>, you deal +1d4 damage.</p>" },
+        {
+          move: {
+            name: "From Blood-Soaked Past",
+            description: "<p>When you <strong><em>Persuade using violence or threats against someone who knows your black reputation</em></strong>, you can roll +STR instead of +CHA. Also, if you take the Formidable move, you can choose to roll +CON instead of +CHA.</p><p>When you <strong><em>fight to kill without mercy or hesitation</em></strong>, you deal +1d4 damage.</p>",
+          },
+        },
       ],
     },
     {

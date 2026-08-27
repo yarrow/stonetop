@@ -35,13 +35,29 @@ pub struct Background {
     pub grants_topic: Option<Grant>,
 }
 
+impl Background {
+    /// The anonymous Moves granted by this Background. (Currently zero or one, unlikely to
+    /// change.)
+    pub fn moves(&self) -> impl Iterator<Item = &Move> {
+        self.description.iter().filter_map(|chunk| match chunk {
+            BackgroundChunk::Move(a_move) => Some(a_move),
+            _ => None,
+        })
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum BackgroundChunk {
     Flavor(String),
-    Crunch(String),
+    /// Some backgrounds explicitly grant names Moves. These are also available to other
+    /// backgrounds, though not for free.  And some backgrounds grant what are in
+    /// effect anonymous Moves, not available to other backgrounds.  The rules don't call
+    /// these Moves, but mechanically they are identical. We want to have just one
+    /// "From Raised by Wolves" section (for instance), so we sometimes jam what might
+    /// more naturally be a list of anonymous Moves into one `Move(Move)`.
+    Move(Move),
     Checklist(BackgroundChecklist),
-    Has(Resource),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

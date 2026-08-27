@@ -117,6 +117,8 @@ pub enum BackstoryKey {
 }
 pub enum MoveKey {
     // Moves for TheBlessed
+    FromRaisedByWolves,
+    FromVessel,
     AmuletsTalismans,
     Barkskin,
     BigMagic,
@@ -142,6 +144,8 @@ pub enum MoveKey {
     VoiceOfTheEarthMother,
 
     // Moves for TheFox
+    FromTheNatural,
+    FromTheProdigalReturned,
     AllInTheWrist,
     Ambush,
     Burgle,
@@ -168,6 +172,8 @@ pub enum MoveKey {
     PfSuperiorStat,
 
     // Moves for TheHeavy
+    FromSheriff,
+    FromBloodSoakedPast,
     PhArmored,
     BattleJoy,
     Berserker,
@@ -197,6 +203,9 @@ pub enum MoveKey {
     PhSuperiorStat,
 
     // Moves for TheJudge
+    FromLegacy,
+    FromMissionary,
+    FromProphet,
     AegisOfFaith,
     PjArmored,
     BearWitness,
@@ -226,6 +235,9 @@ pub enum MoveKey {
     TheTowerEternal,
 
     // Moves for TheLightbearer
+    FromAuspiciousBirth,
+    FromItinerantMystic,
+    FromSoulOnFire,
     ACandleAgainstTheDark,
     LuminousShield,
     AllIsIlluminated,
@@ -252,6 +264,7 @@ pub enum MoveKey {
     WielderOfTheWhiteFlame,
 
     // Moves for TheMarshal
+    FromPenitent,
     PmArmored,
     ArtsOfWar,
     Crew,
@@ -278,6 +291,8 @@ pub enum MoveKey {
     PmSuperiorStat,
 
     // Moves for TheRanger
+    FromWideWanderer,
+    FromBeastBonded,
     ASafePlace,
     AnimalCompanion,
     MagnificentSpecimen,
@@ -335,6 +350,9 @@ pub enum MoveKey {
     ProofAgainstDetection,
 
     // Moves for TheWouldBeHero
+    FromImpetuousYouth,
+    FromDriven,
+    FromDestined,
     AngerIsAGift,
     SpeakTruthToPower,
     BetterPartOfValor,
@@ -359,18 +377,18 @@ pub enum MoveKey {
     VoiceOfExperience,
 }
 pub const THE_BLESSED_MOVE_KEYS: (MoveKey, MoveKey) =
-    (MoveKey::AmuletsTalismans, MoveKey::VoiceOfTheEarthMother);
-pub const THE_FOX_MOVE_KEYS: (MoveKey, MoveKey) = (MoveKey::AllInTheWrist, MoveKey::PfSuperiorStat);
-pub const THE_HEAVY_MOVE_KEYS: (MoveKey, MoveKey) = (MoveKey::PhArmored, MoveKey::PhSuperiorStat);
-pub const THE_JUDGE_MOVE_KEYS: (MoveKey, MoveKey) =
-    (MoveKey::AegisOfFaith, MoveKey::TheTowerEternal);
-pub const THE_LIGHTBEARER_MOVE_KEYS: (MoveKey, MoveKey) = (
-    MoveKey::ACandleAgainstTheDark,
-    MoveKey::WielderOfTheWhiteFlame,
-);
-pub const THE_MARSHAL_MOVE_KEYS: (MoveKey, MoveKey) = (MoveKey::PmArmored, MoveKey::PmSuperiorStat);
-pub const THE_RANGER_MOVE_KEYS: (MoveKey, MoveKey) = (MoveKey::ASafePlace, MoveKey::WalkItOff);
+    (MoveKey::FromRaisedByWolves, MoveKey::VoiceOfTheEarthMother);
+pub const THE_FOX_MOVE_KEYS: (MoveKey, MoveKey) =
+    (MoveKey::FromTheNatural, MoveKey::PfSuperiorStat);
+pub const THE_HEAVY_MOVE_KEYS: (MoveKey, MoveKey) = (MoveKey::FromSheriff, MoveKey::PhSuperiorStat);
+pub const THE_JUDGE_MOVE_KEYS: (MoveKey, MoveKey) = (MoveKey::FromLegacy, MoveKey::TheTowerEternal);
+pub const THE_LIGHTBEARER_MOVE_KEYS: (MoveKey, MoveKey) =
+    (MoveKey::FromAuspiciousBirth, MoveKey::WielderOfTheWhiteFlame);
+pub const THE_MARSHAL_MOVE_KEYS: (MoveKey, MoveKey) =
+    (MoveKey::FromPenitent, MoveKey::PmSuperiorStat);
+pub const THE_RANGER_MOVE_KEYS: (MoveKey, MoveKey) =
+    (MoveKey::FromWideWanderer, MoveKey::WalkItOff);
 pub const THE_SEEKER_MOVE_KEYS: (MoveKey, MoveKey) =
     (MoveKey::Attuned, MoveKey::ProofAgainstDetection);
 pub const THE_WOULD_BE_HERO_MOVE_KEYS: (MoveKey, MoveKey) =
-    (MoveKey::AngerIsAGift, MoveKey::VoiceOfExperience);
+    (MoveKey::FromImpetuousYouth, MoveKey::VoiceOfExperience);

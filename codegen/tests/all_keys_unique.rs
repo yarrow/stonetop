@@ -28,11 +28,7 @@ impl Seen {
     fn conflict_report(&self) -> String {
         let mut conflicts: Vec<_> = self.conflicts.iter().collect();
         conflicts.sort();
-        conflicts
-            .iter()
-            .map(|k| k.as_str())
-            .collect::<Vec<_>>()
-            .join("\n")
+        conflicts.iter().map(|k| k.as_str()).collect::<Vec<_>>().join("\n")
     }
 }
 
@@ -41,6 +37,9 @@ fn visit_playbook(playbook: &Playbook, seen: &mut Seen) {
     seen.record(playbook);
     for background in &playbook.backgrounds {
         seen.record(background);
+        for a_move in background.moves() {
+            seen.record(a_move);
+        }
     }
     for possession in &playbook.special_possessions.options {
         seen.record(possession);
@@ -60,9 +59,5 @@ fn all_keys_unique() {
         let playbook = json5_playbook(&name).unwrap_or_else(|e| panic!("{e:#}"));
         visit_playbook(&playbook, &mut seen);
     }
-    assert!(
-        seen.conflicts.is_empty(),
-        "Duplicate keys:\n{}",
-        seen.conflict_report()
-    );
+    assert!(seen.conflicts.is_empty(), "Duplicate keys:\n{}", seen.conflict_report());
 }
