@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["codegen","xtask"]
+members = ["codegen","stonetop","xtask"]
 
 [workspace.package]
 version = "0.1.0"
