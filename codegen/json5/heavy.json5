@@ -98,28 +98,23 @@
     options: [
       {
         name: "Distillery",
-        keyPrefix: "Ph",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
         resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Chirurgeon's tools",
-        keyPrefix: "Ph",
         description: "catgut, straps, bandages, tubes, poultices, willow bark, ◇ bonesaws, etc.",
       },
       {
         name: "Husbandry tools",
-        keyPrefix: "Ph",
         description: "brushes, muzzles, collars, feed, ◇ whips, ◇ bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
       },
       {
         name: "Smithy",
-        keyPrefix: "Ph",
         description: "(or access to it): iron goods, ingots, thick gloves, ◇ tongs, ◇ bellows, an anvil, etc.",
       },
       {
         name: "Stoneworker's tools",
-        keyPrefix: "Ph",
         description: "chisels, drills, ◇ prybars, ◇ spikes, ◇ block & tackles, wheelbarrow, etc.",
       },
       {
@@ -142,7 +137,6 @@
   moves: [
     {
       name: "Armored",
-      keyPrefix: "Ph",
       description: "<p>When you <strong><em>carry a shield</em></strong>, mark only ◆ (instead of ◆◆). Also, you can ignore the <em>cumbersome</em> tag on any armor you wear.</p><p>If you take this move at the start of play, add an ◇◇ iron hauberk, ◇◇ bronze cuirass, or ◇◇ scale coat to your inventory (all are 2 armor, <em>warm, cumbersome</em>).</p>",
     },
     {
@@ -181,7 +175,6 @@
     },
     {
       name: "Improved Stat",
-      keyPrefix: "Ph",
       description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
       maxPicks: 3,
     },
@@ -290,7 +283,6 @@
     },
     {
       name: "Superior Stat",
-      keyPrefix: "Ph",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
       requirement: {
         level: 6,

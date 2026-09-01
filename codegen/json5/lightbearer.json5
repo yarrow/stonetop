@@ -102,12 +102,10 @@
     options: [
       {
         name: "Apiary",
-        keyPrefix: "Pl",
         description: "beeswax, candles (<em>close, area</em>, lasts ~1 hr), honey, ◇ bee smokers, ◇ hats & veils, etc.",
       },
       {
         name: "Books & scrolls",
-        keyPrefix: "Pl",
         description: "(○○○○○ uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
         resource: { hold: "Uses", canBe: 5, start: "empty" },
       },
@@ -117,7 +115,6 @@
       },
       {
         name: "Distillery",
-        keyPrefix: "Pl",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
         resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
@@ -179,7 +176,6 @@
     },
     {
       name: "Improved Stat",
-      keyPrefix: "Pl",
       description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
       maxPicks: 3,
     },
@@ -258,7 +254,6 @@
     },
     {
       name: "Superior Stat",
-      keyPrefix: "Pl",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
       requirement: {
         level: 6,

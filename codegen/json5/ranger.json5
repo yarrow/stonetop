@@ -121,7 +121,6 @@
       },
       {
         name: "Distillery",
-        keyPrefix: "Pr",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
         resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
@@ -132,7 +131,6 @@
       },
       {
         name: "Husbandry tools",
-        keyPrefix: "Pr",
         description: "brushes, muzzles, collars, feed, ◇ whips, ◇ bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
       },
       {
@@ -193,7 +191,6 @@
     },
     {
       name: "Improved Stat",
-      keyPrefix: "Pr",
       description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
       maxPicks: 3,
     },
@@ -284,7 +281,6 @@
     },
     {
       name: "Superior Stat",
-      keyPrefix: "Pr",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
       requirement: {
         level: 6,

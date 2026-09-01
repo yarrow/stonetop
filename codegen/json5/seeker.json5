@@ -122,24 +122,20 @@
     options: [
       {
         name: "Scribe's tools",
-        keyPrefix: "Ps",
         description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
       },
       {
         name: "Books & scrolls",
-        keyPrefix: "Ps",
         description: "(○○○○○ uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
         resource: { hold: "Uses", canBe: 5, start: "empty" },
       },
       {
         name: "Distillery",
-        keyPrefix: "Ps",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
         resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Engineer's tools",
-        keyPrefix: "Ps",
         description: "rulers, tapes, rods, plumb-bobs, ◇ tripods, ◇ block & tackles, wheelbarrow, etc.",
       },
       {
@@ -152,7 +148,6 @@
       },
       {
         name: "Trade contacts",
-        keyPrefix: "Ps",
         description: "small amounts of salt, glass, silk, spice, medicinal herbs, pigments, ivory, etc.",
       },
     ],
@@ -184,7 +179,6 @@
     },
     {
       name: "Improved Stat",
-      keyPrefix: "Ps",
       description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
       maxPicks: 3,
     },
@@ -283,7 +277,6 @@
     },
     {
       name: "Superior Stat",
-      keyPrefix: "Ps",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
       requirement: {
         level: 6,

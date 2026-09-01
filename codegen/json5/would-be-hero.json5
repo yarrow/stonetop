@@ -137,17 +137,14 @@
       },
       {
         name: "Husbandry tools",
-        keyPrefix: "Pw",
         description: "brushes, muzzles, collars, feed, ◇ whips, ◇ bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
       },
       {
         name: "Smithy",
-        keyPrefix: "Pw",
         description: "(or access to it): iron goods, ingots, thick gloves, ◇ tongs, ◇ bellows, an anvil, etc.",
       },
       {
         name: "Stoneworker's tools",
-        keyPrefix: "Pw",
         description: "chisels, drills, ◇ prybars, ◇ spikes, ◇ block & tackles, wheelbarrow, etc.",
       },
       {
@@ -164,7 +161,6 @@
       },
       {
         name: "Tannery",
-        keyPrefix: "Pw",
         description: "(or access to it): lime, acid, salts, thick gloves, ◇ a boiled leather cuirass (1 armor), etc.",
       },
     ],
@@ -202,7 +198,6 @@
     },
     {
       name: "Improved Stat",
-      keyPrefix: "Pw",
       description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
       maxPicks: 3,
     },

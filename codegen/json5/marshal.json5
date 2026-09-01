@@ -97,18 +97,15 @@
     options: [
       {
         name: "Chirurgeon's tools",
-        keyPrefix: "Pm",
         description: "catgut, straps, bandages, tubes, poultices, willow bark, ◇ bonesaws, etc.",
       },
       {
         name: "Distillery",
-        keyPrefix: "Pm",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
         resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Engineer's tools",
-        keyPrefix: "Pm",
         description: "rulers, tapes, rods, plumb-bobs, ◇ tripods, ◇ block & tackles, wheelbarrow, etc.",
       },
       {
@@ -117,7 +114,6 @@
       },
       {
         name: "Scribe's tools",
-        keyPrefix: "Pm",
         description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
       },
       {
@@ -139,7 +135,6 @@
   moves: [
     {
       name: "Armored",
-      keyPrefix: "Pm",
       description: "<p>When you <strong><em>carry a shield</em></strong>, mark only ◆ (instead of ◆◆). Also, you can ignore the <em>cumbersome</em> tag on any armor you wear.</p><p>If you take this move at the start of play, add an ◇◇ iron hauberk, ◇◇ bronze cuirass, or ◇◇ scale coat to your inventory (all are 2 armor, <em>warm, cumbersome</em>).</p>",
     },
     {
@@ -177,7 +172,6 @@
     },
     {
       name: "Improved Stat",
-      keyPrefix: "Pm",
       description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
       maxPicks: 3,
     },
@@ -288,7 +282,6 @@
     },
     {
       name: "Superior Stat",
-      keyPrefix: "Pm",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
       requirement: {
         level: 6,

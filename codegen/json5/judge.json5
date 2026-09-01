@@ -122,7 +122,6 @@
       },
       {
         name: "Scribe's tools",
-        keyPrefix: "Pj",
         description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
       },
       {
@@ -131,17 +130,14 @@
       },
       {
         name: "Carpenter's tools",
-        keyPrefix: "Pj",
         description: "chisels, files, nails, pitch, ◇ prybars, ◇ saws, ◇◇ firkins, barrels, etc.",
       },
       {
         name: "Engineer's tools",
-        keyPrefix: "Pj",
         description: "rulers, tapes, rods, plumb-bobs, ◇ tripods, ◇ block & tackles, wheelbarrow, etc.",
       },
       {
         name: "Smithy",
-        keyPrefix: "Pj",
         description: "(or access to it): iron goods, ingots, thick gloves, ◇ tongs, ◇ bellows, an anvil, etc.",
       },
     ],
@@ -156,7 +152,6 @@
     },
     {
       name: "Armored",
-      keyPrefix: "Pj",
       description: "<p>When you <strong><em>carry a shield</em></strong>, mark only ◆ (instead of ◆◆). Also, you can ignore the <em>cumbersome</em> tag on any armor you wear.</p><p>If you take this move at the start of play, add an ◇◇ iron hauberk, ◇◇ bronze cuirass, or ◇◇ scale coat to your inventory (all are 2 armor, <em>warm, cumbersome</em>).</p>",
     },
     {
@@ -205,7 +200,6 @@
     },
     {
       name: "Improved Stat",
-      keyPrefix: "Pj",
       description: "<p>Each time you take this move, increase one of your stats by 1 (to a max of +2).</p>",
       maxPicks: 3,
     },
@@ -291,7 +285,6 @@
     },
     {
       name: "Superior Stat",
-      keyPrefix: "Pj",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
       requirement: {
         level: 6,

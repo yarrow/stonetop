@@ -9,114 +9,131 @@ pub enum PlaybookKey {
     TheSeeker,
     TheWouldBeHero,
 }
-pub enum BackgroundKey {
+pub enum ItemKey {
+    // Backgrounds for the Blessed
     Initiate,
     RaisedByWolves,
     Vessel,
+
+    // Backgrounds for the Fox
     TheNatural,
     ALifeOfCrime,
     TheProdigalReturned,
+
+    // Backgrounds for the Heavy
     Sheriff,
     BloodSoakedPast,
     StormMarked,
+
+    // Backgrounds for the Judge
     Legacy,
     Missionary,
     Prophet,
+
+    // Backgrounds for the Lightbearer
     AuspiciousBirth,
     ItinerantMystic,
     SoulOnFire,
+
+    // Backgrounds for the Marshal
     Scion,
     Penitent,
     Luminary,
+
+    // Backgrounds for the Ranger
     MightyHunter,
     WideWanderer,
     BeastBonded,
+
+    // Backgrounds for the Seeker
     Patriot,
     Antiquarian,
     WitchHunter,
+
+    // Backgrounds for the Would-be Hero
     ImpetuousYouth,
     Driven,
     Destined,
-}
-pub enum SpecialPossessionKey {
+
+    // Special Possessions for the Blessed
     SacredPouchEmMagicalEm,
-    PbApiary,
+    Apiary,
     CollectedOfferings,
     GoatHerd,
     HerbGarden,
     Mastiffs,
+
+    // Special Possessions for the Fox
     BurglarsKit,
-    PfCarpentersTools,
-    PfDistillery,
+    CarpentersTools,
+    Distillery,
     HiddenStash,
     MummersKit,
-    PfScribesTools,
-    PfTannery,
-    PfTradeContacts,
-    PhDistillery,
-    PhChirurgeonsTools,
-    PhHusbandryTools,
-    PhSmithy,
-    PhStoneworkersTools,
+    ScribesTools,
+    Tannery,
+    TradeContacts,
+
+    // Special Possessions for the Heavy
+    // Distillery
+    ChirurgeonsTools,
+    HusbandryTools,
+    Smithy,
+    StoneworkersTools,
     PhWeaponsOfWar,
+
+    // Special Possessions for the Judge
     YourSymbolOfAuthority,
-    PjScribesTools,
+    // ScribesTools
     Aviary,
-    PjCarpentersTools,
-    PjEngineersTools,
-    PjSmithy,
-    PlApiary,
-    PlBooksScrolls,
+    // CarpentersTools
+    EngineersTools,
+    // Smithy
+
+    // Special Possessions for the Lightbearer
+    // Apiary
+    BooksScrolls,
     Chandlery,
-    PlDistillery,
+    // Distillery
     Glassworks,
     HolyRelics,
     LuthiersTools,
-    PmChirurgeonsTools,
-    PmDistillery,
-    PmEngineersTools,
+
+    // Special Possessions for the Marshal
+    // ChirurgeonsTools
+    // Distillery
+    // EngineersTools
     PersonalSymbol,
-    PmScribesTools,
+    // ScribesTools
     PmWeaponsOfWar,
+
+    // Special Possessions for the Ranger
     CompositeBow,
-    PrDistillery,
+    // Distillery
     Hideouts,
-    PrHusbandryTools,
+    // HusbandryTools
     Hounds,
     LayOfTheLand,
     TrappingGear,
-    PsScribesTools,
-    PsBooksScrolls,
-    PsDistillery,
-    PsEngineersTools,
+
+    // Special Possessions for the Seeker
+    // ScribesTools
+    // BooksScrolls
+    // Distillery
+    // EngineersTools
     Laboratory,
     Paraphernalia,
-    PsTradeContacts,
+    // TradeContacts
+
+    // Special Possessions for the Would-be Hero
     AHeapOfExpectations,
     AGoodDog,
-    PwHusbandryTools,
-    PwSmithy,
-    PwStoneworkersTools,
+    // HusbandryTools
+    // Smithy
+    // StoneworkersTools
     PersonalTokenFraughtWithMeaning,
-    PwTannery,
-}
-pub enum BackstoryKey {
-    SacredPouch,
-    TheEarthMother,
-    TallTales,
-    AHistoryOfViolence,
-    TheChronicle,
-    TheLawkeeper,
-    PraiseTheDay,
-    WarStories,
-    SomethingWickedThisWayComes,
-    Collection,
-    MajorArcana,
-    MinorArcana,
-    FearAnger,
-}
-pub enum MoveKey {
-    // Moves for TheBlessed
+    // Tannery
+
+    // Moves for the Blessed
     FromRaisedByWolves,
     FromVessel,
     AmuletsTalismans,
@@ -125,7 +142,7 @@ pub enum MoveKey {
     DanusGrasp,
     HealersArts,
     HeedMyWords,
-    PbImprovedStat,
+    ImprovedStat,
     IntoTheLionsDen,
     LightningRod,
     RitesOfTheLand,
@@ -140,10 +157,10 @@ pub enum MoveKey {
     PotentWorkings,
     SharedSouls,
     SuckThePoisonOut,
-    PbSuperiorStat,
+    SuperiorStat,
     VoiceOfTheEarthMother,
 
-    // Moves for TheFox
+    // Moves for the Fox
     FromTheNatural,
     FromTheProdigalReturned,
     AllInTheWrist,
@@ -153,7 +170,7 @@ pub enum MoveKey {
     Dabbler,
     DangerSense,
     FreeRunning,
-    PfImprovedStat,
+    // ImprovedStat
     Irresistible,
     LaughAtDanger,
     LightFingers,
@@ -169,12 +186,12 @@ pub enum MoveKey {
     PantsOnFire,
     SecondIntent,
     Slippery,
-    PfSuperiorStat,
+    // SuperiorStat
 
-    // Moves for TheHeavy
+    // Moves for the Heavy
     FromSheriff,
     FromBloodSoakedPast,
-    PhArmored,
+    Armored,
     BattleJoy,
     Berserker,
     CarvedOutOfWood,
@@ -182,7 +199,7 @@ pub enum MoveKey {
     Formidable,
     Frosty,
     Guardian,
-    PhImprovedStat,
+    // ImprovedStat
     Intimidating,
     HardToKill,
     Unstoppable,
@@ -200,14 +217,14 @@ pub enum MoveKey {
     Nemesis,
     SteadfastGuardian,
     StoneCold,
-    PhSuperiorStat,
+    // SuperiorStat
 
-    // Moves for TheJudge
+    // Moves for the Judge
     FromLegacy,
     FromMissionary,
     FromProphet,
     AegisOfFaith,
-    PjArmored,
+    // Armored
     BearWitness,
     BreakBread,
     Bulwark,
@@ -217,7 +234,7 @@ pub enum MoveKey {
     ForTheGreaterGood,
     HoundOfAratis,
     LikeADogWithABone,
-    PjImprovedStat,
+    // ImprovedStat
     KnowledgeIsPower,
     ManyHandsMakeLightWork,
     ABundleOfSticksUnbroken,
@@ -231,10 +248,10 @@ pub enum MoveKey {
     Condemn,
     Proclamation,
     Mirrorshield,
-    PjSuperiorStat,
+    // SuperiorStat
     TheTowerEternal,
 
-    // Moves for TheLightbearer
+    // Moves for the Lightbearer
     FromAuspiciousBirth,
     FromItinerantMystic,
     FromSoulOnFire,
@@ -246,7 +263,7 @@ pub enum MoveKey {
     FireWithin,
     GuidingLight,
     HeliorsUnblinkingEye,
-    PlImprovedStat,
+    // ImprovedStat
     InvokeTheSunGod,
     KeepTheHomeFiresBurning,
     Lamplighter,
@@ -260,17 +277,17 @@ pub enum MoveKey {
     GloriousServant,
     HungryFlames,
     LightMoreLight,
-    PlSuperiorStat,
+    // SuperiorStat
     WielderOfTheWhiteFlame,
 
-    // Moves for TheMarshal
+    // Moves for the Marshal
     FromPenitent,
-    PmArmored,
+    // Armored
     ArtsOfWar,
     Crew,
     VeteranCrew,
     FrontLineLeader,
-    PmImprovedStat,
+    // ImprovedStat
     Logistics,
     ReadTheLand,
     PrepareAWelcome,
@@ -288,9 +305,9 @@ pub enum MoveKey {
     LikeAnOpenBook,
     NobleMien,
     PeaceThroughStrength,
-    PmSuperiorStat,
+    // SuperiorStat
 
-    // Moves for TheRanger
+    // Moves for the Ranger
     FromWideWanderer,
     FromBeastBonded,
     ASafePlace,
@@ -301,7 +318,7 @@ pub enum MoveKey {
     CallTheShot,
     ExpertTracker,
     HomeOnTheRange,
-    PrImprovedStat,
+    // ImprovedStat
     MentalMap,
     Naturalist,
     OnTheHoof,
@@ -318,17 +335,17 @@ pub enum MoveKey {
     BeastOfLegend,
     ConstantVigilance,
     GiantSlayer,
-    PrSuperiorStat,
+    // SuperiorStat
     Trailblazer,
     WalkItOff,
 
-    // Moves for TheSeeker
+    // Moves for the Seeker
     Attuned,
     ConduitOfPower,
     Countermeasures,
     EverythingBleeds,
     EverythingBurns,
-    PsImprovedStat,
+    // ImprovedStat
     InitiateOfTheSecretArts,
     LetsMakeADeal,
     Logbook,
@@ -344,12 +361,12 @@ pub enum MoveKey {
     ArcaneAdept,
     DeepInsight,
     Improvise,
-    PsSuperiorStat,
+    // SuperiorStat
     MindOverMagic,
     Overchannel,
     ProofAgainstDetection,
 
-    // Moves for TheWouldBeHero
+    // Moves for the Would-be Hero
     FromImpetuousYouth,
     FromDriven,
     FromDestined,
@@ -358,7 +375,7 @@ pub enum MoveKey {
     BetterPartOfValor,
     IGetKnockedDown,
     ButIGetUpAgain,
-    PwImprovedStat,
+    // ImprovedStat
     InOverYourHead,
     IronWill,
     InquiringMinds,
@@ -375,20 +392,295 @@ pub enum MoveKey {
     PwSuperiorStat,
     Undaunted,
     VoiceOfExperience,
+
+    // Backstories for the Blessed
+    SacredPouch,
+    TheEarthMother,
+
+    // Backstories for the Fox
+    TallTales,
+
+    // Backstories for the Heavy
+    AHistoryOfViolence,
+
+    // Backstories for the Judge
+    TheChronicle,
+    TheLawkeeper,
+
+    // Backstories for the Lightbearer
+    PraiseTheDay,
+
+    // Backstories for the Marshal
+    WarStories,
+
+    // Backstories for the Ranger
+    SomethingWickedThisWayComes,
+
+    // Backstories for the Seeker
+    Collection,
+    MajorArcana,
+    MinorArcana,
+
+    // Backstories for the Would-be Hero
+    FearAnger,
 }
-pub const THE_BLESSED_MOVE_KEYS: (MoveKey, MoveKey) =
-    (MoveKey::FromRaisedByWolves, MoveKey::VoiceOfTheEarthMother);
-pub const THE_FOX_MOVE_KEYS: (MoveKey, MoveKey) =
-    (MoveKey::FromTheNatural, MoveKey::PfSuperiorStat);
-pub const THE_HEAVY_MOVE_KEYS: (MoveKey, MoveKey) = (MoveKey::FromSheriff, MoveKey::PhSuperiorStat);
-pub const THE_JUDGE_MOVE_KEYS: (MoveKey, MoveKey) = (MoveKey::FromLegacy, MoveKey::TheTowerEternal);
-pub const THE_LIGHTBEARER_MOVE_KEYS: (MoveKey, MoveKey) =
-    (MoveKey::FromAuspiciousBirth, MoveKey::WielderOfTheWhiteFlame);
-pub const THE_MARSHAL_MOVE_KEYS: (MoveKey, MoveKey) =
-    (MoveKey::FromPenitent, MoveKey::PmSuperiorStat);
-pub const THE_RANGER_MOVE_KEYS: (MoveKey, MoveKey) =
-    (MoveKey::FromWideWanderer, MoveKey::WalkItOff);
-pub const THE_SEEKER_MOVE_KEYS: (MoveKey, MoveKey) =
-    (MoveKey::Attuned, MoveKey::ProofAgainstDetection);
-pub const THE_WOULD_BE_HERO_MOVE_KEYS: (MoveKey, MoveKey) =
-    (MoveKey::FromImpetuousYouth, MoveKey::VoiceOfExperience);
+pub const THE_BLESSED_MOVES: [ItemKey; 25] = [
+    ItemKey::FromRaisedByWolves,
+    ItemKey::FromVessel,
+    ItemKey::AmuletsTalismans,
+    ItemKey::Barkskin,
+    ItemKey::BigMagic,
+    ItemKey::DanusGrasp,
+    ItemKey::HealersArts,
+    ItemKey::HeedMyWords,
+    ItemKey::ImprovedStat,
+    ItemKey::IntoTheLionsDen,
+    ItemKey::LightningRod,
+    ItemKey::RitesOfTheLand,
+    ItemKey::SpiritTongue,
+    ItemKey::BorrowPower,
+    ItemKey::CallTheSpirits,
+    ItemKey::TracklessStep,
+    ItemKey::Veil,
+    ItemKey::WardsBindings,
+    ItemKey::WildSoul,
+    ItemKey::NaturesWrath,
+    ItemKey::PotentWorkings,
+    ItemKey::SharedSouls,
+    ItemKey::SuckThePoisonOut,
+    ItemKey::SuperiorStat,
+    ItemKey::VoiceOfTheEarthMother,
+];
+pub const THE_FOX_MOVES: [ItemKey; 26] = [
+    ItemKey::FromTheNatural,
+    ItemKey::FromTheProdigalReturned,
+    ItemKey::AllInTheWrist,
+    ItemKey::Ambush,
+    ItemKey::Burgle,
+    ItemKey::Catlike,
+    ItemKey::Dabbler,
+    ItemKey::DangerSense,
+    ItemKey::FreeRunning,
+    ItemKey::ImprovedStat,
+    ItemKey::Irresistible,
+    ItemKey::LaughAtDanger,
+    ItemKey::LightFingers,
+    ItemKey::Perceptive,
+    ItemKey::RapierWit,
+    ItemKey::SkillAtArms,
+    ItemKey::ParryRiposte,
+    ItemKey::SilverTongued,
+    ItemKey::UnderYourSkin,
+    ItemKey::BattleDancer,
+    ItemKey::CheapShot,
+    ItemKey::EyeOnTheDoor,
+    ItemKey::PantsOnFire,
+    ItemKey::SecondIntent,
+    ItemKey::Slippery,
+    ItemKey::SuperiorStat,
+];
+pub const THE_HEAVY_MOVES: [ItemKey; 29] = [
+    ItemKey::FromSheriff,
+    ItemKey::FromBloodSoakedPast,
+    ItemKey::Armored,
+    ItemKey::BattleJoy,
+    ItemKey::Berserker,
+    ItemKey::CarvedOutOfWood,
+    ItemKey::Dangerous,
+    ItemKey::Formidable,
+    ItemKey::Frosty,
+    ItemKey::Guardian,
+    ItemKey::ImprovedStat,
+    ItemKey::Intimidating,
+    ItemKey::HardToKill,
+    ItemKey::Unstoppable,
+    ItemKey::Musclebound,
+    ItemKey::Payback,
+    ItemKey::Relentless,
+    ItemKey::SeasonedWarrior,
+    ItemKey::SituationalAwareness,
+    ItemKey::UncannyReflexes,
+    ItemKey::Unfettered,
+    ItemKey::TerrorOnTheField,
+    ItemKey::BringerOfRuin,
+    ItemKey::CutFromGranite,
+    ItemKey::MightyThews,
+    ItemKey::Nemesis,
+    ItemKey::SteadfastGuardian,
+    ItemKey::StoneCold,
+    ItemKey::SuperiorStat,
+];
+pub const THE_JUDGE_MOVES: [ItemKey; 30] = [
+    ItemKey::FromLegacy,
+    ItemKey::FromMissionary,
+    ItemKey::FromProphet,
+    ItemKey::AegisOfFaith,
+    ItemKey::Armored,
+    ItemKey::BearWitness,
+    ItemKey::BreakBread,
+    ItemKey::Bulwark,
+    ItemKey::Censure,
+    ItemKey::Castigate,
+    ItemKey::ChroniclerOfStonetop,
+    ItemKey::ForTheGreaterGood,
+    ItemKey::HoundOfAratis,
+    ItemKey::LikeADogWithABone,
+    ItemKey::ImprovedStat,
+    ItemKey::KnowledgeIsPower,
+    ItemKey::ManyHandsMakeLightWork,
+    ItemKey::ABundleOfSticksUnbroken,
+    ItemKey::TheHammerAndTheBook,
+    ItemKey::TruthOrConsequences,
+    ItemKey::BindingArbitration,
+    ItemKey::VisionUnclouded,
+    ItemKey::WellRead,
+    ItemKey::AMightyRampart,
+    ItemKey::Armistice,
+    ItemKey::Condemn,
+    ItemKey::Proclamation,
+    ItemKey::Mirrorshield,
+    ItemKey::SuperiorStat,
+    ItemKey::TheTowerEternal,
+];
+pub const THE_LIGHTBEARER_MOVES: [ItemKey; 27] = [
+    ItemKey::FromAuspiciousBirth,
+    ItemKey::FromItinerantMystic,
+    ItemKey::FromSoulOnFire,
+    ItemKey::ACandleAgainstTheDark,
+    ItemKey::LuminousShield,
+    ItemKey::AllIsIlluminated,
+    ItemKey::AndBeholdAPaleHorse,
+    ItemKey::ConsecratedFlame,
+    ItemKey::FireWithin,
+    ItemKey::GuidingLight,
+    ItemKey::HeliorsUnblinkingEye,
+    ItemKey::ImprovedStat,
+    ItemKey::InvokeTheSunGod,
+    ItemKey::KeepTheHomeFiresBurning,
+    ItemKey::Lamplighter,
+    ItemKey::Piety,
+    ItemKey::PurifyingFlames,
+    ItemKey::RadiantCountenance,
+    ItemKey::RiseLikeTheSun,
+    ItemKey::SpringsFirstThaw,
+    ItemKey::BurnTwiceAsBright,
+    ItemKey::EmpoweredInvocations,
+    ItemKey::GloriousServant,
+    ItemKey::HungryFlames,
+    ItemKey::LightMoreLight,
+    ItemKey::SuperiorStat,
+    ItemKey::WielderOfTheWhiteFlame,
+];
+pub const THE_MARSHAL_MOVES: [ItemKey; 25] = [
+    ItemKey::FromPenitent,
+    ItemKey::Armored,
+    ItemKey::ArtsOfWar,
+    ItemKey::Crew,
+    ItemKey::VeteranCrew,
+    ItemKey::FrontLineLeader,
+    ItemKey::ImprovedStat,
+    ItemKey::Logistics,
+    ItemKey::ReadTheLand,
+    ItemKey::PrepareAWelcome,
+    ItemKey::SetUpStrike,
+    ItemKey::ShakeItOff,
+    ItemKey::ShieldWall,
+    ItemKey::SirPermissionToDieSir,
+    ItemKey::SpeakSoftly,
+    ItemKey::Stentorian,
+    ItemKey::TakeTheMeasure,
+    ItemKey::WeHappyFew,
+    ItemKey::BattlefieldGrace,
+    ItemKey::HeroesToTheLast,
+    ItemKey::FocusFire,
+    ItemKey::LikeAnOpenBook,
+    ItemKey::NobleMien,
+    ItemKey::PeaceThroughStrength,
+    ItemKey::SuperiorStat,
+];
+pub const THE_RANGER_MOVES: [ItemKey; 30] = [
+    ItemKey::FromWideWanderer,
+    ItemKey::FromBeastBonded,
+    ItemKey::ASafePlace,
+    ItemKey::AnimalCompanion,
+    ItemKey::MagnificentSpecimen,
+    ItemKey::BigGameHunter,
+    ItemKey::BlotOutTheSun,
+    ItemKey::CallTheShot,
+    ItemKey::ExpertTracker,
+    ItemKey::HomeOnTheRange,
+    ItemKey::ImprovedStat,
+    ItemKey::MentalMap,
+    ItemKey::Naturalist,
+    ItemKey::OnTheHoof,
+    ItemKey::PackHorse,
+    ItemKey::Pathfinder,
+    ItemKey::Predator,
+    ItemKey::SniffOutCorruption,
+    ItemKey::Stalker,
+    ItemKey::Survivalist,
+    ItemKey::WardenOfTheWild,
+    ItemKey::WildSpeech,
+    ItemKey::Worldly,
+    ItemKey::Alpha,
+    ItemKey::BeastOfLegend,
+    ItemKey::ConstantVigilance,
+    ItemKey::GiantSlayer,
+    ItemKey::SuperiorStat,
+    ItemKey::Trailblazer,
+    ItemKey::WalkItOff,
+];
+pub const THE_SEEKER_MOVES: [ItemKey; 25] = [
+    ItemKey::Attuned,
+    ItemKey::ConduitOfPower,
+    ItemKey::Countermeasures,
+    ItemKey::EverythingBleeds,
+    ItemKey::EverythingBurns,
+    ItemKey::ImprovedStat,
+    ItemKey::InitiateOfTheSecretArts,
+    ItemKey::LetsMakeADeal,
+    ItemKey::Logbook,
+    ItemKey::Magpie,
+    ItemKey::NeverAtALoss,
+    ItemKey::Polyglot,
+    ItemKey::Cryptologist,
+    ItemKey::QuickStudy,
+    ItemKey::SafetyFirst,
+    ItemKey::SageAdvice,
+    ItemKey::WellVersed,
+    ItemKey::WorkWithWhatYouveGot,
+    ItemKey::ArcaneAdept,
+    ItemKey::DeepInsight,
+    ItemKey::Improvise,
+    ItemKey::SuperiorStat,
+    ItemKey::MindOverMagic,
+    ItemKey::Overchannel,
+    ItemKey::ProofAgainstDetection,
+];
+pub const THE_WOULD_BE_HERO_MOVES: [ItemKey; 25] = [
+    ItemKey::FromImpetuousYouth,
+    ItemKey::FromDriven,
+    ItemKey::FromDestined,
+    ItemKey::AngerIsAGift,
+    ItemKey::SpeakTruthToPower,
+    ItemKey::BetterPartOfValor,
+    ItemKey::IGetKnockedDown,
+    ItemKey::ButIGetUpAgain,
+    ItemKey::ImprovedStat,
+    ItemKey::InOverYourHead,
+    ItemKey::IronWill,
+    ItemKey::InquiringMinds,
+    ItemKey::NeverGonnaKeepMeDown,
+    ItemKey::PotentialForGreatness,
+    ItemKey::Resourceful,
+    ItemKey::SomethingToRememberMeBy,
+    ItemKey::ToughLove,
+    ItemKey::Underestimated,
+    ItemKey::UpWithPeople,
+    ItemKey::Versatile,
+    ItemKey::AForceToBeReckonedWith,
+    ItemKey::BigDamnHero,
+    ItemKey::PwSuperiorStat,
+    ItemKey::Undaunted,
+    ItemKey::VoiceOfExperience,
+];
