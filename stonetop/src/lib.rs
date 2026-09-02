@@ -4,6 +4,7 @@
 )]
 
 //use anyhow::{Context, Result};
+pub mod admin;
 pub mod chargen;
 pub mod item_keys;
 pub mod level_up;
