@@ -1,4 +1,5 @@
 use serde::{Deserialize, Deserializer, Serialize};
+use stonetop::Die;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -10,7 +11,7 @@ pub struct Playbook {
     pub appearance: Vec<TaggedRow>,
     pub origin_choices: Vec<Origin>,
     pub stats_to_assign: Vec<i8>,
-    pub damage: String,
+    pub damage: Die,
     pub hp: u8,
     pub special_possessions: SpecialPossessions,
     pub starting_moves_note: String,
