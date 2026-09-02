@@ -1,8 +1,33 @@
-//! Generated from `codegen/src/item_keys.rs` by `cargo xtask copy-keys`. Do not edit!
+//! Lookup keys, used on the server to look up fixed values baked into the binary, and on both
+//! client and server to look up persistent state. This file is the source of truth: every
+//! playbook and item name in `json5/` must resolve to a variant here, and every variant must be
+//! produced by some name (`tests/keys_consistent.rs` checks both). A shipped key is permanent, so
+//! you can add variants freely but you can't rename or remove one.
+//!
+//! Playbooks share items: every playbook has the same Improved Stat move, for instance. A shared
+//! item gets one variant, listed under the first playbook to use it, and later playbooks show a
+//! comment where that variant would have been.
+//!
+//! The client crate gets a copy of this file with the strum derives stripped; see
+//! `bin/copy-item-keys.rs`.
 
 use serde::{Deserialize, Serialize};
+use strum::{Display, EnumIter, EnumString};
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Serialize,
+    Deserialize,
+    Display,
+    EnumString,
+    EnumIter,
+)]
 pub enum PlaybookKey {
     TheBlessed,
     TheFox,
@@ -15,7 +40,20 @@ pub enum PlaybookKey {
     TheWouldBeHero,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[derive(
+    Clone,
+    Copy,
+    Debug,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Serialize,
+    Deserialize,
+    Display,
+    EnumString,
+    EnumIter,
+)]
 pub enum ItemKey {
     // Backgrounds for the Blessed
     Initiate,

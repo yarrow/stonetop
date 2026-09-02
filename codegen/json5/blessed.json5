@@ -277,7 +277,7 @@
   ],
   backstory: [
     {
-      name: "Sacred pouch",
+      name: "Your sacred pouch",
       list: [
         {
           text: "<p>Your sacred pouch (<em>magical</em>) doesn't take up space in your inventory. It can hold up to 3 Stock (sacred herbs, powders, stones, pigments, chalks, clay, and so forth). Each time you gain an even-numbered level, your pouch can hold +1 Stock. When <strong><em>anyone but you looks inside your sacred pouch and touches the materials therein</em></strong>, the Stock is ruined.</p>",

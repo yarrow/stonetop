@@ -4,6 +4,8 @@
 )]
 use anyhow::{Context, Result};
 use schema::Playbook;
+pub mod client_copy;
+pub mod item_keys;
 pub mod key;
 pub mod schema;
 

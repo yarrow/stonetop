@@ -9,35 +9,33 @@ const USAGE: &str = "\
 usage: cargo xtask <task>
 
 tasks:
-  generate-keys    regenerate stonetop/src/item_keys.rs from codegen/json5";
+  copy-keys    rewrite stonetop/src/item_keys.rs from codegen/src/item_keys.rs";
 
 fn main() -> Result<()> {
     match std::env::args().nth(1).as_deref() {
-        Some("generate-keys") => generate_keys(),
+        Some("copy-keys") => copy_keys(),
         Some(task) => bail!("unknown task `{task}`\n\n{USAGE}"),
         None => bail!("{USAGE}"),
     }
 }
 
-/// Run codegen's `generate-keys` binary, capture its output in
-/// `stonetop/src/item_keys.rs`, and format the result.
-fn generate_keys() -> Result<()> {
+/// Run codegen's `copy-item-keys` binary, which writes `stonetop/src/item_keys.rs`, then
+/// confirm the result is rustfmt-clean. The copy is meant to be clean by construction, so a
+/// failure here is a bug in the transform, not something to fix by reformatting.
+fn copy_keys() -> Result<()> {
     let root = workspace_root();
     let output = root.join("stonetop/src/item_keys.rs");
 
-    cmd!(cargo(), "run", "--package", "codegen", "--bin", "generate-keys")
+    cmd!(cargo(), "run", "--quiet", "--package", "codegen", "--bin", "copy-item-keys")
         .dir(&root)
-        .stdout_path(&output)
         .run()
-        .context("running codegen's generate-keys binary")?;
+        .context("running codegen's copy-item-keys binary")?;
 
     let rustfmt = which::which("rustfmt")
         .context("rustfmt not found; install it with `rustup component add rustfmt`")?;
-    cmd!(rustfmt, "--edition", "2024", &output)
+    cmd!(rustfmt, "--edition", "2024", "--check", &output)
         .run()
-        .with_context(|| format!("formatting {}", output.display()))?;
-
-    println!("wrote {}", output.display());
+        .with_context(|| format!("{} is not rustfmt-clean", output.display()))?;
     Ok(())
 }
 
