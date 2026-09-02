@@ -4,7 +4,7 @@ use heck::ToShoutySnakeCase;
 use indexmap::{IndexMap, IndexSet};
 
 use codegen::key::Key;
-use codegen::playbook::Playbook;
+use codegen::schema::Playbook;
 use codegen::{json5_playbook, playbook_names};
 
 /// The kinds of item in `ItemKey`, in the order their keys appear there. Each kind's name

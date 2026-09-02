@@ -3,9 +3,9 @@
     allow(dead_code, unused_imports, unused_macros, unused_mut, unused_variables)
 )]
 use anyhow::{Context, Result};
-use playbook::Playbook;
+use schema::Playbook;
 pub mod key;
-pub mod playbook;
+pub mod schema;
 
 pub fn playbook_from_str(json5_source: &str) -> Result<Playbook> {
     json5::from_str(json5_source).context("can't parse into a Playbook")

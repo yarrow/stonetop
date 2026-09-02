@@ -1,6 +1,6 @@
 use regex::Regex;
 
-use crate::playbook::{Background, Backstory, Move, Playbook, SpecialPossession};
+use crate::schema::{Background, Backstory, Move, Playbook, SpecialPossession};
 
 /// A playbook item with a unique key shaped like a Rust enum variant.
 pub trait Key {

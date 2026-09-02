@@ -3,7 +3,7 @@
 use std::collections::HashMap;
 
 use codegen::key::Key;
-use codegen::playbook::Playbook;
+use codegen::schema::Playbook;
 use codegen::{json5_playbook, playbook_names};
 use serde::Serialize;
 
