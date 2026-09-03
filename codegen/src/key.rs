@@ -5,12 +5,12 @@ use std::str::FromStr;
 use regex::Regex;
 use serde::de::Error;
 use serde::{Deserialize, Deserializer};
+use stonetop::keys::{BackgroundKey, BackstoryKey, MoveKey, PlaybookKey, SpecialPossessionKey};
 
-use crate::item_keys::{ItemKey, PlaybookKey};
 use crate::schema::{Background, Backstory, Move, Playbook, SpecialPossession};
 
 /// A playbook or item whose name resolves to a variant of one of the key enums in
-/// `item_keys.rs`.
+/// `stonetop/src/keys.rs`.
 pub trait Key {
     type Key: FromStr + Debug;
 
@@ -22,12 +22,12 @@ pub trait Key {
     /// # Panics
     ///
     /// If no variant is named `variant_name()`: the name in the json5 has changed, or a
-    /// new item has been added, and `item_keys.rs` has not been updated to match.
+    /// new item has been added, and `stonetop/src/keys.rs` has not been updated to match.
     fn key(&self) -> Self::Key {
         let name = self.variant_name();
         Self::Key::from_str(&name).unwrap_or_else(|_| {
             panic!(
-                "no variant `{name}` in {}: add it to codegen/src/item_keys.rs",
+                "no variant `{name}` in {}: add it to stonetop/src/keys.rs",
                 type_name::<Self::Key>()
             )
         })
@@ -67,29 +67,29 @@ fn key_from_name<K: FromStr, E: Error>(name: &str) -> Result<K, E> {
     let variant = enumable(name);
     K::from_str(&variant).map_err(|_| {
         E::custom(format!(
-            "`{name}` shapes to `{variant}`, which is not a variant of {}: add it to codegen/src/item_keys.rs",
+            "`{name}` shapes to `{variant}`, which is not a variant of {}: add it to stonetop/src/keys.rs",
             type_name::<K>()
         ))
     })
 }
 
-/// Deserialize an item's name, as written in the json5, into its `ItemKey`.
+/// Deserialize a Move's name, as written in a `requirement`, into its `MoveKey`.
 ///
 /// # Errors
 ///
-/// If the name doesn't resolve to an `ItemKey` variant.
-pub fn item_key<'de, D: Deserializer<'de>>(deserializer: D) -> Result<ItemKey, D::Error> {
+/// If the name doesn't resolve to a `MoveKey` variant.
+pub fn move_key<'de, D: Deserializer<'de>>(deserializer: D) -> Result<MoveKey, D::Error> {
     key_from_name(&String::deserialize(deserializer)?)
 }
 
-/// Deserialize a pair of item names into their `ItemKey`s.
+/// Deserialize a pair of Move names into their `MoveKey`s.
 ///
 /// # Errors
 ///
-/// If either name doesn't resolve to an `ItemKey` variant.
-pub fn item_key_pair<'de, D: Deserializer<'de>>(
+/// If either name doesn't resolve to a `MoveKey` variant.
+pub fn move_key_pair<'de, D: Deserializer<'de>>(
     deserializer: D,
-) -> Result<(ItemKey, ItemKey), D::Error> {
+) -> Result<(MoveKey, MoveKey), D::Error> {
     let (first, second) = <(String, String)>::deserialize(deserializer)?;
     Ok((key_from_name(&first)?, key_from_name(&second)?))
 }
@@ -104,9 +104,9 @@ pub fn playbook_key<'de, D: Deserializer<'de>>(deserializer: D) -> Result<Playbo
 }
 
 macro_rules! impl_key {
-    ($($t:ident),* $(,)?) => {
+    ($($t:ident => $k:ident),* $(,)?) => {
         $(impl Key for $t {
-            type Key = ItemKey;
+            type Key = $k;
             fn variant_name(&self) -> String {
                 enumable(&self.name)
             }
@@ -115,9 +115,9 @@ macro_rules! impl_key {
 }
 
 macro_rules! impl_key_with_prefix {
-    ($($t:ident),* $(,)?) => {
+    ($($t:ident => $k:ident),* $(,)?) => {
         $(impl Key for $t {
-            type Key = ItemKey;
+            type Key = $k;
             fn variant_name(&self) -> String {
                 let prefix = self.key_prefix.as_deref().unwrap_or("");
                 format!("{prefix}{}", enumable(&self.name))
@@ -133,8 +133,8 @@ impl Key for Playbook {
     }
 }
 
-impl_key!(Background, Backstory);
-impl_key_with_prefix!(SpecialPossession, Move);
+impl_key!(Background => BackgroundKey, Backstory => BackstoryKey);
+impl_key_with_prefix!(SpecialPossession => SpecialPossessionKey, Move => MoveKey);
 
 #[cfg(test)]
 mod test {

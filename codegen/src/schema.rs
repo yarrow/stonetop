@@ -1,6 +1,6 @@
-use crate::item_keys::{ItemKey, PlaybookKey};
 use serde::{Deserialize, Deserializer, Serialize};
 use stonetop::Die;
+use stonetop::keys::{MoveKey, PlaybookKey};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -226,11 +226,11 @@ pub enum MoveChecklist {
 #[serde(rename_all = "camelCase")]
 pub enum Requirement {
     Level(u8),
-    Needs(#[serde(deserialize_with = "crate::key::item_key")] ItemKey),
-    NeedsOneOf(#[serde(deserialize_with = "crate::key::item_key_pair")] (ItemKey, ItemKey)),
+    Needs(#[serde(deserialize_with = "crate::key::move_key")] MoveKey),
+    NeedsOneOf(#[serde(deserialize_with = "crate::key::move_key_pair")] (MoveKey, MoveKey)),
     NeedsStrength,
     NeedsSixInPotentialFG,
-    Replaces(#[serde(deserialize_with = "crate::key::item_key")] ItemKey),
+    Replaces(#[serde(deserialize_with = "crate::key::move_key")] MoveKey),
     NeedsPlaybook(#[serde(deserialize_with = "crate::key::playbook_key")] PlaybookKey),
 }
 

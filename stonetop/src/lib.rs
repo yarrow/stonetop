@@ -8,6 +8,6 @@ pub mod admin;
 pub mod chargen;
 pub mod die;
 pub use die::Die;
-pub mod item_keys;
+pub mod keys;
 pub mod level_up;
 pub mod play;

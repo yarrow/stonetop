@@ -1,33 +1,23 @@
-//! Lookup keys, used on the server to look up fixed values baked into the binary, and on both
-//! client and server to look up persistent state. This file is the source of truth: every
-//! playbook and item name in `json5/` must resolve to a variant here, and every variant must be
-//! produced by some name (`tests/keys_consistent.rs` checks both). A shipped key is permanent, so
-//! you can add variants freely but you can't rename or remove one.
+//! Lookup keys: `PlaybookKey` and the four item key enums, `MoveKey`, `BackgroundKey`,
+//! `SpecialPossessionKey`, and `BackstoryKey`. This file is the source of truth for `XKey` types:
+//! every playbook and item name in `codegen/json5/` must resolve to a variant here, and every
+//! variant must be produced by some name (checked by `codegen/tests/keys_consistent.rs`). A
+//! shipped key is permanent, so you can add variants freely but you can't rename or remove one.
 //!
 //! Playbooks share items: every playbook has the same Improved Stat move, for instance. A shared
 //! item gets one variant, listed under the first playbook to use it, and later playbooks show a
 //! comment where that variant would have been.
 //!
-//! The client crate gets a copy of this file with the strum derives stripped; see
-//! `bin/copy-item-keys.rs`.
+//! The strum derives (`Display`, `EnumString`, `EnumIter`) are behind the `codegen` feature:
+//! `codegen` needs them to resolve names and walk every variant, but they never reach the WASM
+//! build.
 
 use serde::{Deserialize, Serialize};
+#[cfg(feature = "codegen")]
 use strum::{Display, EnumIter, EnumString};
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    PartialEq,
-    Eq,
-    PartialOrd,
-    Ord,
-    Serialize,
-    Deserialize,
-    Display,
-    EnumString,
-    EnumIter,
-)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter))]
 pub enum PlaybookKey {
     TheBlessed,
     TheFox,
@@ -40,21 +30,9 @@ pub enum PlaybookKey {
     TheWouldBeHero,
 }
 
-#[derive(
-    Clone,
-    Copy,
-    Debug,
-    PartialEq,
-    Eq,
-    PartialOrd,
-    Ord,
-    Serialize,
-    Deserialize,
-    Display,
-    EnumString,
-    EnumIter,
-)]
-pub enum ItemKey {
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter))]
+pub enum BackgroundKey {
     // Backgrounds for the Blessed
     Initiate,
     RaisedByWolves,
@@ -99,7 +77,11 @@ pub enum ItemKey {
     ImpetuousYouth,
     Driven,
     Destined,
+}
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter))]
+pub enum SpecialPossessionKey {
     // Special Possessions for the Blessed
     SacredPouch,
     Apiary,
@@ -177,7 +159,11 @@ pub enum ItemKey {
     // StoneworkersTools
     PersonalTokenFraughtWithMeaning,
     // Tannery
+}
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter))]
+pub enum MoveKey {
     // Moves for the Blessed
     FromRaisedByWolves,
     FromVessel,
@@ -437,7 +423,11 @@ pub enum ItemKey {
     PwSuperiorStat,
     Undaunted,
     VoiceOfExperience,
+}
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter))]
+pub enum BackstoryKey {
     // Backstories for the Blessed
     YourSacredPouch,
     TheEarthMother,
