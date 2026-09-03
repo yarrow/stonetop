@@ -160,10 +160,10 @@
     {
       name: "Dabbler",
       description: "<p>Each time you take this move, choose a move from the Heavy, Marshal, Ranger, or Seeker playbooks for which you otherwise qualify. (You can't take Improved Stat or Superior Stat.)</p>",
-      requirement: {
-        level: 2,
-        playbook: "The Fox",
-      },
+      requires: [
+        { level: 2 },
+        { needsPlaybook: "The Fox" },
+      ],
       maxPicks: 3,
     },
     {
@@ -206,9 +206,7 @@
     {
       name: "Parry & Riposte",
       description: "<p>When you <strong><em>Defend with a weapon that you can wield quickly</em></strong>, you can spend 1 Readiness to both halve an attack's effects/damage and strike back at the attacker (deal your damage with disadvantage), instead of spending 1 Readiness for each.</p>",
-      requirement: {
-        moves: ["Skill at Arms"],
-      },
+      requires: [{ needs: "Skill at Arms" }],
     },
     {
       name: "Silver Tongued",
@@ -222,54 +220,47 @@
     {
       name: "Battle Dancer",
       description: "<p>When you <strong><em>roll +DEX to Clash</em></strong>, <strong>on a 12+</strong> you deal your damage, avoid your enemy's attack, and impress/embarrass/overawe your foes.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Skill at Arms"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Skill at Arms" },
+      ],
     },
     {
       name: "Cheap Shot",
       description: "<p>When you <strong><em>Ambush with a <strong>hand</strong> weapon</em></strong>, you have advantage on your damage roll.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Ambush"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Ambush" },
+      ],
     },
     {
       name: "Eye on the Door",
       description: "<p>When <strong><em>you and your allies need to get out of here</em></strong>, name your escape route and roll +INT: <strong>on a 10+</strong>, you're gone; <strong>on a 7-9</strong>, you can stay or go, but if you go, it costs you—the GM will tell you what (or who) you leave behind or take with you.</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
     {
       name: "Pants on Fire",
       description: "<p>When you <strong><em>Defy Danger, Persuade, or Interfere by being deceitful</em></strong>, you have advantage.</p><p>When another move (like Seek Insight) allows a player to ask you a question, you can opt not to answer.</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
     {
       name: "Second Intent",
       description: "<p>When you <strong><em>Defend and spend 1 Readiness to Parry & Riposte</em></strong>, also pick 1 option from the Ambush list.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Parry & Riposte", "Ambush"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Parry & Riposte" },
+        { needs: "Ambush" },
+      ],
     },
     {
       name: "Slippery",
       description: "<p>When you <strong><em>roll to escape being caught or controlled</em></strong>, treat a 6- as a 7-9. On a 12+, say how you turn the tables or use the circumstances to your advantage.</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
     {
       name: "Superior Stat",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
   ],
   backstory: [

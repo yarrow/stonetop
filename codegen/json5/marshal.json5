@@ -140,10 +140,10 @@
     {
       name: "Arts of War",
       description: "<p>Take a move from the Fox, Heavy, Judge, Ranger, or Seeker playbooks, for which you otherwise qualify. You can pick from a different playbook each time. You can't take Improved Stat or Superior Stat.</p>",
-      requirement: {
-        level: 2,
-        playbook: "The Marshal",
-      },
+      requires: [
+        { level: 2 },
+        { needsPlaybook: "The Marshal" },
+      ],
       maxPicks: 2,
     },
     {
@@ -153,9 +153,7 @@
     {
       name: "Veteran Crew",
       description: "<p>Each time you take this move, pick 1. You can also choose to reselect their Instinct and Cost.</p>",
-      requirement: {
-        moves: ["Crew"],
-      },
+      requires: [{ needs: "Crew" }],
       maxPicks: 2,
       checklist: {
         options: [
@@ -186,9 +184,7 @@
     {
       name: "Prepare a Welcome",
       description: "<p>When you <strong><em>have your allies fortify a position and lie in wait for battle</em></strong>, hold 1 Surprise if you're rushed or 2 Surprises if you can take your time.</p><p>Once battle is joined, spend 1 Surprise to reveal a ploy, defense, or dirty trick you prepared in advance and roll +INT: <strong>on a 10+</strong>, it works as well as can be expected, and you've still got a few tricks up your sleeve—regain 1 Surprise; <strong>on a 7-9</strong>, it works as well as can be expected.</p>",
-      requirement: {
-        moves: ["Read the Land"],
-      },
+      requires: [{ needs: "Read the Land" }],
       resource: { hold: "Surprise", canBe: 2, start: "empty" },
     },
     {
@@ -227,18 +223,18 @@
     {
       name: "Battlefield Grace",
       description: "<p>When you <strong><em>take damage while leading your allies in battle</em></strong>, the damage roll has disadvantage.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Front Line Leader"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Front Line Leader" },
+      ],
     },
     {
       name: "Heroes to the Last",
       description: "<p>Each time you take this move, pick 1:</p>",
-      requirement: {
-        level: 6,
-        moves: ["Veteran Crew"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Veteran Crew" },
+      ],
       maxPicks: 2,
       checklist: {
         options: [
@@ -252,40 +248,36 @@
     {
       name: "Focus Fire",
       description: "<p>You can spend 1 Command to order your allies to bring down a foe. If you do, each ally has advantage on their next damage roll against that foe.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Stentorian"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Stentorian" },
+      ],
     },
     {
       name: "Like an Open Book",
       description: "<p>When you <strong><em>Take the Measure of someone who fears or respects you</em></strong>, your second question can be anything you want. The GM might ask how you could possibly know this; tell them or ask something else.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Take the Measure"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Take the Measure" },
+      ],
     },
     {
       name: "Noble Mien",
       description: "<p>When you <strong><em>lead an NPC through danger and return them to safety</em></strong>, if they aren't part of your crew they will either offer to join your crew or pledge their future aid and support.</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
     {
       name: "Peace Through Strength",
       description: "<p>When you <strong><em>stand ready to fight alongside like-minded allies</em></strong>, anything capable of fear recognizes you as a serious threat and treats you accordingly.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Speak Softly"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Speak Softly" },
+      ],
     },
     {
       name: "Superior Stat",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
   ],
   backstory: [

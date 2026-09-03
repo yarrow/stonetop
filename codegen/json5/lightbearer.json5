@@ -144,11 +144,7 @@
     {
       name: "Luminous Shield",
       description: "<p>When you <strong><em>brandish a holy light to turn aside an attack against body, mind, or soul</em></strong>, roll +CHA: <strong>on a 10+</strong>, the attack is deflected and, if the attacker is in range of your light, they are briefly blinded; <strong>on a 7-9</strong>, the attack is deflected but your holy light flickers and dims, threatening to go out; <strong>on a 6-</strong>, your light snuffs out and the attack is unimpeded.</p>",
-      requirement: {
-        moves: [
-          "A Candle Against the Dark",
-        ],
-      },
+      requires: [{ needs: "A Candle Against the Dark" }],
     },
     {
       name: "All is Illuminated",
@@ -215,57 +211,55 @@
     {
       name: "Burn Twice as Bright",
       description: "<p>When you <strong><em>Invoke the Sun God</em></strong>, you may mark a debility to use 2 Invocations at once. Roll once, and apply any consequences to both Invocations.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Invoke the Sun God"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Invoke the Sun God" },
+      ],
     },
     {
       name: "Empowered Invocations",
       description: "<p>When you Invoke the Sun God, you can choose an extra consequence before you roll. If you do, the Invocation has its <em>empowered</em> effect.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Invoke the Sun God"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Invoke the Sun God" },
+      ],
     },
     {
       name: "Glorious Servant",
       description: "<p>When you <strong><em>Invoke the Sun God and roll a 10+</em></strong>, you need not choose a consequence; <strong>on a 7-9</strong>, you choose a consequence but the GM does not.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Invoke the Sun God"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Invoke the Sun God" },
+      ],
     },
     {
       name: "Hungry Flames",
       description: "<p>When you <strong><em>deal damage with a holy light</em></strong>, you deal +1d6 damage and your target is engulfed in holy light and flames.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Purifying Flames"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Purifying Flames" },
+      ],
     },
     {
       name: "Light, More Light",
       description: "<p>When you <strong><em>consecrate a flame</em></strong>, it burns brighter than normal. A rushlight or candle illuminates to <em>reach</em> range, an oil lamp, lantern, or torch out to <em>near</em> range, and a bullseye lantern out to <em>far</em> range.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Consecrated Flame"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Consecrated Flame" },
+      ],
     },
     {
       name: "Superior Stat",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
     {
       name: "Wielder of the White Flame",
       description: "<p>When you <strong><em>channel Helior's essence into an object you carry</em></strong>, roll +WIS: <strong>on a 10+</strong>, it ignites with a white flame that casts a holy light (<em>reach, area</em>) and burns neither you nor the object, and you may Invoke the Sun God right now as if you rolled a 10+; <strong>on a 7-9</strong>, it ignites with a white flame that casts a holy light (<em>reach, area</em>) and burns neither you nor the object.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Invoke the Sun God"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Invoke the Sun God" },
+      ],
     },
   ],
   backstory: [

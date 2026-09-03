@@ -177,9 +177,7 @@
     {
       name: "Speak Truth to Power",
       description: "<p>When you <strong><em>demand that someone does what is clearly good and right</em></strong>, you have advantage to Persuade. If they refuse, gain +1 Resolve.</p>",
-      requirement: {
-        moves: ["Anger is a Gift"],
-      },
+      requires: [{ needs: "Anger is a Gift" }],
     },
     {
       name: "Better Part of Valor",
@@ -192,9 +190,7 @@
     {
       name: "But I Get Up Again",
       description: "<p>When you <strong><em>use I Get Knocked Down</em></strong>, you have advantage on your next roll against whatever dealt the damage and your next blow against them does +1d4 damage.</p>",
-      requirement: {
-        moves: ["I Get Knocked Down"],
-      },
+      requires: [{ needs: "I Get Knocked Down" }],
     },
     {
       name: "Improved Stat",
@@ -221,9 +217,7 @@
     {
       name: "Potential for Greatness",
       description: "<p>Once per level, <strong><em>when you roll a stat and get a 10+</em></strong>, mark one of the following (note the level during which you marked it). You don't have to mark them in order.</p>",
-      requirement: {
-        playbook: "The Would-be Hero",
-      },
+      requires: [{ needsPlaybook: "The Would-be Hero" }],
       checklist: {
         optionsWithLevel: [
           "Increase the stat you rolled by 1, to a max of +2",
@@ -262,53 +256,49 @@
     {
       name: "Versatile",
       description: "<p>Choose a move from any other playbook, as long as you meet its requirements. You can pick from a different playbook each time. You can't take Improved Stat or Superior Stat.</p>",
-      requirement: {
-        level: 2,
-        playbook: "The Would-be Hero",
-      },
+      requires: [
+        { level: 2 },
+        { needsPlaybook: "The Would-be Hero" },
+      ],
       maxPicks: 4,
     },
     {
       name: "A Force to Be Reckoned With",
       description: "<p>Any intelligent creature who looks you in the eye or hears the steel in your voice instinctively knows that you are a force to be reckoned with, and treats you appropriately.</p><p>When you <strong><em>Defy Danger against something trying to harm or constrain you</em></strong>, on a 12+ you turn the tables on them (the GM will say how, or ask you to).</p>",
-      requirement: {
-        level: 6,
-      },
-      replaces: "Underestimated",
+      requires: [
+        { level: 6 },
+        { replaces: "Underestimated" },
+      ],
     },
     {
       name: "Big Damn Hero",
       description: "<p>When you <strong><em>first leap into danger to protect someone</em></strong>, don't roll to Defend. Instead, treat it as though you rolled a 10+.</p><p>When you <strong><em>Defend</em></strong>, you can spend 1 Readiness to lock eyes with an attacker; they have disadvantage on damage rolls against you and your ward for the rest of the fight.</p>",
-      requirement: {
-        level: 6,
-      },
-      replaces: "In Over Your Head",
+      requires: [
+        { level: 6 },
+        { replaces: "In Over Your Head" },
+      ],
     },
     {
       name: "Superior Stat",
       keyPrefix: "Pw",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
-      requirement: {
-        moves: [
-          "all 6 marks in Potential for Greatness",
-        ],
-      },
+      requires: ["needsSixInPotentialFG"],
     },
     {
       name: "Undaunted",
       description: "<p>When you <strong><em>are outnumbered or facing a foe bigger than you</em></strong>, you get +1 armor and deal +1d6 damage.</p>",
-      requirement: {
-        level: 6,
-      },
-      replaces: "Better Part of Valor",
+      requires: [
+        { level: 6 },
+        { replaces: "Better Part of Valor" },
+      ],
     },
     {
       name: "Voice of Experience",
       description: "<p>When <strong><em>another PC comes to you for advice and you tell them what you think is best</em></strong>, they have advantage on their first roll to follow your advice.</p><p>When you <strong><em>Seek Insight</em></strong>, you can always ask, \"What is about to happen?\" for free, even on a 6-.</p>",
-      requirement: {
-        level: 6,
-      },
-      replaces: "Inquiring Minds",
+      requires: [
+        { level: 6 },
+        { replaces: "Inquiring Minds" },
+      ],
     },
   ],
   movesFootnote: "The first time you use any move marked with an asterisk (*), cross off \"Would-be\" on the front page.",

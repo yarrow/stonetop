@@ -195,16 +195,12 @@
     {
       name: "Borrow Power",
       description: "<p>When <strong><em>a spirit or beast loans you power</em></strong>, ask the GM for one of its tags or moves. Store it in your pouch in place of 1 Stock. When you <strong><em>use the borrowed tag or move</em></strong>, roll +WIS: <strong>on a 10+</strong>, you do it and can use the power again; <strong>on a 7-9</strong>, you do it, but lose the power.</p>",
-      requirement: {
-        moves: ["Spirit Tongue"],
-      },
+      requires: [{ needs: "Spirit Tongue" }],
     },
     {
       name: "Call the Spirits",
       description: "<p>When you <strong><em>spend 1 Stock and perform a short rite</em></strong>, the spirit(s) of a place or object manifest and hear you out. What they do next is up to them.</p>",
-      requirement: {
-        moves: ["Spirit Tongue"],
-      },
+      requires: [{ needs: "Spirit Tongue" }],
     },
     {
       name: "Trackless Step",
@@ -221,58 +217,56 @@
     {
       name: "Wild Soul",
       description: "<p>Each time you take this move, gain a Ranger move of your choice for which you qualify. You can't pick Improved Stat or Superior Stat.</p>",
-      requirement: {
-        level: 2,
-        playbook: "The Blessed",
-      },
+      requires: [
+        { level: 2 },
+        { needsPlaybook: "The Blessed" },
+      ],
       maxPicks: 2,
     },
     {
       name: "Nature's Wrath",
       description: "<p>Danu's Grasp gains the <em>area</em> tag and can affect any creature. A mortal reduced to 0 HP is subdued or killed (your choice) rather than bound in stone.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Danu's Grasp"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Danu's Grasp" },
+      ],
     },
     {
       name: "Potent Workings",
       description: "<p>When you <strong><em>craft a protective charm</em></strong>, you may spend 1 additional Stock to choose 1:</p><ul><li>Name an additional type of harm</li><li>On a 10+, the charm retains its potency</li></ul>",
-      requirement: {
-        level: 6,
-        moves: ["Amulets & Talismans"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Amulets & Talismans" },
+      ],
     },
     {
       name: "Shared Souls",
       description: "<p>When you <strong><em>mark a beast with 1 Stock</em></strong>, you can direct its actions and perceive through its senses no matter the distance between you. Treat it as a follower with 3 Loyalty; when you spend its last Loyalty, the effect ends.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Into the Lion's Den"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Into the Lion's Den" },
+      ],
     },
     {
       name: "Suck the Poison Out",
       description: "<p>When you <strong><em>draw a malady from a patient's body, mind, or soul</em></strong>, spend 1 Stock and roll +WIS: <strong>on a 10+</strong>, you remove the malady and can safely discard it or store it in your sacred pouch (taking the space of 1 Stock) to study or inflict on another; <strong>on a 7-9</strong>, you remove it, but choose 1:</p><ul><li>Your patient suffers lingering harm or trauma</li><li>You suffer some of the malady's effects</li><li>It will be harmful and dangerous to discard</li></ul>",
-      requirement: {
-        level: 6,
-        moves: ["Healer's Arts"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Healer's Arts" },
+      ],
     },
     {
       name: "Superior Stat",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
     {
       name: "Voice of the Earth Mother",
       description: "<p>When you <strong><em>speak on behalf of Danu</em></strong>, natural beasts and spirits of the wild respect your authority. All but the most headstrong will do as you command, even against their instincts.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Spirit Tongue"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Spirit Tongue" },
+      ],
     },
   ],
   backstory: [

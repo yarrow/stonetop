@@ -173,10 +173,10 @@
     {
       name: "Castigate",
       description: "<p>When you <strong><em>Censure someone</em></strong>, your voice deals 1d4 damage to them (<em>near, loud</em>, ignores armor).</p>",
-      requirement: {
-        level: 2,
-        moves: ["Censure"],
-      },
+      requires: [
+        { level: 2 },
+        { needs: "Censure" },
+      ],
     },
     {
       name: "Chronicler of Stonetop",
@@ -194,9 +194,7 @@
     {
       name: "Like a Dog with a Bone",
       description: "<p>When you <strong><em>attack something you know to be tainted by chaos</em></strong>, deal +1d6 damage.</p>",
-      requirement: {
-        moves: ["Hound of Aratis"],
-      },
+      requires: [{ needs: "Hound of Aratis" }],
     },
     {
       name: "Improved Stat",
@@ -214,11 +212,7 @@
     {
       name: "A Bundle of Sticks Unbroken",
       description: "<p>When you <strong><em>Struggle as One</em></strong>, you and one ally of your choice have advantage.</p>",
-      requirement: {
-        moves: [
-          "Many Hands Make Light Work",
-        ],
-      },
+      requires: [{ needs: "Many Hands Make Light Work" }],
     },
     {
       name: "The Hammer and the Book",
@@ -231,9 +225,7 @@
     {
       name: "Binding Arbitration",
       description: "<p>When you <strong><em>bear witness to someone's promise or oath</em></strong>, henceforth you may ask their player if they have kept their word. They must answer honestly. The character need not be present. If <strong><em>they have broken their word</em></strong>, you gain advantage on all rolls against them until they admit their wrong and suffer an appropriate consequence (your call).</p>",
-      requirement: {
-        moves: ["Truth or Consequences"],
-      },
+      requires: [{ needs: "Truth or Consequences" }],
     },
     {
       name: "Vision Unclouded",
@@ -246,56 +238,52 @@
     {
       name: "A Mighty Rampart",
       description: "<p>When you <strong><em>hold Readiness (from Defend)</em></strong>, you cannot be forced from your position. Also, you can spend 1 Readiness to completely ignore the effects/damage of an attack that you suffer.</p>",
-      requirement: {
-        level: 6,
-      },
-      replaces: "Bulwark",
+      requires: [
+        { level: 6 },
+        { replaces: "Bulwark" },
+      ],
     },
     {
       name: "Armistice",
       description: "<p>When you <strong><em>approach an enemy to negotiate in good faith</em></strong>, they will at least hear you out. Even the most debased and savage foe will delay violence until you've had your say.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Bear Witness"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Bear Witness" },
+      ],
     },
     {
       name: "Condemn",
       description: "<p>When you <strong><em>Censure someone</em></strong>, they are marked with a mystical brand that cannot be removed or hidden until you dismiss it. Any intelligent creature who sees the mark recognizes the bearer as an agent of chaos and anathema to civilization.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Censure"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Censure" },
+      ],
     },
     {
       name: "Proclamation",
       description: "<p>When you <strong><em>Censure</em></strong>, you may denounce a group or faction as long as you can clearly identify them. Apply the effects of Censure to every member of that group, regardless of distance.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Condemn"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Condemn" },
+      ],
     },
     {
       name: "Mirrorshield",
       description: "<p>When you <strong><em>Defend with a shield</em></strong>, you can spend 1 Readiness to intercept a magical force and redirect it to a different target (or none).</p>",
-      requirement: {
-        level: 6,
-        moves: ["Aegis of Faith"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Aegis of Faith" },
+      ],
     },
     {
       name: "Superior Stat",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
     {
       name: "The Tower Eternal",
       description: "<p>When you <strong><em>Defy Danger against magic</em></strong>, treat a result of 6- as a 7-9.</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
   ],
   backstory: [

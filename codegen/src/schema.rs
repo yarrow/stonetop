@@ -1,3 +1,4 @@
+use crate::item_keys::{ItemKey, PlaybookKey};
 use serde::{Deserialize, Deserializer, Serialize};
 use stonetop::Die;
 
@@ -178,12 +179,12 @@ pub struct Move {
     #[serde(default)]
     pub key_prefix: Option<String>,
     pub description: String,
-    pub requirement: Option<Requirement>,
+    #[serde(default)]
+    pub requires: Vec<Requirement>,
     #[serde(default = "one")]
     pub max_picks: u8,
     #[serde(default, deserialize_with = "one_or_many")]
     pub resource: Vec<Resource>,
-    pub replaces: Option<String>,
     pub checklist: Option<MoveChecklist>,
 }
 
@@ -215,13 +216,22 @@ pub enum MoveChecklist {
     OptionsWithLevel(Vec<String>),
 }
 
+/// A condition a character must meet to take a Move.  A Move's requirements are conjoined;
+/// `NeedsOneOf` is the corpus's only disjunction.
+///
+/// Names are written in the json5 as they appear on the referenced item — `"Spirit Tongue"`,
+/// not `"SpiritTongue"` — and resolved to keys on the way in (see `key.rs`), so a name that
+/// no longer matches any item is a parse error.
 #[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
-pub struct Requirement {
-    pub level: Option<u8>,
-    #[serde(default)]
-    pub moves: Vec<String>,
-    pub playbook: Option<String>,
+#[serde(rename_all = "camelCase")]
+pub enum Requirement {
+    Level(u8),
+    Needs(#[serde(deserialize_with = "crate::key::item_key")] ItemKey),
+    NeedsOneOf(#[serde(deserialize_with = "crate::key::item_key_pair")] (ItemKey, ItemKey)),
+    NeedsStrength,
+    NeedsSixInPotentialFG,
+    Replaces(#[serde(deserialize_with = "crate::key::item_key")] ItemKey),
+    NeedsPlaybook(#[serde(deserialize_with = "crate::key::playbook_key")] PlaybookKey),
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

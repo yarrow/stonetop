@@ -185,10 +185,10 @@
     {
       name: "Initiate of the Secret Arts",
       description: "<p>You have a \"Sacred Pouch\" (3 Stock, <em>magical</em>), as per the Blessed, but with no remarkable traits. Each time you take this move, choose a Blessed move for which you otherwise qualify. (You can't take Improved Stat or Superior Stat.)</p>",
-      requirement: {
-        level: 2,
-        playbook: "The Seeker",
-      },
+      requires: [
+        { level: 2 },
+        { needsPlaybook: "The Seeker" },
+      ],
       maxPicks: 3,
     },
     {
@@ -215,9 +215,7 @@
     {
       name: "Cryptologist",
       description: "<p>When you <strong><em>study encoded, forgotten, or arcane marks or writing</em></strong>, roll +INT: <strong>on a 10+</strong>, you can fully decipher them in just a few minutes; <strong>on a 7-9</strong>, you get the gist in a few minutes, but fully deciphering them will take you an hour or so.</p>",
-      requirement: {
-        moves: ["Polyglot"],
-      },
+      requires: [{ needs: "Polyglot" }],
     },
     {
       name: "Quick Study",
@@ -255,55 +253,49 @@
     {
       name: "Arcane Adept",
       description: "<p>When you <strong><em>wish to invent a spell or magical effect</em></strong>, detail its workings with the GM and Make a Plan to invent it. If you like, pick one requirement and ask the GM to provide an alternative (for example \"first you must ▁▁▁▁▁▁▁▁\" could become \"first you must ▁▁▁▁▁▁▁▁, or it will take months\").</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
     {
       name: "Deep Insight",
       description: "<p>When you <strong><em>Seek Insight about something magical</em></strong>, you may ask one additional question, not limited to the list. Even on a 6-, you get to ask this question.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Attuned"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Attuned" },
+      ],
     },
     {
       name: "Improvise",
       description: "<p>When you <strong><em>wish to use an arcanum's move or option without having unlocked it</em></strong>, ask the GM what fool risk(s) it requires and/or what consequence(s) you'll incur. If you go for it, roll +INT: <strong>on a 7+</strong>, you get it to work this once—trigger the move or use the option as if you'd unlocked it; and <strong>on a 10+</strong>, also mark one step towards unlocking the arcanum's mysteries.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Quick Study"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Quick Study" },
+      ],
     },
     {
       name: "Superior Stat",
       description: "<p>Increase one of your stats by +1 (to a max of +3).</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
     {
       name: "Mind Over Magic",
       description: "<p>When you <strong><em>roll to study or use an arcanum</em></strong>, you can roll +INT instead of the stat you'd normally roll.</p>",
-      requirement: {
-        level: 6,
-      },
+      requires: [{ level: 6 }],
     },
     {
       name: "Overchannel",
       description: "<p>When you <strong><em>would mark a Consequence from a major arcanum</em></strong>, you may mark a debility instead.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Conduit of Power"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Conduit of Power" },
+      ],
     },
     {
       name: "Proof Against Detection",
       description: "<p>When you <strong><em>hold Protection</em></strong>, you can't be scried upon or sensed by magical means, and have advantage to Defy Danger by being stealthy.</p>",
-      requirement: {
-        level: 6,
-        moves: ["Safety First"],
-      },
+      requires: [
+        { level: 6 },
+        { needs: "Safety First" },
+      ],
     },
   ],
   backstory: [

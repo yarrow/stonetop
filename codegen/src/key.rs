@@ -3,6 +3,8 @@ use std::fmt::Debug;
 use std::str::FromStr;
 
 use regex::Regex;
+use serde::de::Error;
+use serde::{Deserialize, Deserializer};
 
 use crate::item_keys::{ItemKey, PlaybookKey};
 use crate::schema::{Background, Backstory, Move, Playbook, SpecialPossession};
@@ -53,6 +55,52 @@ fn enumable(phrase: &str) -> String {
         }
     }
     variant
+}
+
+/// The key a name resolves to, for the names that appear in a `requirement` rather than as an
+/// item's own `name`.
+///
+/// # Errors
+///
+/// If no variant is named `enumable(name)`.
+fn key_from_name<K: FromStr, E: Error>(name: &str) -> Result<K, E> {
+    let variant = enumable(name);
+    K::from_str(&variant).map_err(|_| {
+        E::custom(format!(
+            "`{name}` shapes to `{variant}`, which is not a variant of {}: add it to codegen/src/item_keys.rs",
+            type_name::<K>()
+        ))
+    })
+}
+
+/// Deserialize an item's name, as written in the json5, into its `ItemKey`.
+///
+/// # Errors
+///
+/// If the name doesn't resolve to an `ItemKey` variant.
+pub fn item_key<'de, D: Deserializer<'de>>(deserializer: D) -> Result<ItemKey, D::Error> {
+    key_from_name(&String::deserialize(deserializer)?)
+}
+
+/// Deserialize a pair of item names into their `ItemKey`s.
+///
+/// # Errors
+///
+/// If either name doesn't resolve to an `ItemKey` variant.
+pub fn item_key_pair<'de, D: Deserializer<'de>>(
+    deserializer: D,
+) -> Result<(ItemKey, ItemKey), D::Error> {
+    let (first, second) = <(String, String)>::deserialize(deserializer)?;
+    Ok((key_from_name(&first)?, key_from_name(&second)?))
+}
+
+/// Deserialize a playbook's name, as written in the json5, into its `PlaybookKey`.
+///
+/// # Errors
+///
+/// If the name doesn't resolve to a `PlaybookKey` variant.
+pub fn playbook_key<'de, D: Deserializer<'de>>(deserializer: D) -> Result<PlaybookKey, D::Error> {
+    key_from_name(&String::deserialize(deserializer)?)
 }
 
 macro_rules! impl_key {
