@@ -24,6 +24,13 @@ pub struct Playbook {
     pub backstory: Vec<Backstory>,
 }
 
+impl Playbook {
+    /// Every Move this playbook offers, its backgrounds' anonymous Moves first, then its own.
+    pub fn moves(&self) -> impl Iterator<Item = &Move> {
+        self.backgrounds.iter().flat_map(Background::moves).chain(&self.moves)
+    }
+}
+
 // Background -------------------------------------------------------------
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -216,8 +223,9 @@ pub enum MoveChecklist {
     OptionsWithLevel(Vec<String>),
 }
 
-/// A condition a character must meet to take a Move.  A Move's requirements are conjoined;
-/// `NeedsOneOf` is the corpus's only disjunction.
+/// A condition a character must meet to take a Move. Every `Requirement` in a `Move`'s `requires`
+/// field is, er, required. (`NeedsOneOf` requires either of the two `Move`s mentioned to have been
+/// already taken).
 ///
 /// Names are written in the json5 as they appear on the referenced item — `"Spirit Tongue"`,
 /// not `"SpiritTongue"` — and resolved to keys on the way in (see `key.rs`), so a name that

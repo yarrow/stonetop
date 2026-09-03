@@ -4,6 +4,8 @@
 )]
 use anyhow::{Context, Result};
 use schema::Playbook;
+pub mod bake;
+pub mod fixed;
 pub mod key;
 pub mod schema;
 

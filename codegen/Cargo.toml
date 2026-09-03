@@ -15,6 +15,10 @@ serde = { version = "1.0.229", features = ["derive"] }
 strum = { version = "0.28.0", features = ["derive"] }
 stonetop = { version = "0.1.0", path = "../stonetop", features = ["codegen"] }
 
+[dev-dependencies]
+# The tests compare the baked file's content with the json5, so they need the baked file.
+stonetop = { version = "0.1.0", path = "../stonetop", features = ["codegen", "ssr"] }
+
 [lints.rust]
 warnings = "deny"
 unsafe_code = "forbid"

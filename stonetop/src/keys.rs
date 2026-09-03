@@ -8,16 +8,19 @@
 //! item gets one variant, listed under the first playbook to use it, and later playbooks show a
 //! comment where that variant would have been.
 //!
-//! The strum derives (`Display`, `EnumString`, `EnumIter`) are behind the `codegen` feature:
-//! `codegen` needs them to resolve names and walk every variant, but they never reach the WASM
-//! build.
+//! The strum derives (`Display`, `EnumString`, `EnumIter`) and databake's `Bake` are behind the
+//! `codegen` feature: `codegen` needs them to resolve names, walk every variant, and bake Fixed
+//! values, but they never reach the WASM build.
 
+#[cfg(feature = "codegen")]
+use databake::Bake;
 use serde::{Deserialize, Serialize};
 #[cfg(feature = "codegen")]
 use strum::{Display, EnumIter, EnumString};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
-#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter))]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter, Bake))]
+#[cfg_attr(feature = "codegen", databake(path = stonetop::keys))]
 pub enum PlaybookKey {
     TheBlessed,
     TheFox,
@@ -31,7 +34,8 @@ pub enum PlaybookKey {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
-#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter))]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter, Bake))]
+#[cfg_attr(feature = "codegen", databake(path = stonetop::keys))]
 pub enum BackgroundKey {
     // Backgrounds for the Blessed
     Initiate,
@@ -80,7 +84,8 @@ pub enum BackgroundKey {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
-#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter))]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter, Bake))]
+#[cfg_attr(feature = "codegen", databake(path = stonetop::keys))]
 pub enum SpecialPossessionKey {
     // Special Possessions for the Blessed
     SacredPouch,
@@ -162,7 +167,8 @@ pub enum SpecialPossessionKey {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
-#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter))]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter, Bake))]
+#[cfg_attr(feature = "codegen", databake(path = stonetop::keys))]
 pub enum MoveKey {
     // Moves for the Blessed
     FromRaisedByWolves,
@@ -426,7 +432,8 @@ pub enum MoveKey {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
-#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter))]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter, Bake))]
+#[cfg_attr(feature = "codegen", databake(path = stonetop::keys))]
 pub enum BackstoryKey {
     // Backstories for the Blessed
     YourSacredPouch,

@@ -156,6 +156,7 @@ dependencies = [
 name = "stonetop"
 version = "0.1.0"
 dependencies = [
+ "databake",
  "serde",
  "strum",
 ]

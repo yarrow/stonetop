@@ -1,8 +1,11 @@
-use std::fmt;
-use std::str::FromStr;
+#[cfg(feature = "codegen")]
+use databake::Bake;
 use serde::{Deserialize, Serialize};
 use strum::{Display, EnumString};
-#[derive(Clone, Copy, Display, EnumString, Debug, PartialEq, PartialOrd, Serialize, Deserialize)]
+#[derive(
+    Clone, Copy, Display, EnumString, Debug, PartialEq, PartialOrd, Serialize, Deserialize,
+)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop))]
 #[strum(serialize_all = "lowercase")]
 #[serde(rename_all = "lowercase")]
 pub enum Die {
@@ -29,6 +32,7 @@ impl Die {
 #[cfg(test)]
 mod test {
     use super::*;
+    use std::str::FromStr;
     #[test]
     fn upstep() {
         assert_eq!(Die::D4.step_up(), Die::D6);

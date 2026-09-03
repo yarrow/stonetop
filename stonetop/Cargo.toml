@@ -6,8 +6,13 @@ authors.workspace = true
 license.workspace = true
 
 [dependencies]
+databake = { version = "0.2.1", features = ["derive"], optional = true }
 serde = { version = "1.0.229", features = ["derive"] }
 strum = { version = "0.28.0", features = ["derive"] }
 
 [features]
-codegen = []
+# What the `codegen` crate needs to resolve names, walk every variant, and bake Fixed
+# values. Never on in the WASM build.
+codegen = ["dep:databake"]
+# The baked Fixed content (and later the Leptos server). Never on in the WASM build.
+ssr = []
