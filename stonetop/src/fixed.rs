@@ -11,10 +11,88 @@
 #[cfg(feature = "codegen")]
 use databake::Bake;
 
+use crate::Die;
 use crate::keys::{BackgroundKey, BackstoryKey, MoveKey, PlaybookKey, SpecialPossessionKey};
 
 #[cfg(feature = "ssr")]
 mod generated;
+
+// Playbook ---------------------------------------------------------------
+
+/// A playbook as printed, in printed order. Its Backgrounds, Special Possessions, Moves, and
+/// Backstories are references to those items' own statics, each reachable by its own key too.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct PlaybookFixed {
+    pub key: PlaybookKey,
+    pub name: &'static str,
+    pub description: &'static str,
+    pub backgrounds: [&'static BackgroundFixed; 3],
+    pub instinct: [Instinct; 5],
+    pub appearance: [TaggedRow; 4],
+    pub origin_choices: &'static [Origin],
+    pub stats_to_assign: [i8; 6],
+    pub damage: Die,
+    pub hp: u8,
+    pub special_possessions: SpecialPossessions,
+    pub starting_moves_note: &'static str,
+    pub starting_move_choices: u8,
+    pub grants_moves: &'static [Grant],
+    pub moves: &'static [&'static MoveFixed],
+    pub moves_footnote: Option<&'static str>,
+    pub intro: Intro,
+    pub backstory: &'static [&'static BackstoryFixed],
+}
+
+/// The drive that pulls a character toward trouble.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct Instinct {
+    pub title: &'static str,
+    pub description: &'static str,
+}
+
+/// Where a character is from, and how they're named there.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct Origin {
+    pub location: &'static str,
+    pub naming: Naming,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub enum Naming {
+    Instructions(&'static str),
+    Names(&'static [&'static str]),
+    MixAndMatch(NameParts),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct NameParts {
+    pub intro: &'static str,
+    pub name_parts: &'static [TaggedRow],
+}
+
+/// The Special Possessions section: the pick note and counts, and the options in printed order.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct SpecialPossessions {
+    pub pick_note: &'static str,
+    pub pick_count: u8,
+    /// How many of the leading `options` the playbook starts with.
+    pub preselected: u8,
+    pub options: &'static [&'static SpecialPossessionFixed],
+}
+
+/// The Introductions section.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct Intro {
+    pub title: &'static str,
+    pub text: &'static str,
+}
 
 // Move -------------------------------------------------------------------
 

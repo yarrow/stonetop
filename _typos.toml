@@ -4,4 +4,4 @@ Alis = "Alis"
 # No way to pass "mor'n" — I imagine the regexp don't get called until there's a "word"
 # which will be "mor", not "mor'n".
 mor = "mor"
-
+Ba = "Ba"

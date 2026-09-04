@@ -13,7 +13,7 @@ use std::process::{Command, Stdio};
 use anyhow::{Context, Result, bail};
 use databake::{Bake, CrateEnv};
 use stonetop::fixed;
-use stonetop::keys::{BackgroundKey, BackstoryKey, MoveKey, SpecialPossessionKey};
+use stonetop::keys::{BackgroundKey, BackstoryKey, MoveKey, PlaybookKey, SpecialPossessionKey};
 
 use crate::key::Key;
 use crate::schema::{self, Playbook};
@@ -48,15 +48,18 @@ pub fn baked_source() -> Result<String> {
     let backgrounds = bake_backgrounds(&playbooks, &moves, &mut out)?;
     let special_possessions = bake_special_possessions(&playbooks, &mut out)?;
     let backstories = bake_backstories(&playbooks, &mut out)?;
-    bake_fixed_part("MoveKey", "MoveFixed", &moves, &mut out)?;
-    bake_fixed_part("BackgroundKey", "BackgroundFixed", &backgrounds, &mut out)?;
+    let items = ItemStatics { moves, backgrounds, special_possessions, backstories };
+    let playbook_statics = bake_playbooks(&playbooks, &items, &mut out)?;
+    bake_fixed_part("MoveKey", "MoveFixed", &items.moves, &mut out)?;
+    bake_fixed_part("BackgroundKey", "BackgroundFixed", &items.backgrounds, &mut out)?;
     bake_fixed_part(
         "SpecialPossessionKey",
         "SpecialPossessionFixed",
-        &special_possessions,
+        &items.special_possessions,
         &mut out,
     )?;
-    bake_fixed_part("BackstoryKey", "BackstoryFixed", &backstories, &mut out)?;
+    bake_fixed_part("BackstoryKey", "BackstoryFixed", &items.backstories, &mut out)?;
+    bake_fixed_part("PlaybookKey", "PlaybookFixed", &playbook_statics, &mut out)?;
     rustfmt(&out)
 }
 
@@ -65,9 +68,36 @@ const HEADER: &str = "\
 //! `codegen/tests/generated_fresh.rs`. Do not edit; change the json5 and run the command.
 //!
 //! The statics are grouped by playbook, a shared item appearing once under the first playbook
-//! that uses it, as in `keys.rs`. Each kind's `fixed_part()` matches every key to its static.
+//! that uses it, as in `keys.rs`. Each playbook's static references its items' statics. Each
+//! kind's `fixed_part()` matches every key to its static.
 
 ";
+
+/// The name of every item static written so far, by key, so that a later static can reference
+/// an item instead of baking its content a second time.
+struct ItemStatics {
+    moves: BTreeMap<MoveKey, String>,
+    backgrounds: BTreeMap<BackgroundKey, String>,
+    special_possessions: BTreeMap<SpecialPossessionKey, String>,
+    backstories: BTreeMap<BackstoryKey, String>,
+}
+
+/// `&NAME` for `key`'s static in `statics`.
+fn static_ref<K: Display + Ord>(statics: &BTreeMap<K, String>, key: &K) -> String {
+    let name =
+        statics.get(key).unwrap_or_else(|| panic!("{key}: referenced before its static was baked"));
+    format!("&{name}")
+}
+
+/// `&A, &B, …` for `keys`' statics in `statics`: the body of an array or slice literal, for
+/// the caller to bracket.
+fn static_refs<K: Display + Ord>(
+    statics: &BTreeMap<K, String>,
+    keys: impl IntoIterator<Item = K>,
+) -> String {
+    let refs: Vec<String> = keys.into_iter().map(|key| static_ref(statics, &key)).collect();
+    refs.join(", ")
+}
 
 /// Write one static per Move, in playbook order with shared Moves once, returning each key's
 /// static's name.
@@ -156,17 +186,16 @@ fn bake_background_chunk(
 ) -> String {
     match chunk {
         fixed::BackgroundChunk::Move(a_move) => {
-            let name = moves
-                .get(&a_move.key)
-                .unwrap_or_else(|| panic!("{}: Move not baked before its Background", a_move.key));
-            format!("stonetop::fixed::BackgroundChunk::Move(&{name})")
+            let reference = static_ref(moves, &a_move.key);
+            format!("stonetop::fixed::BackgroundChunk::Move({reference})")
         }
         other => other.bake(env).to_string(),
     }
 }
 
 /// Write one static per Special Possession, in playbook order with shared Special Possessions
-/// once, returning each key's static's name.
+/// once, returning each key's static's name. (A playbook's Special Possessions *section*, which
+/// references these statics, is `bake_special_possessions_section`.)
 fn bake_special_possessions(
     playbooks: &[Playbook],
     out: &mut String,
@@ -211,6 +240,89 @@ fn bake_backstories(
         }
     }
     Ok(statics)
+}
+
+/// Write one static per playbook, returning each key's static's name. A playbook's
+/// Backgrounds, Special Possessions, Moves, and Backstories are baked by the item functions;
+/// here they're referenced by name via `items`, not re-baked, so `items` must already hold
+/// every item these playbooks offer.
+fn bake_playbooks(
+    playbooks: &[Playbook],
+    items: &ItemStatics,
+    out: &mut String,
+) -> Result<BTreeMap<PlaybookKey, String>> {
+    let env = CrateEnv::default();
+    let mut statics = BTreeMap::new();
+    for playbook in playbooks {
+        let key = playbook.key();
+        let name = format!("PLAYBOOK_{}", screaming_snake(&key.to_string()));
+        writeln!(out, "// {}\n", playbook.name)?;
+        let baked = bake_playbook(playbook, items, &env);
+        writeln!(out, "static {name}: stonetop::fixed::PlaybookFixed = {baked};\n")?;
+        statics.insert(key, name);
+    }
+    Ok(statics)
+}
+
+/// `playbook` baked to a `PlaybookFixed` literal. Every field bakes as `MoveFixed`'s fields do,
+/// except the four that hold items: `backgrounds`, `special_possessions.options`, `moves`, and
+/// `backstory` reference the items' already-baked statics in `items` rather than baking a
+/// second copy of each item's content.
+fn bake_playbook(playbook: &Playbook, items: &ItemStatics, env: &CrateEnv) -> String {
+    let fixed = playbook.to_fixed();
+    let key = fixed.key.bake(env);
+    let name = fixed.name.bake(env);
+    let description = fixed.description.bake(env);
+    let backgrounds =
+        static_refs(&items.backgrounds, fixed.backgrounds.iter().map(|background| background.key));
+    let instinct = fixed.instinct.bake(env);
+    let appearance = fixed.appearance.bake(env);
+    let origin_choices = fixed.origin_choices.bake(env);
+    let stats_to_assign = fixed.stats_to_assign.bake(env);
+    let damage = fixed.damage.bake(env);
+    let hp = fixed.hp.bake(env);
+    let special_possessions =
+        bake_special_possessions_section(&fixed.special_possessions, items, env);
+    let starting_moves_note = fixed.starting_moves_note.bake(env);
+    let starting_move_choices = fixed.starting_move_choices.bake(env);
+    let grants_moves = fixed.grants_moves.bake(env);
+    let moves = static_refs(&items.moves, fixed.moves.iter().map(|a_move| a_move.key));
+    let moves_footnote = fixed.moves_footnote.bake(env);
+    let intro = fixed.intro.bake(env);
+    let backstory =
+        static_refs(&items.backstories, fixed.backstory.iter().map(|backstory| backstory.key));
+    format!(
+        "stonetop::fixed::PlaybookFixed {{ \
+             key: {key}, name: {name}, description: {description}, \
+             backgrounds: [{backgrounds}], instinct: {instinct}, appearance: {appearance}, \
+             origin_choices: {origin_choices}, stats_to_assign: {stats_to_assign}, \
+             damage: {damage}, hp: {hp}, special_possessions: {special_possessions}, \
+             starting_moves_note: {starting_moves_note}, \
+             starting_move_choices: {starting_move_choices}, grants_moves: {grants_moves}, \
+             moves: &[{moves}], moves_footnote: {moves_footnote}, intro: {intro}, \
+             backstory: &[{backstory}] }}"
+    )
+}
+
+/// A playbook's `special_possessions` section baked, its `options` referencing the Special
+/// Possessions' statics already written by `bake_special_possessions`, via `items`.
+fn bake_special_possessions_section(
+    section: &fixed::SpecialPossessions,
+    items: &ItemStatics,
+    env: &CrateEnv,
+) -> String {
+    let pick_note = section.pick_note.bake(env);
+    let pick_count = section.pick_count.bake(env);
+    let preselected = section.preselected.bake(env);
+    let options = static_refs(
+        &items.special_possessions,
+        section.options.iter().map(|possession| possession.key),
+    );
+    format!(
+        "stonetop::fixed::SpecialPossessions {{ \
+             pick_note: {pick_note}, pick_count: {pick_count}, preselected: {preselected}, \
+             options: &[{options}] }}"
+    )
 }
 
 /// Write the `fixed_part()` that matches every key of `key_type` to its static in `statics`.

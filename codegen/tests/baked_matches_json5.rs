@@ -1,8 +1,8 @@
 //! The baked content equals the json5 content. For every Move, Background, Special Possession,
-//! and Backstory of every playbook, `key.fixed_part()` is the item freshly converted from the
-//! json5 and carries its own key. This one test covers the conversion, the baking, the
-//! checked-in file, and the match in `fixed_part()`, so it needs `stonetop` built with `ssr` (a
-//! dev-dependency here).
+//! and Backstory of every playbook, and for every playbook itself, `key.fixed_part()` is the
+//! item freshly converted from the json5 and carries its own key. Together these tests cover
+//! the conversion, the baking, the checked-in file, and the match in `fixed_part()`, so they
+//! need `stonetop` built with `ssr` (a dev-dependency here).
 
 use codegen::key::Key;
 use codegen::{json5_playbook, playbook_names};
@@ -72,5 +72,16 @@ fn every_backstory_bakes_to_itself() {
             );
             assert_eq!(key.fixed_part().key, key, "{key}: baked Backstory carries the wrong key");
         }
+    }
+}
+
+#[test]
+fn every_playbook_bakes_to_itself() {
+    for name in playbook_names() {
+        let playbook = json5_playbook(&name).unwrap_or_else(|e| panic!("{e:#}"));
+        let key = playbook.key();
+        let fresh = playbook.to_fixed();
+        assert_eq!(key.fixed_part(), &fresh, "{key}: baked Playbook differs from {name}'s json5");
+        assert_eq!(key.fixed_part().key, key, "{key}: baked Playbook carries the wrong key");
     }
 }

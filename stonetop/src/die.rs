@@ -3,7 +3,7 @@ use databake::Bake;
 use serde::{Deserialize, Serialize};
 use strum::{Display, EnumString};
 #[derive(
-    Clone, Copy, Display, EnumString, Debug, PartialEq, PartialOrd, Serialize, Deserialize,
+    Clone, Copy, Display, EnumString, Debug, PartialEq, Eq, PartialOrd, Serialize, Deserialize,
 )]
 #[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop))]
 #[strum(serialize_all = "lowercase")]

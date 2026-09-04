@@ -2,7 +2,8 @@
 //! `codegen/tests/generated_fresh.rs`. Do not edit; change the json5 and run the command.
 //!
 //! The statics are grouped by playbook, a shared item appearing once under the first playbook
-//! that uses it, as in `keys.rs`. Each kind's `fixed_part()` matches every key to its static.
+//! that uses it, as in `keys.rs`. Each playbook's static references its items' statics. Each
+//! kind's `fixed_part()` matches every key to its static.
 
 // The Blessed: Moves
 
@@ -3970,6 +3971,1360 @@ static BACKSTORY_FEAR_ANGER: stonetop::fixed::BackstoryFixed = stonetop::fixed::
     ],
 };
 
+// The Blessed
+
+static PLAYBOOK_THE_BLESSED: stonetop::fixed::PlaybookFixed = stonetop::fixed::PlaybookFixed {
+    key: stonetop::keys::PlaybookKey::TheBlessed,
+    name: "The Blessed",
+    description: "Danu, the Great Mother, provides. We need only learn her secrets: the names by which the trees call each other; the mark made with redberry juice to ward off impure spirits; the language of the wolves. A thousand such secrets Danu keeps, to share with only her true children. Her Blessed.",
+    backgrounds: [&BACKGROUND_INITIATE, &BACKGROUND_RAISED_BY_WOLVES, &BACKGROUND_VESSEL],
+    instinct: [
+        stonetop::fixed::Instinct {
+            title: "Delight",
+            description: "To find beauty, in even the ugliest things.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Detachment",
+            description: "To remain unmoved, to be cold as winter.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Nurture",
+            description: "To help others grow, learn, or improve.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Preservation",
+            description: "To protect the natural world.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Reverence",
+            description: "To honor the spirits and give them their due.",
+        },
+    ],
+    appearance: [
+        stonetop::fixed::TaggedRow {
+            tag: "Age",
+            items: &["fresh-faced", "hale & hearty", "gray & wizened"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Voice",
+            items: &["imperious voice", "raspy voice", "soothing voice"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Build",
+            items: &["curvy", "strapping", "rail-thin", "solid", "willowy"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Clothing",
+            items: &["ceremonial robes", "furs, leather", "work clothes"],
+        },
+    ],
+    origin_choices: &[
+        stonetop::fixed::Origin {
+            location: "Stonetop",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Arwel", "Blodwen", "Brynmor", "Celyn", "Fflur", "Gwynn", "Tegwen", "Winned",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Barrier Pass",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Alagh", "Bora", "Chambui", "Enebish", "Jalakai", "Kamala", "Sechen", "Todogen",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "The Steplands (Hillfolk)",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Bejn", "Decla", "Franza", "Irv", "Ivet", "Jak", "Sibl", "Yez",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "The Wild",
+            naming: stonetop::fixed::Naming::MixAndMatch(stonetop::fixed::NameParts {
+                intro: "mix and match 1-3 of these:",
+                name_parts: &[
+                    stonetop::fixed::TaggedRow {
+                        tag: "A B C",
+                        items: &[
+                            "Autumn", "Badger", "Big", "Black", "Bloody", "Brave", "Crow", "Cub",
+                        ],
+                    },
+                    stonetop::fixed::TaggedRow {
+                        tag: "D F G",
+                        items: &[
+                            "Dark", "Doe", "Fang", "Fierce", "Flower", "Gentle", "Green", "Grim",
+                        ],
+                    },
+                    stonetop::fixed::TaggedRow {
+                        tag: "H L O P",
+                        items: &["Hart", "Leaf", "Little", "Lonely", "Old", "Owl", "Pale", "Pup"],
+                    },
+                    stonetop::fixed::TaggedRow {
+                        tag: "Q R S",
+                        items: &[
+                            "Quick", "Quiet", "Rain", "Red", "Sharp", "Snake", "Snow", "Spring",
+                            "Summer",
+                        ],
+                    },
+                    stonetop::fixed::TaggedRow {
+                        tag: "T Y W",
+                        items: &[
+                            "Tall", "Tree", "Yellow", "White", "Wind", "Winter", "Wolf", "Whisper",
+                        ],
+                    },
+                ],
+            }),
+        },
+    ],
+    stats_to_assign: [2i8, 1i8, 1i8, 0i8, 0i8, -1i8],
+    damage: stonetop::Die::D6,
+    hp: 18u8,
+    special_possessions: stonetop::fixed::SpecialPossessions {
+        pick_note: "Pick 2, in addition to your sacred pouch",
+        pick_count: 2u8,
+        preselected: 1u8,
+        options: &[
+            &SPECIAL_POSSESSION_SACRED_POUCH,
+            &SPECIAL_POSSESSION_APIARY,
+            &SPECIAL_POSSESSION_COLLECTED_OFFERINGS,
+            &SPECIAL_POSSESSION_GOAT_HERD,
+            &SPECIAL_POSSESSION_HERB_GARDEN,
+            &SPECIAL_POSSESSION_MASTIFFS,
+        ],
+    },
+    starting_moves_note: "You start with Spirit Tongue, Call the Spirits, 1 from your Background, and 1 of your choice.",
+    starting_move_choices: 1u8,
+    grants_moves: &[
+        stonetop::fixed::Grant::Simply("Spirit Tongue"),
+        stonetop::fixed::Grant::Simply("Call the Spirits"),
+    ],
+    moves: &[
+        &MOVE_AMULETS_TALISMANS,
+        &MOVE_BARKSKIN,
+        &MOVE_BIG_MAGIC,
+        &MOVE_DANUS_GRASP,
+        &MOVE_HEALERS_ARTS,
+        &MOVE_HEED_MY_WORDS,
+        &MOVE_IMPROVED_STAT,
+        &MOVE_INTO_THE_LIONS_DEN,
+        &MOVE_LIGHTNING_ROD,
+        &MOVE_RITES_OF_THE_LAND,
+        &MOVE_SPIRIT_TONGUE,
+        &MOVE_BORROW_POWER,
+        &MOVE_CALL_THE_SPIRITS,
+        &MOVE_TRACKLESS_STEP,
+        &MOVE_VEIL,
+        &MOVE_WARDS_BINDINGS,
+        &MOVE_WILD_SOUL,
+        &MOVE_NATURES_WRATH,
+        &MOVE_POTENT_WORKINGS,
+        &MOVE_SHARED_SOULS,
+        &MOVE_SUCK_THE_POISON_OUT,
+        &MOVE_SUPERIOR_STAT,
+        &MOVE_VOICE_OF_THE_EARTH_MOTHER,
+    ],
+    moves_footnote: None,
+    intro: stonetop::fixed::Intro {
+        title: "Introductions",
+        text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>describe your sacred pouch</strong> and its remarkable trait. Then, <strong>tell us about Danu's shrine</strong> in Stonetop and how she is worshipped.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Who is your closest kin?</li><li>Whose heart & soul is entwined with yours?</li><li>Who taught you the secret ways?</li><li>Who is beloved by the goddess, your charge to nurture/guide/protect/heal?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you do the spirits whisper of?</li><li>Which one of you has joined me in a sacred rite?</li><li>Which of you has made a blood-oath with me?</li><li>Which one of you doubts the power of Danu?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+    },
+    backstory: &[&BACKSTORY_YOUR_SACRED_POUCH, &BACKSTORY_THE_EARTH_MOTHER],
+};
+
+// The Fox
+
+static PLAYBOOK_THE_FOX: stonetop::fixed::PlaybookFixed = stonetop::fixed::PlaybookFixed {
+    key: stonetop::keys::PlaybookKey::TheFox,
+    name: "The Fox",
+    description: "The elders tell a story about Fox, who knows lots of tricks, and Hedgehog, who knows one: how to curl up into a ball when there's danger. Fox can't eat Hedgehog when he's all curled up, so in the story Fox goes hungry. But you're not that Fox, and this is no story. You want that Hedgehog? Go get a knife.",
+    backgrounds: [
+        &BACKGROUND_THE_NATURAL,
+        &BACKGROUND_A_LIFE_OF_CRIME,
+        &BACKGROUND_THE_PRODIGAL_RETURNED,
+    ],
+    instinct: [
+        stonetop::fixed::Instinct {
+            title: "Conscience",
+            description: "To feel guilty, to try to do right.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Freedom",
+            description: "To chafe against rules, expectations, obligations.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Comfort",
+            description: "To enjoy yourself and avoid hardship.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Prestige",
+            description: "To impress others, to build a name for yourself.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Trickery",
+            description: "To deceive, misdirect, outthink.",
+        },
+    ],
+    appearance: [
+        stonetop::fixed::TaggedRow {
+            tag: "Age",
+            items: &["young pup", "\"responsible\" adult", "cagey old-timer"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Voice",
+            items: &["a pleasant voice", "sharp & nasally", "well-spoken"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Build",
+            items: &["lithe", "heavyset", "gangly", "like a whippin' stick"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Pace",
+            items: &["a light step", "a brisk stride", "more like a strut"],
+        },
+    ],
+    origin_choices: &[
+        stonetop::fixed::Origin {
+            location: "Stonetop",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Bran", "Carwyn", "Delyth", "Elin", "Fion", "Geral", "Mair", "Rannon", "Vaughn",
+                "Wynn",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Barrier Pass",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Anarba",
+                "Batu",
+                "Bugadai",
+                "Hujaghur",
+                "Jigur",
+                "Kete",
+                "Sarantuya",
+                "Tebengri",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Gordin's Delve",
+            naming: stonetop::fixed::Naming::Instructions("Pick a name from any list."),
+        },
+        stonetop::fixed::Origin {
+            location: "Marshedge",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Comyna", "Crevan", "Fitz", "Greagir", "Maired", "Nainsi", "Naiclas", "Saraid",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Lygos or some other point south",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Amit", "Baz", "Dafna", "Mahsa", "Parviz", "Sanaz", "Tzofiya", "Yaniv",
+            ]),
+        },
+    ],
+    stats_to_assign: [2i8, 1i8, 1i8, 0i8, 0i8, -1i8],
+    damage: stonetop::Die::D8,
+    hp: 16u8,
+    special_possessions: stonetop::fixed::SpecialPossessions {
+        pick_note: "Pick 2",
+        pick_count: 2u8,
+        preselected: 0u8,
+        options: &[
+            &SPECIAL_POSSESSION_BURGLARS_KIT,
+            &SPECIAL_POSSESSION_CARPENTERS_TOOLS,
+            &SPECIAL_POSSESSION_DISTILLERY,
+            &SPECIAL_POSSESSION_HIDDEN_STASH,
+            &SPECIAL_POSSESSION_MUMMERS_KIT,
+            &SPECIAL_POSSESSION_SCRIBES_TOOLS,
+            &SPECIAL_POSSESSION_TANNERY,
+            &SPECIAL_POSSESSION_TRADE_CONTACTS,
+        ],
+    },
+    starting_moves_note: "You start with Ambush OR Skill at Arms; Danger Sense OR Perceptive; and 1 of your choice.",
+    starting_move_choices: 1u8,
+    grants_moves: &[
+        stonetop::fixed::Grant::ChooseOne(&["Ambush", "Skill at Arms"]),
+        stonetop::fixed::Grant::ChooseOne(&["Danger Sense", "Perceptive"]),
+    ],
+    moves: &[
+        &MOVE_ALL_IN_THE_WRIST,
+        &MOVE_AMBUSH,
+        &MOVE_BURGLE,
+        &MOVE_CATLIKE,
+        &MOVE_DABBLER,
+        &MOVE_DANGER_SENSE,
+        &MOVE_FREE_RUNNING,
+        &MOVE_IMPROVED_STAT,
+        &MOVE_IRRESISTIBLE,
+        &MOVE_LAUGH_AT_DANGER,
+        &MOVE_LIGHT_FINGERS,
+        &MOVE_PERCEPTIVE,
+        &MOVE_RAPIER_WIT,
+        &MOVE_SKILL_AT_ARMS,
+        &MOVE_PARRY_RIPOSTE,
+        &MOVE_SILVER_TONGUED,
+        &MOVE_UNDER_YOUR_SKIN,
+        &MOVE_BATTLE_DANCER,
+        &MOVE_CHEAP_SHOT,
+        &MOVE_EYE_ON_THE_DOOR,
+        &MOVE_PANTS_ON_FIRE,
+        &MOVE_SECOND_INTENT,
+        &MOVE_SLIPPERY,
+        &MOVE_SUPERIOR_STAT,
+    ],
+    moves_footnote: None,
+    intro: stonetop::fixed::Intro {
+        title: "Introductions",
+        text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>tell us your tall tales</strong>. Feel free to embellish and exaggerate to the other players, but always answer the GM truthfully.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Who is your closest kin?</li><li>Who holds the reins to your heart?</li><li>Whose respect means the world to you?</li><li>To whom do you owe a debt that cannot be repaid?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you joined me in my latest hijinx?</li><li>Which one of you brings your problems to me?</li><li>Which one of you saved my bacon, mor'n once?</li><li>Which one of you trusts me not one bit?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+    },
+    backstory: &[&BACKSTORY_TALL_TALES],
+};
+
+// The Heavy
+
+static PLAYBOOK_THE_HEAVY: stonetop::fixed::PlaybookFixed = stonetop::fixed::PlaybookFixed {
+    key: stonetop::keys::PlaybookKey::TheHeavy,
+    name: "The Heavy",
+    description: "These are good people. Hard-working, honest. They look out for each other. But sometimes, looking out for each other ain't enough. Sometimes, good people need someone to stick up for them. Someone who's not afraid to get a little bloody. To get heavy. Yeah, someone like you.",
+    backgrounds: [&BACKGROUND_SHERIFF, &BACKGROUND_BLOOD_SOAKED_PAST, &BACKGROUND_STORM_MARKED],
+    instinct: [
+        stonetop::fixed::Instinct {
+            title: "Peace",
+            description: "To avoid (further) bloodshed or violence.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Pride",
+            description: "To maintain your dignity, to demand respect.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Recklessness",
+            description: "To act without thought to the consequences.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Trouble",
+            description: "To stick your nose in where it's unwelcome.",
+        },
+        stonetop::fixed::Instinct { title: "Violence", description: "To solve problems by force." },
+    ],
+    appearance: [
+        stonetop::fixed::TaggedRow {
+            tag: "Age",
+            items: &["young & brash", "in my prime", "old & leathery"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Voice",
+            items: &["gravelly voice", "hearty voice", "soft-spoken"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Build",
+            items: &["giant frame", "just ripped", "stocky", "wiry"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Marks",
+            items: &["distinctive scars", "oft-broken nose", "missing bits"],
+        },
+    ],
+    origin_choices: &[
+        stonetop::fixed::Origin {
+            location: "Stonetop",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Aerona", "Arthfael", "Cadmor", "Esyllt", "Pedr", "Rhonwen", "Terrwen", "Trystan",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Gordin's Delve",
+            naming: stonetop::fixed::Naming::Instructions("Pick a name from any list"),
+        },
+        stonetop::fixed::Origin {
+            location: "Marshedge",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Aengus", "Bairbre", "Bronach", "Flann", "Laughn", "Muirdoc", "Quinn", "Treasa",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "The Steplands (Hillfolk)",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Andr", "Gabrl", "Kaetl", "Mael", "Maela", "Par", "Ral", "Umbert",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "The Manmarch",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Bathhilde",
+                "Clothar",
+                "Ganter",
+                "Hiltrude",
+                "Ludig",
+                "Luise",
+                "Modd",
+                "Wiland",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Lygos or some other point south",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Arihl", "Akios", "Bhadur", "Seble", "Shahnaz", "Shay", "Tisi", "Zubin",
+            ]),
+        },
+    ],
+    stats_to_assign: [2i8, 1i8, 1i8, 0i8, 0i8, -1i8],
+    damage: stonetop::Die::D10,
+    hp: 20u8,
+    special_possessions: stonetop::fixed::SpecialPossessions {
+        pick_note: "Pick 2",
+        pick_count: 2u8,
+        preselected: 0u8,
+        options: &[
+            &SPECIAL_POSSESSION_DISTILLERY,
+            &SPECIAL_POSSESSION_CHIRURGEONS_TOOLS,
+            &SPECIAL_POSSESSION_HUSBANDRY_TOOLS,
+            &SPECIAL_POSSESSION_SMITHY,
+            &SPECIAL_POSSESSION_STONEWORKERS_TOOLS,
+            &SPECIAL_POSSESSION_PH_WEAPONS_OF_WAR,
+        ],
+    },
+    starting_moves_note: "You start with Dangerous, Hard to Kill, and either Armored OR Uncanny Reflexes.",
+    starting_move_choices: 0u8,
+    grants_moves: &[
+        stonetop::fixed::Grant::ChooseOne(&["Armored", "Uncanny Reflexes"]),
+        stonetop::fixed::Grant::Simply("Dangerous"),
+        stonetop::fixed::Grant::Simply("Hard to Kill"),
+    ],
+    moves: &[
+        &MOVE_ARMORED,
+        &MOVE_BATTLE_JOY,
+        &MOVE_BERSERKER,
+        &MOVE_CARVED_OUT_OF_WOOD,
+        &MOVE_DANGEROUS,
+        &MOVE_FORMIDABLE,
+        &MOVE_FROSTY,
+        &MOVE_GUARDIAN,
+        &MOVE_IMPROVED_STAT,
+        &MOVE_INTIMIDATING,
+        &MOVE_HARD_TO_KILL,
+        &MOVE_UNSTOPPABLE,
+        &MOVE_MUSCLEBOUND,
+        &MOVE_PAYBACK,
+        &MOVE_RELENTLESS,
+        &MOVE_SEASONED_WARRIOR,
+        &MOVE_SITUATIONAL_AWARENESS,
+        &MOVE_UNCANNY_REFLEXES,
+        &MOVE_UNFETTERED,
+        &MOVE_TERROR_ON_THE_FIELD,
+        &MOVE_BRINGER_OF_RUIN,
+        &MOVE_CUT_FROM_GRANITE,
+        &MOVE_MIGHTY_THEWS,
+        &MOVE_NEMESIS,
+        &MOVE_STEADFAST_GUARDIAN,
+        &MOVE_STONE_COLD,
+        &MOVE_SUPERIOR_STAT,
+    ],
+    moves_footnote: None,
+    intro: stonetop::fixed::Intro {
+        title: "Introductions",
+        text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>tell us about your history of violence</strong>, and what keeps you up at night.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Who is your closest kin?</li><li>Who is your lover/spouse/betrothed?</li><li>Who most needs/deserves your protection?</li><li>Whose forgiveness do you strive to earn?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you once dragged me home, bleeding and unconscious?</li><li>Which one of you can I trust to always have my back?</li><li>Which one of you has stayed my hand?</li><li>Which one of you has traded blows with me?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+    },
+    backstory: &[&BACKSTORY_A_HISTORY_OF_VIOLENCE],
+};
+
+// The Judge
+
+static PLAYBOOK_THE_JUDGE: stonetop::fixed::PlaybookFixed = stonetop::fixed::PlaybookFixed {
+    key: stonetop::keys::PlaybookKey::TheJudge,
+    name: "The Judge",
+    description: "Look here at this little town, this candleflame in the darkness. Its very existence is an act of courage and faith. And Aratis has charged you to keep it: to settle its disputes; to chronicle its tales; to defend it from darkness and ruin. Take up your hammer, Judge. Your town needs you.",
+    backgrounds: [&BACKGROUND_LEGACY, &BACKGROUND_MISSIONARY, &BACKGROUND_PROPHET],
+    instinct: [
+        stonetop::fixed::Instinct {
+            title: "Ambition",
+            description: "To increase your status or influence.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Dispassion",
+            description: "To disregard emotion or sentiment.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Harmony",
+            description: "To seek a path that makes everyone happy.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Orthodoxy",
+            description: "To strictly adhere to rules and traditions.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Zeal",
+            description: "To judge quickly and without doubt.",
+        },
+    ],
+    appearance: [
+        stonetop::fixed::TaggedRow {
+            tag: "Age",
+            items: &["eager youth", "in my prime", "showing my years"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Voice",
+            items: &["calm voice", "booming voice", "a voice that carries"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Build",
+            items: &["hard body", "powerful frame", "slim", "well-fed"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Clothing",
+            items: &["polished gear", "robes of office", "modest clothes"],
+        },
+    ],
+    origin_choices: &[
+        stonetop::fixed::Origin {
+            location: "Stonetop",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Arianrhod",
+                "Caerwyn",
+                "Einion",
+                "Eleri",
+                "Magda",
+                "Nerys",
+                "Trahaern",
+                "Trefor",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Barrier Pass",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Arinasai",
+                "Bortachikhan",
+                "Khadagan",
+                "Khojin",
+                "Odval",
+                "Usun",
+                "Yesui",
+                "Yul",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Gordin's Delve",
+            naming: stonetop::fixed::Naming::Instructions("Pick a name from any list"),
+        },
+        stonetop::fixed::Origin {
+            location: "Marshedge",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Briget", "Comhall", "Elnor", "Liadain", "Mirdach", "Onghus", "Somha", "Toal",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Lygos or some other southern town",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Abrim",
+                "Cassander",
+                "Despina",
+                "Hypatta",
+                "Morecai",
+                "Nomika",
+                "Sofia",
+                "Yose",
+            ]),
+        },
+    ],
+    stats_to_assign: [2i8, 1i8, 1i8, 0i8, 0i8, -1i8],
+    damage: stonetop::Die::D6,
+    hp: 20u8,
+    special_possessions: stonetop::fixed::SpecialPossessions {
+        pick_note: "Pick 1, in addition to your symbol of authority and scribe's kit",
+        pick_count: 1u8,
+        preselected: 2u8,
+        options: &[
+            &SPECIAL_POSSESSION_YOUR_SYMBOL_OF_AUTHORITY,
+            &SPECIAL_POSSESSION_SCRIBES_TOOLS,
+            &SPECIAL_POSSESSION_AVIARY,
+            &SPECIAL_POSSESSION_CARPENTERS_TOOLS,
+            &SPECIAL_POSSESSION_ENGINEERS_TOOLS,
+            &SPECIAL_POSSESSION_SMITHY,
+        ],
+    },
+    starting_moves_note: "You start with Censure, Chronicler of Stonetop, plus 2 more of your choice.",
+    starting_move_choices: 2u8,
+    grants_moves: &[
+        stonetop::fixed::Grant::Simply("Censure"),
+        stonetop::fixed::Grant::Simply("Chronicler of Stonetop"),
+    ],
+    moves: &[
+        &MOVE_AEGIS_OF_FAITH,
+        &MOVE_ARMORED,
+        &MOVE_BEAR_WITNESS,
+        &MOVE_BREAK_BREAD,
+        &MOVE_BULWARK,
+        &MOVE_CENSURE,
+        &MOVE_CASTIGATE,
+        &MOVE_CHRONICLER_OF_STONETOP,
+        &MOVE_FOR_THE_GREATER_GOOD,
+        &MOVE_HOUND_OF_ARATIS,
+        &MOVE_LIKE_A_DOG_WITH_A_BONE,
+        &MOVE_IMPROVED_STAT,
+        &MOVE_KNOWLEDGE_IS_POWER,
+        &MOVE_MANY_HANDS_MAKE_LIGHT_WORK,
+        &MOVE_A_BUNDLE_OF_STICKS_UNBROKEN,
+        &MOVE_THE_HAMMER_AND_THE_BOOK,
+        &MOVE_TRUTH_OR_CONSEQUENCES,
+        &MOVE_BINDING_ARBITRATION,
+        &MOVE_VISION_UNCLOUDED,
+        &MOVE_WELL_READ,
+        &MOVE_A_MIGHTY_RAMPART,
+        &MOVE_ARMISTICE,
+        &MOVE_CONDEMN,
+        &MOVE_PROCLAMATION,
+        &MOVE_MIRRORSHIELD,
+        &MOVE_SUPERIOR_STAT,
+        &MOVE_THE_TOWER_ETERNAL,
+    ],
+    moves_footnote: None,
+    intro: stonetop::fixed::Intro {
+        title: "Introductions",
+        text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong><em>describe the Chronicle</em></strong>. Then, <strong><em>tell us about Aratis and her shrine</em></strong>, and what she demands of her true disciples.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Who is your closest kin?</li><li>Who is your lover/spouse/betrothed?</li><li>Who is your apprentice?</li><li>Who is the wisest of the town elders?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you is a true disciple of Aratis?</li><li>Which one of you is my closest confidant?</li><li>Which one of you has stood beside me in battle against unnatural chaos?</li><li>Against which of you have I passed judgement?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+    },
+    backstory: &[&BACKSTORY_THE_CHRONICLE, &BACKSTORY_THE_LAWKEEPER],
+};
+
+// The Lightbearer
+
+static PLAYBOOK_THE_LIGHTBEARER: stonetop::fixed::PlaybookFixed = stonetop::fixed::PlaybookFixed {
+    key: stonetop::keys::PlaybookKey::TheLightbearer,
+    name: "The Lightbearer",
+    description: "Imagine yourself and your kin in a cave lit by a single torch, entranced by shadow puppet stories. Imagine realizing there is a greater truth, and stepping out of the cave into the true Light of day. Would you not bring that Light back into the darkness, to set your people free?",
+    backgrounds: [
+        &BACKGROUND_AUSPICIOUS_BIRTH,
+        &BACKGROUND_ITINERANT_MYSTIC,
+        &BACKGROUND_SOUL_ON_FIRE,
+    ],
+    instinct: [
+        stonetop::fixed::Instinct {
+            title: "Charity",
+            description: "To go without so that others are better off.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Hope",
+            description: "To inspire others in the face of adversity.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Mercy",
+            description: "To bring relief or comfort, to give second chances.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Praise",
+            description: "To spread the glory and worship of Helior.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Righteousness",
+            description: "To refuse to suffer an injustice or a lesser evil.",
+        },
+    ],
+    appearance: [
+        stonetop::fixed::TaggedRow {
+            tag: "Age",
+            items: &["a youthful glow", "well-weathered", "old & merry"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Voice",
+            items: &["a lilting voice", "a melodious voice", "a soft voice"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Vibe",
+            items: &["beatific", "ethereal", "intense", "jovial", "serene"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Clothing",
+            items: &["fine robes", "threadbare cloak", "working clothes"],
+        },
+    ],
+    origin_choices: &[
+        stonetop::fixed::Origin {
+            location: "Stonetop",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Dai", "Eirian", "Eurig", "Haf", "Haul", "Hefin", "Hulwen", "Tesni",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Barrier Pass",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Alaqa", "Bat", "Dinget", "Ghoa", "Oyuun", "Sidurgu", "Temur", "Toragana",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Gordin's Delve",
+            naming: stonetop::fixed::Naming::Instructions("Pick a name from any list"),
+        },
+        stonetop::fixed::Origin {
+            location: "Marshedge",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Adfin", "Callach", "Conlad", "Eadna", "Fionntan", "Niamh", "Orlaith", "Sorsha",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Lygos or some other point south",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Arash", "Azar", "Hafiz", "Murat", "Roshan", "Shideh", "Zara", "Zohara",
+            ]),
+        },
+    ],
+    stats_to_assign: [2i8, 1i8, 1i8, 0i8, 0i8, -1i8],
+    damage: stonetop::Die::D4,
+    hp: 18u8,
+    special_possessions: stonetop::fixed::SpecialPossessions {
+        pick_note: "Pick 2",
+        pick_count: 2u8,
+        preselected: 0u8,
+        options: &[
+            &SPECIAL_POSSESSION_APIARY,
+            &SPECIAL_POSSESSION_BOOKS_SCROLLS,
+            &SPECIAL_POSSESSION_CHANDLERY,
+            &SPECIAL_POSSESSION_DISTILLERY,
+            &SPECIAL_POSSESSION_GLASSWORKS,
+            &SPECIAL_POSSESSION_HOLY_RELICS,
+            &SPECIAL_POSSESSION_LUTHIERS_TOOLS,
+        ],
+    },
+    starting_moves_note: "You start with Consecrated Flame and Invoke the Sun God, plus 1 more of your choice.",
+    starting_move_choices: 1u8,
+    grants_moves: &[
+        stonetop::fixed::Grant::Simply("Consecrated Flame"),
+        stonetop::fixed::Grant::Simply("Invoke the Sun God"),
+    ],
+    moves: &[
+        &MOVE_A_CANDLE_AGAINST_THE_DARK,
+        &MOVE_LUMINOUS_SHIELD,
+        &MOVE_ALL_IS_ILLUMINATED,
+        &MOVE_AND_BEHOLD_A_PALE_HORSE,
+        &MOVE_CONSECRATED_FLAME,
+        &MOVE_FIRE_WITHIN,
+        &MOVE_GUIDING_LIGHT,
+        &MOVE_HELIORS_UNBLINKING_EYE,
+        &MOVE_IMPROVED_STAT,
+        &MOVE_INVOKE_THE_SUN_GOD,
+        &MOVE_KEEP_THE_HOME_FIRES_BURNING,
+        &MOVE_LAMPLIGHTER,
+        &MOVE_PIETY,
+        &MOVE_PURIFYING_FLAMES,
+        &MOVE_RADIANT_COUNTENANCE,
+        &MOVE_RISE_LIKE_THE_SUN,
+        &MOVE_SPRINGS_FIRST_THAW,
+        &MOVE_BURN_TWICE_AS_BRIGHT,
+        &MOVE_EMPOWERED_INVOCATIONS,
+        &MOVE_GLORIOUS_SERVANT,
+        &MOVE_HUNGRY_FLAMES,
+        &MOVE_LIGHT_MORE_LIGHT,
+        &MOVE_SUPERIOR_STAT,
+        &MOVE_WIELDER_OF_THE_WHITE_FLAME,
+    ],
+    moves_footnote: None,
+    intro: stonetop::fixed::Intro {
+        title: "Introductions",
+        text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>praise the day! Tell us of Helior</strong>, his worship and his shrine. Tell us, too, of the prior Lightbearer and how you gained your powers.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Who is your closest kin?</li><li>Who fans the flames of your heart?</li><li>Whose kindness and generosity warm your soul?</li><li>Who needs Helior's light, badly?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you is an old and dear friend?</li><li>Which one of you shares my faith?</li><li>Which one of you scoffs at mercy and hope?</li><li>Which one of you will need my guidance soon?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+    },
+    backstory: &[&BACKSTORY_PRAISE_THE_DAY],
+};
+
+// The Marshal
+
+static PLAYBOOK_THE_MARSHAL: stonetop::fixed::PlaybookFixed = stonetop::fixed::PlaybookFixed {
+    key: stonetop::keys::PlaybookKey::TheMarshal,
+    name: "The Marshal",
+    description: "Hoping for peace isn't enough. Trouble always comes knocking. And that's why we need you: to run the drills, to man the towers, to take charge when things get bad. To be cold enough to send your neighbors to a sure death in order to keep Stonetop safe. That's the job, Marshal. You up for it?",
+    backgrounds: [&BACKGROUND_SCION, &BACKGROUND_PENITENT, &BACKGROUND_LUMINARY],
+    instinct: [
+        stonetop::fixed::Instinct {
+            title: "Authority",
+            description: "To take charge and throw your weight around.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Caution",
+            description: "To keep everyone safe, to agonize over decisions.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Drive",
+            description: "To take on ever more responsibility.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Honor",
+            description: "To keep your word, to follow a moral code.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Ruthlessness",
+            description: "To do whatever it takes to win or survive.",
+        },
+    ],
+    appearance: [
+        stonetop::fixed::TaggedRow {
+            tag: "Age",
+            items: &["upstart youth", "experienced & sober", "grizzled"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Voice",
+            items: &["clear voice", "resonant voice", "rumbling voice"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Look",
+            items: &["stern frown", "grim-set jaw", "knowing smirk"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Clothing",
+            items: &["badge of office", "spit & polish", "timeworn gear"],
+        },
+    ],
+    origin_choices: &[
+        stonetop::fixed::Origin {
+            location: "Stonetop",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Bethan", "Cadfael", "Ffraid", "Gwythyr", "Llewelyn", "Meredith", "Rhianna",
+                "Urien",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Gordin's Delve",
+            naming: stonetop::fixed::Naming::Instructions("Pick a name from any list"),
+        },
+        stonetop::fixed::Origin {
+            location: "Marshedge",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Brigh", "Cathal", "Conn", "Donal", "Fionna", "Laith", "Talulla", "Torin",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "The Steplands (Hillfolk)",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Adl", "Aeln", "Clotild", "Judoc", "Katrn", "Mygl", "Pirn", "Sera",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "The Manmarch",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Berkhard", "Gerhild", "Hartig", "Hilde", "Sabrinne", "Ulrike", "Urrsla", "Weillem",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Lygos or some other point south",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Ameer", "Calixta", "Hadar", "Kelila", "Sulaim", "Ursa", "Xandros",
+            ]),
+        },
+    ],
+    stats_to_assign: [2i8, 1i8, 1i8, 0i8, 0i8, -1i8],
+    damage: stonetop::Die::D8,
+    hp: 20u8,
+    special_possessions: stonetop::fixed::SpecialPossessions {
+        pick_note: "Pick 2",
+        pick_count: 2u8,
+        preselected: 0u8,
+        options: &[
+            &SPECIAL_POSSESSION_CHIRURGEONS_TOOLS,
+            &SPECIAL_POSSESSION_DISTILLERY,
+            &SPECIAL_POSSESSION_ENGINEERS_TOOLS,
+            &SPECIAL_POSSESSION_PERSONAL_SYMBOL,
+            &SPECIAL_POSSESSION_SCRIBES_TOOLS,
+            &SPECIAL_POSSESSION_PM_WEAPONS_OF_WAR,
+        ],
+    },
+    starting_moves_note: "You start with Crew, Logistics, any moves from your Background, and 1 move of your choice.",
+    starting_move_choices: 1u8,
+    grants_moves: &[
+        stonetop::fixed::Grant::Simply("Crew"),
+        stonetop::fixed::Grant::Simply("Logistics"),
+    ],
+    moves: &[
+        &MOVE_ARMORED,
+        &MOVE_ARTS_OF_WAR,
+        &MOVE_CREW,
+        &MOVE_VETERAN_CREW,
+        &MOVE_FRONT_LINE_LEADER,
+        &MOVE_IMPROVED_STAT,
+        &MOVE_LOGISTICS,
+        &MOVE_READ_THE_LAND,
+        &MOVE_PREPARE_A_WELCOME,
+        &MOVE_SET_UP_STRIKE,
+        &MOVE_SHAKE_IT_OFF,
+        &MOVE_SHIELD_WALL,
+        &MOVE_SIR_PERMISSION_TO_DIE_SIR,
+        &MOVE_SPEAK_SOFTLY,
+        &MOVE_STENTORIAN,
+        &MOVE_TAKE_THE_MEASURE,
+        &MOVE_WE_HAPPY_FEW,
+        &MOVE_BATTLEFIELD_GRACE,
+        &MOVE_HEROES_TO_THE_LAST,
+        &MOVE_FOCUS_FIRE,
+        &MOVE_LIKE_AN_OPEN_BOOK,
+        &MOVE_NOBLE_MIEN,
+        &MOVE_PEACE_THROUGH_STRENGTH,
+        &MOVE_SUPERIOR_STAT,
+    ],
+    moves_footnote: None,
+    intro: stonetop::fixed::Intro {
+        title: "Introductions",
+        text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>tell us the town's war stories</strong>, plus the answers to the questions you chose.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Who is your closest kin?</li><li>Who is your lover/spouse/betrothed?</li><li>Who is your lieutenant?</li><li>Whose kin is dead because of your decisions?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you is or was part of my crew?</li><li>Which one of you have I promised to keep safe?</li><li>Which one of you do I still have doubts about?</li><li>Which one of you ignored my orders and got someone killed?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+    },
+    backstory: &[&BACKSTORY_WAR_STORIES],
+};
+
+// The Ranger
+
+static PLAYBOOK_THE_RANGER: stonetop::fixed::PlaybookFixed = stonetop::fixed::PlaybookFixed {
+    key: stonetop::keys::PlaybookKey::TheRanger,
+    name: "The Ranger",
+    description: "Your true home is out there. Away from the Old Roads, in the wild places, where you've faced storm and beast alike. But unknown forces are at work beyond the Ringwall, and you fear for your kith and kin. These are strange times. Guide them, ranger, and keep them safe when darkness falls.",
+    backgrounds: [&BACKGROUND_MIGHTY_HUNTER, &BACKGROUND_WIDE_WANDERER, &BACKGROUND_BEAST_BONDED],
+    instinct: [
+        stonetop::fixed::Instinct {
+            title: "Adventure",
+            description: "To test yourself, to experience new things.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Independence",
+            description: "To refuse help and push others away.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Stewardship",
+            description: "To value beasts and natural places over people.",
+        },
+        stonetop::fixed::Instinct { title: "Tenacity", description: "To be stubborn, to persist." },
+        stonetop::fixed::Instinct {
+            title: "Wonder",
+            description: "To marvel at beauty, magnificence, splendor.",
+        },
+    ],
+    appearance: [
+        stonetop::fixed::TaggedRow {
+            tag: "Age",
+            items: &["fledgling", "prime specimen", "long in the tooth"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Voice",
+            items: &["barking voice", "growling voice", "sing-song voice"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Build",
+            items: &["compact & sturdy", "long & lean", "wolfish"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Clothing",
+            items: &["shaggy", "threadbare", "well-groomed"],
+        },
+    ],
+    origin_choices: &[
+        stonetop::fixed::Origin {
+            location: "Stonetop",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Aran", "Bledyn", "Branwen", "Deryn", "Ifur", "Meinir", "Rhys", "Teagan",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Barrier Pass",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Anarba",
+                "Arslan",
+                "Bolormaa",
+                "Cirina",
+                "Nergui",
+                "Nomolun",
+                "Saran",
+                "Shigi-Qutuqu",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Marshedge",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Asling",
+                "Conar",
+                "Enna",
+                "Flannan",
+                "Macha",
+                "Mave",
+                "Proinsias",
+                "Rowen",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "The Steplands (Hillfolk)",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Bernd", "Elown", "Irn", "Kani", "Pol", "Nol", "Rozn", "Sterin",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "The Manmarch",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Alfher",
+                "Bertrim",
+                "Dagmar",
+                "Elfrida",
+                "Hramn",
+                "Meike",
+                "Swanhilde",
+                "Wulfrim",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Lygos or some other point south",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Ari", "Boriz", "Dimitra", "Gorhan", "Nitza", "Selen", "Todora", "Vasil",
+            ]),
+        },
+    ],
+    stats_to_assign: [2i8, 1i8, 1i8, 0i8, 0i8, -1i8],
+    damage: stonetop::Die::D8,
+    hp: 18u8,
+    special_possessions: stonetop::fixed::SpecialPossessions {
+        pick_note: "Pick 2, in addition to your composite bow",
+        pick_count: 2u8,
+        preselected: 1u8,
+        options: &[
+            &SPECIAL_POSSESSION_COMPOSITE_BOW,
+            &SPECIAL_POSSESSION_DISTILLERY,
+            &SPECIAL_POSSESSION_HIDEOUTS,
+            &SPECIAL_POSSESSION_HUSBANDRY_TOOLS,
+            &SPECIAL_POSSESSION_HOUNDS,
+            &SPECIAL_POSSESSION_LAY_OF_THE_LAND,
+            &SPECIAL_POSSESSION_TRAPPING_GEAR,
+        ],
+    },
+    starting_moves_note: "You start with Home on the Range, any moves from your Background, plus 1 of your choice.",
+    starting_move_choices: 1u8,
+    grants_moves: &[stonetop::fixed::Grant::Simply("Home on the Range")],
+    moves: &[
+        &MOVE_A_SAFE_PLACE,
+        &MOVE_ANIMAL_COMPANION,
+        &MOVE_MAGNIFICENT_SPECIMEN,
+        &MOVE_BIG_GAME_HUNTER,
+        &MOVE_BLOT_OUT_THE_SUN,
+        &MOVE_CALL_THE_SHOT,
+        &MOVE_EXPERT_TRACKER,
+        &MOVE_HOME_ON_THE_RANGE,
+        &MOVE_IMPROVED_STAT,
+        &MOVE_MENTAL_MAP,
+        &MOVE_NATURALIST,
+        &MOVE_ON_THE_HOOF,
+        &MOVE_PACK_HORSE,
+        &MOVE_PATHFINDER,
+        &MOVE_PREDATOR,
+        &MOVE_SNIFF_OUT_CORRUPTION,
+        &MOVE_STALKER,
+        &MOVE_SURVIVALIST,
+        &MOVE_WARDEN_OF_THE_WILD,
+        &MOVE_WILD_SPEECH,
+        &MOVE_WORLDLY,
+        &MOVE_ALPHA,
+        &MOVE_BEAST_OF_LEGEND,
+        &MOVE_CONSTANT_VIGILANCE,
+        &MOVE_GIANT_SLAYER,
+        &MOVE_SUPERIOR_STAT,
+        &MOVE_TRAILBLAZER,
+        &MOVE_WALK_IT_OFF,
+    ],
+    moves_footnote: None,
+    intro: stonetop::fixed::Intro {
+        title: "Introductions",
+        text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>tell us what you're worried about</strong> (see \"Something wicked this way comes\").</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Who is your closest kin?</li><li>To whom do you always return home?</li><li>Who would be lost without you?</li><li>Who has much to learn from you?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you fears the wider world?</li><li>Which one of you has shown me great beauty?</li><li>Which one of you have I caught sometimes staring out at the horizon?</li><li>Which one of you lacked the stomach to put something out of its misery?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+    },
+    backstory: &[&BACKSTORY_SOMETHING_WICKED_THIS_WAY_COMES],
+};
+
+// The Seeker
+
+static PLAYBOOK_THE_SEEKER: stonetop::fixed::PlaybookFixed = stonetop::fixed::PlaybookFixed {
+    key: stonetop::keys::PlaybookKey::TheSeeker,
+    name: "The Seeker",
+    description: "Look at us. Huddling behind our walls, hearing evil in every passing noise. Cowards, all. All, but you. You fear not the unknown. You plunge into it, searching. Grasping at what has been lost. What will you find, o Seeker? Signs of a bright new age? Or signs of our doom?",
+    backgrounds: [&BACKGROUND_PATRIOT, &BACKGROUND_ANTIQUARIAN, &BACKGROUND_WITCH_HUNTER],
+    instinct: [
+        stonetop::fixed::Instinct {
+            title: "Cunning",
+            description: "To scheme, manipulate, and plot.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Curiosity",
+            description: "To seek answers that maybe you oughtn't.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Hubris",
+            description: "To assume you know best, that you can't fail.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Mystery",
+            description: "To avoid straight answers; to keep secrets.",
+        },
+        stonetop::fixed::Instinct {
+            title: "Vision",
+            description: "To think big and pursue grandiose goals.",
+        },
+    ],
+    appearance: [
+        stonetop::fixed::TaggedRow {
+            tag: "Age",
+            items: &["curiously young", "world-weary", "bent with years"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Voice",
+            items: &["haunted voice", "rich voice", "whispery"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Hands",
+            items: &["ink-stained fingers", "sinewy hands", "soft hands"],
+        },
+        stonetop::fixed::TaggedRow {
+            tag: "Build",
+            items: &["bony limbed", "lean & lanky", "short", "thick-set"],
+        },
+    ],
+    origin_choices: &[
+        stonetop::fixed::Origin {
+            location: "Stonetop",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Alis", "Dylan", "Eilwen", "Gerlt", "Gwenda", "Macsen", "Mirgan", "Owena",
+                "Taliesyn", "Twymor",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Barrier Pass",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Bayanaganengri",
+                "Chakha",
+                "Jetei",
+                "Moog",
+                "Narengawa",
+                "Ogul",
+                "Ozbeg",
+                "Solongo",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "The Steplands (Hillfolk)",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Anook", "Anxo", "Dors", "Jory", "Mari", "Padg", "Pons", "Silf",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Gordin's Delve",
+            naming: stonetop::fixed::Naming::Instructions("Pick a name from any list"),
+        },
+        stonetop::fixed::Origin {
+            location: "Marshedge",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Aiden",
+                "Barrfind",
+                "Caolan",
+                "Ciara",
+                "Deirbhile",
+                "Moirin",
+                "Tiern",
+                "Reamann",
+            ]),
+        },
+        stonetop::fixed::Origin {
+            location: "Lygos or some other point south",
+            naming: stonetop::fixed::Naming::Names(&[
+                "Dana",
+                "Eliana",
+                "Erez",
+                "Fikri",
+                "Isra",
+                "Persefoni",
+                "Spiro",
+                "Vahid",
+            ]),
+        },
+    ],
+    stats_to_assign: [2i8, 1i8, 1i8, 0i8, 0i8, -1i8],
+    damage: stonetop::Die::D6,
+    hp: 16u8,
+    special_possessions: stonetop::fixed::SpecialPossessions {
+        pick_note: "Pick 2, in addition to your scribe's tools",
+        pick_count: 2u8,
+        preselected: 1u8,
+        options: &[
+            &SPECIAL_POSSESSION_SCRIBES_TOOLS,
+            &SPECIAL_POSSESSION_BOOKS_SCROLLS,
+            &SPECIAL_POSSESSION_DISTILLERY,
+            &SPECIAL_POSSESSION_ENGINEERS_TOOLS,
+            &SPECIAL_POSSESSION_LABORATORY,
+            &SPECIAL_POSSESSION_PARAPHERNALIA,
+            &SPECIAL_POSSESSION_TRADE_CONTACTS,
+        ],
+    },
+    starting_moves_note: "You start with Well Versed, Work With What You've Got, plus 1 from your Background.",
+    starting_move_choices: 0u8,
+    grants_moves: &[
+        stonetop::fixed::Grant::Simply("Well Versed"),
+        stonetop::fixed::Grant::Simply("Work With What You've Got"),
+    ],
+    moves: &[
+        &MOVE_ATTUNED,
+        &MOVE_CONDUIT_OF_POWER,
+        &MOVE_COUNTERMEASURES,
+        &MOVE_EVERYTHING_BLEEDS,
+        &MOVE_EVERYTHING_BURNS,
+        &MOVE_IMPROVED_STAT,
+        &MOVE_INITIATE_OF_THE_SECRET_ARTS,
+        &MOVE_LETS_MAKE_A_DEAL,
+        &MOVE_LOGBOOK,
+        &MOVE_MAGPIE,
+        &MOVE_NEVER_AT_A_LOSS,
+        &MOVE_POLYGLOT,
+        &MOVE_CRYPTOLOGIST,
+        &MOVE_QUICK_STUDY,
+        &MOVE_SAFETY_FIRST,
+        &MOVE_SAGE_ADVICE,
+        &MOVE_WELL_VERSED,
+        &MOVE_WORK_WITH_WHAT_YOUVE_GOT,
+        &MOVE_ARCANE_ADEPT,
+        &MOVE_DEEP_INSIGHT,
+        &MOVE_IMPROVISE,
+        &MOVE_SUPERIOR_STAT,
+        &MOVE_MIND_OVER_MAGIC,
+        &MOVE_OVERCHANNEL,
+        &MOVE_PROOF_AGAINST_DETECTION,
+    ],
+    moves_footnote: None,
+    intro: stonetop::fixed::Intro {
+        title: "Introductions",
+        text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>describe your major arcana</strong>. Tell us your answers to the questions you chose. Then, <strong>tell us about your minor arcana</strong>, too.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Who is your closest kin?</li><li>Who is your spouse/lover/betrothed?</li><li>Whom do you trust, even more than yourself?</li><li>Whom do you secretly watch over, and why?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you led me to a key discovery?</li><li>Which one of you has been at my side the entire way?</li><li>Which one of you most fears the path I tread?</li><li>Which one of you is keeping secrets from me?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+    },
+    backstory: &[&BACKSTORY_COLLECTION, &BACKSTORY_MAJOR_ARCANA, &BACKSTORY_MINOR_ARCANA],
+};
+
+// The Would-be Hero
+
+static PLAYBOOK_THE_WOULD_BE_HERO: stonetop::fixed::PlaybookFixed =
+    stonetop::fixed::PlaybookFixed {
+        key: stonetop::keys::PlaybookKey::TheWouldBeHero,
+        name: "The Would-be Hero",
+        description: "Most people hope for a quiet life. They spend their days a-worrying: about a leaky roof, a sick child, their crops. But you aren't like most people—you're on a different path. A path to adventure! There's greatness in you. Let's hope you live long enough for everyone else to see it.",
+        backgrounds: [&BACKGROUND_IMPETUOUS_YOUTH, &BACKGROUND_DRIVEN, &BACKGROUND_DESTINED],
+        instinct: [
+            stonetop::fixed::Instinct {
+                title: "Defiance",
+                description: "To refuse to back down, give up, give in.",
+            },
+            stonetop::fixed::Instinct {
+                title: "Doubt",
+                description: "To question yourself, your actions, your worth.",
+            },
+            stonetop::fixed::Instinct {
+                title: "Earnestness",
+                description: "To prove yourself, to yourself and others.",
+            },
+            stonetop::fixed::Instinct {
+                title: "Optimism",
+                description: "To assume the best, and that things are simple.",
+            },
+            stonetop::fixed::Instinct {
+                title: "Sacrifice",
+                description: "To put the needs/wants of others above your own.",
+            },
+        ],
+        appearance: [
+            stonetop::fixed::TaggedRow {
+                tag: "Age",
+                items: &["still a child", "young & beautiful", "all grown up"],
+            },
+            stonetop::fixed::TaggedRow {
+                tag: "Voice",
+                items: &["confident voice", "earnest voice", "quiet voice"],
+            },
+            stonetop::fixed::TaggedRow {
+                tag: "Build",
+                items: &["big", "scrawny", "sinewy", "slender", "thick"],
+            },
+            stonetop::fixed::TaggedRow {
+                tag: "Vibe",
+                items: &["back unbowed", "jaw firmly set", "soulful eyes"],
+            },
+        ],
+        origin_choices: &[
+            stonetop::fixed::Origin {
+                location: "Stonetop",
+                naming: stonetop::fixed::Naming::Names(&[
+                    "Anwen", "Caradoc", "Dafyd", "Glenys", "Madoc", "Morwenna", "Siwan", "Wynfor",
+                ]),
+            },
+            stonetop::fixed::Origin {
+                location: "Barrier Pass",
+                naming: stonetop::fixed::Naming::Names(&[
+                    "Bala", "Cotota", "Ganzorig", "Gerelma", "Ibahka", "Jungshoi", "Mukhali",
+                    "Taichu",
+                ]),
+            },
+            stonetop::fixed::Origin {
+                location: "The Steplands (Hillfolk)",
+                naming: stonetop::fixed::Naming::Names(&[
+                    "Annic", "Cosette", "Denl", "Hugenne", "Jag", "Marc", "Oanz", "Sandre",
+                ]),
+            },
+            stonetop::fixed::Origin {
+                location: "Gordin's Delve",
+                naming: stonetop::fixed::Naming::Instructions("Pick a name from any list"),
+            },
+            stonetop::fixed::Origin {
+                location: "Marshedge",
+                naming: stonetop::fixed::Naming::Names(&[
+                    "Bridin", "Clian", "Engis", "Fearghul", "Lan", "Neasa", "Nill", "Una",
+                ]),
+            },
+            stonetop::fixed::Origin {
+                location: "Lygos or some other point south",
+                naming: stonetop::fixed::Naming::Names(&[
+                    "Chara", "Davud", "Korina", "Omid", "Parvaneh", "Tamir", "Takish", "Yannis",
+                ]),
+            },
+        ],
+        stats_to_assign: [1i8, 0i8, 0i8, 0i8, 0i8, -1i8],
+        damage: stonetop::Die::D6,
+        hp: 16u8,
+        special_possessions: stonetop::fixed::SpecialPossessions {
+            pick_note: "Pick 2",
+            pick_count: 2u8,
+            preselected: 0u8,
+            options: &[
+                &SPECIAL_POSSESSION_A_HEAP_OF_EXPECTATIONS,
+                &SPECIAL_POSSESSION_A_GOOD_DOG,
+                &SPECIAL_POSSESSION_HUSBANDRY_TOOLS,
+                &SPECIAL_POSSESSION_SMITHY,
+                &SPECIAL_POSSESSION_STONEWORKERS_TOOLS,
+                &SPECIAL_POSSESSION_PERSONAL_TOKEN_FRAUGHT_WITH_MEANING,
+                &SPECIAL_POSSESSION_TANNERY,
+            ],
+        },
+        starting_moves_note: "You start with Anger is a Gift, Potential for Greatness, and 2 other moves of your choice.",
+        starting_move_choices: 2u8,
+        grants_moves: &[
+            stonetop::fixed::Grant::Simply("Anger is a Gift"),
+            stonetop::fixed::Grant::Simply("Potential for Greatness"),
+        ],
+        moves: &[
+            &MOVE_ANGER_IS_A_GIFT,
+            &MOVE_SPEAK_TRUTH_TO_POWER,
+            &MOVE_BETTER_PART_OF_VALOR,
+            &MOVE_I_GET_KNOCKED_DOWN,
+            &MOVE_BUT_I_GET_UP_AGAIN,
+            &MOVE_IMPROVED_STAT,
+            &MOVE_IN_OVER_YOUR_HEAD,
+            &MOVE_IRON_WILL,
+            &MOVE_INQUIRING_MINDS,
+            &MOVE_NEVER_GONNA_KEEP_ME_DOWN,
+            &MOVE_POTENTIAL_FOR_GREATNESS,
+            &MOVE_RESOURCEFUL,
+            &MOVE_SOMETHING_TO_REMEMBER_ME_BY,
+            &MOVE_TOUGH_LOVE,
+            &MOVE_UNDERESTIMATED,
+            &MOVE_UP_WITH_PEOPLE,
+            &MOVE_VERSATILE,
+            &MOVE_A_FORCE_TO_BE_RECKONED_WITH,
+            &MOVE_BIG_DAMN_HERO,
+            &MOVE_PW_SUPERIOR_STAT,
+            &MOVE_UNDAUNTED,
+            &MOVE_VOICE_OF_EXPERIENCE,
+        ],
+        moves_footnote: Some(
+            "The first time you use any move marked with an asterisk (*), cross off \"Would-be\" on the front page.",
+        ),
+        intro: stonetop::fixed::Intro {
+            title: "Introductions",
+            text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>tell us of your fear & anger</strong>, and of the last time they caused you trouble.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>Whose heart do you hope to win?</li><li>Who is counting on you?</li><li>Who quietly understands the path you are on?</li><li>Who do you intend to prove wrong?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>Which one of you is my closest, truest friend?</li><li>Which one of you believes in me, despite it all?</li><li>Which one of you has promised to teach me?</li><li>Which one of you have I hurt, through what I have done or what I've failed to do?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
+        },
+        backstory: &[&BACKSTORY_FEAR_ANGER],
+    };
+
 impl stonetop::keys::MoveKey {
     /// The printed content this key names.
     #[must_use]
@@ -4305,6 +5660,23 @@ impl stonetop::keys::BackstoryKey {
             Self::MajorArcana => &BACKSTORY_MAJOR_ARCANA,
             Self::MinorArcana => &BACKSTORY_MINOR_ARCANA,
             Self::FearAnger => &BACKSTORY_FEAR_ANGER,
+        }
+    }
+}
+impl stonetop::keys::PlaybookKey {
+    /// The printed content this key names.
+    #[must_use]
+    pub fn fixed_part(self) -> &'static stonetop::fixed::PlaybookFixed {
+        match self {
+            Self::TheBlessed => &PLAYBOOK_THE_BLESSED,
+            Self::TheFox => &PLAYBOOK_THE_FOX,
+            Self::TheHeavy => &PLAYBOOK_THE_HEAVY,
+            Self::TheJudge => &PLAYBOOK_THE_JUDGE,
+            Self::TheLightbearer => &PLAYBOOK_THE_LIGHTBEARER,
+            Self::TheMarshal => &PLAYBOOK_THE_MARSHAL,
+            Self::TheRanger => &PLAYBOOK_THE_RANGER,
+            Self::TheSeeker => &PLAYBOOK_THE_SEEKER,
+            Self::TheWouldBeHero => &PLAYBOOK_THE_WOULD_BE_HERO,
         }
     }
 }
