@@ -1,21 +1,22 @@
-//! Bake the Fixed content into `stonetop/src/fixed/generated.rs`: one named static per item,
-//! and a `fixed_part()` method on each key enum that matches every variant to its static. The match
-//! is exhaustive, so a key added to `keys.rs` without a re-bake is a compile error in the `ssr`
-//! build, not a gap. Run as `cargo xtask bake`, which writes the file and then runs `rustfmt`
-//! on it.
+//! Bake the Fixed content into `stonetop/src/fixed/generated.rs`: one named static per item, and a
+//! `fixed_part()` method on each key enum that matches every variant to its static. The match is
+//! exhaustive, so a key added to `keys.rs` without a re-bake is a compile error in the `ssr`
+//! build, not a gap. Run as `cargo xtask bake`, which writes the file and then runs `rustfmt` on
+//! it.
 
 use std::collections::BTreeMap;
-use std::fmt::Write as _;
+use std::fmt::{Display, Write as _};
 use std::io::Write as _;
 use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
 
 use anyhow::{Context, Result, bail};
 use databake::{Bake, CrateEnv};
-use stonetop::keys::MoveKey;
+use stonetop::fixed;
+use stonetop::keys::{BackgroundKey, BackstoryKey, MoveKey, SpecialPossessionKey};
 
 use crate::key::Key;
-use crate::schema::Playbook;
+use crate::schema::{self, Playbook};
 use crate::{json5_playbook, playbook_names};
 
 /// Where the baked file lives.
@@ -44,7 +45,18 @@ pub fn baked_source() -> Result<String> {
         .collect::<Result<Vec<Playbook>>>()?;
     let mut out = String::from(HEADER);
     let moves = bake_moves(&playbooks, &mut out)?;
-    bake_fixed(&moves, &mut out)?;
+    let backgrounds = bake_backgrounds(&playbooks, &moves, &mut out)?;
+    let special_possessions = bake_special_possessions(&playbooks, &mut out)?;
+    let backstories = bake_backstories(&playbooks, &mut out)?;
+    bake_fixed_part("MoveKey", "MoveFixed", &moves, &mut out)?;
+    bake_fixed_part("BackgroundKey", "BackgroundFixed", &backgrounds, &mut out)?;
+    bake_fixed_part(
+        "SpecialPossessionKey",
+        "SpecialPossessionFixed",
+        &special_possessions,
+        &mut out,
+    )?;
+    bake_fixed_part("BackstoryKey", "BackstoryFixed", &backstories, &mut out)?;
     rustfmt(&out)
 }
 
@@ -78,16 +90,145 @@ fn bake_moves(playbooks: &[Playbook], out: &mut String) -> Result<BTreeMap<MoveK
     Ok(statics)
 }
 
-/// Write the `MoveKey::fixed` that matches each key to its static in `statics`. The arms come
-/// from the Moves found, not from `MoveKey`'s variants, so that a variant without a Move fails
-/// to compile as a non-exhaustive match rather than being papered over here.
-fn bake_fixed(statics: &BTreeMap<MoveKey, String>, out: &mut String) -> Result<()> {
+/// Write one static per Background, in playbook order with shared Backgrounds once (none are
+/// shared today, but the loop guards against it exactly as Moves' does), returning each key's
+/// static's name. A Background's anonymous Moves are baked by `bake_moves`; here they're
+/// referenced by name via `moves`, not re-baked, so `moves` must already hold every Move these
+/// playbooks offer.
+fn bake_backgrounds(
+    playbooks: &[Playbook],
+    moves: &BTreeMap<MoveKey, String>,
+    out: &mut String,
+) -> Result<BTreeMap<BackgroundKey, String>> {
+    let env = CrateEnv::default();
+    let mut statics = BTreeMap::new();
+    for playbook in playbooks {
+        writeln!(out, "// {}: Backgrounds\n", playbook.name)?;
+        for background in &playbook.backgrounds {
+            let key = background.key();
+            if statics.contains_key(&key) {
+                continue;
+            }
+            let name = format!("BACKGROUND_{}", screaming_snake(&key.to_string()));
+            let baked = bake_background(background, moves, &env);
+            writeln!(out, "static {name}: stonetop::fixed::BackgroundFixed = {baked};\n")?;
+            statics.insert(key, name);
+        }
+    }
+    Ok(statics)
+}
+
+/// `background` baked to a `BackgroundFixed` literal. Every field bakes as `MoveFixed`'s
+/// fields do, except `description`: a Move chunk there references its already-baked static in
+/// `moves` rather than baking a second copy of the Move's content.
+fn bake_background(
+    background: &schema::Background,
+    moves: &BTreeMap<MoveKey, String>,
+    env: &CrateEnv,
+) -> String {
+    let background = background.to_fixed();
+    let key = background.key.bake(env);
+    let name = background.name.bake(env);
+    let chunks: Vec<String> = background
+        .description
+        .iter()
+        .map(|chunk| bake_background_chunk(chunk, moves, env))
+        .collect();
+    let grants_moves = background.grants_moves.bake(env);
+    let grants_possession = background.grants_possession.bake(env);
+    let grants_topic = background.grants_topic.bake(env);
+    format!(
+        "stonetop::fixed::BackgroundFixed {{ \
+             key: {key}, name: {name}, description: &[{}], \
+             grants_moves: {grants_moves}, grants_possession: {grants_possession}, \
+             grants_topic: {grants_topic} }}",
+        chunks.join(", ")
+    )
+}
+
+/// One chunk of a Background's `description`, baked. A Move chunk names its already-baked
+/// static in `moves` instead of baking the Move's content a second time; every other chunk
+/// bakes normally.
+fn bake_background_chunk(
+    chunk: &fixed::BackgroundChunk,
+    moves: &BTreeMap<MoveKey, String>,
+    env: &CrateEnv,
+) -> String {
+    match chunk {
+        fixed::BackgroundChunk::Move(a_move) => {
+            let name = moves
+                .get(&a_move.key)
+                .unwrap_or_else(|| panic!("{}: Move not baked before its Background", a_move.key));
+            format!("stonetop::fixed::BackgroundChunk::Move(&{name})")
+        }
+        other => other.bake(env).to_string(),
+    }
+}
+
+/// Write one static per Special Possession, in playbook order with shared Special Possessions
+/// once, returning each key's static's name.
+fn bake_special_possessions(
+    playbooks: &[Playbook],
+    out: &mut String,
+) -> Result<BTreeMap<SpecialPossessionKey, String>> {
+    let env = CrateEnv::default();
+    let mut statics = BTreeMap::new();
+    for playbook in playbooks {
+        writeln!(out, "// {}: Special Possessions\n", playbook.name)?;
+        for possession in &playbook.special_possessions.options {
+            let key = possession.key();
+            if statics.contains_key(&key) {
+                continue;
+            }
+            let name = format!("SPECIAL_POSSESSION_{}", screaming_snake(&key.to_string()));
+            let baked = possession.to_fixed().bake(&env);
+            writeln!(out, "static {name}: stonetop::fixed::SpecialPossessionFixed = {baked};\n")?;
+            statics.insert(key, name);
+        }
+    }
+    Ok(statics)
+}
+
+/// Write one static per Backstory, in playbook order with shared Backstories once, returning
+/// each key's static's name.
+fn bake_backstories(
+    playbooks: &[Playbook],
+    out: &mut String,
+) -> Result<BTreeMap<BackstoryKey, String>> {
+    let env = CrateEnv::default();
+    let mut statics = BTreeMap::new();
+    for playbook in playbooks {
+        writeln!(out, "// {}: Backstories\n", playbook.name)?;
+        for backstory in &playbook.backstory {
+            let key = backstory.key();
+            if statics.contains_key(&key) {
+                continue;
+            }
+            let name = format!("BACKSTORY_{}", screaming_snake(&key.to_string()));
+            let baked = backstory.to_fixed().bake(&env);
+            writeln!(out, "static {name}: stonetop::fixed::BackstoryFixed = {baked};\n")?;
+            statics.insert(key, name);
+        }
+    }
+    Ok(statics)
+}
+
+/// Write the `fixed_part()` that matches every key of `key_type` to its static in `statics`.
+/// The arms come from the items found, not from the key enum's variants, so that a variant
+/// without an item fails to compile as a non-exhaustive match rather than being papered over
+/// here.
+fn bake_fixed_part<K: Display + Ord>(
+    key_type: &str,
+    fixed_type: &str,
+    statics: &BTreeMap<K, String>,
+    out: &mut String,
+) -> Result<()> {
     writeln!(
         out,
-        "impl stonetop::keys::MoveKey {{\n\
-             /// The printed Move this key names.\n\
+        "impl stonetop::keys::{key_type} {{\n\
+             /// The printed content this key names.\n\
              #[must_use]\n\
-             pub fn fixed_part(self) -> &'static stonetop::fixed::MoveFixed {{\n\
+             pub fn fixed_part(self) -> &'static stonetop::fixed::{fixed_type} {{\n\
                  match self {{"
     )?;
     for (key, name) in statics {

@@ -2550,8 +2550,1428 @@ static MOVE_VOICE_OF_EXPERIENCE: stonetop::fixed::MoveFixed = stonetop::fixed::M
     checklist: None,
 };
 
+// The Blessed: Backgrounds
+
+static BACKGROUND_INITIATE: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Initiate,
+    name: "Initiate",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>Stonetop has long been home to a sacred order, keepers of the old ways and speakers for Danu. You are one such initiate, the most gifted in generations. You gain the Rites of the Land move.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>There are other initiates in Stonetop, serving the goddess and the village. They aid you as followers—see the Initiates of Danu insert. Who are they? Choose 2 or 3:</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Checklist(stonetop::fixed::BackgroundChecklist::Options(
+            &[
+                "<strong>Enfys</strong>, your acolyte, beloved by birds",
+                "<strong>Afon</strong>, strange and Fae-touched",
+                "<strong>Gwendyl</strong>, your mentor, a talented healer",
+                "<strong>Olwin</strong>, your anointed lover, seer of fates",
+                "<strong>Seren the Eldest</strong>, wise and hard as winter",
+            ],
+        )),
+    ],
+    grants_moves: &[stonetop::fixed::Grant::Simply("Rites of the Land")],
+    grants_possession: None,
+    grants_topic: None,
+};
+
+static BACKGROUND_RAISED_BY_WOLVES: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::RaisedByWolves,
+        name: "Raised by Wolves",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>Maybe not by <em>wolves</em>, but you grew up in the wild. Beasts of land and air were your siblings. The sighing wind taught you language. The trees and rocks were your home. Were you one of the Forest Folk? Abandoned or orphaned? Lured into the Wood? Regardless, you get the Trackless Step move.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>For some reason, you've made yourself known to Stonetop and perhaps you even call it home. But the ways of humans are still strange to you.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_RAISED_BY_WOLVES),
+        ],
+        grants_moves: &[stonetop::fixed::Grant::Simply("Trackless Step")],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+static BACKGROUND_VESSEL: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Vessel,
+    name: "Vessel",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>A seed of Danu's power has taken root in your soul. Perhaps it has always been there and only recently sprouted. Or maybe it was planted in you during some portentous event.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>Regardless, your dreams have been haunted by strange markings and symbols. You feel the mystic power in plants, stones, and soil. And you've felt the growing wrath of the Earth Mother as foul things begin to move about. Take the Danu's Grasp move.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_VESSEL),
+    ],
+    grants_moves: &[stonetop::fixed::Grant::Simply("Danu's Grasp")],
+    grants_possession: None,
+    grants_topic: None,
+};
+
+// The Fox: Backgrounds
+
+static BACKGROUND_THE_NATURAL: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::TheNatural,
+        name: "The Natural",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You grew up around here, and always picked things up quickly. Reading and numbers, sure, but more. Hide and seek. Throwing stones. Climbing. Fighting. Whatever you tried, you were good at it. As good as anyone else, if not better.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>Sure, you've got a reputation for bending the rules. Playing dirty. But why play if you don't play to win, right? And who do they come to when there's a problem needs solving? You, that's who.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_THE_NATURAL),
+        ],
+        grants_moves: &[],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+static BACKGROUND_A_LIFE_OF_CRIME: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::ALifeOfCrime,
+        name: "A Life of Crime",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You're new to Stonetop, having left behind a... <em>colorful</em> past. How did you get into that life? Why and how did you get out? Who and what did you leave behind?</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>Regardless, these people have taken you in. Time to lead an honest life, right?</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You start with either Burgle or Light Fingers (your choice) as an extra move, and either burglar tools or a hidden stash (your choice) as an additional special possession.</p>",
+            ),
+        ],
+        grants_moves: &[stonetop::fixed::Grant::ChooseOne(&["Burgle", "Light Fingers"])],
+        grants_possession: Some(stonetop::fixed::Grant::ChooseOne(&[
+            "Burglar's kit",
+            "Hidden stash",
+        ])),
+        grants_topic: None,
+    };
+
+static BACKGROUND_THE_PRODIGAL_RETURNED: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::TheProdigalReturned,
+        name: "The Prodigal Returned",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You left long ago, travelling far and living by your wits. Why did you leave? What deeds do you boast of, and which do you regret?</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You always longed to return to Stonetop, and return you have. You're a bit of a celebrity now, and you've got friends (or close enough) strewn about the known world.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_THE_PRODIGAL_RETURNED),
+        ],
+        grants_moves: &[],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+// The Heavy: Backgrounds
+
+static BACKGROUND_SHERIFF: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Sheriff,
+    name: "Sheriff",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>You keep order in Stonetop and protect it from outside threats. It might not be anything official, but everyone knows you've got a cool head and the weight to back up your words.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_SHERIFF),
+    ],
+    grants_moves: &[],
+    grants_possession: None,
+    grants_topic: None,
+};
+
+static BACKGROUND_BLOOD_SOAKED_PAST: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::BloodSoakedPast,
+        name: "Blood-Soaked Past",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You left behind a life of violence and a name mothers used to scare their children. For whatever reason, the people of Stonetop took you (back?) in and treat you like one of their own.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_BLOOD_SOAKED_PAST),
+        ],
+        grants_moves: &[],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+static BACKGROUND_STORM_MARKED: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::StormMarked,
+        name: "Storm-Marked",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You've been touched by Tor (Rain-maker, Thunderhead, Slayer-of-Beasts!) and bear runic markings similar to those etched into the Stone. When did the marks manifest? Are they a symbol of your strength, speed, and courage? Or their source?</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You start with the Storm Markings major arcanum. Mark one of the boxes on the front of the Storm Markings sheet, and describe here the time you were struck by lightning and walked away unharmed:</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor("<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>"),
+        ],
+        grants_moves: &[],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+// The Judge: Backgrounds
+
+static BACKGROUND_LEGACY: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Legacy,
+    name: "Legacy",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>You are the latest in a long line of Judges—born here, apprenticed to the prior Judge, and charged with the passing of the mantle. The Chronicle is a rich repository of lore, but there's no index, so good luck finding anything.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_LEGACY),
+    ],
+    grants_moves: &[],
+    grants_possession: None,
+    grants_topic: None,
+};
+
+static BACKGROUND_MISSIONARY: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Missionary,
+    name: "Missionary",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>You are part of a larger order of Judges, sent here to protect the flickering flame of civilization. The Chronicle is relatively new; your position in town is far from certain. Add these Judges to the Neighbors section of the steading playbook (pick 2 more):</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Checklist(
+            stonetop::fixed::BackgroundChecklist::OptionsPrecheckable(&[
+                stonetop::fixed::PrecheckableOption {
+                    prechecked: true,
+                    text: "Devin (from Marshedge)",
+                },
+                stonetop::fixed::PrecheckableOption {
+                    prechecked: true,
+                    text: "Haeris (from Gordin's Delve)",
+                },
+                stonetop::fixed::PrecheckableOption {
+                    prechecked: false,
+                    text: "Isalde (from the Manmarch)",
+                },
+                stonetop::fixed::PrecheckableOption {
+                    prechecked: false,
+                    text: "Rahat (from Lygos)",
+                },
+                stonetop::fixed::PrecheckableOption {
+                    prechecked: false,
+                    text: "Tejisha (from Barrier Pass)",
+                },
+                stonetop::fixed::PrecheckableOption {
+                    prechecked: false,
+                    text: "Unz (from the Hillfolk)",
+                },
+            ]),
+        ),
+        stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_MISSIONARY),
+    ],
+    grants_moves: &[],
+    grants_possession: Some(stonetop::fixed::Grant::Simply("Aviary")),
+    grants_topic: None,
+};
+
+static BACKGROUND_PROPHET: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Prophet,
+    name: "Prophet",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>The line of Judges was broken long ago, the Chronicle lost or fallen into ruin. Aratis has called you personally to her service through dreams, omens, and visions. Some in town resent the authority you've assumed.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_PROPHET),
+    ],
+    grants_moves: &[],
+    grants_possession: None,
+    grants_topic: None,
+};
+
+// The Lightbearer: Backgrounds
+
+static BACKGROUND_AUSPICIOUS_BIRTH: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::AuspiciousBirth,
+        name: "Auspicious Birth",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You were born in Stonetop, and that birth was marked by the God of Light. You were born during an eclipse, perhaps, or under the light of a bright new star? Maybe you bear a sun-shaped birthmark?</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>Whatever the sign, your connection to Helior was clear early on. You've a place of honor in Stonetop, though it'd be a lie to say you don't make some uneasy.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_AUSPICIOUS_BIRTH),
+        ],
+        grants_moves: &[],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+static BACKGROUND_ITINERANT_MYSTIC: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::ItinerantMystic,
+        name: "Itinerant Mystic",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>They think of you as a self-important kook who comes through now and again, speaking in riddles and playing tricks with the light. Sure, they know there's something holy about you, but it's not like you're a priest or anything. Priests talk sense.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_ITINERANT_MYSTIC),
+        ],
+        grants_moves: &[],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+static BACKGROUND_SOUL_ON_FIRE: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::SoulOnFire,
+        name: "Soul on Fire",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You once led a worldly life, full of fear and doubt, base pleasures and petty grudges. But something happened. Injury, illness, a brush with death. Or just a moment of such profound misery and self-loathing that you thought you could fall no further.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>There, in the dark, Helior's light shined upon you, igniting in your soul, lifting you and filling you with a profound sense of purpose.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_SOUL_ON_FIRE),
+        ],
+        grants_moves: &[],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+// The Marshal: Backgrounds
+
+static BACKGROUND_SCION: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Scion,
+    name: "Scion",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>You grew up here, descended from a long line. Some of the biggest names in Stonetop's past are perched in your family tree. Everyone in the village takes your authority as a given, and your crew is a well-established institution in town.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>You start with the Veteran Crew move, in addition to your usual moves.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>When you <strong><em>create your Crew</em></strong>, they automatically have the <em>respected</em> tag (in addition to your usual picks, and any you get from Veteran Crew).</p>",
+        ),
+    ],
+    grants_moves: &[stonetop::fixed::Grant::Simply("Veteran Crew")],
+    grants_possession: None,
+    grants_topic: None,
+};
+
+static BACKGROUND_PENITENT: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Penitent,
+    name: "Penitent",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>Before you came here, you led a band of ne'er-do-wells: bandits, raiders, or bloody-handed mercenaries. But something changed. A moment of truth led you and your followers—some of them at least—to leave that life behind. And for whatever reason, the people of Stonetop took you in.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_PENITENT),
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>When you <strong><em>create your Crew</em></strong>, they automatically have the <em>warriors</em> tag (in addition to your usual picks).</p>",
+        ),
+    ],
+    grants_moves: &[],
+    grants_possession: None,
+    grants_topic: None,
+};
+
+static BACKGROUND_LUMINARY: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Luminary,
+    name: "Luminary",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>You're a natural leader—your words inspire, your plans win the day, your deeds are recounted far and wide. Are you touched by the gods? Does ancient blood flow in your veins? Or are you simply the champion that Stonetop needs in these trying times?</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>You start with the We Happy Few move, in addition to your usual moves.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>When you <strong><em>create your Crew</em></strong>, they automatically have the <em>devoted</em> tag (in addition to your usual picks).</p>",
+        ),
+    ],
+    grants_moves: &[stonetop::fixed::Grant::Simply("We Happy Few")],
+    grants_possession: None,
+    grants_topic: None,
+};
+
+// The Ranger: Backgrounds
+
+static BACKGROUND_MIGHTY_HUNTER: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::MightyHunter,
+        name: "Mighty Hunter",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You are a hunter of the Great Wood, the best the town has seen in generations. You know every part of the Wood within a two-day march.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You start with both the Expert Tracker move and the Stalker move.</p>",
+            ),
+        ],
+        grants_moves: &[
+            stonetop::fixed::Grant::Simply("Expert Tracker"),
+            stonetop::fixed::Grant::Simply("Stalker"),
+        ],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+static BACKGROUND_WIDE_WANDERER: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::WideWanderer,
+        name: "Wide Wanderer",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You have travelled much of the known world and perhaps parts beyond. Add each of the following to the Neighbors list in the Stonetop playbook, choosing 1 trait for each:</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<ul><li><strong>Ennis</strong> (from Marshedge)</li><li><strong>Shahar</strong> (from Gordin's Delve)</li><li><strong>Yannic</strong> (from the Hillfolk)</li><li><strong>Tovia</strong> (from Lygos)</li><li><strong>Sasca</strong> (from the northern Manmarch)</li></ul>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor("<p>You start with the Mental Map move.</p>"),
+            stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_WIDE_WANDERER),
+        ],
+        grants_moves: &[stonetop::fixed::Grant::Simply("Mental Map")],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+static BACKGROUND_BEAST_BONDED: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::BeastBonded,
+        name: "Beast-Bonded",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You grew up civilized, but your soul is bound to a beast of the wild. You're closer to it than to any man or woman. How did this bond come about? How long ago? Regardless, you start with the Animal Companion move.</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_BEAST_BONDED),
+        ],
+        grants_moves: &[stonetop::fixed::Grant::Simply("Animal Companion")],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+// The Seeker: Backgrounds
+
+static BACKGROUND_PATRIOT: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Patriot,
+    name: "Patriot",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>These people are family. Chaos grows all around, but you'll be damned if you'll let your family come to harm. Damned indeed.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>You have sought out and embraced dark power to protect that which you hold dear. Or perhaps that power fell upon you, and you took it up for the greater good. Either way, you seek more.</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>You start with the Let's Make a Deal move and are Well Versed in the Things Below. You've also acquired 1 major arcanum:</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Checklist(stonetop::fixed::BackgroundChecklist::Options(
+            &["◇ The Hec'tumel Codex", "◇ The Red Scepter", "◇ The Staff of the Lidless Orb"],
+        )),
+    ],
+    grants_moves: &[stonetop::fixed::Grant::Simply("Let's Make a Deal")],
+    grants_possession: None,
+    grants_topic: Some(stonetop::fixed::Grant::Simply("The Things Below")),
+};
+
+static BACKGROUND_ANTIQUARIAN: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::Antiquarian,
+        name: "Antiquarian",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>The past has buried many secrets, and you are determined to dig them up. Years of study across the land have led you here, and you are convinced that this town holds the key to your greatest discoveries. What is it you hope to find? What is it that keeps you here?</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>In any case, your travels and studies mean that you start with the Polyglot move and that you are Well Versed in the Makers and their arts. You've also acquired 1 major arcanum:</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Checklist(
+                stonetop::fixed::BackgroundChecklist::Options(&[
+                    "◇ Noruba's Ice Sphere",
+                    "◇ The Azure Hand",
+                    "◇◇ The Mindgem",
+                ]),
+            ),
+        ],
+        grants_moves: &[stonetop::fixed::Grant::Simply("Polyglot")],
+        grants_possession: None,
+        grants_topic: Some(stonetop::fixed::Grant::Simply("The Makers and their arts")),
+    };
+
+static BACKGROUND_WITCH_HUNTER: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::WitchHunter,
+        name: "Witch Hunter",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>You've dedicated your life to rooting out and destroying horrors and their servants. What set you down this path? What did you sacrifice to walk it? What led you to call Stonetop home?</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>Regardless, you start with the Everything Bleeds move and are Well Versed in (pick 1) the Fae, the Things Below, or the Last Door and what lies beyond. You've also acquired 1 major arcanum:</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Checklist(
+                stonetop::fixed::BackgroundChecklist::Options(&[
+                    "◇ The Demonhide Cloak",
+                    "The Redwood Effigy",
+                    "◇◇ The Twisted Spear",
+                ]),
+            ),
+        ],
+        grants_moves: &[stonetop::fixed::Grant::Simply("Everything Bleeds")],
+        grants_possession: None,
+        grants_topic: Some(stonetop::fixed::Grant::ChooseOne(&[
+            "the Fae",
+            "the Things Below",
+            "the Last Door",
+        ])),
+    };
+
+// The Would-be Hero: Backgrounds
+
+static BACKGROUND_IMPETUOUS_YOUTH: stonetop::fixed::BackgroundFixed =
+    stonetop::fixed::BackgroundFixed {
+        key: stonetop::keys::BackgroundKey::ImpetuousYouth,
+        name: "Impetuous Youth",
+        description: &[
+            stonetop::fixed::BackgroundChunk::Flavor(
+                "<p>Stonetop has always been home, but you chafe at the demands of mundane life and have always longed for more. Excitement! Danger!</p>",
+            ),
+            stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_IMPETUOUS_YOUTH),
+        ],
+        grants_moves: &[],
+        grants_possession: None,
+        grants_topic: None,
+    };
+
+static BACKGROUND_DRIVEN: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Driven,
+    name: "Driven",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>You once led a simple life, but something happened. Something changed you, burdened you with terrible purpose. What was it? Choose 1:</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Checklist(stonetop::fixed::BackgroundChecklist::Options(
+            &[
+                "A loved one was killed or abducted",
+                "Someone gave their life to save you",
+                "Your idol sacrificed themselves to save many",
+                "You stumbled upon a dark mystery",
+                "You must make amends for a terrible mistake",
+            ],
+        )),
+        stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_DRIVEN),
+    ],
+    grants_moves: &[],
+    grants_possession: None,
+    grants_topic: None,
+};
+
+static BACKGROUND_DESTINED: stonetop::fixed::BackgroundFixed = stonetop::fixed::BackgroundFixed {
+    key: stonetop::keys::BackgroundKey::Destined,
+    name: "Destined",
+    description: &[
+        stonetop::fixed::BackgroundChunk::Flavor(
+            "<p>Fate has laid her hand upon you. Choose 3-4 of the items below to describe your destiny:</p>",
+        ),
+        stonetop::fixed::BackgroundChunk::Checklist(stonetop::fixed::BackgroundChecklist::Rows(&[
+            stonetop::fixed::TaggedRow {
+                tag: "Portents",
+                items: &["anointed", "marked at birth", "your coming foretold"],
+            },
+            stonetop::fixed::TaggedRow {
+                tag: "Actions",
+                items: &["destroy", "discover", "free", "protect", "restore", "unify"],
+            },
+            stonetop::fixed::TaggedRow {
+                tag: "Elements",
+                items: &["earth & stone", "darkness", "fire", "ice", "light", "water"],
+            },
+            stonetop::fixed::TaggedRow {
+                tag: "History",
+                items: &["blood", "civilization", "life", "storms", "war"],
+            },
+            stonetop::fixed::TaggedRow {
+                tag: "Mysteries",
+                items: &["the Fae", "the gods", "the Makers", "the Stone", "the Things Below"],
+            },
+        ])),
+        stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_DESTINED),
+    ],
+    grants_moves: &[],
+    grants_possession: None,
+    grants_topic: None,
+};
+
+// The Blessed: Special Possessions
+
+static SPECIAL_POSSESSION_SACRED_POUCH: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::SacredPouch,
+        name: "Sacred pouch (<em>magical</em>)",
+        description: "see back page. Stock: ○○○",
+        resource: Some(stonetop::fixed::Resource {
+            hold: "Stock",
+            can_be: stonetop::fixed::CanBe::Max(3u8),
+            start: stonetop::fixed::EmptyFull::Full,
+        }),
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_APIARY: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Apiary,
+        name: "Apiary",
+        description: "beeswax, candles (<em>close, area</em>, lasts ~1 hr), honey, ◇ bee smokers, ◇ hats & veils, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_COLLECTED_OFFERINGS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::CollectedOfferings,
+        name: "Collected offerings",
+        description: "(○○○ uses): Expend a use to produce something valuable to a spirit of the wild. Restore 1 use each season.",
+        resource: Some(stonetop::fixed::Resource {
+            hold: "Uses",
+            can_be: stonetop::fixed::CanBe::Max(3u8),
+            start: stonetop::fixed::EmptyFull::Full,
+        }),
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_GOAT_HERD: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::GoatHerd,
+        name: "Goat herd",
+        description: "milk, cheese, pelts, meat, blood, horn, wool, etc. Each season, 1 in 4 chance of having a bezoar (swallow it to cure poison).",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_HERB_GARDEN: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::HerbGarden,
+        name: "Herb garden",
+        description: "shears, mortars & pestles, herbs, seeds, remedies, mild poisons, ◇ spades, etc. Each spring, d4 uses of bendis root (<em>reach, area</em>, burns ~1 hr, fumes repel perversions of nature).",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_MASTIFFS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Mastiffs,
+        name: "Mastiffs",
+        description: ", 2-3 followers (<em>alert, keen-nosed, fierce, overprotective</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct: to bark &amp; threaten; Cost: affection.",
+        resource: None,
+        pick: &[],
+    };
+
+// The Fox: Special Possessions
+
+static SPECIAL_POSSESSION_BURGLARS_KIT: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::BurglarsKit,
+        name: "Burglar's kit",
+        description: "picks, files, snippers, wire, ◇ prybars, ◇ hacksaws, ◇ a lantern (○○○○○ hours, <em>close, area</em>), ◇ a grappling hook, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_CARPENTERS_TOOLS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::CarpentersTools,
+        name: "Carpenter's tools",
+        description: "chisels, files, nails, pitch, ◇ prybars, ◇ saws, ◇◇ firkins, barrels, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_DISTILLERY: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Distillery,
+        name: "Distillery",
+        description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
+        resource: Some(stonetop::fixed::Resource {
+            hold: "Skins of fine whisky",
+            can_be: stonetop::fixed::CanBe::Max(2u8),
+            start: stonetop::fixed::EmptyFull::Full,
+        }),
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_HIDDEN_STASH: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::HiddenStash,
+        name: "Hidden stash",
+        description: "(○○○ uses): each use produces valuables worth a purse of silvers (Value 2)",
+        resource: Some(stonetop::fixed::Resource {
+            hold: "Uses",
+            can_be: stonetop::fixed::CanBe::Max(3u8),
+            start: stonetop::fixed::EmptyFull::Full,
+        }),
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_MUMMERS_KIT: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::MummersKit,
+        name: "Mummer's kit",
+        description: "juggling balls, whirlybird seeds, motley, ribbons, bells, ◇ puppets, ◇ a fiddle, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_SCRIBES_TOOLS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::ScribesTools,
+        name: "Scribe's tools",
+        description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_TANNERY: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Tannery,
+        name: "Tannery",
+        description: "(or access to it): lime, acid, salts, thick gloves, ◇ a boiled leather cuirass (1 armor), etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_TRADE_CONTACTS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::TradeContacts,
+        name: "Trade contacts",
+        description: "small amounts of salt, glass, silk, spice, medicinal herbs, pigments, ivory, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+// The Heavy: Special Possessions
+
+static SPECIAL_POSSESSION_CHIRURGEONS_TOOLS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::ChirurgeonsTools,
+        name: "Chirurgeon's tools",
+        description: "catgut, straps, bandages, tubes, poultices, willow bark, ◇ bonesaws, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_HUSBANDRY_TOOLS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::HusbandryTools,
+        name: "Husbandry tools",
+        description: "brushes, muzzles, collars, feed, ◇ whips, ◇ bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_SMITHY: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Smithy,
+        name: "Smithy",
+        description: "(or access to it): iron goods, ingots, thick gloves, ◇ tongs, ◇ bellows, an anvil, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_STONEWORKERS_TOOLS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::StoneworkersTools,
+        name: "Stoneworker's tools",
+        description: "chisels, drills, ◇ prybars, ◇ spikes, ◇ block & tackles, wheelbarrow, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_PH_WEAPONS_OF_WAR: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::PhWeaponsOfWar,
+        name: "Weapons of war",
+        description: "choose up to 3 (now or later):",
+        resource: None,
+        pick: &[
+            "◇ Sword, iron (<em>close</em>, +1 damage)",
+            "◇ Battleaxe, iron (<em>close, messy</em>)",
+            "◇ Warhammer, iron (<em>close</em>, 2 piercing)",
+            "◇ Mace or flail, iron (<em>close, forceful</em>)",
+            "◇ Crossbow (<em>far</em>, +1 damage, <em>reload</em>, x piercing, ○ low ammo, ○ all out)",
+        ],
+    };
+
+// The Judge: Special Possessions
+
+static SPECIAL_POSSESSION_YOUR_SYMBOL_OF_AUTHORITY: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::YourSymbolOfAuthority,
+        name: "Your symbol of authority",
+        description: "(pick 1):",
+        resource: None,
+        pick: &[
+            "◇◇ Black iron maul, utterly immune to all magic (<em>close, forceful, awkward</em>, +1 damage)",
+            "◇◇ Makerglass shield, etched with Aratis's symbol (<em>indestructible</em>, +1 armor, +1 Readiness on a Defend 7+)",
+            "◇ Helm set with a dark ice \"jewel.\" Grants advantage to resist mind-affecting magic.",
+        ],
+    };
+
+static SPECIAL_POSSESSION_AVIARY: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Aviary,
+        name: "Aviary",
+        description: "thick gloves, bird hoods, tethers, seed, ◇ messenger birds, ◇ birdcages, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_ENGINEERS_TOOLS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::EngineersTools,
+        name: "Engineer's tools",
+        description: "rulers, tapes, rods, plumb-bobs, ◇ tripods, ◇ block & tackles, wheelbarrow, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+// The Lightbearer: Special Possessions
+
+static SPECIAL_POSSESSION_BOOKS_SCROLLS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::BooksScrolls,
+        name: "Books & scrolls",
+        description: "(○○○○○ uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
+        resource: Some(stonetop::fixed::Resource {
+            hold: "Uses",
+            can_be: stonetop::fixed::CanBe::Max(5u8),
+            start: stonetop::fixed::EmptyFull::Empty,
+        }),
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_CHANDLERY: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Chandlery,
+        name: "Chandlery",
+        description: "beeswax, candles (<em>close, area</em>, lasts ~1 hr), wicks, scented herbs, soap, lye, ash, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_GLASSWORKS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Glassworks,
+        name: "Glassworks",
+        description: "vials, charms, lenses, sand, marbles, bellows, crucible, ◇ lanterns (○○○○○ hours, <em>close, area</em>), etc.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_HOLY_RELICS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::HolyRelics,
+        name: "Holy relics",
+        description: "(○○○ uses): if you have one in inventory when you Invoke the Sun God, you can mark a use in lieu of choosing a consequence.",
+        resource: Some(stonetop::fixed::Resource {
+            hold: "Uses",
+            can_be: stonetop::fixed::CanBe::Max(3u8),
+            start: stonetop::fixed::EmptyFull::Empty,
+        }),
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_LUTHIERS_TOOLS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::LuthiersTools,
+        name: "Luthier's tools",
+        description: "chisels, files, catgut, various woods, stains, ◇ a lute, ◇ a fiddle, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+// The Marshal: Special Possessions
+
+static SPECIAL_POSSESSION_PERSONAL_SYMBOL: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::PersonalSymbol,
+        name: "Personal symbol",
+        description: "(a flag, crest, marking, etc.): when you <strong><em>display or reveal it in a dramatic fashion</em></strong>, your crew holds +1 Loyalty (max 3).",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_PM_WEAPONS_OF_WAR: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::PmWeaponsOfWar,
+        name: "Weapons of war",
+        description: "choose up to 3 (now or later):",
+        resource: None,
+        pick: &[
+            "◇ Sword, iron (<em>close</em>, +1 damage)",
+            "◇◇ Long spear, fine steel (<em>reach</em>, 2 piercing)",
+            "◇ Battleaxe, iron (<em>close, messy</em>)",
+            "◇ Composite bow (<em>far</em>, +1 damage, x piercing; ○ low ammo, ○ all out)",
+        ],
+    };
+
+// The Ranger: Special Possessions
+
+static SPECIAL_POSSESSION_COMPOSITE_BOW: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::CompositeBow,
+        name: "◇ Composite bow",
+        description: "(<em>far</em>, +1 damage, x piercing; ○ low ammo, ○ all out)",
+        resource: Some(stonetop::fixed::Resource {
+            hold: "Arrows",
+            can_be: stonetop::fixed::CanBe::Labels(&["all out", "low ammo", "plenty left"]),
+            start: stonetop::fixed::EmptyFull::Full,
+        }),
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_HIDEOUTS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Hideouts,
+        name: "Hideouts",
+        description: "(○○○ uses): expend a use to have a well-stocked, safe shelter nearby; GM can veto.",
+        resource: Some(stonetop::fixed::Resource {
+            hold: "Uses",
+            can_be: stonetop::fixed::CanBe::Max(3u8),
+            start: stonetop::fixed::EmptyFull::Empty,
+        }),
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_HOUNDS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Hounds,
+        name: "Hounds",
+        description: ", 2-3 followers (<em>trackers, keen-nosed, fast</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct: to give chase; Cost: training.",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_LAY_OF_THE_LAND: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::LayOfTheLand,
+        name: "Lay of the land",
+        description: "(○○○ uses): expend a use to know where to find ▁▁▁▁▁▁▁▁, without having to Know Things; GM can veto.",
+        resource: Some(stonetop::fixed::Resource {
+            hold: "Uses",
+            can_be: stonetop::fixed::CanBe::Max(3u8),
+            start: stonetop::fixed::EmptyFull::Empty,
+        }),
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_TRAPPING_GEAR: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::TrappingGear,
+        name: "Trapping gear",
+        description: "snares, pelts, musk, bait, etc. When you <strong><em>Forage</em></strong>, get +1 use of provisions.",
+        resource: None,
+        pick: &[],
+    };
+
+// The Seeker: Special Possessions
+
+static SPECIAL_POSSESSION_LABORATORY: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Laboratory,
+        name: "Laboratory",
+        description: "chemics, reagents, vials, measures, ◇ scales, ◇ decanters, etc. Every season, produce d4-1 uses of ◇ naphtha (<em>thrown, area, dangerous</em>, ignores armor).",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_PARAPHERNALIA: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::Paraphernalia,
+        name: "Paraphernalia",
+        description: "crystals, incense, talismans, blood, bone, horn, eye of newt, ◇ braziers, ◇◇ a cauldron, etc.",
+        resource: None,
+        pick: &[],
+    };
+
+// The Would-be Hero: Special Possessions
+
+static SPECIAL_POSSESSION_A_HEAP_OF_EXPECTATIONS: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::AHeapOfExpectations,
+        name: "A heap of expectations",
+        description: "of little use",
+        resource: None,
+        pick: &[],
+    };
+
+static SPECIAL_POSSESSION_A_GOOD_DOG: stonetop::fixed::SpecialPossessionFixed =
+    stonetop::fixed::SpecialPossessionFixed {
+        key: stonetop::keys::SpecialPossessionKey::AGoodDog,
+        name: "A good dog",
+        description: ", follower (☐ <em>retriever</em> or ☐ <em>herder</em>, <em>keen-nosed, clever</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct to play; Cost: affection.",
+        resource: None,
+        pick: &["retriever", "herder"],
+    };
+
+static SPECIAL_POSSESSION_PERSONAL_TOKEN_FRAUGHT_WITH_MEANING:
+    stonetop::fixed::SpecialPossessionFixed = stonetop::fixed::SpecialPossessionFixed {
+    key: stonetop::keys::SpecialPossessionKey::PersonalTokenFraughtWithMeaning,
+    name: "Personal token, fraught with meaning",
+    description: ": (pick 1)",
+    resource: None,
+    pick: &[
+        "◇◇ A shield, bearing ▁▁▁▁▁▁▁▁'s crest",
+        "◇ A wool cloak, woven just for you by ▁▁▁▁▁▁▁▁",
+        "A letter, spattered with tears & blood",
+        "A flute, a gift from someone you loved",
+        "A fine locket, holding a strand of hair",
+        "A tinderbox, lovingly engraved",
+    ],
+};
+
+// The Blessed: Backstories
+
+static BACKSTORY_YOUR_SACRED_POUCH: stonetop::fixed::BackstoryFixed =
+    stonetop::fixed::BackstoryFixed {
+        key: stonetop::keys::BackstoryKey::YourSacredPouch,
+        name: "Your sacred pouch",
+        list: &[
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>Your sacred pouch (<em>magical</em>) doesn't take up space in your inventory. It can hold up to 3 Stock (sacred herbs, powders, stones, pigments, chalks, clay, and so forth). Each time you gain an even-numbered level, your pouch can hold +1 Stock. When <strong><em>anyone but you looks inside your sacred pouch and touches the materials therein</em></strong>, the Stock is ruined.</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>When you <strong><em>have a few days of downtime in familiar terrain</em></strong>, you may replenish your Stock.</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>When you <strong><em>Forage</em></strong>, you can produce Stock instead of provisions.</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>Your sacred pouch is... (choose 1 on each line)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::ChoiceRow(stonetop::fixed::TaggedRow {
+                tag: "Provenance",
+                items: &["an heirloom", "made just for you", "your own work"],
+            }),
+            stonetop::fixed::BackstoryItem::ChoiceRow(stonetop::fixed::TaggedRow {
+                tag: "Materials",
+                items: &["fur", "drakescale", "leather", "woven", "demonflesh"],
+            }),
+            stonetop::fixed::BackstoryItem::ChoiceRow(stonetop::fixed::TaggedRow {
+                tag: "Trimmings",
+                items: &["unadorned", "beadwork", "rich dyes", "runes"],
+            }),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>What remarkable trait does it possess? (choose 1)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "It cannot be cut, torn, or burned by any natural means.",
+                "Unless someone is specifically searching for your pouch, they will ignore its presence.",
+                "So long as the pouch is sealed, nothing within can be detected or found by magic, nor can anything within escape or affect the outside world.",
+                "Unnatural and unclean creatures cannot bear to touch it.",
+            ]),
+        ],
+    };
+
+static BACKSTORY_THE_EARTH_MOTHER: stonetop::fixed::BackstoryFixed =
+    stonetop::fixed::BackstoryFixed {
+        key: stonetop::keys::BackstoryKey::TheEarthMother,
+        name: "The Earth Mother",
+        list: &[
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>Danu has long been revered by all peoples, though not always worshipped or served by priests. In Stonetop's Pavilion of the Gods, Danu's shrine is... (choose 1)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "... loved, well-used, dripping with offerings and petitions.",
+                "... little more than a token of respect, for her holy places are anywhere but here.",
+                "... given wide berth by most, and approached only with care and propitiation.",
+                "... neglected and all but forgotten, except by a few.",
+            ]),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>What do the folk of Stonetop leave as offerings? (choose 2-3)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "fruits of harvest",
+                "whisky/spirits",
+                "pure rain water",
+                "blood/burnt flesh",
+                "figurines/effigies",
+                "salt/crystals",
+                "metal nails/tools",
+                "incense/sage bark",
+            ]),
+        ],
+    };
+
+// The Fox: Backstories
+
+static BACKSTORY_TALL_TALES: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
+    key: stonetop::keys::BackstoryKey::TallTales,
+    name: "Tall tales",
+    list: &[
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>Someone like you gets into all sorts of trouble, whether you mean to or not. Mix and match the following to come up with a couple of your more memorable adventures, and write them down in the space at the bottom of this column.</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>There was that time that you… (choose 1 per tale)</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Text(
+            "<ul><li>got lost in (choose 1) the Great Wood, or the Flats, or the Steplands, or Ferrier's Fen, or the Foothills, or the Huffel Peaks</li><li>were on watch when the crinwin raided</li><li>dared each other to explore the Ruined Tower</li><li>managed to rile up a small band of Hillfolk</li><li>braved the Labyrinth, just a little</li><li>stole that crazy old man's book</li><li>went poking about the old Barrow Mounds</li></ul>",
+        ),
+        stonetop::fixed::BackstoryItem::Text("<p>And you ended up… (choose 1 or 2 per tale)</p>"),
+        stonetop::fixed::BackstoryItem::Text(
+            "<ul><li>running for your life from ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</li><li>landing a well-placed blow</li><li>interrupting a strange, creepy gathering</li><li>stumbling on a beast, bigger'n anything</li><li>with a sack full of treasure</li><li>getting ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ to fight them for you</li><li>face to face with a ghost/Fae/demon</li><li>finding those strange old runes</li><li>getting to know that fine-looking fellow/lady/person/couple</li></ul>",
+        ),
+        stonetop::fixed::BackstoryItem::Text("<p>But all you've got left to show for it is…</p>"),
+        stonetop::fixed::BackstoryItem::Text(
+            "<ul><li>a story no one believes.</li><li>a nasty scar; wanna see?</li><li>the occasional nightmare.</li><li>this map with runes no one can read.</li><li>this key that opens who-knows-what.</li></ul>",
+        ),
+    ],
+};
+
+// The Heavy: Backstories
+
+static BACKSTORY_A_HISTORY_OF_VIOLENCE: stonetop::fixed::BackstoryFixed =
+    stonetop::fixed::BackstoryFixed {
+        key: stonetop::keys::BackstoryKey::AHistoryOfViolence,
+        name: "A history of violence",
+        list: &[
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>Just about everyone here talks about the time you… (pick 1 or 2)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "… drove off a thunder drake that got too close to town.",
+                "… killed that hagr in the Foothills.",
+                "… slew a dozen crinwin in one battle.",
+                "… tossed those adventurers out of town.",
+                "… bested Ivan, the scariest bandit in Brennan's gang, the Claws.",
+                "… dragged yourself (and another?) into town, bleeding from a dozen wounds.",
+                "… were struck by lightning and woke up covered in these marks.",
+            ]),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>But folks are less keen to discuss… (pick 1 or 2)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "… the look in your eye when you spilled all that blood.",
+                "… those hard cases who showed up looking for you.",
+                "… the shouting matches between you and your love.",
+                "… the time you spent as one of Brennan's Claws.",
+                "… what happened to Urbgen, even if he did have it coming.",
+                "… your uncontrollable seizures, where you claw those weird marks in the dirt.",
+            ]),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>What keeps you up at night? (pick 1 or 2)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "That thrice-damned temper of yours.",
+                "The worry that someone's coming after you.",
+                "The feeling that the crinwin are getting bolder.",
+                "Wondering what Brennan's up to, now that he's the marshal of Marshedge.",
+                "Dark visions of things moving in the earth, restless, whispering, and hungry.",
+                "The question of who'll look after your family when you get yourself killed.",
+                "The worry that they'll all learn the truth about you, sooner or later.",
+            ]),
+        ],
+    };
+
+// The Judge: Backstories
+
+static BACKSTORY_THE_CHRONICLE: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
+    key: stonetop::keys::BackstoryKey::TheChronicle,
+    name: "The Chronicle",
+    list: &[
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>The Judge of Aratis is charged with maintaining the Chronicle, a history of the community, its people, their knowledge, and their traditions. The nature of the lore contained in the Chronicle depends on your Background, but it is more than a mere book; it is a physical place. Decide on its physical structure.</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Text("<p>On the plus side, it… (choose 3)</p>"),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "… is a sturdy vault from the time of the Makers.",
+            "… has plenty of room to grow.",
+            "… is hidden underground.",
+            "… has but one entrance, magically sealed.",
+            "… bears minor magics to preserve its contents.",
+            "… is warded against spirits and magic.",
+            "… includes your living quarters & office.",
+        ]),
+        stonetop::fixed::BackstoryItem::Text("<p>But alas, it… (choose 2)</p>"),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "… sits on the outskirts, near the Old Wall.",
+            "… is cramped, chaotic, and overflowing.",
+            "… is little more than a crude cellar.",
+            "… seems to be haunted.",
+            "… contains a few dangerous artifacts.",
+        ]),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>Mark the location of the Chronicle on the Stonetop Playbook map.</p>",
+        ),
+    ],
+};
+
+static BACKSTORY_THE_LAWKEEPER: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
+    key: stonetop::keys::BackstoryKey::TheLawkeeper,
+    name: "The Lawkeeper",
+    list: &[
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>Her Judges say that Aratis has been with humanity since they first stacked one stone upon another and called it home.</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>In Stonetop's Pavilion of the Gods, Aratis's shrine is… (pick 1)</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "… a hub of the community, a place of frequent rites, petitions, and celebrations",
+            "… used only on high holidays, for each home keeps its own shrine above the hearth",
+            "… neglected by most, tended only by you and a handful of believers",
+            "… a grim place of judgement and punishment, shunned by all but her chosen",
+            "… newly established, cramped and spare",
+        ]),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>Of her true disciples, Aratis demands… (choose 3)</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "… truth, honesty, and forthrightness",
+            "… hospitality, freely given to all who ask for it",
+            "… the punishment of thieves & oathbreakers",
+            "… adherence to strict rules of diet and dress",
+            "… respect for authority, property, and rank",
+        ]),
+    ],
+};
+
+// The Lightbearer: Backstories
+
+static BACKSTORY_PRAISE_THE_DAY: stonetop::fixed::BackstoryFixed =
+    stonetop::fixed::BackstoryFixed {
+        key: stonetop::keys::BackstoryKey::PraiseTheDay,
+        name: "Praise the day",
+        list: &[
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>You are the appointed servant of Helior the Day-bringer, god of the sun and light, beacon of hope and mercy.</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Text("<p>The worship of Helior is… (choose 1)</p>"),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "… ancient, widespread, and well-known",
+                "… most common in Lygos and the south",
+                "… a new thing, still unheard of by many",
+                "… an old thing, forgotten by most",
+                "… widely persecuted",
+            ]),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>He is worshipped through… (choose 1 or 2)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "… solemn hymns",
+                "… serene meditation",
+                "… joyful song",
+                "… ascetic denial",
+                "… fervent dancing",
+                "… formal ceremonies",
+                "… drugs & intoxicants",
+                "… pain & sacrifice",
+            ]),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>In Stonetop's Pavilion of the Gods, Helior's shrine has… (choose 1)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "… the place of highest honor, even if Tor is more popular",
+                "… been well-tended and given due respect",
+                "… recently been restored/established, perhaps by you",
+                "… seen better days, for certain",
+            ]),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>Your predecessor, the previous Lightbearer… (choose 2 or 3)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "… lived long ago, a figure of legend",
+                "… was martyred for their faith",
+                "… died facing a mighty sorcerer or demon",
+                "… wrote many works of sublime beauty",
+                "… faced one of the Things Below",
+                "… died in their bed, peacefully",
+                "… ascended bodily into the heavens",
+                "… was reincarnated—as you",
+            ]),
+            stonetop::fixed::BackstoryItem::Text("<p>You came into your powers… (choose 1)</p>"),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "… through years of study and devotion",
+                "… when your predecessor passed them on",
+                "… suddenly, at a moment of great need",
+                "… after a visitation from Helior or one of his servants",
+                "… when you first laid eyes upon the ▁▁▁▁▁▁▁▁",
+            ]),
+        ],
+    };
+
+// The Marshal: Backstories
+
+static BACKSTORY_WAR_STORIES: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
+    key: stonetop::keys::BackstoryKey::WarStories,
+    name: "War stories",
+    list: &[
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>The last time the militia saw serious action, it was... (pick 1)</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "...to repel a nighttime raid by crinwin from the Great Wood.",
+            "...to drive off bandits who'd taken up near the Ruined Tower.",
+            "...to fend off Hillfolk pursuing a blood feud.",
+            "...against Brennan and his Claws, before they settled in Marshedge.",
+            "...to face a brutish hagr, come down from the Foothills to wreak havoc.",
+            "...to hunt down beasts (wolves, drakes, or bears maybe?) who'd been preying on the village.",
+        ]),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>Answer at least 3 of the following questions about that action:</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "When exactly did it happen?",
+            "Who lost their life, and who mourns them?",
+            "Who from Stonetop was maimed, and how?",
+            "Who saved the day, and how?",
+            "How did the enemy get away, and whom do you still blame for it?",
+            "Who comported themselves with honor?",
+            "What's been bugging you about it ever since?",
+            "What's got you even more worried now?",
+        ]),
+    ],
+};
+
+// The Ranger: Backstories
+
+static BACKSTORY_SOMETHING_WICKED_THIS_WAY_COMES: stonetop::fixed::BackstoryFixed =
+    stonetop::fixed::BackstoryFixed {
+        key: stonetop::keys::BackstoryKey::SomethingWickedThisWayComes,
+        name: "Something wicked this way comes",
+        list: &[
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>You know firsthand that trouble is out there, and like it or not, one of these days the folk of Stonetop are going to have to face it. What is it that you're so worried about? (choose 1)</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "A dark, unwholesome presence lurking in the Great Wood",
+                "A strange, furtive figure seen near the Ruined Tower",
+                "Something big & savage stalking the northern foothills",
+                "Whatever's made the lizard-like suarachan of Ferrier's Fen so bold",
+                "That of which the Hillfolk refuse to speak",
+            ]),
+            stonetop::fixed::BackstoryItem::Text(
+                "<p>Then, answer at least 3 of the following questions about this threat:</p>",
+            ),
+            stonetop::fixed::BackstoryItem::Choices(&[
+                "What, exactly, do you think it is?",
+                "What did you see, and how close did you have to get to see it?",
+                "Whom or what have you lost to it?",
+                "What did it leave behind?",
+                "What do you think it wants?",
+                "Who refuses to believe you?",
+                "Who can tell you more, if you can only convince them?",
+            ]),
+        ],
+    };
+
+// The Seeker: Backstories
+
+static BACKSTORY_COLLECTION: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
+    key: stonetop::keys::BackstoryKey::Collection,
+    name: "Collection",
+    list: &[stonetop::fixed::BackstoryItem::Text(
+        "<p>In your travels and investigations you have acquired arcana—artifacts of power and mystery.</p>",
+    )],
+};
+
+static BACKSTORY_MAJOR_ARCANA: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
+    key: stonetop::keys::BackstoryKey::MajorArcana,
+    name: "Major Arcana",
+    list: &[
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>Your Background grants you 1 major arcanum. Answer at least 2 questions about it:</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "Where did you acquire it?",
+            "From whose grasp did you wrest it?",
+            "Who else wants it?",
+            "What did it cost you?",
+        ]),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>You've begun to unlock the mysteries of your major arcanum; mark 1 ☐ or ○ on the front of its insert.</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Text("<p>When and how did that happen?</p>"),
+        stonetop::fixed::BackstoryItem::Text("<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>"),
+    ],
+};
+
+static BACKSTORY_MINOR_ARCANA: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
+    key: stonetop::keys::BackstoryKey::MinorArcana,
+    name: "Minor Arcana",
+    list: &[
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>Ask the GM for the minor arcana cards. Draw 3 at random and review both sides.</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>Choose one whose secrets you have unlocked. If it's portable, you either keep it on your person or hidden away somewhere safe. Where is it now? How did you come to master it?</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Text("<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>"),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>Choose another, which you have not yet mastered. It is either in your possession or in a secret place known only to you. Where is it? How did you find it?</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Text("<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>"),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>The third you have not yet found, but you have a lead on it. Give the card back to the GM, but make note of it below. During play, ask the GM what you know about it.</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Text("<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>"),
+    ],
+};
+
+// The Would-be Hero: Backstories
+
+static BACKSTORY_FEAR_ANGER: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
+    key: stonetop::keys::BackstoryKey::FearAnger,
+    name: "Fear & anger",
+    list: &[
+        stonetop::fixed::BackstoryItem::Text("<p>What do you fear most? (choose 1, maybe 2)</p>"),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "Fire, burning, the smell of charred flesh",
+            "That they won't take you seriously",
+            "That you really aren't cut out for this",
+            "The death of your family or loved ones",
+            "Being alone and helpless",
+            "Violence, bloodshed, and pain",
+            "Monsters",
+            "What you're capable of",
+            "What you must do",
+        ]),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>What makes you burn with righteous anger? (choose 2, maybe 3)</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "Bullying, slavery, and oppression",
+            "Wanton cruelty and unnecessary suffering",
+            "Injustice and inequality",
+            "Cowardice, treachery, and selfishness",
+            "The despoiling of beauty and innocence",
+            "Threats to your loved ones",
+            "Violence to children, animals, the innocent",
+            "Perversions of nature",
+        ]),
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>When did your fear or anger last cause you trouble?</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Text("<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>"),
+        stonetop::fixed::BackstoryItem::Text("<p>What did you do?</p>"),
+        stonetop::fixed::BackstoryItem::Text("<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>"),
+        stonetop::fixed::BackstoryItem::Text("<p>How did it turn out?</p>"),
+        stonetop::fixed::BackstoryItem::Text("<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>"),
+    ],
+};
+
 impl stonetop::keys::MoveKey {
-    /// The printed Move this key names.
+    /// The printed content this key names.
     #[must_use]
     pub fn fixed_part(self) -> &'static stonetop::fixed::MoveFixed {
         match self {
@@ -2780,6 +4200,111 @@ impl stonetop::keys::MoveKey {
             Self::PwSuperiorStat => &MOVE_PW_SUPERIOR_STAT,
             Self::Undaunted => &MOVE_UNDAUNTED,
             Self::VoiceOfExperience => &MOVE_VOICE_OF_EXPERIENCE,
+        }
+    }
+}
+impl stonetop::keys::BackgroundKey {
+    /// The printed content this key names.
+    #[must_use]
+    pub fn fixed_part(self) -> &'static stonetop::fixed::BackgroundFixed {
+        match self {
+            Self::Initiate => &BACKGROUND_INITIATE,
+            Self::RaisedByWolves => &BACKGROUND_RAISED_BY_WOLVES,
+            Self::Vessel => &BACKGROUND_VESSEL,
+            Self::TheNatural => &BACKGROUND_THE_NATURAL,
+            Self::ALifeOfCrime => &BACKGROUND_A_LIFE_OF_CRIME,
+            Self::TheProdigalReturned => &BACKGROUND_THE_PRODIGAL_RETURNED,
+            Self::Sheriff => &BACKGROUND_SHERIFF,
+            Self::BloodSoakedPast => &BACKGROUND_BLOOD_SOAKED_PAST,
+            Self::StormMarked => &BACKGROUND_STORM_MARKED,
+            Self::Legacy => &BACKGROUND_LEGACY,
+            Self::Missionary => &BACKGROUND_MISSIONARY,
+            Self::Prophet => &BACKGROUND_PROPHET,
+            Self::AuspiciousBirth => &BACKGROUND_AUSPICIOUS_BIRTH,
+            Self::ItinerantMystic => &BACKGROUND_ITINERANT_MYSTIC,
+            Self::SoulOnFire => &BACKGROUND_SOUL_ON_FIRE,
+            Self::Scion => &BACKGROUND_SCION,
+            Self::Penitent => &BACKGROUND_PENITENT,
+            Self::Luminary => &BACKGROUND_LUMINARY,
+            Self::MightyHunter => &BACKGROUND_MIGHTY_HUNTER,
+            Self::WideWanderer => &BACKGROUND_WIDE_WANDERER,
+            Self::BeastBonded => &BACKGROUND_BEAST_BONDED,
+            Self::Patriot => &BACKGROUND_PATRIOT,
+            Self::Antiquarian => &BACKGROUND_ANTIQUARIAN,
+            Self::WitchHunter => &BACKGROUND_WITCH_HUNTER,
+            Self::ImpetuousYouth => &BACKGROUND_IMPETUOUS_YOUTH,
+            Self::Driven => &BACKGROUND_DRIVEN,
+            Self::Destined => &BACKGROUND_DESTINED,
+        }
+    }
+}
+impl stonetop::keys::SpecialPossessionKey {
+    /// The printed content this key names.
+    #[must_use]
+    pub fn fixed_part(self) -> &'static stonetop::fixed::SpecialPossessionFixed {
+        match self {
+            Self::SacredPouch => &SPECIAL_POSSESSION_SACRED_POUCH,
+            Self::Apiary => &SPECIAL_POSSESSION_APIARY,
+            Self::CollectedOfferings => &SPECIAL_POSSESSION_COLLECTED_OFFERINGS,
+            Self::GoatHerd => &SPECIAL_POSSESSION_GOAT_HERD,
+            Self::HerbGarden => &SPECIAL_POSSESSION_HERB_GARDEN,
+            Self::Mastiffs => &SPECIAL_POSSESSION_MASTIFFS,
+            Self::BurglarsKit => &SPECIAL_POSSESSION_BURGLARS_KIT,
+            Self::CarpentersTools => &SPECIAL_POSSESSION_CARPENTERS_TOOLS,
+            Self::Distillery => &SPECIAL_POSSESSION_DISTILLERY,
+            Self::HiddenStash => &SPECIAL_POSSESSION_HIDDEN_STASH,
+            Self::MummersKit => &SPECIAL_POSSESSION_MUMMERS_KIT,
+            Self::ScribesTools => &SPECIAL_POSSESSION_SCRIBES_TOOLS,
+            Self::Tannery => &SPECIAL_POSSESSION_TANNERY,
+            Self::TradeContacts => &SPECIAL_POSSESSION_TRADE_CONTACTS,
+            Self::ChirurgeonsTools => &SPECIAL_POSSESSION_CHIRURGEONS_TOOLS,
+            Self::HusbandryTools => &SPECIAL_POSSESSION_HUSBANDRY_TOOLS,
+            Self::Smithy => &SPECIAL_POSSESSION_SMITHY,
+            Self::StoneworkersTools => &SPECIAL_POSSESSION_STONEWORKERS_TOOLS,
+            Self::PhWeaponsOfWar => &SPECIAL_POSSESSION_PH_WEAPONS_OF_WAR,
+            Self::YourSymbolOfAuthority => &SPECIAL_POSSESSION_YOUR_SYMBOL_OF_AUTHORITY,
+            Self::Aviary => &SPECIAL_POSSESSION_AVIARY,
+            Self::EngineersTools => &SPECIAL_POSSESSION_ENGINEERS_TOOLS,
+            Self::BooksScrolls => &SPECIAL_POSSESSION_BOOKS_SCROLLS,
+            Self::Chandlery => &SPECIAL_POSSESSION_CHANDLERY,
+            Self::Glassworks => &SPECIAL_POSSESSION_GLASSWORKS,
+            Self::HolyRelics => &SPECIAL_POSSESSION_HOLY_RELICS,
+            Self::LuthiersTools => &SPECIAL_POSSESSION_LUTHIERS_TOOLS,
+            Self::PersonalSymbol => &SPECIAL_POSSESSION_PERSONAL_SYMBOL,
+            Self::PmWeaponsOfWar => &SPECIAL_POSSESSION_PM_WEAPONS_OF_WAR,
+            Self::CompositeBow => &SPECIAL_POSSESSION_COMPOSITE_BOW,
+            Self::Hideouts => &SPECIAL_POSSESSION_HIDEOUTS,
+            Self::Hounds => &SPECIAL_POSSESSION_HOUNDS,
+            Self::LayOfTheLand => &SPECIAL_POSSESSION_LAY_OF_THE_LAND,
+            Self::TrappingGear => &SPECIAL_POSSESSION_TRAPPING_GEAR,
+            Self::Laboratory => &SPECIAL_POSSESSION_LABORATORY,
+            Self::Paraphernalia => &SPECIAL_POSSESSION_PARAPHERNALIA,
+            Self::AHeapOfExpectations => &SPECIAL_POSSESSION_A_HEAP_OF_EXPECTATIONS,
+            Self::AGoodDog => &SPECIAL_POSSESSION_A_GOOD_DOG,
+            Self::PersonalTokenFraughtWithMeaning => {
+                &SPECIAL_POSSESSION_PERSONAL_TOKEN_FRAUGHT_WITH_MEANING
+            }
+        }
+    }
+}
+impl stonetop::keys::BackstoryKey {
+    /// The printed content this key names.
+    #[must_use]
+    pub fn fixed_part(self) -> &'static stonetop::fixed::BackstoryFixed {
+        match self {
+            Self::YourSacredPouch => &BACKSTORY_YOUR_SACRED_POUCH,
+            Self::TheEarthMother => &BACKSTORY_THE_EARTH_MOTHER,
+            Self::TallTales => &BACKSTORY_TALL_TALES,
+            Self::AHistoryOfViolence => &BACKSTORY_A_HISTORY_OF_VIOLENCE,
+            Self::TheChronicle => &BACKSTORY_THE_CHRONICLE,
+            Self::TheLawkeeper => &BACKSTORY_THE_LAWKEEPER,
+            Self::PraiseTheDay => &BACKSTORY_PRAISE_THE_DAY,
+            Self::WarStories => &BACKSTORY_WAR_STORIES,
+            Self::SomethingWickedThisWayComes => &BACKSTORY_SOMETHING_WICKED_THIS_WAY_COMES,
+            Self::Collection => &BACKSTORY_COLLECTION,
+            Self::MajorArcana => &BACKSTORY_MAJOR_ARCANA,
+            Self::MinorArcana => &BACKSTORY_MINOR_ARCANA,
+            Self::FearAnger => &BACKSTORY_FEAR_ANGER,
         }
     }
 }

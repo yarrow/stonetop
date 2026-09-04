@@ -11,7 +11,7 @@
 #[cfg(feature = "codegen")]
 use databake::Bake;
 
-use crate::keys::{MoveKey, PlaybookKey};
+use crate::keys::{BackgroundKey, BackstoryKey, MoveKey, PlaybookKey, SpecialPossessionKey};
 
 #[cfg(feature = "ssr")]
 mod generated;
@@ -76,4 +76,90 @@ pub enum CanBe {
 pub enum EmptyFull {
     Empty,
     Full,
+}
+
+// Background -------------------------------------------------------------
+
+/// A Background as printed: flavor text and mechanical chunks in reading order.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct BackgroundFixed {
+    pub key: BackgroundKey,
+    pub name: &'static str,
+    pub description: &'static [BackgroundChunk],
+    pub grants_moves: &'static [Grant],
+    pub grants_possession: Option<Grant>,
+    pub grants_topic: Option<Grant>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub enum BackgroundChunk {
+    Flavor(&'static str),
+    /// An anonymous Move this Background grants. It's a keyed Move like any other, baked and
+    /// reachable by its own `MoveKey`; this is a reference to that same static, not a second
+    /// copy of its content.
+    Move(&'static MoveFixed),
+    Checklist(BackgroundChecklist),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub enum BackgroundChecklist {
+    Options(&'static [&'static str]),
+    OptionsPrecheckable(&'static [PrecheckableOption]),
+    Rows(&'static [TaggedRow]),
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct PrecheckableOption {
+    pub prechecked: bool,
+    pub text: &'static str,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct TaggedRow {
+    pub tag: &'static str,
+    pub items: &'static [&'static str],
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub enum Grant {
+    Simply(&'static str),
+    ChooseOne(&'static [&'static str]),
+}
+
+// SpecialPossession ------------------------------------------------------
+
+/// A Special Possession as printed.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct SpecialPossessionFixed {
+    pub key: SpecialPossessionKey,
+    pub name: &'static str,
+    pub description: &'static str,
+    pub resource: Option<Resource>,
+    pub pick: &'static [&'static str],
+}
+
+// Backstory --------------------------------------------------------------
+
+/// A Backstory as printed: one named list of text and choices.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct BackstoryFixed {
+    pub key: BackstoryKey,
+    pub name: &'static str,
+    pub list: &'static [BackstoryItem],
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub enum BackstoryItem {
+    Text(&'static str),
+    Choices(&'static [&'static str]),
+    ChoiceRow(TaggedRow),
 }
