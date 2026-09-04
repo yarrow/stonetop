@@ -126,13 +126,12 @@
       },
       {
         name: "Books & scrolls",
-        description: "(○○○○○ uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
+        description: "({resource} uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
         resource: { hold: "Uses", canBe: 5, start: "empty" },
       },
       {
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Engineer's tools",

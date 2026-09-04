@@ -99,7 +99,6 @@
       {
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Chirurgeon's tools",
@@ -137,7 +136,7 @@
   moves: [
     {
       name: "Armored",
-      description: "<p>When you <strong><em>carry a shield</em></strong>, mark only ◆ (instead of ◆◆). Also, you can ignore the <em>cumbersome</em> tag on any armor you wear.</p><p>If you take this move at the start of play, add an ◇◇ iron hauberk, ◇◇ bronze cuirass, or ◇◇ scale coat to your inventory (all are 2 armor, <em>warm, cumbersome</em>).</p>",
+      description: "<p>When you <strong><em>carry a shield</em></strong>, mark only 1 inventory slot (instead of 2). Also, you can ignore the <em>cumbersome</em> tag on any armor you wear.</p><p>If you take this move at the start of play, add an ◇◇ iron hauberk, ◇◇ bronze cuirass, or ◇◇ scale coat to your inventory (all are 2 armor, <em>warm, cumbersome</em>).</p>",
     },
     {
       name: "Battle Joy",

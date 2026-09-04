@@ -115,7 +115,7 @@
     options: [
       {
         name: "Sacred pouch (<em>magical</em>)",
-        description: "see back page. Stock: ○○○",
+        description: "see back page. Stock: {resource}",
         resource: { hold: "Stock", canBe: 3, start: "full" },
       },
       {
@@ -124,7 +124,7 @@
       },
       {
         name: "Collected offerings",
-        description: "(○○○ uses): Expend a use to produce something valuable to a spirit of the wild. Restore 1 use each season.",
+        description: "({resource} uses): Expend a use to produce something valuable to a spirit of the wild. Restore 1 use each season.",
         resource: { hold: "Uses", canBe: 3, start: "full" },
       },
       {

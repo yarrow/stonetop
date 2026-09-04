@@ -567,7 +567,7 @@ static MOVE_FROM_BLOOD_SOAKED_PAST: stonetop::fixed::MoveFixed = stonetop::fixed
 static MOVE_ARMORED: stonetop::fixed::MoveFixed = stonetop::fixed::MoveFixed {
     key: stonetop::keys::MoveKey::Armored,
     name: "Armored",
-    description: "<p>When you <strong><em>carry a shield</em></strong>, mark only ◆ (instead of ◆◆). Also, you can ignore the <em>cumbersome</em> tag on any armor you wear.</p><p>If you take this move at the start of play, add an ◇◇ iron hauberk, ◇◇ bronze cuirass, or ◇◇ scale coat to your inventory (all are 2 armor, <em>warm, cumbersome</em>).</p>",
+    description: "<p>When you <strong><em>carry a shield</em></strong>, mark only 1 inventory slot (instead of 2). Also, you can ignore the <em>cumbersome</em> tag on any armor you wear.</p><p>If you take this move at the start of play, add an ◇◇ iron hauberk, ◇◇ bronze cuirass, or ◇◇ scale coat to your inventory (all are 2 armor, <em>warm, cumbersome</em>).</p>",
     requires: &[],
     max_picks: 1u8,
     resource: &[],
@@ -3119,7 +3119,7 @@ static SPECIAL_POSSESSION_SACRED_POUCH: stonetop::fixed::SpecialPossessionFixed 
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::SacredPouch,
         name: "Sacred pouch (<em>magical</em>)",
-        description: "see back page. Stock: ○○○",
+        description: "see back page. Stock: {resource}",
         resource: Some(stonetop::fixed::Resource {
             hold: "Stock",
             can_be: stonetop::fixed::CanBe::Max(3u8),
@@ -3141,7 +3141,7 @@ static SPECIAL_POSSESSION_COLLECTED_OFFERINGS: stonetop::fixed::SpecialPossessio
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::CollectedOfferings,
         name: "Collected offerings",
-        description: "(○○○ uses): Expend a use to produce something valuable to a spirit of the wild. Restore 1 use each season.",
+        description: "({resource} uses): Expend a use to produce something valuable to a spirit of the wild. Restore 1 use each season.",
         resource: Some(stonetop::fixed::Resource {
             hold: "Uses",
             can_be: stonetop::fixed::CanBe::Max(3u8),
@@ -3202,11 +3202,7 @@ static SPECIAL_POSSESSION_DISTILLERY: stonetop::fixed::SpecialPossessionFixed =
         key: stonetop::keys::SpecialPossessionKey::Distillery,
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: Some(stonetop::fixed::Resource {
-            hold: "Skins of fine whisky",
-            can_be: stonetop::fixed::CanBe::Max(2u8),
-            start: stonetop::fixed::EmptyFull::Full,
-        }),
+        resource: None,
         pick: &[],
     };
 
@@ -3214,7 +3210,7 @@ static SPECIAL_POSSESSION_HIDDEN_STASH: stonetop::fixed::SpecialPossessionFixed 
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::HiddenStash,
         name: "Hidden stash",
-        description: "(○○○ uses): each use produces valuables worth a purse of silvers (Value 2)",
+        description: "({resource} uses): each use produces valuables worth a purse of silvers (Value 2)",
         resource: Some(stonetop::fixed::Resource {
             hold: "Uses",
             can_be: stonetop::fixed::CanBe::Max(3u8),
@@ -3351,7 +3347,7 @@ static SPECIAL_POSSESSION_BOOKS_SCROLLS: stonetop::fixed::SpecialPossessionFixed
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::BooksScrolls,
         name: "Books & scrolls",
-        description: "(○○○○○ uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
+        description: "({resource} uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
         resource: Some(stonetop::fixed::Resource {
             hold: "Uses",
             can_be: stonetop::fixed::CanBe::Max(5u8),
@@ -3382,7 +3378,7 @@ static SPECIAL_POSSESSION_HOLY_RELICS: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::HolyRelics,
         name: "Holy relics",
-        description: "(○○○ uses): if you have one in inventory when you Invoke the Sun God, you can mark a use in lieu of choosing a consequence.",
+        description: "({resource} uses): if you have one in inventory when you Invoke the Sun God, you can mark a use in lieu of choosing a consequence.",
         resource: Some(stonetop::fixed::Resource {
             hold: "Uses",
             can_be: stonetop::fixed::CanBe::Max(3u8),
@@ -3431,7 +3427,7 @@ static SPECIAL_POSSESSION_COMPOSITE_BOW: stonetop::fixed::SpecialPossessionFixed
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::CompositeBow,
         name: "◇ Composite bow",
-        description: "(<em>far</em>, +1 damage, x piercing; ○ low ammo, ○ all out)",
+        description: "(<em>far</em>, +1 damage, x piercing; Arrows: {resource})",
         resource: Some(stonetop::fixed::Resource {
             hold: "Arrows",
             can_be: stonetop::fixed::CanBe::Labels(&["all out", "low ammo", "plenty left"]),
@@ -3444,7 +3440,7 @@ static SPECIAL_POSSESSION_HIDEOUTS: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::Hideouts,
         name: "Hideouts",
-        description: "(○○○ uses): expend a use to have a well-stocked, safe shelter nearby; GM can veto.",
+        description: "({resource} uses): expend a use to have a well-stocked, safe shelter nearby; GM can veto.",
         resource: Some(stonetop::fixed::Resource {
             hold: "Uses",
             can_be: stonetop::fixed::CanBe::Max(3u8),
@@ -3466,7 +3462,7 @@ static SPECIAL_POSSESSION_LAY_OF_THE_LAND: stonetop::fixed::SpecialPossessionFix
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::LayOfTheLand,
         name: "Lay of the land",
-        description: "(○○○ uses): expend a use to know where to find ▁▁▁▁▁▁▁▁, without having to Know Things; GM can veto.",
+        description: "({resource} uses): expend a use to know where to find ▁▁▁▁▁▁▁▁, without having to Know Things; GM can veto.",
         resource: Some(stonetop::fixed::Resource {
             hold: "Uses",
             can_be: stonetop::fixed::CanBe::Max(3u8),

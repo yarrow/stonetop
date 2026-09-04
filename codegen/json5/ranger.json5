@@ -112,7 +112,7 @@
     options: [
       {
         name: "◇ Composite bow",
-        description: "(<em>far</em>, +1 damage, x piercing; ○ low ammo, ○ all out)",
+        description: "(<em>far</em>, +1 damage, x piercing; Arrows: {resource})",
         resource: {
           hold: "Arrows",
           canBe: ["all out", "low ammo", "plenty left"],
@@ -122,11 +122,10 @@
       {
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Hideouts",
-        description: "(○○○ uses): expend a use to have a well-stocked, safe shelter nearby; GM can veto.",
+        description: "({resource} uses): expend a use to have a well-stocked, safe shelter nearby; GM can veto.",
         resource: { hold: "Uses", canBe: 3, start: "empty" },
       },
       {
@@ -139,7 +138,7 @@
       },
       {
         name: "Lay of the land",
-        description: "(○○○ uses): expend a use to know where to find ▁▁▁▁▁▁▁▁, without having to Know Things; GM can veto.",
+        description: "({resource} uses): expend a use to know where to find ▁▁▁▁▁▁▁▁, without having to Know Things; GM can veto.",
         resource: { hold: "Uses", canBe: 3, start: "empty" },
       },
       {

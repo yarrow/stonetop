@@ -107,11 +107,10 @@
       {
         name: "Distillery",
         description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
-        resource: { hold: "Skins of fine whisky", canBe: 2, start: "full" },
       },
       {
         name: "Hidden stash",
-        description: "(○○○ uses): each use produces valuables worth a purse of silvers (Value 2)",
+        description: "({resource} uses): each use produces valuables worth a purse of silvers (Value 2)",
         resource: { hold: "Uses", canBe: 3, start: "full" },
       },
       {
