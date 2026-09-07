@@ -488,7 +488,7 @@ static MOVE_BATTLE_DANCER: stonetop::fixed::MoveFixed = stonetop::fixed::MoveFix
 static MOVE_CHEAP_SHOT: stonetop::fixed::MoveFixed = stonetop::fixed::MoveFixed {
     key: stonetop::keys::MoveKey::CheapShot,
     name: "Cheap Shot",
-    description: "<p>When you <strong><em>Ambush with a <strong>hand</strong> weapon</em></strong>, you have advantage on your damage roll.</p>",
+    description: "<p>When you <strong><em>Ambush with a</em></strong> <strong>hand</strong> <strong><em>weapon</em></strong>, you have advantage on your damage roll.</p>",
     requires: &[
         stonetop::fixed::Requirement::Level(6u8),
         stonetop::fixed::Requirement::Needs(stonetop::keys::MoveKey::Ambush),

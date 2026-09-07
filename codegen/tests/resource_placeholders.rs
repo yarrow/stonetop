@@ -2,7 +2,7 @@
 //! The place to put the number is marked with `{resource}` in the description.
 //! A description with no backing `Resource` keeps its circles, and the set of those
 //! leftover runs is pinned by an allowlist — which will also complain if an allowed circle
-//! disappers — so also edit this test when you remove a circle.
+//! disappears — so also edit this test when you remove a circle.
 
 use std::collections::BTreeSet;
 
