@@ -1,10 +1,10 @@
 #!/bin/sh
 set -e
+set -x
 export RUSTDOCFLAGS=-Dwarnings
-cargo fmt -- --check
-cargo test -q
-cargo test -q -- --ignored
-cargo clippy --profile=test
-cargo doc --workspace --no-deps --document-private-items
 typos
-cargo clippy --profile=release --all-targets --no-deps
+cargo fmt -- --check
+cargo doc --workspace --no-deps --document-private-items --all-features
+cargo clippy --profile=test --all-targets --all-features --no-deps
+cargo clippy --profile=release --all-targets --all-features --no-deps
+cargo nextest run --run-ignored all --all-features --cargo-quiet --cargo-quiet --status-level none

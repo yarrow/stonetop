@@ -7,6 +7,7 @@ license.workspace = true
 
 [dependencies]
 databake = { version = "0.2.1", features = ["derive"], optional = true }
+regex-lite = { version = "0.1.9", optional = true }
 serde = { version = "1.0.229", features = ["derive"] }
 strum = { version = "0.28.0", features = ["derive"] }
 
@@ -15,4 +16,7 @@ strum = { version = "0.28.0", features = ["derive"] }
 # values. Never on in the WASM build.
 codegen = ["dep:databake"]
 # The baked Fixed content (and later the Leptos server). Never on in the WASM build.
-ssr = []
+ssr = ["dep:regex-lite"]
+
+[dev-dependencies]
+test-case = "3.3.1"

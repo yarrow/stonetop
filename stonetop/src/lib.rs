@@ -19,3 +19,5 @@ pub mod fixed;
 pub mod keys;
 pub mod level_up;
 pub mod play;
+#[cfg(feature = "ssr")]
+pub mod render;
