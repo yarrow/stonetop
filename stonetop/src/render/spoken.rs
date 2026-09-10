@@ -49,14 +49,21 @@ pub fn resource_value(resource: &Resource) -> String {
         CanBe::Max(n) => n.to_string(),
         // The json5 lists states worst first; spoken, the best state comes first.
         CanBe::Labels(labels) => {
+            assert!(!labels.is_empty(), "resource {:?} has no labels", resource.hold);
             let best_first: Vec<&str> = labels.iter().copied().rev().collect();
-            match best_first.split_last() {
-                None => panic!("resource {:?} has no labels", resource.hold),
-                Some((only, [])) => (*only).to_string(),
-                Some((last, [first])) => format!("{first} or {last}"),
-                Some((last, rest)) => format!("{}, or {last}", rest.join(", ")),
-            }
+            join_with("or", &best_first)
         }
+    }
+}
+
+/// `items` as a spoken list: "a", "a or b", "a, b, or c", with `conjunction` before the last.
+pub fn join_with(conjunction: &str, items: &[impl AsRef<str>]) -> String {
+    let items: Vec<&str> = items.iter().map(AsRef::as_ref).collect();
+    match items.split_last() {
+        None => String::new(),
+        Some((only, [])) => (*only).to_string(),
+        Some((last, [first])) => format!("{first} {conjunction} {last}"),
+        Some((last, rest)) => format!("{}, {conjunction} {last}", rest.join(", ")),
     }
 }
 

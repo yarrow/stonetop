@@ -44,6 +44,16 @@ pub struct PlaybookFixed {
     pub backstory: &'static [&'static BackstoryFixed],
 }
 
+impl PlaybookFixed {
+    /// Whether the playbook grants the Move called `move_name` outright, with no choice.
+    #[must_use]
+    pub fn grants_outright(&self, move_name: &str) -> bool {
+        self.grants_moves
+            .iter()
+            .any(|grant| matches!(grant, Grant::Simply(name) if *name == move_name))
+    }
+}
+
 /// The drive that pulls a character toward trouble.
 #[derive(Debug, Clone, PartialEq, Eq)]
 #[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
