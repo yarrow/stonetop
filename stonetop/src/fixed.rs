@@ -37,7 +37,7 @@ pub struct PlaybookFixed {
     pub special_possessions: SpecialPossessions,
     pub starting_moves_note: &'static str,
     pub starting_move_choices: u8,
-    pub grants_moves: &'static [Grant],
+    pub grants_moves: &'static [GrantMove],
     pub moves: &'static [&'static MoveFixed],
     pub moves_footnote: Option<&'static str>,
     pub intro: Intro,
@@ -47,10 +47,10 @@ pub struct PlaybookFixed {
 impl PlaybookFixed {
     /// Whether the playbook grants the Move called `move_name` outright, with no choice.
     #[must_use]
-    pub fn grants_outright(&self, move_name: &str) -> bool {
+    pub fn grants_outright(&self, move_name: MoveKey) -> bool {
         self.grants_moves
             .iter()
-            .any(|grant| matches!(grant, Grant::Simply(name) if *name == move_name))
+            .any(|grant| matches!(grant, GrantMove::Simply(name) if *name == move_name))
     }
 }
 
@@ -175,9 +175,9 @@ pub struct BackgroundFixed {
     pub key: BackgroundKey,
     pub name: &'static str,
     pub description: &'static [BackgroundChunk],
-    pub grants_moves: &'static [Grant],
-    pub grants_possession: Option<Grant>,
-    pub grants_topic: Option<Grant>,
+    pub grants_moves: &'static [GrantMove],
+    pub grants_possession: Option<GrantPossession>,
+    pub grants_topic: Option<GrantTopic>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -213,9 +213,27 @@ pub struct TaggedRow {
     pub items: &'static [&'static str],
 }
 
+/// A Move granted outright, or a choice between two.
 #[derive(Debug, Clone, PartialEq, Eq)]
 #[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
-pub enum Grant {
+pub enum GrantMove {
+    Simply(MoveKey),
+    ChooseOne(MoveKey, MoveKey),
+}
+
+/// A Special Possession granted outright, or a choice between two.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub enum GrantPossession {
+    Simply(SpecialPossessionKey),
+    ChooseOne(SpecialPossessionKey, SpecialPossessionKey),
+}
+
+/// A topic (for the Seeker's Lore) granted outright, or a choice among several. Topics have
+/// no key enum; they are the printed names.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub enum GrantTopic {
     Simply(&'static str),
     ChooseOne(&'static [&'static str]),
 }

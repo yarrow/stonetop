@@ -2573,7 +2573,7 @@ static BACKGROUND_INITIATE: stonetop::fixed::BackgroundFixed = stonetop::fixed::
             ],
         )),
     ],
-    grants_moves: &[stonetop::fixed::Grant::Simply("Rites of the Land")],
+    grants_moves: &[stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::RitesOfTheLand)],
     grants_possession: None,
     grants_topic: None,
 };
@@ -2591,7 +2591,7 @@ static BACKGROUND_RAISED_BY_WOLVES: stonetop::fixed::BackgroundFixed =
             ),
             stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_RAISED_BY_WOLVES),
         ],
-        grants_moves: &[stonetop::fixed::Grant::Simply("Trackless Step")],
+        grants_moves: &[stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::TracklessStep)],
         grants_possession: None,
         grants_topic: None,
     };
@@ -2608,7 +2608,7 @@ static BACKGROUND_VESSEL: stonetop::fixed::BackgroundFixed = stonetop::fixed::Ba
         ),
         stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_VESSEL),
     ],
-    grants_moves: &[stonetop::fixed::Grant::Simply("Danu's Grasp")],
+    grants_moves: &[stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::DanusGrasp)],
     grants_possession: None,
     grants_topic: None,
 };
@@ -2648,11 +2648,14 @@ static BACKGROUND_A_LIFE_OF_CRIME: stonetop::fixed::BackgroundFixed =
                 "<p>You start with either Burgle or Light Fingers (your choice) as an extra move, and either burglar tools or a hidden stash (your choice) as an additional special possession.</p>",
             ),
         ],
-        grants_moves: &[stonetop::fixed::Grant::ChooseOne(&["Burgle", "Light Fingers"])],
-        grants_possession: Some(stonetop::fixed::Grant::ChooseOne(&[
-            "Burglar's kit",
-            "Hidden stash",
-        ])),
+        grants_moves: &[stonetop::fixed::GrantMove::ChooseOne(
+            stonetop::keys::MoveKey::Burgle,
+            stonetop::keys::MoveKey::LightFingers,
+        )],
+        grants_possession: Some(stonetop::fixed::GrantPossession::ChooseOne(
+            stonetop::keys::SpecialPossessionKey::BurglarsKit,
+            stonetop::keys::SpecialPossessionKey::HiddenStash,
+        )),
         grants_topic: None,
     };
 
@@ -2777,7 +2780,9 @@ static BACKGROUND_MISSIONARY: stonetop::fixed::BackgroundFixed = stonetop::fixed
         stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_MISSIONARY),
     ],
     grants_moves: &[],
-    grants_possession: Some(stonetop::fixed::Grant::Simply("Aviary")),
+    grants_possession: Some(stonetop::fixed::GrantPossession::Simply(
+        stonetop::keys::SpecialPossessionKey::Aviary,
+    )),
     grants_topic: None,
 };
 
@@ -2864,7 +2869,7 @@ static BACKGROUND_SCION: stonetop::fixed::BackgroundFixed = stonetop::fixed::Bac
             "<p>When you <strong><em>create your Crew</em></strong>, they automatically have the <em>respected</em> tag (in addition to your usual picks, and any you get from Veteran Crew).</p>",
         ),
     ],
-    grants_moves: &[stonetop::fixed::Grant::Simply("Veteran Crew")],
+    grants_moves: &[stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::VeteranCrew)],
     grants_possession: None,
     grants_topic: None,
 };
@@ -2900,7 +2905,7 @@ static BACKGROUND_LUMINARY: stonetop::fixed::BackgroundFixed = stonetop::fixed::
             "<p>When you <strong><em>create your Crew</em></strong>, they automatically have the <em>devoted</em> tag (in addition to your usual picks).</p>",
         ),
     ],
-    grants_moves: &[stonetop::fixed::Grant::Simply("We Happy Few")],
+    grants_moves: &[stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::WeHappyFew)],
     grants_possession: None,
     grants_topic: None,
 };
@@ -2920,8 +2925,8 @@ static BACKGROUND_MIGHTY_HUNTER: stonetop::fixed::BackgroundFixed =
             ),
         ],
         grants_moves: &[
-            stonetop::fixed::Grant::Simply("Expert Tracker"),
-            stonetop::fixed::Grant::Simply("Stalker"),
+            stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::ExpertTracker),
+            stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::Stalker),
         ],
         grants_possession: None,
         grants_topic: None,
@@ -2941,7 +2946,7 @@ static BACKGROUND_WIDE_WANDERER: stonetop::fixed::BackgroundFixed =
             stonetop::fixed::BackgroundChunk::Flavor("<p>You start with the Mental Map move.</p>"),
             stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_WIDE_WANDERER),
         ],
-        grants_moves: &[stonetop::fixed::Grant::Simply("Mental Map")],
+        grants_moves: &[stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::MentalMap)],
         grants_possession: None,
         grants_topic: None,
     };
@@ -2956,7 +2961,9 @@ static BACKGROUND_BEAST_BONDED: stonetop::fixed::BackgroundFixed =
             ),
             stonetop::fixed::BackgroundChunk::Move(&MOVE_FROM_BEAST_BONDED),
         ],
-        grants_moves: &[stonetop::fixed::Grant::Simply("Animal Companion")],
+        grants_moves: &[stonetop::fixed::GrantMove::Simply(
+            stonetop::keys::MoveKey::AnimalCompanion,
+        )],
         grants_possession: None,
         grants_topic: None,
     };
@@ -2980,9 +2987,9 @@ static BACKGROUND_PATRIOT: stonetop::fixed::BackgroundFixed = stonetop::fixed::B
             &["◇ The Hec'tumel Codex", "◇ The Red Scepter", "◇ The Staff of the Lidless Orb"],
         )),
     ],
-    grants_moves: &[stonetop::fixed::Grant::Simply("Let's Make a Deal")],
+    grants_moves: &[stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::LetsMakeADeal)],
     grants_possession: None,
-    grants_topic: Some(stonetop::fixed::Grant::Simply("The Things Below")),
+    grants_topic: Some(stonetop::fixed::GrantTopic::Simply("The Things Below")),
 };
 
 static BACKGROUND_ANTIQUARIAN: stonetop::fixed::BackgroundFixed =
@@ -3004,9 +3011,9 @@ static BACKGROUND_ANTIQUARIAN: stonetop::fixed::BackgroundFixed =
                 ]),
             ),
         ],
-        grants_moves: &[stonetop::fixed::Grant::Simply("Polyglot")],
+        grants_moves: &[stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::Polyglot)],
         grants_possession: None,
-        grants_topic: Some(stonetop::fixed::Grant::Simply("The Makers and their arts")),
+        grants_topic: Some(stonetop::fixed::GrantTopic::Simply("The Makers and their arts")),
     };
 
 static BACKGROUND_WITCH_HUNTER: stonetop::fixed::BackgroundFixed =
@@ -3028,9 +3035,11 @@ static BACKGROUND_WITCH_HUNTER: stonetop::fixed::BackgroundFixed =
                 ]),
             ),
         ],
-        grants_moves: &[stonetop::fixed::Grant::Simply("Everything Bleeds")],
+        grants_moves: &[stonetop::fixed::GrantMove::Simply(
+            stonetop::keys::MoveKey::EverythingBleeds,
+        )],
         grants_possession: None,
-        grants_topic: Some(stonetop::fixed::Grant::ChooseOne(&[
+        grants_topic: Some(stonetop::fixed::GrantTopic::ChooseOne(&[
             "the Fae",
             "the Things Below",
             "the Last Door",
@@ -4090,8 +4099,8 @@ static PLAYBOOK_THE_BLESSED: stonetop::fixed::PlaybookFixed = stonetop::fixed::P
     starting_moves_note: "You start with Spirit Tongue, Call the Spirits, 1 from your Background, and 1 of your choice.",
     starting_move_choices: 1u8,
     grants_moves: &[
-        stonetop::fixed::Grant::Simply("Spirit Tongue"),
-        stonetop::fixed::Grant::Simply("Call the Spirits"),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::SpiritTongue),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::CallTheSpirits),
     ],
     moves: &[
         &MOVE_AMULETS_TALISMANS,
@@ -4236,8 +4245,14 @@ static PLAYBOOK_THE_FOX: stonetop::fixed::PlaybookFixed = stonetop::fixed::Playb
     starting_moves_note: "You start with Ambush OR Skill at Arms; Danger Sense OR Perceptive; and 1 of your choice.",
     starting_move_choices: 1u8,
     grants_moves: &[
-        stonetop::fixed::Grant::ChooseOne(&["Ambush", "Skill at Arms"]),
-        stonetop::fixed::Grant::ChooseOne(&["Danger Sense", "Perceptive"]),
+        stonetop::fixed::GrantMove::ChooseOne(
+            stonetop::keys::MoveKey::Ambush,
+            stonetop::keys::MoveKey::SkillAtArms,
+        ),
+        stonetop::fixed::GrantMove::ChooseOne(
+            stonetop::keys::MoveKey::DangerSense,
+            stonetop::keys::MoveKey::Perceptive,
+        ),
     ],
     moves: &[
         &MOVE_ALL_IN_THE_WRIST,
@@ -4379,9 +4394,12 @@ static PLAYBOOK_THE_HEAVY: stonetop::fixed::PlaybookFixed = stonetop::fixed::Pla
     starting_moves_note: "You start with Dangerous, Hard to Kill, and either Armored OR Uncanny Reflexes.",
     starting_move_choices: 0u8,
     grants_moves: &[
-        stonetop::fixed::Grant::ChooseOne(&["Armored", "Uncanny Reflexes"]),
-        stonetop::fixed::Grant::Simply("Dangerous"),
-        stonetop::fixed::Grant::Simply("Hard to Kill"),
+        stonetop::fixed::GrantMove::ChooseOne(
+            stonetop::keys::MoveKey::Armored,
+            stonetop::keys::MoveKey::UncannyReflexes,
+        ),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::Dangerous),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::HardToKill),
     ],
     moves: &[
         &MOVE_ARMORED,
@@ -4537,8 +4555,8 @@ static PLAYBOOK_THE_JUDGE: stonetop::fixed::PlaybookFixed = stonetop::fixed::Pla
     starting_moves_note: "You start with Censure, Chronicler of Stonetop, plus 2 more of your choice.",
     starting_move_choices: 2u8,
     grants_moves: &[
-        stonetop::fixed::Grant::Simply("Censure"),
-        stonetop::fixed::Grant::Simply("Chronicler of Stonetop"),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::Censure),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::ChroniclerOfStonetop),
     ],
     moves: &[
         &MOVE_AEGIS_OF_FAITH,
@@ -4678,8 +4696,8 @@ static PLAYBOOK_THE_LIGHTBEARER: stonetop::fixed::PlaybookFixed = stonetop::fixe
     starting_moves_note: "You start with Consecrated Flame and Invoke the Sun God, plus 1 more of your choice.",
     starting_move_choices: 1u8,
     grants_moves: &[
-        stonetop::fixed::Grant::Simply("Consecrated Flame"),
-        stonetop::fixed::Grant::Simply("Invoke the Sun God"),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::ConsecratedFlame),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::InvokeTheSunGod),
     ],
     moves: &[
         &MOVE_A_CANDLE_AGAINST_THE_DARK,
@@ -4818,8 +4836,8 @@ static PLAYBOOK_THE_MARSHAL: stonetop::fixed::PlaybookFixed = stonetop::fixed::P
     starting_moves_note: "You start with Crew, Logistics, any moves from your Background, and 1 move of your choice.",
     starting_move_choices: 1u8,
     grants_moves: &[
-        stonetop::fixed::Grant::Simply("Crew"),
-        stonetop::fixed::Grant::Simply("Logistics"),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::Crew),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::Logistics),
     ],
     moves: &[
         &MOVE_ARMORED,
@@ -4977,7 +4995,7 @@ static PLAYBOOK_THE_RANGER: stonetop::fixed::PlaybookFixed = stonetop::fixed::Pl
     },
     starting_moves_note: "You start with Home on the Range, any moves from your Background, plus 1 of your choice.",
     starting_move_choices: 1u8,
-    grants_moves: &[stonetop::fixed::Grant::Simply("Home on the Range")],
+    grants_moves: &[stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::HomeOnTheRange)],
     moves: &[
         &MOVE_A_SAFE_PLACE,
         &MOVE_ANIMAL_COMPANION,
@@ -5141,8 +5159,8 @@ static PLAYBOOK_THE_SEEKER: stonetop::fixed::PlaybookFixed = stonetop::fixed::Pl
     starting_moves_note: "You start with Well Versed, Work With What You've Got, plus 1 from your Background.",
     starting_move_choices: 0u8,
     grants_moves: &[
-        stonetop::fixed::Grant::Simply("Well Versed"),
-        stonetop::fixed::Grant::Simply("Work With What You've Got"),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::WellVersed),
+        stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::WorkWithWhatYouveGot),
     ],
     moves: &[
         &MOVE_ATTUNED,
@@ -5284,8 +5302,8 @@ static PLAYBOOK_THE_WOULD_BE_HERO: stonetop::fixed::PlaybookFixed =
         starting_moves_note: "You start with Anger is a Gift, Potential for Greatness, and 2 other moves of your choice.",
         starting_move_choices: 2u8,
         grants_moves: &[
-            stonetop::fixed::Grant::Simply("Anger is a Gift"),
-            stonetop::fixed::Grant::Simply("Potential for Greatness"),
+            stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::AngerIsAGift),
+            stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::PotentialForGreatness),
         ],
         moves: &[
             &MOVE_ANGER_IS_A_GIFT,

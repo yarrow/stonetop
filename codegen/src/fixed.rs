@@ -59,7 +59,9 @@ impl schema::Playbook {
             special_possessions: self.special_possessions.to_fixed(),
             starting_moves_note: leak_str(&self.starting_moves_note),
             starting_move_choices: self.starting_move_choices,
-            grants_moves: leak_vec(self.grants_moves.iter().map(schema::Grant::to_fixed).collect()),
+            grants_moves: leak_vec(
+                self.grants_moves.iter().map(schema::GrantMove::to_fixed).collect(),
+            ),
             moves: leak_vec(self.moves.iter().map(|m| leak(m.to_fixed())).collect()),
             moves_footnote: self.moves_footnote.as_deref().map(leak_str),
             intro: self.intro.to_fixed(),
@@ -224,9 +226,14 @@ impl schema::Background {
             description: leak_vec(
                 self.description.iter().map(schema::BackgroundChunk::to_fixed).collect(),
             ),
-            grants_moves: leak_vec(self.grants_moves.iter().map(schema::Grant::to_fixed).collect()),
-            grants_possession: self.grants_possession.as_ref().map(schema::Grant::to_fixed),
-            grants_topic: self.grants_topic.as_ref().map(schema::Grant::to_fixed),
+            grants_moves: leak_vec(
+                self.grants_moves.iter().map(schema::GrantMove::to_fixed).collect(),
+            ),
+            grants_possession: self
+                .grants_possession
+                .as_ref()
+                .map(schema::GrantPossession::to_fixed),
+            grants_topic: self.grants_topic.as_ref().map(schema::GrantTopic::to_fixed),
         }
     }
 }
@@ -273,12 +280,32 @@ impl schema::TaggedRow {
     }
 }
 
-impl schema::Grant {
+impl schema::GrantMove {
     #[must_use]
-    pub fn to_fixed(&self) -> fixed::Grant {
+    pub fn to_fixed(&self) -> fixed::GrantMove {
         match self {
-            Self::Simply(s) => fixed::Grant::Simply(leak_str(s)),
-            Self::ChooseOne(options) => fixed::Grant::ChooseOne(leak_strs(options)),
+            Self::Simply(key) => fixed::GrantMove::Simply(*key),
+            Self::ChooseOne((first, second)) => fixed::GrantMove::ChooseOne(*first, *second),
+        }
+    }
+}
+
+impl schema::GrantPossession {
+    #[must_use]
+    pub fn to_fixed(&self) -> fixed::GrantPossession {
+        match self {
+            Self::Simply(key) => fixed::GrantPossession::Simply(*key),
+            Self::ChooseOne((first, second)) => fixed::GrantPossession::ChooseOne(*first, *second),
+        }
+    }
+}
+
+impl schema::GrantTopic {
+    #[must_use]
+    pub fn to_fixed(&self) -> fixed::GrantTopic {
+        match self {
+            Self::Simply(topic) => fixed::GrantTopic::Simply(leak_str(topic)),
+            Self::ChooseOne(topics) => fixed::GrantTopic::ChooseOne(leak_strs(topics)),
         }
     }
 }
@@ -414,9 +441,10 @@ mod test {
 #[cfg(test)]
 mod background_test {
     use stonetop::fixed::{
-        BackgroundChecklist, BackgroundChunk, Grant, PrecheckableOption, TaggedRow,
+        BackgroundChecklist, BackgroundChunk, GrantMove, GrantPossession, GrantTopic,
+        PrecheckableOption, TaggedRow,
     };
-    use stonetop::keys::{BackgroundKey, MoveKey};
+    use stonetop::keys::{BackgroundKey, MoveKey, SpecialPossessionKey};
 
     use crate::schema::Background;
 
@@ -451,8 +479,11 @@ mod background_test {
             fixed.description[2],
             BackgroundChunk::Checklist(BackgroundChecklist::Options(&["a", "b"]))
         );
-        assert_eq!(fixed.grants_moves, &[Grant::Simply("Trackless Step")]);
-        assert_eq!(fixed.grants_possession, Some(Grant::Simply("Sacred Pouch")));
+        assert_eq!(fixed.grants_moves, &[GrantMove::Simply(MoveKey::TracklessStep)]);
+        assert_eq!(
+            fixed.grants_possession,
+            Some(GrantPossession::Simply(SpecialPossessionKey::SacredPouch))
+        );
         assert_eq!(fixed.grants_topic, None);
     }
 
@@ -468,7 +499,7 @@ mod background_test {
                     ] } },
                     { checklist: { rows: [{ tag: "Tag", items: ["x", "y"] }] } },
                 ],
-                grantsTopic: ["a", "b"],
+                grantsTopic: ["a", "b", "c"],
             }"#,
         )
         .to_fixed();
@@ -487,7 +518,7 @@ mod background_test {
                 items: &["x", "y"]
             }]))
         );
-        assert_eq!(fixed.grants_topic, Some(Grant::ChooseOne(&["a", "b"])));
+        assert_eq!(fixed.grants_topic, Some(GrantTopic::ChooseOne(&["a", "b", "c"])));
     }
 }
 
@@ -576,7 +607,7 @@ mod backstory_test {
 #[cfg(test)]
 mod playbook_test {
     use stonetop::Die;
-    use stonetop::fixed::{Grant, Instinct, Intro, NameParts, Naming, Origin, TaggedRow};
+    use stonetop::fixed::{GrantMove, Instinct, Intro, NameParts, Naming, Origin, TaggedRow};
     use stonetop::keys::{BackgroundKey, BackstoryKey, MoveKey, PlaybookKey, SpecialPossessionKey};
 
     use crate::json5_playbook;
@@ -671,7 +702,10 @@ mod playbook_test {
         assert_eq!(fixed.starting_move_choices, 1);
         assert_eq!(
             fixed.grants_moves,
-            &[Grant::Simply("Dangerous"), Grant::ChooseOne(&["Armored", "Uncanny Reflexes"])]
+            &[
+                GrantMove::Simply(MoveKey::Dangerous),
+                GrantMove::ChooseOne(MoveKey::Armored, MoveKey::UncannyReflexes)
+            ]
         );
         assert_eq!(fixed.moves[0].key, MoveKey::Dangerous);
         assert_eq!(fixed.moves[0].description, "<p>Deal +1d4.</p>");

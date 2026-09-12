@@ -1,6 +1,6 @@
 use serde::{Deserialize, Deserializer, Serialize};
 use stonetop::Die;
-use stonetop::keys::{MoveKey, PlaybookKey};
+use stonetop::keys::{MoveKey, PlaybookKey, SpecialPossessionKey};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
@@ -17,7 +17,7 @@ pub struct Playbook {
     pub special_possessions: SpecialPossessions,
     pub starting_moves_note: String,
     pub starting_move_choices: u8,
-    pub grants_moves: Vec<Grant>,
+    pub grants_moves: Vec<GrantMove>,
     pub moves: Vec<Move>,
     pub moves_footnote: Option<String>,
     pub intro: Intro,
@@ -39,9 +39,9 @@ pub struct Background {
     pub name: String,
     pub description: Vec<BackgroundChunk>,
     #[serde(default)]
-    pub grants_moves: Vec<Grant>,
-    pub grants_possession: Option<Grant>,
-    pub grants_topic: Option<Grant>,
+    pub grants_moves: Vec<GrantMove>,
+    pub grants_possession: Option<GrantPossession>,
+    pub grants_topic: Option<GrantTopic>,
 }
 
 impl Background {
@@ -107,9 +107,30 @@ pub struct TaggedRow {
     pub items: Vec<String>,
 }
 
+/// A Move granted outright, or a choice between two.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged, rename_all = "camelCase")]
-pub enum Grant {
+pub enum GrantMove {
+    Simply(#[serde(deserialize_with = "crate::key::move_key")] MoveKey),
+    ChooseOne(#[serde(deserialize_with = "crate::key::move_key_pair")] (MoveKey, MoveKey)),
+}
+
+/// A Special Possession granted outright, or a choice between two.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged, rename_all = "camelCase")]
+pub enum GrantPossession {
+    Simply(#[serde(deserialize_with = "crate::key::possession_key")] SpecialPossessionKey),
+    ChooseOne(
+        #[serde(deserialize_with = "crate::key::possession_key_pair")]
+        (SpecialPossessionKey, SpecialPossessionKey),
+    ),
+}
+
+/// A topic (for the Seeker's Lore) granted outright, or a choice among several. Topics have
+/// no key enum; they are the printed names.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged, rename_all = "camelCase")]
+pub enum GrantTopic {
     Simply(String),
     ChooseOne(Vec<String>),
 }

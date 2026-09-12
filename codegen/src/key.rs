@@ -94,6 +94,30 @@ pub fn move_key_pair<'de, D: Deserializer<'de>>(
     Ok((key_from_name(&first)?, key_from_name(&second)?))
 }
 
+/// Deserialize a Special Possession's name, as written in a `grantsPossession`, into its
+/// `SpecialPossessionKey`.
+///
+/// # Errors
+///
+/// If the name doesn't resolve to a `SpecialPossessionKey` variant.
+pub fn possession_key<'de, D: Deserializer<'de>>(
+    deserializer: D,
+) -> Result<SpecialPossessionKey, D::Error> {
+    key_from_name(&String::deserialize(deserializer)?)
+}
+
+/// Deserialize a pair of Special Possession names into their `SpecialPossessionKey`s.
+///
+/// # Errors
+///
+/// If either name doesn't resolve to a `SpecialPossessionKey` variant.
+pub fn possession_key_pair<'de, D: Deserializer<'de>>(
+    deserializer: D,
+) -> Result<(SpecialPossessionKey, SpecialPossessionKey), D::Error> {
+    let (first, second) = <(String, String)>::deserialize(deserializer)?;
+    Ok((key_from_name(&first)?, key_from_name(&second)?))
+}
+
 /// Deserialize a playbook's name, as written in the json5, into its `PlaybookKey`.
 ///
 /// # Errors

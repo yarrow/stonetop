@@ -225,7 +225,7 @@ fn moves(doc: &mut Document, playbook: &PlaybookFixed) {
     doc.block("## Moves");
     doc.block(speak(playbook.starting_moves_note));
     for a_move in playbook.moves {
-        move_section(doc, a_move, playbook.grants_outright(a_move.name));
+        move_section(doc, a_move, playbook.grants_outright(a_move.key));
     }
     if let Some(footnote) = playbook.moves_footnote {
         doc.block(speak(footnote));
