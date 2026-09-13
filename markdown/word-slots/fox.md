@@ -75,7 +75,7 @@ Damage: d8 · HP (max 16): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 
 ## Moves
 
-You start with Ambush OR Skill at Arms; Danger Sense OR Perceptive; and 1 of your choice.
+You start with Ambush OR Skill at Arms; Danger Sense OR Perceptive; any moves from your Background; and 1 of your choice.
 
 ### ☐ Ambush
 

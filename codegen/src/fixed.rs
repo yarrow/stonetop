@@ -57,7 +57,6 @@ impl schema::Playbook {
             damage: self.damage,
             hp: self.hp,
             special_possessions: self.special_possessions.to_fixed(),
-            starting_moves_note: leak_str(&self.starting_moves_note),
             starting_move_choices: self.starting_move_choices,
             grants_moves: leak_vec(
                 self.grants_moves.iter().map(schema::GrantMove::to_fixed).collect(),
@@ -655,7 +654,6 @@ mod playbook_test {
                     preselected: 1,
                     options: [{ name: "Weapons of War", keyPrefix: "Ph", description: "Big." }],
                 },
-                startingMovesNote: "You start with Dangerous.",
                 startingMoveChoices: 1,
                 grantsMoves: ["Dangerous", ["Armored", "Uncanny Reflexes"]],
                 moves: [{ name: "Dangerous", description: "<p>Deal +1d4.</p>" }],
@@ -698,7 +696,6 @@ mod playbook_test {
         assert_eq!(fixed.special_possessions.pick_count, 2);
         assert_eq!(fixed.special_possessions.preselected, 1);
         assert_eq!(fixed.special_possessions.options[0].key, SpecialPossessionKey::PhWeaponsOfWar);
-        assert_eq!(fixed.starting_moves_note, "You start with Dangerous.");
         assert_eq!(fixed.starting_move_choices, 1);
         assert_eq!(
             fixed.grants_moves,

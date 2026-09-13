@@ -6,5 +6,6 @@
 pub mod markdown;
 mod playbook;
 pub mod spoken;
+pub mod starting_moves;
 
 pub use playbook::render_markdown;

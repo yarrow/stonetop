@@ -84,7 +84,7 @@ Damage: d6 · HP (max 16): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 
 ## Moves
 
-You start with Anger is a Gift, Potential for Greatness, and 2 other moves of your choice.
+You start with Anger is a Gift, Potential for Greatness, and 2 of your choice.
 
 ### ☑︎ Anger is a Gift — ◯◯
 

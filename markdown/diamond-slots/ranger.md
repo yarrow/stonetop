@@ -81,7 +81,7 @@ Damage: d8 · HP (max 18): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 
 ## Moves
 
-You start with Home on the Range, any moves from your Background, plus 1 of your choice.
+You start with Home on the Range, any moves from your Background, and 1 of your choice.
 
 ### ☑︎ Home on the Range
 

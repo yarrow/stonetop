@@ -79,7 +79,7 @@ Damage: d6 · HP (max 16): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 
 ## Moves
 
-You start with Well Versed, Work With What You've Got, plus 1 from your Background.
+You start with Well Versed, Work With What You've Got, and 1 from your Background.
 
 ### ☑︎☐☐ Well Versed
 

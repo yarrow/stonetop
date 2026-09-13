@@ -35,7 +35,6 @@ pub struct PlaybookFixed {
     pub damage: Die,
     pub hp: u8,
     pub special_possessions: SpecialPossessions,
-    pub starting_moves_note: &'static str,
     pub starting_move_choices: u8,
     pub grants_moves: &'static [GrantMove],
     pub moves: &'static [&'static MoveFixed],

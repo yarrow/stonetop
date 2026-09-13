@@ -131,7 +131,6 @@
       },
     ],
   },
-  startingMovesNote: "You start with Ambush OR Skill at Arms; Danger Sense OR Perceptive; and 1 of your choice.",
   startingMoveChoices: 1,
   grantsMoves: [["Ambush", "Skill at Arms"], ["Danger Sense", "Perceptive"]],
   moves: [

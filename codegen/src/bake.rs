@@ -283,7 +283,6 @@ fn bake_playbook(playbook: &Playbook, items: &ItemStatics, env: &CrateEnv) -> St
     let hp = fixed.hp.bake(env);
     let special_possessions =
         bake_special_possessions_section(&fixed.special_possessions, items, env);
-    let starting_moves_note = fixed.starting_moves_note.bake(env);
     let starting_move_choices = fixed.starting_move_choices.bake(env);
     let grants_moves = fixed.grants_moves.bake(env);
     let moves = static_refs(&items.moves, fixed.moves.iter().map(|a_move| a_move.key));
@@ -297,7 +296,6 @@ fn bake_playbook(playbook: &Playbook, items: &ItemStatics, env: &CrateEnv) -> St
              backgrounds: [{backgrounds}], instinct: {instinct}, appearance: {appearance}, \
              origin_choices: {origin_choices}, stats_to_assign: {stats_to_assign}, \
              damage: {damage}, hp: {hp}, special_possessions: {special_possessions}, \
-             starting_moves_note: {starting_moves_note}, \
              starting_move_choices: {starting_move_choices}, grants_moves: {grants_moves}, \
              moves: &[{moves}], moves_footnote: {moves_footnote}, intro: {intro}, \
              backstory: &[{backstory}] }}"

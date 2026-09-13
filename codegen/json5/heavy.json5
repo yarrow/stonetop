@@ -130,7 +130,6 @@
       },
     ],
   },
-  startingMovesNote: "You start with Dangerous, Hard to Kill, and either Armored OR Uncanny Reflexes.",
   startingMoveChoices: 0,
   grantsMoves: [["Armored", "Uncanny Reflexes"], "Dangerous", "Hard to Kill"],
   moves: [

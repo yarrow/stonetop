@@ -75,7 +75,7 @@ Damage: d6 · HP (max 20): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 
 ## Moves
 
-You start with Censure, Chronicler of Stonetop, plus 2 more of your choice.
+You start with Censure, Chronicler of Stonetop, and 2 of your choice.
 
 ### ☑︎ Censure
 

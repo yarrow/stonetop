@@ -71,7 +71,7 @@ Damage: d8 · HP (max 20): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 
 ## Moves
 
-You start with Crew, Logistics, any moves from your Background, and 1 move of your choice.
+You start with Crew, Logistics, any moves from your Background, and 1 of your choice.
 
 ### ☑︎ Crew
 

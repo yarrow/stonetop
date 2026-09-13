@@ -151,7 +151,6 @@
       },
     ],
   },
-  startingMovesNote: "You start with Well Versed, Work With What You've Got, plus 1 from your Background.",
   startingMoveChoices: 0,
   grantsMoves: ["Well Versed", "Work With What You've Got"],
   moves: [

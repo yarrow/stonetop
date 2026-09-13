@@ -142,7 +142,6 @@
       },
     ],
   },
-  startingMovesNote: "You start with Censure, Chronicler of Stonetop, plus 2 more of your choice.",
   startingMoveChoices: 2,
   grantsMoves: ["Censure", "Chronicler of Stonetop"],
   moves: [

@@ -75,7 +75,7 @@ Damage: d4 · HP (max 18): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 
 ## Moves
 
-You start with Consecrated Flame and Invoke the Sun God, plus 1 more of your choice.
+You start with Consecrated Flame, Invoke the Sun God, and 1 of your choice.
 
 ### ☑︎ Consecrated Flame
 

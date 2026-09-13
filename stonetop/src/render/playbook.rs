@@ -14,6 +14,7 @@ use crate::keys::{MoveKey, PlaybookKey};
 
 use super::markdown::html_to_markdown;
 use super::spoken::{expand_resource, join_with, move_resource_line, speak_slots};
+use super::starting_moves;
 
 const UNCHECKED: &str = "☐";
 const CHECKED: &str = "☑︎";
@@ -223,7 +224,7 @@ fn possession_text(possession: &SpecialPossessionFixed) -> String {
 
 fn moves(doc: &mut Document, playbook: &PlaybookFixed) {
     doc.block("## Moves");
-    doc.block(speak(playbook.starting_moves_note));
+    doc.block(speak(&starting_moves::note(playbook, None)));
     for a_move in playbook.moves {
         move_section(doc, a_move, playbook.grants_outright(a_move.key));
     }

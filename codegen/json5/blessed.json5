@@ -141,7 +141,6 @@
       },
     ],
   },
-  startingMovesNote: "You start with Spirit Tongue, Call the Spirits, 1 from your Background, and 1 of your choice.",
   startingMoveChoices: 1,
   grantsMoves: ["Spirit Tongue", "Call the Spirits"],
   moves: [

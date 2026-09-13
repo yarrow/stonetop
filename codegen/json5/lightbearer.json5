@@ -132,7 +132,6 @@
       },
     ],
   },
-  startingMovesNote: "You start with Consecrated Flame and Invoke the Sun God, plus 1 more of your choice.",
   startingMoveChoices: 1,
   grantsMoves: ["Consecrated Flame", "Invoke the Sun God"],
   moves: [

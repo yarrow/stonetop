@@ -15,7 +15,6 @@ pub struct Playbook {
     pub damage: Die,
     pub hp: u8,
     pub special_possessions: SpecialPossessions,
-    pub starting_moves_note: String,
     pub starting_move_choices: u8,
     pub grants_moves: Vec<GrantMove>,
     pub moves: Vec<Move>,

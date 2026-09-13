@@ -4096,7 +4096,6 @@ static PLAYBOOK_THE_BLESSED: stonetop::fixed::PlaybookFixed = stonetop::fixed::P
             &SPECIAL_POSSESSION_MASTIFFS,
         ],
     },
-    starting_moves_note: "You start with Spirit Tongue, Call the Spirits, 1 from your Background, and 1 of your choice.",
     starting_move_choices: 1u8,
     grants_moves: &[
         stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::SpiritTongue),
@@ -4242,7 +4241,6 @@ static PLAYBOOK_THE_FOX: stonetop::fixed::PlaybookFixed = stonetop::fixed::Playb
             &SPECIAL_POSSESSION_TRADE_CONTACTS,
         ],
     },
-    starting_moves_note: "You start with Ambush OR Skill at Arms; Danger Sense OR Perceptive; and 1 of your choice.",
     starting_move_choices: 1u8,
     grants_moves: &[
         stonetop::fixed::GrantMove::ChooseOne(
@@ -4391,7 +4389,6 @@ static PLAYBOOK_THE_HEAVY: stonetop::fixed::PlaybookFixed = stonetop::fixed::Pla
             &SPECIAL_POSSESSION_PH_WEAPONS_OF_WAR,
         ],
     },
-    starting_moves_note: "You start with Dangerous, Hard to Kill, and either Armored OR Uncanny Reflexes.",
     starting_move_choices: 0u8,
     grants_moves: &[
         stonetop::fixed::GrantMove::ChooseOne(
@@ -4552,7 +4549,6 @@ static PLAYBOOK_THE_JUDGE: stonetop::fixed::PlaybookFixed = stonetop::fixed::Pla
             &SPECIAL_POSSESSION_SMITHY,
         ],
     },
-    starting_moves_note: "You start with Censure, Chronicler of Stonetop, plus 2 more of your choice.",
     starting_move_choices: 2u8,
     grants_moves: &[
         stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::Censure),
@@ -4693,7 +4689,6 @@ static PLAYBOOK_THE_LIGHTBEARER: stonetop::fixed::PlaybookFixed = stonetop::fixe
             &SPECIAL_POSSESSION_LUTHIERS_TOOLS,
         ],
     },
-    starting_moves_note: "You start with Consecrated Flame and Invoke the Sun God, plus 1 more of your choice.",
     starting_move_choices: 1u8,
     grants_moves: &[
         stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::ConsecratedFlame),
@@ -4833,7 +4828,6 @@ static PLAYBOOK_THE_MARSHAL: stonetop::fixed::PlaybookFixed = stonetop::fixed::P
             &SPECIAL_POSSESSION_PM_WEAPONS_OF_WAR,
         ],
     },
-    starting_moves_note: "You start with Crew, Logistics, any moves from your Background, and 1 move of your choice.",
     starting_move_choices: 1u8,
     grants_moves: &[
         stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::Crew),
@@ -4993,7 +4987,6 @@ static PLAYBOOK_THE_RANGER: stonetop::fixed::PlaybookFixed = stonetop::fixed::Pl
             &SPECIAL_POSSESSION_TRAPPING_GEAR,
         ],
     },
-    starting_moves_note: "You start with Home on the Range, any moves from your Background, plus 1 of your choice.",
     starting_move_choices: 1u8,
     grants_moves: &[stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::HomeOnTheRange)],
     moves: &[
@@ -5156,7 +5149,6 @@ static PLAYBOOK_THE_SEEKER: stonetop::fixed::PlaybookFixed = stonetop::fixed::Pl
             &SPECIAL_POSSESSION_TRADE_CONTACTS,
         ],
     },
-    starting_moves_note: "You start with Well Versed, Work With What You've Got, plus 1 from your Background.",
     starting_move_choices: 0u8,
     grants_moves: &[
         stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::WellVersed),
@@ -5299,7 +5291,6 @@ static PLAYBOOK_THE_WOULD_BE_HERO: stonetop::fixed::PlaybookFixed =
                 &SPECIAL_POSSESSION_TANNERY,
             ],
         },
-        starting_moves_note: "You start with Anger is a Gift, Potential for Greatness, and 2 other moves of your choice.",
         starting_move_choices: 2u8,
         grants_moves: &[
             stonetop::fixed::GrantMove::Simply(stonetop::keys::MoveKey::AngerIsAGift),

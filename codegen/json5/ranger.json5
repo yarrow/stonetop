@@ -147,7 +147,6 @@
       },
     ],
   },
-  startingMovesNote: "You start with Home on the Range, any moves from your Background, plus 1 of your choice.",
   startingMoveChoices: 1,
   grantsMoves: ["Home on the Range"],
   moves: [
