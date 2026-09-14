@@ -1,12 +1,13 @@
-//! We're replacing runs of ○ circles with number, but for now only those backed by a `Resource`.
-//! The place to put the number is marked with `{resource}` in the description.
-//! A description with no backing `Resource` keeps its circles, and the set of those
-//! leftover runs is pinned by an allowlist — which will also complain if an allowed circle
-//! disappears — so also edit this test when you remove a circle.
+//! Every run of ○ circles in the playbooks and the gear file is a `Resource`, and the place its
+//! value is spoken is marked with `{resource}` in the description: a possession or gizmo has
+//! exactly one placeholder if it has a resource and none otherwise. A description with no
+//! backing `Resource` would keep its circles, and the set of those leftover runs is pinned by
+//! an allowlist, empty since gizmos got their structs; a new circle run goes red here until it
+//! gets a resource or is deliberately allowlisted.
 
 use std::collections::BTreeSet;
 
-use codegen::{json5_playbook, playbook_names};
+use codegen::{json5_gear, json5_playbook, playbook_names};
 
 fn display_name(playbook_name: &str) -> String {
     let playbook = json5_playbook(playbook_name).unwrap_or_else(|e| panic!("{e:#}"));
@@ -37,6 +38,17 @@ fn resource_placeholder_matches_struct() {
             }
         }
     }
+    let gear = json5_gear().unwrap_or_else(|e| panic!("{e:#}"));
+    for gizmo in gear.gizmos() {
+        let count = gizmo.description.matches("{resource}").count();
+        match (gizmo.resource.is_some(), count) {
+            (true, 1) | (false, 0) => {}
+            (has_resource, n) => problems.push(format!(
+                "gear {:?}: resource.is_some() == {has_resource} but {n} {{resource}} placeholder(s)",
+                gizmo.name
+            )),
+        }
+    }
     problems.sort();
     assert!(problems.is_empty(), "{{resource}} placeholder mismatches:\n{}", problems.join("\n"));
 }
@@ -53,22 +65,9 @@ fn has_leftover_circle(s: &str) -> bool {
 
 #[test]
 fn leftover_circles_match_allowlist() {
-    // (playbook, item) pairs: not-yet-modelled resources, pinned deliberately (ADR-0010).
-    let allowed: BTreeSet<(String, String)> = [
-        ("Fox", "Distillery"),
-        ("Heavy", "Distillery"),
-        ("Lightbearer", "Distillery"),
-        ("Marshal", "Distillery"),
-        ("Ranger", "Distillery"),
-        ("Seeker", "Distillery"),
-        ("Fox", "Burglar's kit"),
-        ("Lightbearer", "Glassworks"),
-        ("Heavy", "Weapons of war Crossbow"),
-        ("Marshal", "Weapons of war Composite bow"),
-    ]
-    .into_iter()
-    .map(|(playbook, item)| (playbook.to_string(), item.to_string()))
-    .collect();
+    // (playbook, item) pairs: not-yet-modelled resources, pinned deliberately. Empty now that
+    // every circle run in the playbooks belongs to a gizmo or possession with a struct.
+    let allowed: BTreeSet<(String, String)> = BTreeSet::new();
 
     let mut found = BTreeSet::new();
     for name in playbook_names() {
@@ -87,6 +86,12 @@ fn leftover_circles_match_allowlist() {
             for item in &possession.pick {
                 record(format!("{} {}", possession.name, pick_item_label(item)), item);
             }
+        }
+    }
+    let gear = json5_gear().unwrap_or_else(|e| panic!("{e:#}"));
+    for gizmo in gear.gizmos() {
+        if has_leftover_circle(&gizmo.description) {
+            found.insert(("gear".to_string(), gizmo.name.clone()));
         }
     }
 

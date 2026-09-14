@@ -98,35 +98,29 @@
     options: [
       {
         name: "Distillery",
-        description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
+        description: "{skins of whisky|Skin of whisky, fine}, {copper tubes}, {malt}, {firkins}, stills, barrels, etc.",
       },
       {
         name: "Chirurgeon's tools",
-        description: "catgut, straps, bandages, tubes, poultices, willow bark, ◇ bonesaws, etc.",
+        description: "{catgut}, {straps}, {bandages}, {tubes}, {poultices}, {willow bark}, {bonesaws}, etc.",
       },
       {
         name: "Husbandry tools",
-        description: "brushes, muzzles, collars, feed, ◇ whips, ◇ bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
+        description: "{brushes}, {muzzles}, {collars}, {feed}, {whips}, {bridles}, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
       },
       {
         name: "Smithy",
-        description: "(or access to it): iron goods, ingots, thick gloves, ◇ tongs, ◇ bellows, an anvil, etc.",
+        description: "(or access to it): {iron goods}, {ingots}, {thick gloves}, {tongs}, {bellows}, an anvil, etc.",
       },
       {
         name: "Stoneworker's tools",
-        description: "chisels, drills, ◇ prybars, ◇ spikes, ◇ block & tackles, wheelbarrow, etc.",
+        description: "{chisels}, {drills}, {prybars}, {spikes}, {block & tackles|Block & tackle}, wheelbarrow, etc.",
       },
       {
         name: "Weapons of war",
         keyPrefix: "Ph",
         description: "choose up to 3 (now or later):",
-        pick: [
-          "◇ Sword, iron (<em>close</em>, +1 damage)",
-          "◇ Battleaxe, iron (<em>close, messy</em>)",
-          "◇ Warhammer, iron (<em>close</em>, 2 piercing)",
-          "◇ Mace or flail, iron (<em>close, forceful</em>)",
-          "◇ Crossbow (<em>far</em>, +1 damage, <em>reload</em>, x piercing, ○ low ammo, ○ all out)",
-        ],
+        pick: ["{Sword}", "{Battleaxe}", "{Warhammer}", "{Mace or flail}", "{Crossbow}"],
       },
     ],
   },

@@ -122,32 +122,32 @@
     options: [
       {
         name: "Scribe's tools",
-        description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
+        description: "{parchment|Parchment}, {ink}, {pigments}, {vials|Glass vial}, {quills}, {a notebook|Notebook}, etc.",
       },
       {
         name: "Books & scrolls",
         description: "({resource} uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
-        resource: { hold: "Uses", canBe: 5, start: "empty" },
+        resource: { hold: "Uses", canBe: 5, start: "full" },
       },
       {
         name: "Distillery",
-        description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
+        description: "{skins of whisky|Skin of whisky, fine}, {copper tubes}, {malt}, {firkins}, stills, barrels, etc.",
       },
       {
         name: "Engineer's tools",
-        description: "rulers, tapes, rods, plumb-bobs, ◇ tripods, ◇ block & tackles, wheelbarrow, etc.",
+        description: "{rulers}, {tapes}, {rods}, {plumb-bobs}, {tripods}, {block & tackles|Block & tackle}, wheelbarrow, etc.",
       },
       {
         name: "Laboratory",
-        description: "chemics, reagents, vials, measures, ◇ scales, ◇ decanters, etc. Every season, produce d4-1 uses of ◇ naphtha (<em>thrown, area, dangerous</em>, ignores armor).",
+        description: "{chemics}, {reagents}, {vials|Glass vial}, {measures}, {scales}, {decanters}, etc. Every season, produce d4-1 uses of {naphtha|Naphtha}.",
       },
       {
         name: "Paraphernalia",
-        description: "crystals, incense, talismans, blood, bone, horn, eye of newt, ◇ braziers, ◇◇ a cauldron, etc.",
+        description: "{crystals}, {incense}, {talismans}, {blood}, {bone}, {horn}, {eye of newt}, {braziers}, {a cauldron|Cauldron}, etc.",
       },
       {
         name: "Trade contacts",
-        description: "small amounts of salt, glass, silk, spice, medicinal herbs, pigments, ivory, etc.",
+        description: "small amounts of {salt|Salt}, {glass}, {silk}, {spice}, {medicinal herbs}, {pigments}, {ivory}, etc.",
       },
     ],
   },

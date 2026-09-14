@@ -102,33 +102,33 @@
     options: [
       {
         name: "Apiary",
-        description: "beeswax, candles (<em>close, area</em>, lasts ~1 hr), honey, ◇ bee smokers, ◇ hats & veils, etc.",
+        description: "{beeswax}, {candles|Candle}, {honey}, {bee smokers}, {hats & veils}, etc.",
       },
       {
         name: "Books & scrolls",
         description: "({resource} uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.",
-        resource: { hold: "Uses", canBe: 5, start: "empty" },
+        resource: { hold: "Uses", canBe: 5, start: "full" },
       },
       {
         name: "Chandlery",
-        description: "beeswax, candles (<em>close, area</em>, lasts ~1 hr), wicks, scented herbs, soap, lye, ash, etc.",
+        description: "{beeswax}, {candles|Candle}, {wicks}, {scented herbs}, {soap}, {lye}, {ash}, etc.",
       },
       {
         name: "Distillery",
-        description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
+        description: "{skins of whisky|Skin of whisky, fine}, {copper tubes}, {malt}, {firkins}, stills, barrels, etc.",
       },
       {
         name: "Glassworks",
-        description: "vials, charms, lenses, sand, marbles, bellows, crucible, ◇ lanterns (○○○○○ hours, <em>close, area</em>), etc.",
+        description: "{vials|Glass vial}, {charms}, {lenses}, {sand}, {marbles}, {bellows}, crucible, {lanterns|Lantern}, etc.",
       },
       {
         name: "Holy relics",
         description: "({resource} uses): if you have one in inventory when you Invoke the Sun God, you can mark a use in lieu of choosing a consequence.",
-        resource: { hold: "Uses", canBe: 3, start: "empty" },
+        resource: { hold: "Uses", canBe: 3, start: "full" },
       },
       {
         name: "Luthier's tools",
-        description: "chisels, files, catgut, various woods, stains, ◇ a lute, ◇ a fiddle, etc.",
+        description: "{chisels}, {files}, {catgut}, {various woods}, {stains}, {a lute|Lute}, {a fiddle|Fiddle}, etc.",
       },
     ],
   },

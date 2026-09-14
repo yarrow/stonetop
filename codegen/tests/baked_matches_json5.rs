@@ -1,11 +1,11 @@
 //! The baked content equals the json5 content. For every Move, Background, Special Possession,
-//! and Backstory of every playbook, and for every playbook itself, `key.fixed_part()` is the
-//! item freshly converted from the json5 and carries its own key. Together these tests cover
-//! the conversion, the baking, the checked-in file, and the match in `fixed_part()`, so they
-//! need `stonetop` built with `ssr` (a dev-dependency here).
+//! and Backstory of every playbook, for every playbook itself, and for every gizmo in the gear
+//! file, `key.fixed_part()` is the item freshly converted from the json5 and carries its own
+//! key. Together these tests cover the conversion, the baking, the checked-in file, and the
+//! match in `fixed_part()`, so they need `stonetop` built with `ssr` (a dev-dependency here).
 
 use codegen::key::Key;
-use codegen::{json5_playbook, playbook_names};
+use codegen::{json5_gear, json5_playbook, playbook_names};
 
 #[test]
 fn every_move_bakes_to_itself() {
@@ -83,5 +83,16 @@ fn every_playbook_bakes_to_itself() {
         let fresh = playbook.to_fixed();
         assert_eq!(key.fixed_part(), &fresh, "{key}: baked Playbook differs from {name}'s json5");
         assert_eq!(key.fixed_part().key, key, "{key}: baked Playbook carries the wrong key");
+    }
+}
+
+#[test]
+fn every_gizmo_bakes_to_itself() {
+    let gear = json5_gear().unwrap_or_else(|e| panic!("{e:#}"));
+    for gizmo in gear.gizmos() {
+        let key = gizmo.key();
+        let fresh = gizmo.to_fixed();
+        assert_eq!(key.fixed_part(), &fresh, "{key}: baked gizmo differs from gear.json5");
+        assert_eq!(key.fixed_part().key, key, "{key}: baked gizmo carries the wrong key");
     }
 }

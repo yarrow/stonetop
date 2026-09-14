@@ -161,16 +161,82 @@ pub struct SpecialPossessions {
     pub options: Vec<SpecialPossession>,
 }
 
+/// A Special Possession. Its `description` and `pick` entries refer to the gizmos of its kit
+/// inline, as `{Candle}` or `{a lantern|Lantern}`; a kit of one names its gizmo in `gizmo`
+/// instead and has no description of its own.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct SpecialPossession {
     pub name: String,
     #[serde(default)]
     pub key_prefix: Option<String>,
+    #[serde(default)]
     pub description: String,
     pub resource: Option<Resource>,
     #[serde(default)]
     pub pick: Vec<String>,
+    /// The one gizmo of a kit of one, as a reference target: "Sacred pouch", "Composite bow".
+    pub gizmo: Option<String>,
+}
+
+// Gear -------------------------------------------------------------------
+
+/// `gear.json5`: every gizmo, in the printed sections, in printed order.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct Gear {
+    pub weapons_of_war: Vec<Gizmo>,
+    pub bronze_weapons: Vec<Gizmo>,
+    pub armor: Vec<Gizmo>,
+    pub light_sources: Vec<Gizmo>,
+    pub tools_and_trades: Vec<Gizmo>,
+    pub writing_implements: Vec<Gizmo>,
+    pub exotic_stuff: Vec<Gizmo>,
+    pub trade_goods: Vec<Gizmo>,
+    pub slotted_items: Vec<Gizmo>,
+    pub small_items: Vec<Gizmo>,
+    pub kit_contents: Vec<Gizmo>,
+}
+
+impl Gear {
+    /// The sections in printed order, each with its printed heading.
+    #[must_use]
+    pub fn sections(&self) -> [(&'static str, &[Gizmo]); 11] {
+        [
+            ("Weapons of war", &self.weapons_of_war),
+            ("Bronze weapons", &self.bronze_weapons),
+            ("Armor", &self.armor),
+            ("Light sources", &self.light_sources),
+            ("Tools & trades", &self.tools_and_trades),
+            ("Writing implements", &self.writing_implements),
+            ("Exotic stuff", &self.exotic_stuff),
+            ("Trade goods", &self.trade_goods),
+            ("Slotted items", &self.slotted_items),
+            ("Small items", &self.small_items),
+            ("Kit contents", &self.kit_contents),
+        ]
+    }
+
+    /// Every gizmo, section by section in printed order.
+    pub fn gizmos(&self) -> impl Iterator<Item = &Gizmo> {
+        self.sections().into_iter().flat_map(|(_, gizmos)| gizmos)
+    }
+}
+
+/// A gizmo as written in `gear.json5`: see the comment at the top of that file for the fields.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct Gizmo {
+    pub name: String,
+    pub qualifier: Option<String>,
+    pub piercing: Option<u8>,
+    pub slots: u8,
+    /// The gear sheet's price band, 0 to 4. Recorded while the sheet is open; nothing reads it
+    /// yet, so it doesn't reach the Fixed type.
+    pub value: Option<u8>,
+    #[serde(default)]
+    pub description: String,
+    pub resource: Option<Resource>,
 }
 
 // Backstory and Intro ----------------------------------------------------

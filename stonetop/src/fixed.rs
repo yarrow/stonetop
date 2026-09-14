@@ -1,5 +1,5 @@
-//! The Fixed half of the Fixed/State split: playbook content as printed, immutable and
-//! identical for everyone. The shapes follow `codegen/src/schema.rs` with three changes:
+//! The Fixed half of the Fixed/State split: playbook and gear content as printed, immutable
+//! and identical for everyone. The shapes follow `codegen/src/schema.rs` with three changes:
 //! every `String` is a `&'static str`, every `Vec<T>` is a `&'static [T]`, and every keyed
 //! item carries a `key` of its kind's enum and has no `key_prefix`.
 //!
@@ -12,7 +12,9 @@
 use databake::Bake;
 
 use crate::Die;
-use crate::keys::{BackgroundKey, BackstoryKey, MoveKey, PlaybookKey, SpecialPossessionKey};
+use crate::keys::{
+    BackgroundKey, BackstoryKey, GizmoKey, MoveKey, PlaybookKey, SpecialPossessionKey,
+};
 
 #[cfg(feature = "ssr")]
 mod generated;
@@ -142,7 +144,8 @@ pub enum MoveChecklist {
 
 // Resource ---------------------------------------------------------------
 
-/// A countable pool held by a Move or possession, with a capacity and a starting fullness.
+/// A countable pool held by a Move, possession, or gizmo, with a capacity and a starting
+/// fullness.
 #[derive(Debug, Clone, PartialEq, Eq)]
 #[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
 pub struct Resource {
@@ -239,7 +242,10 @@ pub enum GrantTopic {
 
 // SpecialPossession ------------------------------------------------------
 
-/// A Special Possession as printed.
+/// A Special Possession as printed. Its `description` and `pick` entries name the gizmos of
+/// its kit inline, as `{Candle}` or `{a lantern|Lantern}` (see [`gizmo_references`]); `kit`
+/// holds those gizmos' keys in the same order, or the one gizmo of a kit of one, whose
+/// `description` is empty because the gizmo's own description serves.
 #[derive(Debug, Clone, PartialEq, Eq)]
 #[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
 pub struct SpecialPossessionFixed {
@@ -248,6 +254,123 @@ pub struct SpecialPossessionFixed {
     pub description: &'static str,
     pub resource: Option<Resource>,
     pub pick: &'static [&'static str],
+    pub kit: GizmoKit,
+}
+
+/// The gizmos a Special Possession makes available to the character who selects it.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub enum GizmoKit {
+    /// A kit of one: the possession is this gizmo (the Blessed's Sacred pouch, the Ranger's
+    /// Composite bow). Selecting the possession creates instance 0 of the gizmo, because the
+    /// print puts its resource circles on the playbook.
+    One(GizmoKey),
+    /// The gizmos referenced in the possession's description and pick entries, in order of
+    /// appearance; empty for a Reserve, an ability, or a follower. Selecting the possession
+    /// makes them available and creates no instance, except that each picked Weapon of War
+    /// creates instance 0 of its gizmo when picked.
+    Referenced(&'static [GizmoKey]),
+}
+
+impl GizmoKit {
+    /// Every gizmo in the kit, in order.
+    #[must_use]
+    pub fn gizmos(&self) -> &[GizmoKey] {
+        match self {
+            Self::One(key) => std::slice::from_ref(key),
+            Self::Referenced(keys) => keys,
+        }
+    }
+}
+
+// Gizmo ------------------------------------------------------------------
+
+/// A gizmo as printed: one thing a character can carry, defined once for the gear sheet, the
+/// Inventory insert, and every kit that names it.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct GizmoFixed {
+    pub key: GizmoKey,
+    /// The bold head as printed: "Long spear", "Battleaxe".
+    pub name: &'static str,
+    /// The material or grade printed after the name (iron, bronze, fine steel, boiled leather),
+    /// which tells same-named gizmos apart. Iron is the unmarked default in the key.
+    pub qualifier: Option<&'static str>,
+    /// The gear sheet's starred piercing upgrade, when this is the upgraded variant.
+    pub piercing: Option<u8>,
+    pub slots: SlotCount,
+    /// Everything after the name as printed, qualifier and tags included, with `{resource}`
+    /// where a run of circles was.
+    pub description: &'static str,
+    pub resource: Option<Resource>,
+}
+
+/// How many Inventory slots a gizmo occupies: one per printed diamond.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub enum SlotCount {
+    Zero,
+    One,
+    Two,
+}
+
+impl SlotCount {
+    /// The printed diamonds: "", "◇", or "◇◇".
+    #[must_use]
+    pub fn diamonds(self) -> &'static str {
+        match self {
+            Self::Zero => "",
+            Self::One => "◇",
+            Self::Two => "◇◇",
+        }
+    }
+}
+
+/// One `{…}` reference to a gizmo in a possession's description or pick entry: `{Candle}`
+/// names the gizmo and is spoken as written, `{a lantern|Lantern}` names it after the bar and
+/// is spoken as the printed phrase before it. `{resource}` is a resource placeholder, not a
+/// reference.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct GizmoReference<'a> {
+    /// The printed phrase, when it differs from the name.
+    pub phrase: Option<&'a str>,
+    /// The gizmo's name, with its qualifier if it has one: "Lantern", "Long spear, fine steel".
+    pub target: &'a str,
+    /// Where the whole `{…}` sits in the text.
+    pub span: std::ops::Range<usize>,
+}
+
+impl GizmoReference<'_> {
+    /// The words spoken for the reference: the phrase if given, else the target.
+    #[must_use]
+    pub fn spoken(&self) -> &str {
+        self.phrase.unwrap_or(self.target)
+    }
+}
+
+/// The marker in a description where a resource's value is spoken.
+pub const RESOURCE_PLACEHOLDER: &str = "{resource}";
+
+/// Every gizmo reference in `text`, in order of appearance. An unclosed brace is plain text.
+#[must_use]
+pub fn gizmo_references(text: &str) -> Vec<GizmoReference<'_>> {
+    let mut references = Vec::new();
+    let mut from = 0;
+    while let Some(open) = text[from..].find('{') {
+        let start = from + open;
+        let Some(close) = text[start..].find('}') else { break };
+        let end = start + close + 1;
+        let inner = &text[start + 1..end - 1];
+        if inner != &RESOURCE_PLACEHOLDER[1..RESOURCE_PLACEHOLDER.len() - 1] {
+            let (phrase, target) = match inner.split_once('|') {
+                Some((phrase, target)) => (Some(phrase), target),
+                None => (None, inner),
+            };
+            references.push(GizmoReference { phrase, target, span: start..end });
+        }
+        from = end;
+    }
+    references
 }
 
 // Backstory --------------------------------------------------------------
@@ -267,4 +390,39 @@ pub enum BackstoryItem {
     Text(&'static str),
     Choices(&'static [&'static str]),
     ChoiceRow(TaggedRow),
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn bare_and_phrased_references_are_found_in_order_and_the_placeholder_is_skipped() {
+        let text = "{beeswax}, {candles|Candle}, {resource} uses, {a lantern|Lantern} etc.";
+        let found = gizmo_references(text);
+        assert_eq!(
+            found,
+            vec![
+                GizmoReference { phrase: None, target: "beeswax", span: 0..9 },
+                GizmoReference { phrase: Some("candles"), target: "Candle", span: 11..27 },
+                GizmoReference { phrase: Some("a lantern"), target: "Lantern", span: 46..65 },
+            ]
+        );
+        assert_eq!(found[0].spoken(), "beeswax");
+        assert_eq!(found[1].spoken(), "candles");
+        assert_eq!(&text[found[2].span.clone()], "{a lantern|Lantern}");
+    }
+
+    #[test]
+    fn text_without_references_has_none() {
+        assert!(gizmo_references("({resource} uses): each use produces valuables").is_empty());
+        assert!(gizmo_references("no braces at all").is_empty());
+        assert!(gizmo_references("an unclosed { brace").is_empty());
+    }
+
+    #[test]
+    fn a_kit_of_one_is_a_slice_of_one() {
+        assert_eq!(GizmoKit::One(GizmoKey::SacredPouch).gizmos(), &[GizmoKey::SacredPouch]);
+        assert_eq!(GizmoKit::Referenced(&[]).gizmos(), &[] as &[GizmoKey]);
+    }
 }

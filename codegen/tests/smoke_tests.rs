@@ -1,4 +1,4 @@
-use codegen::json5_playbook;
+use codegen::{json5_gear, json5_playbook};
 
 fn loads_ok(playbook_name: &str) {
     if let Err(e) = json5_playbook(playbook_name) {
@@ -40,4 +40,10 @@ fn seeker() {
 #[test]
 fn would_be_hero() {
     loads_ok("would-be-hero");
+}
+#[test]
+fn gear() {
+    if let Err(e) = json5_gear() {
+        panic!("Failed: {e:#?}");
+    }
 }

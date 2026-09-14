@@ -98,15 +98,15 @@
     options: [
       {
         name: "Burglar's kit",
-        description: "picks, files, snippers, wire, ◇ prybars, ◇ hacksaws, ◇ a lantern (○○○○○ hours, <em>close, area</em>), ◇ a grappling hook, etc.",
+        description: "{picks}, {files}, {snippers}, {wire}, {prybars}, {hacksaws}, {a lantern|Lantern}, {a grappling hook|Grappling hook}, etc.",
       },
       {
         name: "Carpenter's tools",
-        description: "chisels, files, nails, pitch, ◇ prybars, ◇ saws, ◇◇ firkins, barrels, etc.",
+        description: "{chisels}, {files}, {nails}, {pitch}, {prybars}, {saws}, {firkins}, barrels, etc.",
       },
       {
         name: "Distillery",
-        description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
+        description: "{skins of whisky|Skin of whisky, fine}, {copper tubes}, {malt}, {firkins}, stills, barrels, etc.",
       },
       {
         name: "Hidden stash",
@@ -115,19 +115,19 @@
       },
       {
         name: "Mummer's kit",
-        description: "juggling balls, whirlybird seeds, motley, ribbons, bells, ◇ puppets, ◇ a fiddle, etc.",
+        description: "{juggling balls}, {whirlybird seeds}, {motley}, {ribbons}, {bells}, {puppets}, {a fiddle|Fiddle}, etc.",
       },
       {
         name: "Scribe's tools",
-        description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
+        description: "{parchment|Parchment}, {ink}, {pigments}, {vials|Glass vial}, {quills}, {a notebook|Notebook}, etc.",
       },
       {
         name: "Tannery",
-        description: "(or access to it): lime, acid, salts, thick gloves, ◇ a boiled leather cuirass (1 armor), etc.",
+        description: "(or access to it): {lime}, {acid}, {salts}, {thick gloves}, {a cuirass|Cuirass, boiled leather}, etc.",
       },
       {
         name: "Trade contacts",
-        description: "small amounts of salt, glass, silk, spice, medicinal herbs, pigments, ivory, etc.",
+        description: "small amounts of {salt|Salt}, {glass}, {silk}, {spice}, {medicinal herbs}, {pigments}, {ivory}, etc.",
       },
     ],
   },

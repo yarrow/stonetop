@@ -97,15 +97,15 @@
     options: [
       {
         name: "Chirurgeon's tools",
-        description: "catgut, straps, bandages, tubes, poultices, willow bark, ◇ bonesaws, etc.",
+        description: "{catgut}, {straps}, {bandages}, {tubes}, {poultices}, {willow bark}, {bonesaws}, etc.",
       },
       {
         name: "Distillery",
-        description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
+        description: "{skins of whisky|Skin of whisky, fine}, {copper tubes}, {malt}, {firkins}, stills, barrels, etc.",
       },
       {
         name: "Engineer's tools",
-        description: "rulers, tapes, rods, plumb-bobs, ◇ tripods, ◇ block & tackles, wheelbarrow, etc.",
+        description: "{rulers}, {tapes}, {rods}, {plumb-bobs}, {tripods}, {block & tackles|Block & tackle}, wheelbarrow, etc.",
       },
       {
         name: "Personal symbol",
@@ -113,18 +113,13 @@
       },
       {
         name: "Scribe's tools",
-        description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
+        description: "{parchment|Parchment}, {ink}, {pigments}, {vials|Glass vial}, {quills}, {a notebook|Notebook}, etc.",
       },
       {
         name: "Weapons of war",
         keyPrefix: "Pm",
         description: "choose up to 3 (now or later):",
-        pick: [
-          "◇ Sword, iron (<em>close</em>, +1 damage)",
-          "◇◇ Long spear, fine steel (<em>reach</em>, 2 piercing)",
-          "◇ Battleaxe, iron (<em>close, messy</em>)",
-          "◇ Composite bow (<em>far</em>, +1 damage, x piercing; ○ low ammo, ○ all out)",
-        ],
+        pick: ["{Sword}", "{Long spear|Long spear, fine steel}", "{Battleaxe}", "{Composite bow}"],
       },
     ],
   },

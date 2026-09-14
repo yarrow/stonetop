@@ -1,12 +1,17 @@
-//! Lookup keys: `PlaybookKey` and the four item key enums, `MoveKey`, `BackgroundKey`,
-//! `SpecialPossessionKey`, and `BackstoryKey`. This file is the source of truth for `XKey` types:
-//! every playbook and item name in `codegen/json5/` must resolve to a variant here, and every
-//! variant must be produced by some name (checked by `codegen/tests/keys_consistent.rs`). A
-//! shipped key is permanent, so you can add variants freely but you can't rename or remove one.
+//! Lookup keys: `PlaybookKey`, the four item key enums, `MoveKey`, `BackgroundKey`,
+//! `SpecialPossessionKey`, and `BackstoryKey`, and `GizmoKey` for gear. This file is the source
+//! of truth for `XKey` types: every playbook, item, and gizmo name in `codegen/json5/` must
+//! resolve to a variant here, and every variant must be produced by some name (checked by
+//! `codegen/tests/keys_consistent.rs`). A shipped key is permanent, so you can add variants
+//! freely but you can't rename or remove one.
 //!
 //! Playbooks share items: every playbook has the same Improved Stat move, for instance. A shared
 //! item gets one variant, listed under the first playbook to use it, and later playbooks show a
 //! comment where that variant would have been.
+//!
+//! Gizmos are defined once, in `gear.json5`, and listed here by that file's sections. A gizmo's
+//! variant is its name, then its qualifier unless that is iron, then `PiercingN` for the starred
+//! piercing upgrade: `Battleaxe`, `BattleaxePiercing1`, `BattleaxeBronze`, `LongSpearFineSteel`.
 //!
 //! The strum derives (`Display`, `EnumString`, `EnumIter`) and databake's `Bake` are behind the
 //! `codegen` feature: `codegen` needs them to resolve names, walk every variant, and bake Fixed
@@ -164,6 +169,271 @@ pub enum SpecialPossessionKey {
     // StoneworkersTools
     PersonalTokenFraughtWithMeaning,
     // Tannery
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[cfg_attr(feature = "codegen", derive(Display, EnumString, EnumIter, Bake))]
+#[cfg_attr(feature = "codegen", databake(path = stonetop::keys))]
+pub enum GizmoKey {
+    // Weapons of war (gear sheet)
+    MaceOrFlail,
+    Battleaxe,
+    BattleaxePiercing1,
+    BattleaxePiercing2,
+    ShortSword,
+    ShortSwordPiercing1,
+    ShortSwordPiercing2,
+    Sword,
+    SwordPiercing1,
+    SwordPiercing2,
+    Warhammer,
+    Crossbow,
+    CompositeBow,
+
+    // Bronze weapons (gear sheet)
+    MaceOrFlailBronze,
+    BattleaxeBronze,
+    BattleaxeBronzePiercing1,
+    BattleaxeBronzePiercing2,
+    ShortSwordBronze,
+    ShortSwordBronzePiercing1,
+    ShortSwordBronzePiercing2,
+    SwordBronze,
+    SwordBronzePiercing1,
+    SwordBronzePiercing2,
+    WarhammerBronze,
+
+    // Armor (gear sheet)
+    CuirassBoiledLeather,
+    HauberkCuirassScale,
+    Vest,
+
+    // Light sources (gear sheet)
+    Candle,
+    Lantern,
+    BullseyeLantern,
+
+    // Tools & trades (gear sheet)
+    SmallMetalTool,
+    GlassVial,
+    BlockTackle,
+    Instrument,
+    MetalTools,
+    Mirror,
+
+    // Writing implements (gear sheet)
+    SlateAndChalk,
+    WaxTabletAndStylus,
+    Parchment,
+    FineVellum,
+    InkVialAndQuills,
+    EmptyBookParchment,
+    EmptyBookFineVellum,
+
+    // Exotic stuff (gear sheet)
+    BendisRoot,
+    Bezoar,
+    Naphtha,
+    SilverAlloyDagger,
+
+    // Trade goods (gear sheet)
+    Salt,
+    SkinOfWhiskyFine,
+    PurseOfCoppers,
+    FirkinOfWhiskyFine,
+    HandfulOfSilvers,
+    PurseOfSilvers,
+
+    // Slotted items (Inventory insert)
+    MessKit,
+    Bedroll,
+    Blanket,
+    ChangeOfClothes,
+    Rope,
+    Shovel,
+    SledgeLitterTravois,
+    SnowShoes,
+    Torch,
+    OilLamp,
+    ExtraOil,
+    Firewood,
+    Hatchet,
+    Mallet,
+    Mattock,
+    Maul,
+    Staff,
+    Spear,
+    LongSpear,
+    BowIronArrows,
+    ExtraArrows,
+    Javelins,
+    Shield,
+    ThickHides,
+    Cloak,
+
+    // Small items (Inventory insert)
+    KnifeOrDagger,
+    Sling,
+    Rushlight,
+    Tinderbox,
+    NeedleThread,
+    HandfulOfCoppers,
+    WhiskySkin,
+    Awl,
+    Bowstring,
+    Chalk,
+    Charcoal,
+    ClayJar,
+    ClothRag,
+    Comb,
+    Cup,
+    ExtraSocks,
+    Gloves,
+    LittleBox,
+    Sack,
+    Sawdust,
+    Tallow,
+    TwineCord,
+    Waterskin,
+    Whetstone,
+    Whistle,
+
+    // Kit contents: the Blessed
+    SacredPouch,
+    Beeswax,
+    Honey,
+    BeeSmokers,
+    HatsVeils,
+    Milk,
+    Cheese,
+    Pelts,
+    Meat,
+    Blood,
+    Horn,
+    Wool,
+    Shears,
+    MortarsPestles,
+    Herbs,
+    Seeds,
+    Remedies,
+    MildPoisons,
+    Spades,
+
+    // Kit contents: the Fox
+    Picks,
+    Files,
+    Snippers,
+    Wire,
+    Prybars,
+    Hacksaws,
+    GrapplingHook,
+    Chisels,
+    Nails,
+    Pitch,
+    Saws,
+    Firkins,
+    CopperTubes,
+    Malt,
+    JugglingBalls,
+    WhirlybirdSeeds,
+    Motley,
+    Ribbons,
+    Bells,
+    Puppets,
+    Fiddle,
+    Ink,
+    Pigments,
+    Quills,
+    Notebook,
+    Lime,
+    Acid,
+    Salts,
+    ThickGloves,
+    Glass,
+    Silk,
+    Spice,
+    MedicinalHerbs,
+    Ivory,
+
+    // Kit contents: the Heavy
+    Catgut,
+    Straps,
+    Bandages,
+    Tubes,
+    Poultices,
+    WillowBark,
+    Bonesaws,
+    Brushes,
+    Muzzles,
+    Collars,
+    Feed,
+    Whips,
+    Bridles,
+    IronGoods,
+    Ingots,
+    Tongs,
+    Bellows,
+    Drills,
+    Spikes,
+
+    // Kit contents: the Judge
+    BlackIronMaul,
+    MakerglassShield,
+    DarkIceHelm,
+    BirdHoods,
+    Tethers,
+    Seed,
+    MessengerBirds,
+    Birdcages,
+    Rulers,
+    Tapes,
+    Rods,
+    PlumbBobs,
+    Tripods,
+
+    // Kit contents: the Lightbearer
+    Wicks,
+    ScentedHerbs,
+    Soap,
+    Lye,
+    Ash,
+    Charms,
+    Lenses,
+    Sand,
+    Marbles,
+    VariousWoods,
+    Stains,
+    Lute,
+
+    // Kit contents: the Marshal
+    LongSpearFineSteel,
+
+    // Kit contents: the Ranger
+    Snares,
+    Musk,
+    Bait,
+
+    // Kit contents: the Seeker
+    Chemics,
+    Reagents,
+    Measures,
+    Scales,
+    Decanters,
+    Crystals,
+    Incense,
+    Talismans,
+    Bone,
+    EyeOfNewt,
+    Braziers,
+    Cauldron,
+
+    // Kit contents: the Would-be Hero
+    CrestedShield,
+    WoolCloak,
+    Letter,
+    Flute,
+    Locket,
+    EngravedTinderbox,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]

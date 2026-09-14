@@ -111,26 +111,21 @@
     preselected: 1,
     options: [
       {
-        name: "◇ Composite bow",
-        description: "(<em>far</em>, +1 damage, x piercing; Arrows: {resource})",
-        resource: {
-          hold: "Arrows",
-          canBe: ["all out", "low ammo", "plenty left"],
-          start: "full",
-        },
+        name: "Composite bow",
+        gizmo: "Composite bow",
       },
       {
         name: "Distillery",
-        description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
+        description: "{skins of whisky|Skin of whisky, fine}, {copper tubes}, {malt}, {firkins}, stills, barrels, etc.",
       },
       {
         name: "Hideouts",
         description: "({resource} uses): expend a use to have a well-stocked, safe shelter nearby; GM can veto.",
-        resource: { hold: "Uses", canBe: 3, start: "empty" },
+        resource: { hold: "Uses", canBe: 3, start: "full" },
       },
       {
         name: "Husbandry tools",
-        description: "brushes, muzzles, collars, feed, ◇ whips, ◇ bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
+        description: "{brushes}, {muzzles}, {collars}, {feed}, {whips}, {bridles}, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
       },
       {
         name: "Hounds",
@@ -139,11 +134,11 @@
       {
         name: "Lay of the land",
         description: "({resource} uses): expend a use to know where to find ▁▁▁▁▁▁▁▁, without having to Know Things; GM can veto.",
-        resource: { hold: "Uses", canBe: 3, start: "empty" },
+        resource: { hold: "Uses", canBe: 3, start: "full" },
       },
       {
         name: "Trapping gear",
-        description: "snares, pelts, musk, bait, etc. When you <strong><em>Forage</em></strong>, get +1 use of provisions.",
+        description: "{snares}, {pelts}, {musk}, {bait}, etc. When you <strong><em>Forage</em></strong>, get +1 use of provisions.",
       },
     ],
   },

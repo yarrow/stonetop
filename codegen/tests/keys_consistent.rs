@@ -1,17 +1,22 @@
 //! The json5 files and `stonetop/src/keys.rs` agree: every name resolves to an enum variant (else
 //! the `Key` impl panics); every variant of every `XKey` enum is produced by some name; no
 //! playbook uses a key twice; and if different playbooks have identically-named keys, then those
-//! keys have the same value.
+//! keys have the same value. For gear: every `GizmoKey` is produced by exactly one gizmo, every
+//! reference from a possession resolves to a gizmo and names it as the gear file does, a
+//! possession's kit is its references in order, and a qualifier appears in its gizmo's prose.
 
 use std::any::type_name;
 use std::collections::BTreeMap;
 use std::fmt::{Debug, Display};
 
-use codegen::key::Key;
-use codegen::schema::Playbook;
-use codegen::{json5_playbook, playbook_names};
+use codegen::key::{Key, gizmo_key};
+use codegen::schema::{Gear, Gizmo, Playbook};
+use codegen::{json5_gear, json5_playbook, playbook_names};
 use serde::Serialize;
-use stonetop::keys::{BackgroundKey, BackstoryKey, MoveKey, PlaybookKey, SpecialPossessionKey};
+use stonetop::fixed::GizmoKit;
+use stonetop::keys::{
+    BackgroundKey, BackstoryKey, GizmoKey, MoveKey, PlaybookKey, SpecialPossessionKey,
+};
 use strum::IntoEnumIterator;
 
 /// Every item of one kind seen so far, keyed by its `XKey` value, to the first playbook that used
@@ -129,4 +134,100 @@ fn keys_consistent() {
     }
     seen.check_every_variant_used();
     assert!(seen.problems.is_empty(), "Inconsistent keys:\n{}", seen.report());
+}
+
+/// Every gizmo in the gear file by its key, with a problem for each key produced twice.
+fn gizmos_by_key<'a>(gear: &'a Gear, problems: &mut Vec<String>) -> BTreeMap<GizmoKey, &'a Gizmo> {
+    let mut by_key = BTreeMap::new();
+    for gizmo in gear.gizmos() {
+        let key = gizmo.key();
+        if by_key.insert(key, gizmo).is_some() {
+            problems.push(format!("{key}: two gizmos in gear.json5 produce this GizmoKey"));
+        }
+    }
+    by_key
+}
+
+#[test]
+fn every_gizmo_key_is_produced_by_exactly_one_gizmo() {
+    let gear = json5_gear().unwrap_or_else(|e| panic!("{e:#}"));
+    let mut problems = Vec::new();
+    let by_key = gizmos_by_key(&gear, &mut problems);
+    for key in GizmoKey::iter() {
+        if !by_key.contains_key(&key) {
+            problems.push(format!("{key}: no gizmo in gear.json5 produces this GizmoKey"));
+        }
+    }
+    problems.sort();
+    assert!(problems.is_empty(), "Inconsistent gizmo keys:\n{}", problems.join("\n"));
+}
+
+#[test]
+fn every_reference_resolves_and_names_its_gizmo_and_kits_are_the_references_in_order() {
+    let gear = json5_gear().unwrap_or_else(|e| panic!("{e:#}"));
+    let mut problems = Vec::new();
+    let by_key = gizmos_by_key(&gear, &mut problems);
+    for name in playbook_names() {
+        let playbook = json5_playbook(&name).unwrap_or_else(|e| panic!("{e:#}"));
+        for possession in &playbook.special_possessions.options {
+            let label = format!("{name} {:?}", possession.name);
+            let mut expected = Vec::new();
+            for target in possession.gizmo.iter().map(String::as_str) {
+                match gizmo_key(target) {
+                    Ok(key) => expected.push(key),
+                    Err(e) => problems.push(format!("{label}: {e}")),
+                }
+            }
+            for reference in possession.gizmo_references() {
+                let key = match gizmo_key(reference.target) {
+                    Ok(key) => key,
+                    Err(e) => {
+                        problems.push(format!("{label}: {e}"));
+                        continue;
+                    }
+                };
+                expected.push(key);
+                // A bare reference is spoken as written, so it must be the gizmo's own name;
+                // a qualified gizmo needs the phrase form, since its description carries the
+                // qualifier.
+                if reference.phrase.is_none()
+                    && !by_key[&key].name.eq_ignore_ascii_case(reference.target)
+                {
+                    problems.push(format!(
+                        "{label}: `{{{}}}` is not the name of {key}; write `{{phrase|{}}}`",
+                        reference.target, reference.target
+                    ));
+                }
+            }
+            let kit = possession.to_fixed().kit;
+            if kit.gizmos() != expected.as_slice() {
+                problems.push(format!("{label}: kit {kit:?} is not its references {expected:?}"));
+            }
+            match (&possession.gizmo, &kit) {
+                (Some(_), GizmoKit::One(_)) | (None, GizmoKit::Referenced(_)) => {}
+                (gizmo, kit) => problems.push(format!("{label}: gizmo {gizmo:?} but kit {kit:?}")),
+            }
+        }
+    }
+    problems.sort();
+    assert!(problems.is_empty(), "Gizmo references:\n{}", problems.join("\n"));
+}
+
+#[test]
+fn a_gizmos_qualifier_appears_in_its_description() {
+    let gear = json5_gear().unwrap_or_else(|e| panic!("{e:#}"));
+    let mut problems = Vec::new();
+    for gizmo in gear.gizmos() {
+        if let Some(qualifier) = &gizmo.qualifier
+            && !gizmo.description.to_lowercase().contains(&qualifier.to_lowercase())
+        {
+            problems.push(format!(
+                "{}: qualifier {qualifier:?} is not in the description {:?}",
+                gizmo.key(),
+                gizmo.description
+            ));
+        }
+    }
+    problems.sort();
+    assert!(problems.is_empty(), "Qualifiers missing from prose:\n{}", problems.join("\n"));
 }

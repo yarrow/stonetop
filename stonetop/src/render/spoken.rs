@@ -1,11 +1,12 @@
-//! Spoken forms of print glyphs: slot diamonds become "N-slot", and a resource's
-//! `{resource}` placeholder becomes its count or its list of states.
+//! Spoken forms of print glyphs: slot diamonds become "N-slot", a resource's `{resource}`
+//! placeholder becomes its count or its list of states, and a gizmo reference becomes the
+//! gizmo's printed line, diamonds and all, for [`speak_slots`] to finish.
 
 use std::sync::LazyLock;
 
 use regex_lite::{Captures, Regex};
 
-use crate::fixed::{CanBe, Resource};
+use crate::fixed::{CanBe, GizmoFixed, RESOURCE_PLACEHOLDER, Resource, gizmo_references};
 
 /// A run of slot diamonds with the article beside it, if any: "an ◇◇", "◇ a ", or a bare
 /// run. The alternatives are tried in that order, so an article before the run wins.
@@ -35,9 +36,6 @@ pub fn speak_slots(text: &str) -> String {
         })
         .into_owned()
 }
-
-/// The marker in a possession's description where its resource's value is spoken.
-const RESOURCE_PLACEHOLDER: &str = "{resource}";
 
 /// A resource's capacity as words: a count for `CanBe::Max`, or the states best first for
 /// `CanBe::Labels` ("plenty left, low ammo, or all out").
@@ -84,10 +82,76 @@ pub fn move_resource_line(resource: &Resource) -> String {
     format!("{}: {}", resource.hold, resource_value(resource))
 }
 
+/// A gizmo's printed head, spoken for `phrase`: its diamonds, then the phrase. "◇ a lantern",
+/// "◇◇ firkins", "Sword". The diamonds are left for [`speak_slots`], which also moves an
+/// article in the phrase to the front.
+pub fn gizmo_head(phrase: &str, gizmo: &GizmoFixed) -> String {
+    let diamonds = gizmo.slots.diamonds();
+    if diamonds.is_empty() { phrase.to_string() } else { format!("{diamonds} {phrase}") }
+}
+
+/// `description` with its resource, if it has one, spoken in place of the `{resource}`
+/// placeholder; a description with no resource has no placeholder and is unchanged.
+pub fn speak_resource(description: &str, resource: Option<&Resource>) -> String {
+    match resource {
+        Some(resource) => expand_resource(description, resource),
+        None => description.to_string(),
+    }
+}
+
+/// A gizmo's description with its resource, if any, spoken: ", iron (<em>close</em>, +1
+/// damage)", "({resource} hours, …)" with the hours counted.
+pub fn gizmo_body(gizmo: &GizmoFixed) -> String {
+    speak_resource(gizmo.description, gizmo.resource.as_ref())
+}
+
+/// `head` and `body` as one line: a body that continues the head with a comma or a colon
+/// follows it directly, any other body after a space, and an empty body leaves the head alone.
+fn join_head_and_body(head: &str, body: &str) -> String {
+    if body.is_empty() {
+        head.to_string()
+    } else if body.starts_with([',', ':']) {
+        format!("{head}{body}")
+    } else {
+        format!("{head} {body}")
+    }
+}
+
+/// `text` with each gizmo reference replaced by its gizmo's line, head and body, so that
+/// "{a lantern|Lantern}" reads as the print's "◇ a lantern (5 hours, <em>close, area</em>)"
+/// once [`speak_slots`] has spoken the diamonds. `gizmos` are the referenced gizmos in order
+/// of appearance, as a possession's kit lists them.
+///
+/// # Panics
+/// If `text` has a different number of references from `gizmos`.
+pub fn expand_gizmos(text: &str, gizmos: &[&GizmoFixed]) -> String {
+    let references = gizmo_references(text);
+    assert_eq!(
+        references.len(),
+        gizmos.len(),
+        "{text:?} has {} gizmo references but {} gizmos were supplied",
+        references.len(),
+        gizmos.len()
+    );
+    let mut spoken = String::with_capacity(text.len());
+    let mut from = 0;
+    for (reference, gizmo) in references.iter().zip(gizmos) {
+        spoken.push_str(&text[from..reference.span.start]);
+        spoken.push_str(&join_head_and_body(
+            &gizmo_head(reference.spoken(), gizmo),
+            &gizmo_body(gizmo),
+        ));
+        from = reference.span.end;
+    }
+    spoken.push_str(&text[from..]);
+    spoken
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::fixed::EmptyFull;
+    use crate::fixed::{EmptyFull, SlotCount};
+    use crate::keys::GizmoKey;
 
     #[test]
     fn a_run_of_one_or_two_diamonds_is_spoken_as_n_slot() {
@@ -196,5 +260,70 @@ mod tests {
             move_resource_line(&resource("Keep fighting", CanBe::Max(5))),
             "Keep fighting: 5"
         );
+    }
+
+    fn gizmo(
+        name: &'static str,
+        slots: SlotCount,
+        description: &'static str,
+        resource: Option<Resource>,
+    ) -> GizmoFixed {
+        GizmoFixed {
+            key: GizmoKey::Lantern,
+            name,
+            qualifier: None,
+            piercing: None,
+            slots,
+            description,
+            resource,
+        }
+    }
+
+    #[test]
+    fn a_reference_becomes_the_printed_line_with_its_diamonds_and_resource() {
+        let lantern = gizmo(
+            "Lantern",
+            SlotCount::One,
+            "({resource} hours, <em>close, area</em>)",
+            Some(resource("Hours", CanBe::Max(5))),
+        );
+        let prybars = gizmo("Prybars", SlotCount::One, "", None);
+        let picks = gizmo("Picks", SlotCount::Zero, "", None);
+        let expanded = expand_gizmos(
+            "{picks}, {prybars}, {a lantern|Lantern}, etc.",
+            &[&picks, &prybars, &lantern],
+        );
+        assert_eq!(expanded, "picks, ◇ prybars, ◇ a lantern (5 hours, <em>close, area</em>), etc.");
+        assert_eq!(
+            speak_slots(&expanded),
+            "picks, 1-slot prybars, a 1-slot lantern (5 hours, <em>close, area</em>), etc."
+        );
+    }
+
+    #[test]
+    fn a_body_that_starts_with_a_comma_or_colon_continues_the_head() {
+        let sword = gizmo("Sword", SlotCount::One, ", iron (<em>close</em>, +1 damage)", None);
+        assert_eq!(
+            expand_gizmos("{Sword}", &[&sword]),
+            "◇ Sword, iron (<em>close</em>, +1 damage)"
+        );
+        let pouch = gizmo("Sacred pouch", SlotCount::Zero, ": see back page", None);
+        assert_eq!(expand_gizmos("{Sacred pouch}", &[&pouch]), "Sacred pouch: see back page");
+    }
+
+    #[test]
+    fn a_resource_placeholder_is_not_a_reference_and_is_left_for_the_possession() {
+        let whisky = gizmo("Whisky", SlotCount::Zero, "", None);
+        assert_eq!(
+            expand_gizmos("({resource} uses) of {whisky}", &[&whisky]),
+            "({resource} uses) of whisky"
+        );
+    }
+
+    #[test]
+    #[should_panic(expected = "has 2 gizmo references but 1 gizmos were supplied")]
+    fn a_kit_that_does_not_match_the_references_is_a_bug() {
+        let awl = gizmo("Awl", SlotCount::Zero, "", None);
+        expand_gizmos("{awl} and {awl}", &[&awl]);
     }
 }

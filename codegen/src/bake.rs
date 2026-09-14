@@ -13,11 +13,13 @@ use std::process::{Command, Stdio};
 use anyhow::{Context, Result, bail};
 use databake::{Bake, CrateEnv};
 use stonetop::fixed;
-use stonetop::keys::{BackgroundKey, BackstoryKey, MoveKey, PlaybookKey, SpecialPossessionKey};
+use stonetop::keys::{
+    BackgroundKey, BackstoryKey, GizmoKey, MoveKey, PlaybookKey, SpecialPossessionKey,
+};
 
 use crate::key::Key;
-use crate::schema::{self, Playbook};
-use crate::{json5_playbook, playbook_names};
+use crate::schema::{self, Gear, Playbook};
+use crate::{json5_gear, json5_playbook, playbook_names};
 
 /// Where the baked file lives.
 #[must_use]
@@ -37,13 +39,15 @@ fn workspace_root() -> PathBuf {
 ///
 /// # Errors
 ///
-/// If a playbook fails to parse, or rustfmt is missing or rejects the output.
+/// If the gear file or a playbook fails to parse, or rustfmt is missing or rejects the output.
 pub fn baked_source() -> Result<String> {
+    let gear = json5_gear()?;
     let playbooks = playbook_names()
         .iter()
         .map(|name| json5_playbook(name))
         .collect::<Result<Vec<Playbook>>>()?;
     let mut out = String::from(HEADER);
+    let gizmos = bake_gizmos(&gear, &mut out)?;
     let moves = bake_moves(&playbooks, &mut out)?;
     let backgrounds = bake_backgrounds(&playbooks, &moves, &mut out)?;
     let special_possessions = bake_special_possessions(&playbooks, &mut out)?;
@@ -60,6 +64,7 @@ pub fn baked_source() -> Result<String> {
     )?;
     bake_fixed_part("BackstoryKey", "BackstoryFixed", &items.backstories, &mut out)?;
     bake_fixed_part("PlaybookKey", "PlaybookFixed", &playbook_statics, &mut out)?;
+    bake_fixed_part("GizmoKey", "GizmoFixed", &gizmos, &mut out)?;
     rustfmt(&out)
 }
 
@@ -67,11 +72,31 @@ const HEADER: &str = "\
 //! Baked Fixed content: written by `cargo xtask bake` from `codegen/json5/`, checked by
 //! `codegen/tests/generated_fresh.rs`. Do not edit; change the json5 and run the command.
 //!
-//! The statics are grouped by playbook, a shared item appearing once under the first playbook
-//! that uses it, as in `keys.rs`. Each playbook's static references its items' statics. Each
-//! kind's `fixed_part()` matches every key to its static.
+//! Gizmos come first, grouped by the gear file's sections. The playbook statics are grouped
+//! by playbook, a shared item appearing once under the first playbook that uses it, as in
+//! `keys.rs`. Each playbook's static references its items' statics; a Special Possession's
+//! kit names its gizmos by key. Each kind's `fixed_part()` matches every key to its static.
 
 ";
+
+/// Write one static per gizmo, section by section in the gear file's order, returning each
+/// key's static's name.
+fn bake_gizmos(gear: &Gear, out: &mut String) -> Result<BTreeMap<GizmoKey, String>> {
+    let env = CrateEnv::default();
+    let mut statics = BTreeMap::new();
+    for (section, gizmos) in gear.sections() {
+        writeln!(out, "// Gear: {section}\n")?;
+        for gizmo in gizmos {
+            let key = gizmo.key();
+            assert!(!statics.contains_key(&key), "{key}: two gizmos in gear.json5 share this key");
+            let name = format!("GIZMO_{}", screaming_snake(&key.to_string()));
+            let baked = gizmo.to_fixed().bake(&env);
+            writeln!(out, "static {name}: stonetop::fixed::GizmoFixed = {baked};\n")?;
+            statics.insert(key, name);
+        }
+    }
+    Ok(statics)
+}
 
 /// The name of every item static written so far, by key, so that a later static can reference
 /// an item instead of baking its content a second time.

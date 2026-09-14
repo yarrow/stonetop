@@ -115,12 +115,11 @@
     options: [
       {
         name: "Sacred pouch (<em>magical</em>)",
-        description: "see back page. Stock: {resource}",
-        resource: { hold: "Stock", canBe: 3, start: "full" },
+        gizmo: "Sacred pouch",
       },
       {
         name: "Apiary",
-        description: "beeswax, candles (<em>close, area</em>, lasts ~1 hr), honey, ◇ bee smokers, ◇ hats & veils, etc.",
+        description: "{beeswax}, {candles|Candle}, {honey}, {bee smokers}, {hats & veils}, etc.",
       },
       {
         name: "Collected offerings",
@@ -129,11 +128,11 @@
       },
       {
         name: "Goat herd",
-        description: "milk, cheese, pelts, meat, blood, horn, wool, etc. Each season, 1 in 4 chance of having a bezoar (swallow it to cure poison).",
+        description: "{milk}, {cheese}, {pelts}, {meat}, {blood}, {horn}, {wool}, etc. Each season, 1 in 4 chance of having {a bezoar|Bezoar}.",
       },
       {
         name: "Herb garden",
-        description: "shears, mortars & pestles, herbs, seeds, remedies, mild poisons, ◇ spades, etc. Each spring, d4 uses of bendis root (<em>reach, area</em>, burns ~1 hr, fumes repel perversions of nature).",
+        description: "{shears}, {mortars & pestles}, {herbs}, {seeds}, {remedies}, {mild poisons}, {spades}, etc. Each spring, d4 uses of {bendis root|Bendis root}.",
       },
       {
         name: "Mastiffs",

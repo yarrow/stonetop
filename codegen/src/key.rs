@@ -1,15 +1,17 @@
 use std::any::type_name;
-use std::fmt::Debug;
+use std::fmt::{Debug, Write as _};
 use std::str::FromStr;
 
 use regex::Regex;
 use serde::de::Error;
 use serde::{Deserialize, Deserializer};
-use stonetop::keys::{BackgroundKey, BackstoryKey, MoveKey, PlaybookKey, SpecialPossessionKey};
+use stonetop::keys::{
+    BackgroundKey, BackstoryKey, GizmoKey, MoveKey, PlaybookKey, SpecialPossessionKey,
+};
 
-use crate::schema::{Background, Backstory, Move, Playbook, SpecialPossession};
+use crate::schema::{Background, Backstory, Gizmo, Move, Playbook, SpecialPossession};
 
-/// A playbook or item whose name resolves to a variant of one of the key enums in
+/// A playbook, item, or gizmo whose name resolves to a variant of one of the key enums in
 /// `stonetop/src/keys.rs`.
 pub trait Key {
     type Key: FromStr + Debug;
@@ -157,12 +159,48 @@ impl Key for Playbook {
     }
 }
 
+impl Key for Gizmo {
+    type Key = GizmoKey;
+
+    /// The name, then the qualifier unless it is iron, then `PiercingN` for the starred
+    /// upgrade: `Battleaxe`, `BattleaxePiercing1`, `BattleaxeBronze`, `LongSpearFineSteel`.
+    fn variant_name(&self) -> String {
+        let mut variant = enumable(&self.name);
+        if let Some(qualifier) =
+            self.qualifier.as_deref().filter(|q| !q.eq_ignore_ascii_case("iron"))
+        {
+            variant.push_str(&enumable(qualifier));
+        }
+        if let Some(piercing) = self.piercing {
+            let _ = write!(variant, "Piercing{piercing}");
+        }
+        variant
+    }
+}
+
+/// The key a gizmo reference's target resolves to. A target is the gizmo's name with its
+/// qualifier if it has one, so it shapes to the variant the same way the gizmo's own name does:
+/// `Lantern`, `Long spear, fine steel`, `Cuirass, boiled leather`.
+///
+/// # Errors
+///
+/// If no variant is named `enumable(target)`.
+pub fn gizmo_key(target: &str) -> Result<GizmoKey, String> {
+    let variant = enumable(target);
+    GizmoKey::from_str(&variant).map_err(|_| {
+        format!("`{{{target}}}` shapes to `{variant}`, which is not a GizmoKey: check gear.json5 and stonetop/src/keys.rs")
+    })
+}
+
 impl_key!(Background => BackgroundKey, Backstory => BackstoryKey);
 impl_key_with_prefix!(SpecialPossession => SpecialPossessionKey, Move => MoveKey);
 
 #[cfg(test)]
 mod test {
-    use super::enumable;
+    use stonetop::keys::GizmoKey;
+
+    use super::{Key, enumable, gizmo_key};
+    use crate::schema::Gizmo;
 
     #[test]
     fn words_run_together() {
@@ -178,5 +216,34 @@ mod test {
     #[test]
     fn tags_and_parenthesised_qualifiers_are_dropped() {
         assert_eq!(enumable("Sacred pouch (<em>magical</em>)"), "SacredPouch");
+    }
+
+    fn gizmo(json5_source: &str) -> Gizmo {
+        json5::from_str(json5_source).unwrap_or_else(|e| panic!("{e:#}"))
+    }
+
+    #[test]
+    fn a_gizmos_variant_drops_iron_and_keeps_other_qualifiers_and_the_piercing_upgrade() {
+        assert_eq!(
+            gizmo(r#"{ name: "Spear", qualifier: "iron", slots: 1 }"#).key(),
+            GizmoKey::Spear
+        );
+        assert_eq!(
+            gizmo(r#"{ name: "Battleaxe", qualifier: "bronze", piercing: 2, slots: 1 }"#).key(),
+            GizmoKey::BattleaxeBronzePiercing2
+        );
+        assert_eq!(
+            gizmo(r#"{ name: "Empty book", qualifier: "fine vellum", slots: 1 }"#).key(),
+            GizmoKey::EmptyBookFineVellum
+        );
+        assert_eq!(gizmo(r#"{ name: "Block & tackle", slots: 1 }"#).key(), GizmoKey::BlockTackle);
+    }
+
+    #[test]
+    fn a_reference_target_resolves_like_a_name_with_its_qualifier() {
+        assert_eq!(gizmo_key("Lantern"), Ok(GizmoKey::Lantern));
+        assert_eq!(gizmo_key("Long spear, fine steel"), Ok(GizmoKey::LongSpearFineSteel));
+        assert_eq!(gizmo_key("Sword"), Ok(GizmoKey::Sword));
+        assert!(gizmo_key("Sword, iron").unwrap_err().contains("SwordIron"));
     }
 }

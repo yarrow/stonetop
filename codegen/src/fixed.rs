@@ -5,9 +5,9 @@
 //! vector is leaked on the way across. This is deliberate: `codegen` is a build tool that runs
 //! once, bakes what it built, and exits, so nothing is ever freed anyway.
 
-use stonetop::fixed;
+use stonetop::fixed::{self, GizmoReference, gizmo_references};
 
-use crate::key::Key;
+use crate::key::{Key, gizmo_key};
 use crate::schema;
 
 fn leak_str(s: &str) -> &'static str {
@@ -312,12 +312,13 @@ impl schema::GrantTopic {
 // SpecialPossession ------------------------------------------------------
 
 impl schema::SpecialPossession {
-    /// This Special Possession as `stonetop` will see it, with its key resolved.
+    /// This Special Possession as `stonetop` will see it, with its key and its kit's keys
+    /// resolved.
     ///
     /// # Panics
     ///
     /// If the Special Possession's name doesn't resolve to a `SpecialPossessionKey` (see
-    /// [`Key::key`]).
+    /// [`Key::key`]), or its kit is malformed (see [`Self::kit`]).
     #[must_use]
     pub fn to_fixed(&self) -> fixed::SpecialPossessionFixed {
         fixed::SpecialPossessionFixed {
@@ -326,6 +327,71 @@ impl schema::SpecialPossession {
             description: leak_str(&self.description),
             resource: self.resource.as_ref().map(schema::Resource::to_fixed),
             pick: leak_strs(&self.pick),
+            kit: self.kit(),
+        }
+    }
+
+    /// Every gizmo reference in the description, then in each pick entry, in order.
+    pub fn gizmo_references(&self) -> impl Iterator<Item = GizmoReference<'_>> {
+        gizmo_references(&self.description)
+            .into_iter()
+            .chain(self.pick.iter().flat_map(|entry| gizmo_references(entry)))
+    }
+
+    /// The kit: the one gizmo named by `gizmo`, or the gizmos referenced in the description and
+    /// pick entries, in order.
+    ///
+    /// # Panics
+    ///
+    /// If a reference target or the `gizmo` field resolves to no `GizmoKey`, or a possession
+    /// with a `gizmo` also has a description, a resource, or pick entries: a kit of one has
+    /// nothing of its own, since the gizmo's description and resource serve.
+    #[must_use]
+    pub fn kit(&self) -> fixed::GizmoKit {
+        let resolve =
+            |target: &str| gizmo_key(target).unwrap_or_else(|e| panic!("{:?}: {e}", self.name));
+        match &self.gizmo {
+            Some(target) => {
+                assert!(
+                    self.description.is_empty() && self.resource.is_none() && self.pick.is_empty(),
+                    "{:?}: a kit of one has no description, resource, or pick of its own",
+                    self.name
+                );
+                fixed::GizmoKit::One(resolve(target))
+            }
+            None => fixed::GizmoKit::Referenced(leak_vec(
+                self.gizmo_references().map(|reference| resolve(reference.target)).collect(),
+            )),
+        }
+    }
+}
+
+// Gizmo ------------------------------------------------------------------
+
+impl schema::Gizmo {
+    /// This gizmo as `stonetop` will see it, with its key resolved. `value` stays behind: nothing
+    /// reads it yet.
+    ///
+    /// # Panics
+    ///
+    /// If the gizmo's name doesn't resolve to a `GizmoKey` (see [`Key::key`]), or `slots` is
+    /// more than 2.
+    #[must_use]
+    pub fn to_fixed(&self) -> fixed::GizmoFixed {
+        let slots = match self.slots {
+            0 => fixed::SlotCount::Zero,
+            1 => fixed::SlotCount::One,
+            2 => fixed::SlotCount::Two,
+            n => panic!("{:?}: a gizmo takes 0, 1, or 2 slots, not {n}", self.name),
+        };
+        fixed::GizmoFixed {
+            key: self.key(),
+            name: leak_str(&self.name),
+            qualifier: self.qualifier.as_deref().map(leak_str),
+            piercing: self.piercing,
+            slots,
+            description: leak_str(&self.description),
+            resource: self.resource.as_ref().map(schema::Resource::to_fixed),
         }
     }
 }
@@ -523,8 +589,8 @@ mod background_test {
 
 #[cfg(test)]
 mod special_possession_test {
-    use stonetop::fixed::{CanBe, EmptyFull, Resource, SpecialPossessionFixed};
-    use stonetop::keys::SpecialPossessionKey;
+    use stonetop::fixed::{CanBe, EmptyFull, GizmoKit, Resource, SpecialPossessionFixed};
+    use stonetop::keys::{GizmoKey, SpecialPossessionKey};
 
     use crate::schema::SpecialPossession;
 
@@ -535,15 +601,16 @@ mod special_possession_test {
     #[test]
     fn defaults_come_across_as_empty() {
         let fixed =
-            parse(r#"{ name: "Sacred pouch", description: "<p>Carries things.</p>" }"#).to_fixed();
+            parse(r#"{ name: "Hidden stash", description: "<p>Carries things.</p>" }"#).to_fixed();
         assert_eq!(
             fixed,
             SpecialPossessionFixed {
-                key: SpecialPossessionKey::SacredPouch,
-                name: "Sacred pouch",
+                key: SpecialPossessionKey::HiddenStash,
+                name: "Hidden stash",
                 description: "<p>Carries things.</p>",
                 resource: None,
                 pick: &[],
+                kit: GizmoKit::Referenced(&[]),
             }
         );
     }
@@ -566,6 +633,111 @@ mod special_possession_test {
             Some(Resource { hold: "Ammo", can_be: CanBe::Max(3), start: EmptyFull::Full })
         );
         assert_eq!(fixed.pick, &["sword", "axe"]);
+    }
+
+    #[test]
+    fn the_kit_is_the_references_in_order_description_first_then_picks() {
+        let fixed = parse(
+            r#"{
+                name: "Weapons of War",
+                keyPrefix: "Ph",
+                description: "{a lantern|Lantern} and {candles|Candle} ({resource} uses):",
+                resource: { hold: "Uses", canBe: 3, start: "full" },
+                pick: ["{Sword}", "{Long spear|Long spear, fine steel}"],
+            }"#,
+        )
+        .to_fixed();
+        assert_eq!(
+            fixed.kit,
+            GizmoKit::Referenced(&[
+                GizmoKey::Lantern,
+                GizmoKey::Candle,
+                GizmoKey::Sword,
+                GizmoKey::LongSpearFineSteel
+            ])
+        );
+    }
+
+    #[test]
+    fn a_kit_of_one_names_its_gizmo_and_has_no_description() {
+        let fixed = parse(r#"{ name: "Sacred pouch", gizmo: "Sacred pouch" }"#).to_fixed();
+        assert_eq!(fixed.description, "");
+        assert_eq!(fixed.kit, GizmoKit::One(GizmoKey::SacredPouch));
+    }
+
+    #[test]
+    #[should_panic(expected = "a kit of one has no description")]
+    fn a_kit_of_one_with_a_description_is_a_bug() {
+        let _ = parse(r#"{ name: "Sacred pouch", gizmo: "Sacred pouch", description: "x" }"#)
+            .to_fixed();
+    }
+
+    #[test]
+    #[should_panic(expected = "not a GizmoKey")]
+    fn a_reference_to_no_gizmo_is_a_bug() {
+        let _ =
+            parse(r#"{ name: "Apiary", description: "{a unicorn horn|Unicorn horn}" }"#).to_fixed();
+    }
+}
+
+#[cfg(test)]
+mod gizmo_test {
+    use stonetop::fixed::{CanBe, EmptyFull, GizmoFixed, Resource, SlotCount};
+    use stonetop::keys::GizmoKey;
+
+    use crate::schema::Gizmo;
+
+    fn parse(json5_source: &str) -> Gizmo {
+        json5::from_str(json5_source).unwrap_or_else(|e| panic!("{e:#}"))
+    }
+
+    #[test]
+    fn every_field_comes_across_and_value_stays_behind() {
+        let fixed = parse(
+            r#"{
+                name: "Battleaxe",
+                qualifier: "bronze",
+                piercing: 1,
+                slots: 2,
+                value: 2,
+                description: ", bronze (<em>close, messy</em>, 1 piercing; {resource} uses)",
+                resource: { hold: "Uses", canBe: 3, start: "full" },
+            }"#,
+        )
+        .to_fixed();
+        assert_eq!(
+            fixed,
+            GizmoFixed {
+                key: GizmoKey::BattleaxeBronzePiercing1,
+                name: "Battleaxe",
+                qualifier: Some("bronze"),
+                piercing: Some(1),
+                slots: SlotCount::Two,
+                description: ", bronze (<em>close, messy</em>, 1 piercing; {resource} uses)",
+                resource: Some(Resource {
+                    hold: "Uses",
+                    can_be: CanBe::Max(3),
+                    start: EmptyFull::Full
+                }),
+            }
+        );
+    }
+
+    #[test]
+    fn defaults_come_across_as_empty() {
+        let fixed = parse(r#"{ name: "Awl", slots: 0 }"#).to_fixed();
+        assert_eq!(fixed.key, GizmoKey::Awl);
+        assert_eq!(fixed.qualifier, None);
+        assert_eq!(fixed.piercing, None);
+        assert_eq!(fixed.slots, SlotCount::Zero);
+        assert_eq!(fixed.description, "");
+        assert_eq!(fixed.resource, None);
+    }
+
+    #[test]
+    #[should_panic(expected = "0, 1, or 2 slots")]
+    fn three_slots_is_a_bug() {
+        let _ = parse(r#"{ name: "Awl", slots: 3 }"#).to_fixed();
     }
 }
 

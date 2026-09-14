@@ -1,9 +1,2312 @@
 //! Baked Fixed content: written by `cargo xtask bake` from `codegen/json5/`, checked by
 //! `codegen/tests/generated_fresh.rs`. Do not edit; change the json5 and run the command.
 //!
-//! The statics are grouped by playbook, a shared item appearing once under the first playbook
-//! that uses it, as in `keys.rs`. Each playbook's static references its items' statics. Each
-//! kind's `fixed_part()` matches every key to its static.
+//! Gizmos come first, grouped by the gear file's sections. The playbook statics are grouped
+//! by playbook, a shared item appearing once under the first playbook that uses it, as in
+//! `keys.rs`. Each playbook's static references its items' statics; a Special Possession's
+//! kit names its gizmos by key. Each kind's `fixed_part()` matches every key to its static.
+
+// Gear: Weapons of war
+
+static GIZMO_MACE_OR_FLAIL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::MaceOrFlail,
+    name: "Mace or flail",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>close, forceful</em>)",
+    resource: None,
+};
+
+static GIZMO_BATTLEAXE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Battleaxe,
+    name: "Battleaxe",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>close, messy</em>)",
+    resource: None,
+};
+
+static GIZMO_BATTLEAXE_PIERCING1: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::BattleaxePiercing1,
+    name: "Battleaxe",
+    qualifier: Some("iron"),
+    piercing: Some(1u8),
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>close, messy</em>, 1 piercing)",
+    resource: None,
+};
+
+static GIZMO_BATTLEAXE_PIERCING2: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::BattleaxePiercing2,
+    name: "Battleaxe",
+    qualifier: Some("iron"),
+    piercing: Some(2u8),
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>close, messy</em>, 2 piercing)",
+    resource: None,
+};
+
+static GIZMO_SHORT_SWORD: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ShortSword,
+    name: "Short sword",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>hand, close</em>)",
+    resource: None,
+};
+
+static GIZMO_SHORT_SWORD_PIERCING1: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ShortSwordPiercing1,
+    name: "Short sword",
+    qualifier: Some("iron"),
+    piercing: Some(1u8),
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>hand, close</em>, 1 piercing)",
+    resource: None,
+};
+
+static GIZMO_SHORT_SWORD_PIERCING2: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ShortSwordPiercing2,
+    name: "Short sword",
+    qualifier: Some("iron"),
+    piercing: Some(2u8),
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>hand, close</em>, 2 piercing)",
+    resource: None,
+};
+
+static GIZMO_SWORD: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Sword,
+    name: "Sword",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>close</em>, +1 damage)",
+    resource: None,
+};
+
+static GIZMO_SWORD_PIERCING1: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SwordPiercing1,
+    name: "Sword",
+    qualifier: Some("iron"),
+    piercing: Some(1u8),
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>close</em>, +1 damage, 1 piercing)",
+    resource: None,
+};
+
+static GIZMO_SWORD_PIERCING2: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SwordPiercing2,
+    name: "Sword",
+    qualifier: Some("iron"),
+    piercing: Some(2u8),
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>close</em>, +1 damage, 2 piercing)",
+    resource: None,
+};
+
+static GIZMO_WARHAMMER: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Warhammer,
+    name: "Warhammer",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>close</em>, 2 piercing)",
+    resource: None,
+};
+
+static GIZMO_CROSSBOW: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Crossbow,
+    name: "Crossbow",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(<em>far</em>, +1 damage, <em>reload</em>, x piercing; Bolts: {resource})",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Bolts",
+        can_be: stonetop::fixed::CanBe::Labels(&["all out", "low ammo", "plenty left"]),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_COMPOSITE_BOW: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::CompositeBow,
+    name: "Composite bow",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(<em>far</em>, +1 damage, x piercing; Arrows: {resource})",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Arrows",
+        can_be: stonetop::fixed::CanBe::Labels(&["all out", "low ammo", "plenty left"]),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+// Gear: Bronze weapons
+
+static GIZMO_MACE_OR_FLAIL_BRONZE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::MaceOrFlailBronze,
+    name: "Mace or flail",
+    qualifier: Some("bronze"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", bronze (<em>close, forceful</em>)",
+    resource: None,
+};
+
+static GIZMO_BATTLEAXE_BRONZE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::BattleaxeBronze,
+    name: "Battleaxe",
+    qualifier: Some("bronze"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", bronze (<em>close, messy</em>)",
+    resource: None,
+};
+
+static GIZMO_BATTLEAXE_BRONZE_PIERCING1: stonetop::fixed::GizmoFixed =
+    stonetop::fixed::GizmoFixed {
+        key: stonetop::keys::GizmoKey::BattleaxeBronzePiercing1,
+        name: "Battleaxe",
+        qualifier: Some("bronze"),
+        piercing: Some(1u8),
+        slots: stonetop::fixed::SlotCount::One,
+        description: ", bronze (<em>close, messy</em>, 1 piercing)",
+        resource: None,
+    };
+
+static GIZMO_BATTLEAXE_BRONZE_PIERCING2: stonetop::fixed::GizmoFixed =
+    stonetop::fixed::GizmoFixed {
+        key: stonetop::keys::GizmoKey::BattleaxeBronzePiercing2,
+        name: "Battleaxe",
+        qualifier: Some("bronze"),
+        piercing: Some(2u8),
+        slots: stonetop::fixed::SlotCount::One,
+        description: ", bronze (<em>close, messy</em>, 2 piercing)",
+        resource: None,
+    };
+
+static GIZMO_SHORT_SWORD_BRONZE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ShortSwordBronze,
+    name: "Short sword",
+    qualifier: Some("bronze"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", bronze (<em>hand, close</em>)",
+    resource: None,
+};
+
+static GIZMO_SHORT_SWORD_BRONZE_PIERCING1: stonetop::fixed::GizmoFixed =
+    stonetop::fixed::GizmoFixed {
+        key: stonetop::keys::GizmoKey::ShortSwordBronzePiercing1,
+        name: "Short sword",
+        qualifier: Some("bronze"),
+        piercing: Some(1u8),
+        slots: stonetop::fixed::SlotCount::One,
+        description: ", bronze (<em>hand, close</em>, 1 piercing)",
+        resource: None,
+    };
+
+static GIZMO_SHORT_SWORD_BRONZE_PIERCING2: stonetop::fixed::GizmoFixed =
+    stonetop::fixed::GizmoFixed {
+        key: stonetop::keys::GizmoKey::ShortSwordBronzePiercing2,
+        name: "Short sword",
+        qualifier: Some("bronze"),
+        piercing: Some(2u8),
+        slots: stonetop::fixed::SlotCount::One,
+        description: ", bronze (<em>hand, close</em>, 2 piercing)",
+        resource: None,
+    };
+
+static GIZMO_SWORD_BRONZE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SwordBronze,
+    name: "Sword",
+    qualifier: Some("bronze"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", bronze (<em>close</em>, +1 damage)",
+    resource: None,
+};
+
+static GIZMO_SWORD_BRONZE_PIERCING1: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SwordBronzePiercing1,
+    name: "Sword",
+    qualifier: Some("bronze"),
+    piercing: Some(1u8),
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", bronze (<em>close</em>, +1 damage, 1 piercing)",
+    resource: None,
+};
+
+static GIZMO_SWORD_BRONZE_PIERCING2: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SwordBronzePiercing2,
+    name: "Sword",
+    qualifier: Some("bronze"),
+    piercing: Some(2u8),
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", bronze (<em>close</em>, +1 damage, 2 piercing)",
+    resource: None,
+};
+
+static GIZMO_WARHAMMER_BRONZE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::WarhammerBronze,
+    name: "Warhammer",
+    qualifier: Some("bronze"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", bronze (<em>close</em>, 2 piercing)",
+    resource: None,
+};
+
+// Gear: Armor
+
+static GIZMO_CUIRASS_BOILED_LEATHER: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::CuirassBoiledLeather,
+    name: "Cuirass",
+    qualifier: Some("boiled leather"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", boiled leather (1 armor)",
+    resource: None,
+};
+
+static GIZMO_HAUBERK_CUIRASS_SCALE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::HauberkCuirassScale,
+    name: "Hauberk/cuirass/scale",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: ", iron or bronze (2 armor, <em>warm, cumbersome</em>)",
+    resource: None,
+};
+
+static GIZMO_VEST: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Vest,
+    name: "Vest",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", brigandine, fancy (2 armor, <em>warm</em>)",
+    resource: None,
+};
+
+// Gear: Light sources
+
+static GIZMO_CANDLE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Candle,
+    name: "Candle",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(lasts ~1 hour, <em>close, area</em>)",
+    resource: None,
+};
+
+static GIZMO_LANTERN: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Lantern,
+    name: "Lantern",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "({resource} hours, <em>close, area</em>)",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Hours",
+        can_be: stonetop::fixed::CanBe::Max(5u8),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_BULLSEYE_LANTERN: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::BullseyeLantern,
+    name: "Bullseye lantern",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "({resource} hours, <em>near</em>)",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Hours",
+        can_be: stonetop::fixed::CanBe::Max(5u8),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+// Gear: Tools & trades
+
+static GIZMO_SMALL_METAL_TOOL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SmallMetalTool,
+    name: "Small metal tool",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(chisel, file, nails, shears, etc.)",
+    resource: None,
+};
+
+static GIZMO_GLASS_VIAL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::GlassVial,
+    name: "Glass vial",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(<em>fragile</em>)",
+    resource: None,
+};
+
+static GIZMO_BLOCK_TACKLE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::BlockTackle,
+    name: "Block & tackle",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_INSTRUMENT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Instrument,
+    name: "Instrument",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(harp, lute, fiddle, etc.)",
+    resource: None,
+};
+
+static GIZMO_METAL_TOOLS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::MetalTools,
+    name: "Metal tools",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(drill, prybar, saw, tongs, etc.)",
+    resource: None,
+};
+
+static GIZMO_MIRROR: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Mirror,
+    name: "Mirror",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", hand-held, polished bronze",
+    resource: None,
+};
+
+// Gear: Writing implements
+
+static GIZMO_SLATE_AND_CHALK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SlateAndChalk,
+    name: "Slate and chalk",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WAX_TABLET_AND_STYLUS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::WaxTabletAndStylus,
+    name: "Wax tablet and stylus",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_PARCHMENT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Parchment,
+    name: "Parchment",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: ", a few sheets (<em>fragile</em>)",
+    resource: None,
+};
+
+static GIZMO_FINE_VELLUM: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::FineVellum,
+    name: "Fine vellum",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: ", a few sheets (<em>fragile</em>)",
+    resource: None,
+};
+
+static GIZMO_INK_VIAL_AND_QUILLS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::InkVialAndQuills,
+    name: "Ink, vial and quills",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_EMPTY_BOOK_PARCHMENT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::EmptyBookParchment,
+    name: "Empty book",
+    qualifier: Some("parchment"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", parchment (<em>fragile</em>)",
+    resource: None,
+};
+
+static GIZMO_EMPTY_BOOK_FINE_VELLUM: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::EmptyBookFineVellum,
+    name: "Empty book",
+    qualifier: Some("fine vellum"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", fine vellum (<em>fragile</em>)",
+    resource: None,
+};
+
+// Gear: Exotic stuff
+
+static GIZMO_BENDIS_ROOT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::BendisRoot,
+    name: "Bendis root",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(burnt fumes repel perversions of nature; lasts ~1 hour, <em>reach, area</em>)",
+    resource: None,
+};
+
+static GIZMO_BEZOAR: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Bezoar,
+    name: "Bezoar",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(swallow to cure any poison)",
+    resource: None,
+};
+
+static GIZMO_NAPHTHA: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Naphtha,
+    name: "Naphtha",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(burns hot & sticky; damage d8; {resource} uses, <em>thrown, area, dangerous</em>, ignores armor)",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Uses",
+        can_be: stonetop::fixed::CanBe::Max(3u8),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_SILVER_ALLOY_DAGGER: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SilverAlloyDagger,
+    name: "Silver-alloy dagger",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(<em>hand</em>)",
+    resource: None,
+};
+
+// Gear: Trade goods
+
+static GIZMO_SALT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Salt,
+    name: "Salt",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(a little box)",
+    resource: None,
+};
+
+static GIZMO_SKIN_OF_WHISKY_FINE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SkinOfWhiskyFine,
+    name: "Skin of whisky",
+    qualifier: Some("fine"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: ", fine ({resource} uses; share a use with someone to get advantage on Persuade)",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Uses",
+        can_be: stonetop::fixed::CanBe::Max(2u8),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_PURSE_OF_COPPERS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::PurseOfCoppers,
+    name: "Purse of coppers",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(~10 handfuls)",
+    resource: None,
+};
+
+static GIZMO_FIRKIN_OF_WHISKY_FINE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::FirkinOfWhiskyFine,
+    name: "Firkin of whisky",
+    qualifier: Some("fine"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: ", fine",
+    resource: None,
+};
+
+static GIZMO_HANDFUL_OF_SILVERS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::HandfulOfSilvers,
+    name: "Handful of silvers",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_PURSE_OF_SILVERS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::PurseOfSilvers,
+    name: "Purse of silvers",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(~10 handfuls)",
+    resource: None,
+};
+
+// Gear: Slotted items
+
+static GIZMO_MESS_KIT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::MessKit,
+    name: "Mess kit",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(requires fire & water; makes Supplies last longer)",
+    resource: None,
+};
+
+static GIZMO_BEDROLL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Bedroll,
+    name: "Bedroll",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(recover 1d6 extra HP when you Make Camp)",
+    resource: None,
+};
+
+static GIZMO_BLANKET: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Blanket,
+    name: "Blanket",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(<em>warm</em>)",
+    resource: None,
+};
+
+static GIZMO_CHANGE_OF_CLOTHES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ChangeOfClothes,
+    name: "Change of clothes",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_ROPE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Rope,
+    name: "Rope",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", ~25 ft",
+    resource: None,
+};
+
+static GIZMO_SHOVEL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Shovel,
+    name: "Shovel",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SLEDGE_LITTER_TRAVOIS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SledgeLitterTravois,
+    name: "Sledge/litter/travois",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: ", roll-out",
+    resource: None,
+};
+
+static GIZMO_SNOW_SHOES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SnowShoes,
+    name: "Snow-shoes",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_TORCH: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Torch,
+    name: "Torch",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(lasts ~1 hour; <em>reach, area, dangerous</em>)",
+    resource: None,
+};
+
+static GIZMO_OIL_LAMP: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::OilLamp,
+    name: "Oil lamp",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "({resource} hours, <em>close, area, crude</em>)",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Hours",
+        can_be: stonetop::fixed::CanBe::Max(3u8),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_EXTRA_OIL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ExtraOil,
+    name: "Extra oil",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "({resource} hours, for lamp/lantern, useless as a weapon)",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Hours",
+        can_be: stonetop::fixed::CanBe::Max(5u8),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_FIREWOOD: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Firewood,
+    name: "Firewood",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: "(enough to last 1 full night, <em>reach, area</em>)",
+    resource: None,
+};
+
+static GIZMO_HATCHET: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Hatchet,
+    name: "Hatchet",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>hand, thrown</em>, x piercing)",
+    resource: None,
+};
+
+static GIZMO_MALLET: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Mallet,
+    name: "Mallet",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron and/or wood (<em>hand</em>)",
+    resource: None,
+};
+
+static GIZMO_MATTOCK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Mattock,
+    name: "Mattock",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>close</em>, x piercing, <em>messy, awkward</em>)",
+    resource: None,
+};
+
+static GIZMO_MAUL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Maul,
+    name: "Maul",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: ", iron (<em>close, forceful, awkward</em>)",
+    resource: None,
+};
+
+static GIZMO_STAFF: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Staff,
+    name: "Staff",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(<em>close</em>)",
+    resource: None,
+};
+
+static GIZMO_SPEAR: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Spear,
+    name: "Spear",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", iron (<em>close, thrown</em>, x piercing)",
+    resource: None,
+};
+
+static GIZMO_LONG_SPEAR: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::LongSpear,
+    name: "Long spear",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: ", iron (<em>reach</em>, x piercing)",
+    resource: None,
+};
+
+static GIZMO_BOW_IRON_ARROWS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::BowIronArrows,
+    name: "Bow & iron arrows",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(<em>near</em>, x piercing; Arrows: {resource})",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Arrows",
+        can_be: stonetop::fixed::CanBe::Labels(&["all out", "low ammo", "plenty left"]),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_EXTRA_ARROWS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ExtraArrows,
+    name: "Extra arrows",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(x piercing; Arrows: {resource})",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Arrows",
+        can_be: stonetop::fixed::CanBe::Labels(&["all out", "low ammo", "plenty left", "abundant"]),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_JAVELINS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Javelins,
+    name: "Javelins",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", a few, iron (<em>thrown</em>, x piercing, +1 damage; Javelins: {resource})",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Javelins",
+        can_be: stonetop::fixed::CanBe::Labels(&["all out", "a few"]),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_SHIELD: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Shield,
+    name: "Shield",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: "(+1 armor, +1 Readiness on a 7+ to Defend)",
+    resource: None,
+};
+
+static GIZMO_THICK_HIDES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ThickHides,
+    name: "Thick hides",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: "(1 armor, <em>warm</em>)",
+    resource: None,
+};
+
+static GIZMO_CLOAK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Cloak,
+    name: "Cloak",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "(<em>warm</em>)",
+    resource: None,
+};
+
+// Gear: Small items
+
+static GIZMO_KNIFE_OR_DAGGER: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::KnifeOrDagger,
+    name: "Knife or dagger",
+    qualifier: Some("iron"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: ", iron (<em>hand</em>)",
+    resource: None,
+};
+
+static GIZMO_SLING: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Sling,
+    name: "Sling",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(<em>near, reload, awkward</em>; Stones: {resource})",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Stones",
+        can_be: stonetop::fixed::CanBe::Labels(&["all out", "low ammo", "plenty left"]),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_RUSHLIGHT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Rushlight,
+    name: "Rushlight",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(lasts ~15-30 minutes, <em>hand, crude</em>)",
+    resource: None,
+};
+
+static GIZMO_TINDERBOX: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Tinderbox,
+    name: "Tinderbox",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(<em>slow</em>)",
+    resource: None,
+};
+
+static GIZMO_NEEDLE_THREAD: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::NeedleThread,
+    name: "Needle & thread",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_HANDFUL_OF_COPPERS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::HandfulOfCoppers,
+    name: "Handful of coppers",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WHISKY_SKIN: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::WhiskySkin,
+    name: "Whisky, skin",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "({resource} uses)",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Uses",
+        can_be: stonetop::fixed::CanBe::Max(2u8),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_AWL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Awl,
+    name: "Awl",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BOWSTRING: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Bowstring,
+    name: "Bowstring",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CHALK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Chalk,
+    name: "Chalk",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CHARCOAL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Charcoal,
+    name: "Charcoal",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CLAY_JAR: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ClayJar,
+    name: "Clay jar",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CLOTH_RAG: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ClothRag,
+    name: "Cloth/rag",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_COMB: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Comb,
+    name: "Comb",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CUP: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Cup,
+    name: "Cup",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_EXTRA_SOCKS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ExtraSocks,
+    name: "Extra socks",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_GLOVES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Gloves,
+    name: "Gloves",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_LITTLE_BOX: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::LittleBox,
+    name: "Little box",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SACK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Sack,
+    name: "Sack",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "(empty)",
+    resource: None,
+};
+
+static GIZMO_SAWDUST: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Sawdust,
+    name: "Sawdust",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_TALLOW: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Tallow,
+    name: "Tallow",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_TWINE_CORD: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::TwineCord,
+    name: "Twine/cord",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WATERSKIN: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Waterskin,
+    name: "Waterskin",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WHETSTONE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Whetstone,
+    name: "Whetstone",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WHISTLE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Whistle,
+    name: "Whistle",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+// Gear: Kit contents
+
+static GIZMO_SACRED_POUCH: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::SacredPouch,
+    name: "Sacred pouch",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "see back page. Stock: {resource}",
+    resource: Some(stonetop::fixed::Resource {
+        hold: "Stock",
+        can_be: stonetop::fixed::CanBe::Max(3u8),
+        start: stonetop::fixed::EmptyFull::Full,
+    }),
+};
+
+static GIZMO_BEESWAX: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Beeswax,
+    name: "Beeswax",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_HONEY: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Honey,
+    name: "Honey",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BEE_SMOKERS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::BeeSmokers,
+    name: "Bee smokers",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_HATS_VEILS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::HatsVeils,
+    name: "Hats & veils",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MILK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Milk,
+    name: "Milk",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CHEESE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Cheese,
+    name: "Cheese",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_PELTS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Pelts,
+    name: "Pelts",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MEAT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Meat,
+    name: "Meat",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BLOOD: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Blood,
+    name: "Blood",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_HORN: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Horn,
+    name: "Horn",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WOOL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Wool,
+    name: "Wool",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SHEARS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Shears,
+    name: "Shears",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MORTARS_PESTLES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::MortarsPestles,
+    name: "Mortars & pestles",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_HERBS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Herbs,
+    name: "Herbs",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SEEDS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Seeds,
+    name: "Seeds",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_REMEDIES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Remedies,
+    name: "Remedies",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MILD_POISONS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::MildPoisons,
+    name: "Mild poisons",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SPADES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Spades,
+    name: "Spades",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_PICKS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Picks,
+    name: "Picks",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_FILES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Files,
+    name: "Files",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SNIPPERS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Snippers,
+    name: "Snippers",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WIRE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Wire,
+    name: "Wire",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_PRYBARS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Prybars,
+    name: "Prybars",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_HACKSAWS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Hacksaws,
+    name: "Hacksaws",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_GRAPPLING_HOOK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::GrapplingHook,
+    name: "Grappling hook",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CHISELS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Chisels,
+    name: "Chisels",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_NAILS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Nails,
+    name: "Nails",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_PITCH: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Pitch,
+    name: "Pitch",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SAWS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Saws,
+    name: "Saws",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_FIRKINS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Firkins,
+    name: "Firkins",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_COPPER_TUBES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::CopperTubes,
+    name: "Copper tubes",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MALT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Malt,
+    name: "Malt",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_JUGGLING_BALLS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::JugglingBalls,
+    name: "Juggling balls",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WHIRLYBIRD_SEEDS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::WhirlybirdSeeds,
+    name: "Whirlybird seeds",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MOTLEY: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Motley,
+    name: "Motley",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_RIBBONS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Ribbons,
+    name: "Ribbons",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BELLS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Bells,
+    name: "Bells",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_PUPPETS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Puppets,
+    name: "Puppets",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_FIDDLE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Fiddle,
+    name: "Fiddle",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_INK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Ink,
+    name: "Ink",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_PIGMENTS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Pigments,
+    name: "Pigments",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_QUILLS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Quills,
+    name: "Quills",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_NOTEBOOK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Notebook,
+    name: "Notebook",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_LIME: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Lime,
+    name: "Lime",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_ACID: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Acid,
+    name: "Acid",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SALTS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Salts,
+    name: "Salts",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_THICK_GLOVES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ThickGloves,
+    name: "Thick gloves",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_GLASS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Glass,
+    name: "Glass",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SILK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Silk,
+    name: "Silk",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SPICE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Spice,
+    name: "Spice",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MEDICINAL_HERBS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::MedicinalHerbs,
+    name: "Medicinal herbs",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_IVORY: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Ivory,
+    name: "Ivory",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CATGUT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Catgut,
+    name: "Catgut",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_STRAPS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Straps,
+    name: "Straps",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BANDAGES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Bandages,
+    name: "Bandages",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_TUBES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Tubes,
+    name: "Tubes",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_POULTICES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Poultices,
+    name: "Poultices",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WILLOW_BARK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::WillowBark,
+    name: "Willow bark",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BONESAWS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Bonesaws,
+    name: "Bonesaws",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BRUSHES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Brushes,
+    name: "Brushes",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MUZZLES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Muzzles,
+    name: "Muzzles",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_COLLARS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Collars,
+    name: "Collars",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_FEED: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Feed,
+    name: "Feed",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WHIPS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Whips,
+    name: "Whips",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BRIDLES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Bridles,
+    name: "Bridles",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_IRON_GOODS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::IronGoods,
+    name: "Iron goods",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_INGOTS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Ingots,
+    name: "Ingots",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_TONGS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Tongs,
+    name: "Tongs",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BELLOWS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Bellows,
+    name: "Bellows",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_DRILLS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Drills,
+    name: "Drills",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SPIKES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Spikes,
+    name: "Spikes",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BLACK_IRON_MAUL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::BlackIronMaul,
+    name: "Black iron maul",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: ", utterly immune to all magic (<em>close, forceful, awkward</em>, +1 damage)",
+    resource: None,
+};
+
+static GIZMO_MAKERGLASS_SHIELD: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::MakerglassShield,
+    name: "Makerglass shield",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: ", etched with Aratis's symbol (<em>indestructible</em>, +1 armor, +1 Readiness on a Defend 7+)",
+    resource: None,
+};
+
+static GIZMO_DARK_ICE_HELM: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::DarkIceHelm,
+    name: "Dark ice helm",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "set with a dark ice \"jewel.\" Grants advantage to resist mind-affecting magic.",
+    resource: None,
+};
+
+static GIZMO_BIRD_HOODS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::BirdHoods,
+    name: "Bird hoods",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_TETHERS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Tethers,
+    name: "Tethers",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SEED: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Seed,
+    name: "Seed",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MESSENGER_BIRDS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::MessengerBirds,
+    name: "Messenger birds",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BIRDCAGES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Birdcages,
+    name: "Birdcages",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_RULERS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Rulers,
+    name: "Rulers",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_TAPES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Tapes,
+    name: "Tapes",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_RODS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Rods,
+    name: "Rods",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_PLUMB_BOBS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::PlumbBobs,
+    name: "Plumb-bobs",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_TRIPODS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Tripods,
+    name: "Tripods",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_WICKS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Wicks,
+    name: "Wicks",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SCENTED_HERBS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::ScentedHerbs,
+    name: "Scented herbs",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SOAP: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Soap,
+    name: "Soap",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_LYE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Lye,
+    name: "Lye",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_ASH: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Ash,
+    name: "Ash",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CHARMS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Charms,
+    name: "Charms",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_LENSES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Lenses,
+    name: "Lenses",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SAND: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Sand,
+    name: "Sand",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MARBLES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Marbles,
+    name: "Marbles",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_VARIOUS_WOODS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::VariousWoods,
+    name: "Various woods",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_STAINS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Stains,
+    name: "Stains",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_LUTE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Lute,
+    name: "Lute",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_LONG_SPEAR_FINE_STEEL: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::LongSpearFineSteel,
+    name: "Long spear",
+    qualifier: Some("fine steel"),
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: ", fine steel (<em>reach</em>, 2 piercing)",
+    resource: None,
+};
+
+static GIZMO_SNARES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Snares,
+    name: "Snares",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MUSK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Musk,
+    name: "Musk",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BAIT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Bait,
+    name: "Bait",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CHEMICS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Chemics,
+    name: "Chemics",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_REAGENTS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Reagents,
+    name: "Reagents",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_MEASURES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Measures,
+    name: "Measures",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_SCALES: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Scales,
+    name: "Scales",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_DECANTERS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Decanters,
+    name: "Decanters",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CRYSTALS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Crystals,
+    name: "Crystals",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_INCENSE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Incense,
+    name: "Incense",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_TALISMANS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Talismans,
+    name: "Talismans",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BONE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Bone,
+    name: "Bone",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_EYE_OF_NEWT: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::EyeOfNewt,
+    name: "Eye of newt",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_BRAZIERS: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Braziers,
+    name: "Braziers",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CAULDRON: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Cauldron,
+    name: "Cauldron",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: "",
+    resource: None,
+};
+
+static GIZMO_CRESTED_SHIELD: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::CrestedShield,
+    name: "Crested shield",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Two,
+    description: ", bearing ▁▁▁▁▁▁▁▁'s crest",
+    resource: None,
+};
+
+static GIZMO_WOOL_CLOAK: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::WoolCloak,
+    name: "Wool cloak",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::One,
+    description: ", woven just for you by ▁▁▁▁▁▁▁▁",
+    resource: None,
+};
+
+static GIZMO_LETTER: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Letter,
+    name: "Letter",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: ", spattered with tears & blood",
+    resource: None,
+};
+
+static GIZMO_FLUTE: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Flute,
+    name: "Flute",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: ", a gift from someone you loved",
+    resource: None,
+};
+
+static GIZMO_LOCKET: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::Locket,
+    name: "Locket",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: ", holding a strand of hair",
+    resource: None,
+};
+
+static GIZMO_ENGRAVED_TINDERBOX: stonetop::fixed::GizmoFixed = stonetop::fixed::GizmoFixed {
+    key: stonetop::keys::GizmoKey::EngravedTinderbox,
+    name: "Engraved tinderbox",
+    qualifier: None,
+    piercing: None,
+    slots: stonetop::fixed::SlotCount::Zero,
+    description: ", lovingly engraved",
+    resource: None,
+};
 
 // The Blessed: Moves
 
@@ -3128,22 +5431,26 @@ static SPECIAL_POSSESSION_SACRED_POUCH: stonetop::fixed::SpecialPossessionFixed 
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::SacredPouch,
         name: "Sacred pouch (<em>magical</em>)",
-        description: "see back page. Stock: {resource}",
-        resource: Some(stonetop::fixed::Resource {
-            hold: "Stock",
-            can_be: stonetop::fixed::CanBe::Max(3u8),
-            start: stonetop::fixed::EmptyFull::Full,
-        }),
+        description: "",
+        resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::One(stonetop::keys::GizmoKey::SacredPouch),
     };
 
 static SPECIAL_POSSESSION_APIARY: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::Apiary,
         name: "Apiary",
-        description: "beeswax, candles (<em>close, area</em>, lasts ~1 hr), honey, ◇ bee smokers, ◇ hats & veils, etc.",
+        description: "{beeswax}, {candles|Candle}, {honey}, {bee smokers}, {hats & veils}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Beeswax,
+            stonetop::keys::GizmoKey::Candle,
+            stonetop::keys::GizmoKey::Honey,
+            stonetop::keys::GizmoKey::BeeSmokers,
+            stonetop::keys::GizmoKey::HatsVeils,
+        ]),
     };
 
 static SPECIAL_POSSESSION_COLLECTED_OFFERINGS: stonetop::fixed::SpecialPossessionFixed =
@@ -3157,24 +5464,45 @@ static SPECIAL_POSSESSION_COLLECTED_OFFERINGS: stonetop::fixed::SpecialPossessio
             start: stonetop::fixed::EmptyFull::Full,
         }),
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 static SPECIAL_POSSESSION_GOAT_HERD: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::GoatHerd,
         name: "Goat herd",
-        description: "milk, cheese, pelts, meat, blood, horn, wool, etc. Each season, 1 in 4 chance of having a bezoar (swallow it to cure poison).",
+        description: "{milk}, {cheese}, {pelts}, {meat}, {blood}, {horn}, {wool}, etc. Each season, 1 in 4 chance of having {a bezoar|Bezoar}.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Milk,
+            stonetop::keys::GizmoKey::Cheese,
+            stonetop::keys::GizmoKey::Pelts,
+            stonetop::keys::GizmoKey::Meat,
+            stonetop::keys::GizmoKey::Blood,
+            stonetop::keys::GizmoKey::Horn,
+            stonetop::keys::GizmoKey::Wool,
+            stonetop::keys::GizmoKey::Bezoar,
+        ]),
     };
 
 static SPECIAL_POSSESSION_HERB_GARDEN: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::HerbGarden,
         name: "Herb garden",
-        description: "shears, mortars & pestles, herbs, seeds, remedies, mild poisons, ◇ spades, etc. Each spring, d4 uses of bendis root (<em>reach, area</em>, burns ~1 hr, fumes repel perversions of nature).",
+        description: "{shears}, {mortars & pestles}, {herbs}, {seeds}, {remedies}, {mild poisons}, {spades}, etc. Each spring, d4 uses of {bendis root|Bendis root}.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Shears,
+            stonetop::keys::GizmoKey::MortarsPestles,
+            stonetop::keys::GizmoKey::Herbs,
+            stonetop::keys::GizmoKey::Seeds,
+            stonetop::keys::GizmoKey::Remedies,
+            stonetop::keys::GizmoKey::MildPoisons,
+            stonetop::keys::GizmoKey::Spades,
+            stonetop::keys::GizmoKey::BendisRoot,
+        ]),
     };
 
 static SPECIAL_POSSESSION_MASTIFFS: stonetop::fixed::SpecialPossessionFixed =
@@ -3184,6 +5512,7 @@ static SPECIAL_POSSESSION_MASTIFFS: stonetop::fixed::SpecialPossessionFixed =
         description: ", 2-3 followers (<em>alert, keen-nosed, fierce, overprotective</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct: to bark &amp; threaten; Cost: affection.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 // The Fox: Special Possessions
@@ -3192,27 +5521,52 @@ static SPECIAL_POSSESSION_BURGLARS_KIT: stonetop::fixed::SpecialPossessionFixed 
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::BurglarsKit,
         name: "Burglar's kit",
-        description: "picks, files, snippers, wire, ◇ prybars, ◇ hacksaws, ◇ a lantern (○○○○○ hours, <em>close, area</em>), ◇ a grappling hook, etc.",
+        description: "{picks}, {files}, {snippers}, {wire}, {prybars}, {hacksaws}, {a lantern|Lantern}, {a grappling hook|Grappling hook}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Picks,
+            stonetop::keys::GizmoKey::Files,
+            stonetop::keys::GizmoKey::Snippers,
+            stonetop::keys::GizmoKey::Wire,
+            stonetop::keys::GizmoKey::Prybars,
+            stonetop::keys::GizmoKey::Hacksaws,
+            stonetop::keys::GizmoKey::Lantern,
+            stonetop::keys::GizmoKey::GrapplingHook,
+        ]),
     };
 
 static SPECIAL_POSSESSION_CARPENTERS_TOOLS: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::CarpentersTools,
         name: "Carpenter's tools",
-        description: "chisels, files, nails, pitch, ◇ prybars, ◇ saws, ◇◇ firkins, barrels, etc.",
+        description: "{chisels}, {files}, {nails}, {pitch}, {prybars}, {saws}, {firkins}, barrels, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Chisels,
+            stonetop::keys::GizmoKey::Files,
+            stonetop::keys::GizmoKey::Nails,
+            stonetop::keys::GizmoKey::Pitch,
+            stonetop::keys::GizmoKey::Prybars,
+            stonetop::keys::GizmoKey::Saws,
+            stonetop::keys::GizmoKey::Firkins,
+        ]),
     };
 
 static SPECIAL_POSSESSION_DISTILLERY: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::Distillery,
         name: "Distillery",
-        description: "skins of fine whisky (○○ uses, grants advantage to Persuade), copper tubes, malt, ◇◇ firkins, stills, barrels, etc.",
+        description: "{skins of whisky|Skin of whisky, fine}, {copper tubes}, {malt}, {firkins}, stills, barrels, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::SkinOfWhiskyFine,
+            stonetop::keys::GizmoKey::CopperTubes,
+            stonetop::keys::GizmoKey::Malt,
+            stonetop::keys::GizmoKey::Firkins,
+        ]),
     };
 
 static SPECIAL_POSSESSION_HIDDEN_STASH: stonetop::fixed::SpecialPossessionFixed =
@@ -3226,42 +5580,76 @@ static SPECIAL_POSSESSION_HIDDEN_STASH: stonetop::fixed::SpecialPossessionFixed 
             start: stonetop::fixed::EmptyFull::Full,
         }),
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 static SPECIAL_POSSESSION_MUMMERS_KIT: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::MummersKit,
         name: "Mummer's kit",
-        description: "juggling balls, whirlybird seeds, motley, ribbons, bells, ◇ puppets, ◇ a fiddle, etc.",
+        description: "{juggling balls}, {whirlybird seeds}, {motley}, {ribbons}, {bells}, {puppets}, {a fiddle|Fiddle}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::JugglingBalls,
+            stonetop::keys::GizmoKey::WhirlybirdSeeds,
+            stonetop::keys::GizmoKey::Motley,
+            stonetop::keys::GizmoKey::Ribbons,
+            stonetop::keys::GizmoKey::Bells,
+            stonetop::keys::GizmoKey::Puppets,
+            stonetop::keys::GizmoKey::Fiddle,
+        ]),
     };
 
 static SPECIAL_POSSESSION_SCRIBES_TOOLS: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::ScribesTools,
         name: "Scribe's tools",
-        description: "parchment, ink, pigments, vials, quills, ◇ a notebook, etc.",
+        description: "{parchment|Parchment}, {ink}, {pigments}, {vials|Glass vial}, {quills}, {a notebook|Notebook}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Parchment,
+            stonetop::keys::GizmoKey::Ink,
+            stonetop::keys::GizmoKey::Pigments,
+            stonetop::keys::GizmoKey::GlassVial,
+            stonetop::keys::GizmoKey::Quills,
+            stonetop::keys::GizmoKey::Notebook,
+        ]),
     };
 
 static SPECIAL_POSSESSION_TANNERY: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::Tannery,
         name: "Tannery",
-        description: "(or access to it): lime, acid, salts, thick gloves, ◇ a boiled leather cuirass (1 armor), etc.",
+        description: "(or access to it): {lime}, {acid}, {salts}, {thick gloves}, {a cuirass|Cuirass, boiled leather}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Lime,
+            stonetop::keys::GizmoKey::Acid,
+            stonetop::keys::GizmoKey::Salts,
+            stonetop::keys::GizmoKey::ThickGloves,
+            stonetop::keys::GizmoKey::CuirassBoiledLeather,
+        ]),
     };
 
 static SPECIAL_POSSESSION_TRADE_CONTACTS: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::TradeContacts,
         name: "Trade contacts",
-        description: "small amounts of salt, glass, silk, spice, medicinal herbs, pigments, ivory, etc.",
+        description: "small amounts of {salt|Salt}, {glass}, {silk}, {spice}, {medicinal herbs}, {pigments}, {ivory}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Salt,
+            stonetop::keys::GizmoKey::Glass,
+            stonetop::keys::GizmoKey::Silk,
+            stonetop::keys::GizmoKey::Spice,
+            stonetop::keys::GizmoKey::MedicinalHerbs,
+            stonetop::keys::GizmoKey::Pigments,
+            stonetop::keys::GizmoKey::Ivory,
+        ]),
     };
 
 // The Heavy: Special Possessions
@@ -3270,36 +5658,67 @@ static SPECIAL_POSSESSION_CHIRURGEONS_TOOLS: stonetop::fixed::SpecialPossessionF
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::ChirurgeonsTools,
         name: "Chirurgeon's tools",
-        description: "catgut, straps, bandages, tubes, poultices, willow bark, ◇ bonesaws, etc.",
+        description: "{catgut}, {straps}, {bandages}, {tubes}, {poultices}, {willow bark}, {bonesaws}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Catgut,
+            stonetop::keys::GizmoKey::Straps,
+            stonetop::keys::GizmoKey::Bandages,
+            stonetop::keys::GizmoKey::Tubes,
+            stonetop::keys::GizmoKey::Poultices,
+            stonetop::keys::GizmoKey::WillowBark,
+            stonetop::keys::GizmoKey::Bonesaws,
+        ]),
     };
 
 static SPECIAL_POSSESSION_HUSBANDRY_TOOLS: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::HusbandryTools,
         name: "Husbandry tools",
-        description: "brushes, muzzles, collars, feed, ◇ whips, ◇ bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
+        description: "{brushes}, {muzzles}, {collars}, {feed}, {whips}, {bridles}, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Brushes,
+            stonetop::keys::GizmoKey::Muzzles,
+            stonetop::keys::GizmoKey::Collars,
+            stonetop::keys::GizmoKey::Feed,
+            stonetop::keys::GizmoKey::Whips,
+            stonetop::keys::GizmoKey::Bridles,
+        ]),
     };
 
 static SPECIAL_POSSESSION_SMITHY: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::Smithy,
         name: "Smithy",
-        description: "(or access to it): iron goods, ingots, thick gloves, ◇ tongs, ◇ bellows, an anvil, etc.",
+        description: "(or access to it): {iron goods}, {ingots}, {thick gloves}, {tongs}, {bellows}, an anvil, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::IronGoods,
+            stonetop::keys::GizmoKey::Ingots,
+            stonetop::keys::GizmoKey::ThickGloves,
+            stonetop::keys::GizmoKey::Tongs,
+            stonetop::keys::GizmoKey::Bellows,
+        ]),
     };
 
 static SPECIAL_POSSESSION_STONEWORKERS_TOOLS: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::StoneworkersTools,
         name: "Stoneworker's tools",
-        description: "chisels, drills, ◇ prybars, ◇ spikes, ◇ block & tackles, wheelbarrow, etc.",
+        description: "{chisels}, {drills}, {prybars}, {spikes}, {block & tackles|Block & tackle}, wheelbarrow, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Chisels,
+            stonetop::keys::GizmoKey::Drills,
+            stonetop::keys::GizmoKey::Prybars,
+            stonetop::keys::GizmoKey::Spikes,
+            stonetop::keys::GizmoKey::BlockTackle,
+        ]),
     };
 
 static SPECIAL_POSSESSION_PH_WEAPONS_OF_WAR: stonetop::fixed::SpecialPossessionFixed =
@@ -3308,13 +5727,14 @@ static SPECIAL_POSSESSION_PH_WEAPONS_OF_WAR: stonetop::fixed::SpecialPossessionF
         name: "Weapons of war",
         description: "choose up to 3 (now or later):",
         resource: None,
-        pick: &[
-            "◇ Sword, iron (<em>close</em>, +1 damage)",
-            "◇ Battleaxe, iron (<em>close, messy</em>)",
-            "◇ Warhammer, iron (<em>close</em>, 2 piercing)",
-            "◇ Mace or flail, iron (<em>close, forceful</em>)",
-            "◇ Crossbow (<em>far</em>, +1 damage, <em>reload</em>, x piercing, ○ low ammo, ○ all out)",
-        ],
+        pick: &["{Sword}", "{Battleaxe}", "{Warhammer}", "{Mace or flail}", "{Crossbow}"],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Sword,
+            stonetop::keys::GizmoKey::Battleaxe,
+            stonetop::keys::GizmoKey::Warhammer,
+            stonetop::keys::GizmoKey::MaceOrFlail,
+            stonetop::keys::GizmoKey::Crossbow,
+        ]),
     };
 
 // The Judge: Special Possessions
@@ -3325,29 +5745,46 @@ static SPECIAL_POSSESSION_YOUR_SYMBOL_OF_AUTHORITY: stonetop::fixed::SpecialPoss
         name: "Your symbol of authority",
         description: "(pick 1):",
         resource: None,
-        pick: &[
-            "◇◇ Black iron maul, utterly immune to all magic (<em>close, forceful, awkward</em>, +1 damage)",
-            "◇◇ Makerglass shield, etched with Aratis's symbol (<em>indestructible</em>, +1 armor, +1 Readiness on a Defend 7+)",
-            "◇ Helm set with a dark ice \"jewel.\" Grants advantage to resist mind-affecting magic.",
-        ],
+        pick: &["{Black iron maul}", "{Makerglass shield}", "{Helm|Dark ice helm}"],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::BlackIronMaul,
+            stonetop::keys::GizmoKey::MakerglassShield,
+            stonetop::keys::GizmoKey::DarkIceHelm,
+        ]),
     };
 
 static SPECIAL_POSSESSION_AVIARY: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::Aviary,
         name: "Aviary",
-        description: "thick gloves, bird hoods, tethers, seed, ◇ messenger birds, ◇ birdcages, etc.",
+        description: "{thick gloves}, {bird hoods}, {tethers}, {seed}, {messenger birds}, {birdcages}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::ThickGloves,
+            stonetop::keys::GizmoKey::BirdHoods,
+            stonetop::keys::GizmoKey::Tethers,
+            stonetop::keys::GizmoKey::Seed,
+            stonetop::keys::GizmoKey::MessengerBirds,
+            stonetop::keys::GizmoKey::Birdcages,
+        ]),
     };
 
 static SPECIAL_POSSESSION_ENGINEERS_TOOLS: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::EngineersTools,
         name: "Engineer's tools",
-        description: "rulers, tapes, rods, plumb-bobs, ◇ tripods, ◇ block & tackles, wheelbarrow, etc.",
+        description: "{rulers}, {tapes}, {rods}, {plumb-bobs}, {tripods}, {block & tackles|Block & tackle}, wheelbarrow, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Rulers,
+            stonetop::keys::GizmoKey::Tapes,
+            stonetop::keys::GizmoKey::Rods,
+            stonetop::keys::GizmoKey::PlumbBobs,
+            stonetop::keys::GizmoKey::Tripods,
+            stonetop::keys::GizmoKey::BlockTackle,
+        ]),
     };
 
 // The Lightbearer: Special Possessions
@@ -3360,27 +5797,46 @@ static SPECIAL_POSSESSION_BOOKS_SCROLLS: stonetop::fixed::SpecialPossessionFixed
         resource: Some(stonetop::fixed::Resource {
             hold: "Uses",
             can_be: stonetop::fixed::CanBe::Max(5u8),
-            start: stonetop::fixed::EmptyFull::Empty,
+            start: stonetop::fixed::EmptyFull::Full,
         }),
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 static SPECIAL_POSSESSION_CHANDLERY: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::Chandlery,
         name: "Chandlery",
-        description: "beeswax, candles (<em>close, area</em>, lasts ~1 hr), wicks, scented herbs, soap, lye, ash, etc.",
+        description: "{beeswax}, {candles|Candle}, {wicks}, {scented herbs}, {soap}, {lye}, {ash}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Beeswax,
+            stonetop::keys::GizmoKey::Candle,
+            stonetop::keys::GizmoKey::Wicks,
+            stonetop::keys::GizmoKey::ScentedHerbs,
+            stonetop::keys::GizmoKey::Soap,
+            stonetop::keys::GizmoKey::Lye,
+            stonetop::keys::GizmoKey::Ash,
+        ]),
     };
 
 static SPECIAL_POSSESSION_GLASSWORKS: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::Glassworks,
         name: "Glassworks",
-        description: "vials, charms, lenses, sand, marbles, bellows, crucible, ◇ lanterns (○○○○○ hours, <em>close, area</em>), etc.",
+        description: "{vials|Glass vial}, {charms}, {lenses}, {sand}, {marbles}, {bellows}, crucible, {lanterns|Lantern}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::GlassVial,
+            stonetop::keys::GizmoKey::Charms,
+            stonetop::keys::GizmoKey::Lenses,
+            stonetop::keys::GizmoKey::Sand,
+            stonetop::keys::GizmoKey::Marbles,
+            stonetop::keys::GizmoKey::Bellows,
+            stonetop::keys::GizmoKey::Lantern,
+        ]),
     };
 
 static SPECIAL_POSSESSION_HOLY_RELICS: stonetop::fixed::SpecialPossessionFixed =
@@ -3391,18 +5847,28 @@ static SPECIAL_POSSESSION_HOLY_RELICS: stonetop::fixed::SpecialPossessionFixed =
         resource: Some(stonetop::fixed::Resource {
             hold: "Uses",
             can_be: stonetop::fixed::CanBe::Max(3u8),
-            start: stonetop::fixed::EmptyFull::Empty,
+            start: stonetop::fixed::EmptyFull::Full,
         }),
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 static SPECIAL_POSSESSION_LUTHIERS_TOOLS: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::LuthiersTools,
         name: "Luthier's tools",
-        description: "chisels, files, catgut, various woods, stains, ◇ a lute, ◇ a fiddle, etc.",
+        description: "{chisels}, {files}, {catgut}, {various woods}, {stains}, {a lute|Lute}, {a fiddle|Fiddle}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Chisels,
+            stonetop::keys::GizmoKey::Files,
+            stonetop::keys::GizmoKey::Catgut,
+            stonetop::keys::GizmoKey::VariousWoods,
+            stonetop::keys::GizmoKey::Stains,
+            stonetop::keys::GizmoKey::Lute,
+            stonetop::keys::GizmoKey::Fiddle,
+        ]),
     };
 
 // The Marshal: Special Possessions
@@ -3414,6 +5880,7 @@ static SPECIAL_POSSESSION_PERSONAL_SYMBOL: stonetop::fixed::SpecialPossessionFix
         description: "(a flag, crest, marking, etc.): when you <strong><em>display or reveal it in a dramatic fashion</em></strong>, your crew holds +1 Loyalty (max 3).",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 static SPECIAL_POSSESSION_PM_WEAPONS_OF_WAR: stonetop::fixed::SpecialPossessionFixed =
@@ -3422,12 +5889,13 @@ static SPECIAL_POSSESSION_PM_WEAPONS_OF_WAR: stonetop::fixed::SpecialPossessionF
         name: "Weapons of war",
         description: "choose up to 3 (now or later):",
         resource: None,
-        pick: &[
-            "◇ Sword, iron (<em>close</em>, +1 damage)",
-            "◇◇ Long spear, fine steel (<em>reach</em>, 2 piercing)",
-            "◇ Battleaxe, iron (<em>close, messy</em>)",
-            "◇ Composite bow (<em>far</em>, +1 damage, x piercing; ○ low ammo, ○ all out)",
-        ],
+        pick: &["{Sword}", "{Long spear|Long spear, fine steel}", "{Battleaxe}", "{Composite bow}"],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Sword,
+            stonetop::keys::GizmoKey::LongSpearFineSteel,
+            stonetop::keys::GizmoKey::Battleaxe,
+            stonetop::keys::GizmoKey::CompositeBow,
+        ]),
     };
 
 // The Ranger: Special Possessions
@@ -3435,14 +5903,11 @@ static SPECIAL_POSSESSION_PM_WEAPONS_OF_WAR: stonetop::fixed::SpecialPossessionF
 static SPECIAL_POSSESSION_COMPOSITE_BOW: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::CompositeBow,
-        name: "◇ Composite bow",
-        description: "(<em>far</em>, +1 damage, x piercing; Arrows: {resource})",
-        resource: Some(stonetop::fixed::Resource {
-            hold: "Arrows",
-            can_be: stonetop::fixed::CanBe::Labels(&["all out", "low ammo", "plenty left"]),
-            start: stonetop::fixed::EmptyFull::Full,
-        }),
+        name: "Composite bow",
+        description: "",
+        resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::One(stonetop::keys::GizmoKey::CompositeBow),
     };
 
 static SPECIAL_POSSESSION_HIDEOUTS: stonetop::fixed::SpecialPossessionFixed =
@@ -3453,9 +5918,10 @@ static SPECIAL_POSSESSION_HIDEOUTS: stonetop::fixed::SpecialPossessionFixed =
         resource: Some(stonetop::fixed::Resource {
             hold: "Uses",
             can_be: stonetop::fixed::CanBe::Max(3u8),
-            start: stonetop::fixed::EmptyFull::Empty,
+            start: stonetop::fixed::EmptyFull::Full,
         }),
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 static SPECIAL_POSSESSION_HOUNDS: stonetop::fixed::SpecialPossessionFixed =
@@ -3465,6 +5931,7 @@ static SPECIAL_POSSESSION_HOUNDS: stonetop::fixed::SpecialPossessionFixed =
         description: ", 2-3 followers (<em>trackers, keen-nosed, fast</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct: to give chase; Cost: training.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 static SPECIAL_POSSESSION_LAY_OF_THE_LAND: stonetop::fixed::SpecialPossessionFixed =
@@ -3475,18 +5942,25 @@ static SPECIAL_POSSESSION_LAY_OF_THE_LAND: stonetop::fixed::SpecialPossessionFix
         resource: Some(stonetop::fixed::Resource {
             hold: "Uses",
             can_be: stonetop::fixed::CanBe::Max(3u8),
-            start: stonetop::fixed::EmptyFull::Empty,
+            start: stonetop::fixed::EmptyFull::Full,
         }),
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 static SPECIAL_POSSESSION_TRAPPING_GEAR: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::TrappingGear,
         name: "Trapping gear",
-        description: "snares, pelts, musk, bait, etc. When you <strong><em>Forage</em></strong>, get +1 use of provisions.",
+        description: "{snares}, {pelts}, {musk}, {bait}, etc. When you <strong><em>Forage</em></strong>, get +1 use of provisions.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Snares,
+            stonetop::keys::GizmoKey::Pelts,
+            stonetop::keys::GizmoKey::Musk,
+            stonetop::keys::GizmoKey::Bait,
+        ]),
     };
 
 // The Seeker: Special Possessions
@@ -3495,18 +5969,38 @@ static SPECIAL_POSSESSION_LABORATORY: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::Laboratory,
         name: "Laboratory",
-        description: "chemics, reagents, vials, measures, ◇ scales, ◇ decanters, etc. Every season, produce d4-1 uses of ◇ naphtha (<em>thrown, area, dangerous</em>, ignores armor).",
+        description: "{chemics}, {reagents}, {vials|Glass vial}, {measures}, {scales}, {decanters}, etc. Every season, produce d4-1 uses of {naphtha|Naphtha}.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Chemics,
+            stonetop::keys::GizmoKey::Reagents,
+            stonetop::keys::GizmoKey::GlassVial,
+            stonetop::keys::GizmoKey::Measures,
+            stonetop::keys::GizmoKey::Scales,
+            stonetop::keys::GizmoKey::Decanters,
+            stonetop::keys::GizmoKey::Naphtha,
+        ]),
     };
 
 static SPECIAL_POSSESSION_PARAPHERNALIA: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::Paraphernalia,
         name: "Paraphernalia",
-        description: "crystals, incense, talismans, blood, bone, horn, eye of newt, ◇ braziers, ◇◇ a cauldron, etc.",
+        description: "{crystals}, {incense}, {talismans}, {blood}, {bone}, {horn}, {eye of newt}, {braziers}, {a cauldron|Cauldron}, etc.",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[
+            stonetop::keys::GizmoKey::Crystals,
+            stonetop::keys::GizmoKey::Incense,
+            stonetop::keys::GizmoKey::Talismans,
+            stonetop::keys::GizmoKey::Blood,
+            stonetop::keys::GizmoKey::Bone,
+            stonetop::keys::GizmoKey::Horn,
+            stonetop::keys::GizmoKey::EyeOfNewt,
+            stonetop::keys::GizmoKey::Braziers,
+            stonetop::keys::GizmoKey::Cauldron,
+        ]),
     };
 
 // The Would-be Hero: Special Possessions
@@ -3518,6 +6012,7 @@ static SPECIAL_POSSESSION_A_HEAP_OF_EXPECTATIONS: stonetop::fixed::SpecialPosses
         description: "of little use",
         resource: None,
         pick: &[],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 static SPECIAL_POSSESSION_A_GOOD_DOG: stonetop::fixed::SpecialPossessionFixed =
@@ -3527,22 +6022,31 @@ static SPECIAL_POSSESSION_A_GOOD_DOG: stonetop::fixed::SpecialPossessionFixed =
         description: ", follower (☐ <em>retriever</em> or ☐ <em>herder</em>, <em>keen-nosed, clever</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct to play; Cost: affection.",
         resource: None,
         pick: &["retriever", "herder"],
+        kit: stonetop::fixed::GizmoKit::Referenced(&[]),
     };
 
 static SPECIAL_POSSESSION_PERSONAL_TOKEN_FRAUGHT_WITH_MEANING:
     stonetop::fixed::SpecialPossessionFixed = stonetop::fixed::SpecialPossessionFixed {
     key: stonetop::keys::SpecialPossessionKey::PersonalTokenFraughtWithMeaning,
     name: "Personal token, fraught with meaning",
-    description: ": (pick 1)",
+    description: "(pick 1)",
     resource: None,
     pick: &[
-        "◇◇ A shield, bearing ▁▁▁▁▁▁▁▁'s crest",
-        "◇ A wool cloak, woven just for you by ▁▁▁▁▁▁▁▁",
-        "A letter, spattered with tears & blood",
-        "A flute, a gift from someone you loved",
-        "A fine locket, holding a strand of hair",
-        "A tinderbox, lovingly engraved",
+        "{A shield|Crested shield}",
+        "{A wool cloak|Wool cloak}",
+        "{A letter|Letter}",
+        "{A flute|Flute}",
+        "{A fine locket|Locket}",
+        "{A tinderbox|Engraved tinderbox}",
     ],
+    kit: stonetop::fixed::GizmoKit::Referenced(&[
+        stonetop::keys::GizmoKey::CrestedShield,
+        stonetop::keys::GizmoKey::WoolCloak,
+        stonetop::keys::GizmoKey::Letter,
+        stonetop::keys::GizmoKey::Flute,
+        stonetop::keys::GizmoKey::Locket,
+        stonetop::keys::GizmoKey::EngravedTinderbox,
+    ]),
 };
 
 // The Blessed: Backstories
@@ -5682,6 +8186,236 @@ impl stonetop::keys::PlaybookKey {
             Self::TheRanger => &PLAYBOOK_THE_RANGER,
             Self::TheSeeker => &PLAYBOOK_THE_SEEKER,
             Self::TheWouldBeHero => &PLAYBOOK_THE_WOULD_BE_HERO,
+        }
+    }
+}
+impl stonetop::keys::GizmoKey {
+    /// The printed content this key names.
+    #[must_use]
+    pub fn fixed_part(self) -> &'static stonetop::fixed::GizmoFixed {
+        match self {
+            Self::MaceOrFlail => &GIZMO_MACE_OR_FLAIL,
+            Self::Battleaxe => &GIZMO_BATTLEAXE,
+            Self::BattleaxePiercing1 => &GIZMO_BATTLEAXE_PIERCING1,
+            Self::BattleaxePiercing2 => &GIZMO_BATTLEAXE_PIERCING2,
+            Self::ShortSword => &GIZMO_SHORT_SWORD,
+            Self::ShortSwordPiercing1 => &GIZMO_SHORT_SWORD_PIERCING1,
+            Self::ShortSwordPiercing2 => &GIZMO_SHORT_SWORD_PIERCING2,
+            Self::Sword => &GIZMO_SWORD,
+            Self::SwordPiercing1 => &GIZMO_SWORD_PIERCING1,
+            Self::SwordPiercing2 => &GIZMO_SWORD_PIERCING2,
+            Self::Warhammer => &GIZMO_WARHAMMER,
+            Self::Crossbow => &GIZMO_CROSSBOW,
+            Self::CompositeBow => &GIZMO_COMPOSITE_BOW,
+            Self::MaceOrFlailBronze => &GIZMO_MACE_OR_FLAIL_BRONZE,
+            Self::BattleaxeBronze => &GIZMO_BATTLEAXE_BRONZE,
+            Self::BattleaxeBronzePiercing1 => &GIZMO_BATTLEAXE_BRONZE_PIERCING1,
+            Self::BattleaxeBronzePiercing2 => &GIZMO_BATTLEAXE_BRONZE_PIERCING2,
+            Self::ShortSwordBronze => &GIZMO_SHORT_SWORD_BRONZE,
+            Self::ShortSwordBronzePiercing1 => &GIZMO_SHORT_SWORD_BRONZE_PIERCING1,
+            Self::ShortSwordBronzePiercing2 => &GIZMO_SHORT_SWORD_BRONZE_PIERCING2,
+            Self::SwordBronze => &GIZMO_SWORD_BRONZE,
+            Self::SwordBronzePiercing1 => &GIZMO_SWORD_BRONZE_PIERCING1,
+            Self::SwordBronzePiercing2 => &GIZMO_SWORD_BRONZE_PIERCING2,
+            Self::WarhammerBronze => &GIZMO_WARHAMMER_BRONZE,
+            Self::CuirassBoiledLeather => &GIZMO_CUIRASS_BOILED_LEATHER,
+            Self::HauberkCuirassScale => &GIZMO_HAUBERK_CUIRASS_SCALE,
+            Self::Vest => &GIZMO_VEST,
+            Self::Candle => &GIZMO_CANDLE,
+            Self::Lantern => &GIZMO_LANTERN,
+            Self::BullseyeLantern => &GIZMO_BULLSEYE_LANTERN,
+            Self::SmallMetalTool => &GIZMO_SMALL_METAL_TOOL,
+            Self::GlassVial => &GIZMO_GLASS_VIAL,
+            Self::BlockTackle => &GIZMO_BLOCK_TACKLE,
+            Self::Instrument => &GIZMO_INSTRUMENT,
+            Self::MetalTools => &GIZMO_METAL_TOOLS,
+            Self::Mirror => &GIZMO_MIRROR,
+            Self::SlateAndChalk => &GIZMO_SLATE_AND_CHALK,
+            Self::WaxTabletAndStylus => &GIZMO_WAX_TABLET_AND_STYLUS,
+            Self::Parchment => &GIZMO_PARCHMENT,
+            Self::FineVellum => &GIZMO_FINE_VELLUM,
+            Self::InkVialAndQuills => &GIZMO_INK_VIAL_AND_QUILLS,
+            Self::EmptyBookParchment => &GIZMO_EMPTY_BOOK_PARCHMENT,
+            Self::EmptyBookFineVellum => &GIZMO_EMPTY_BOOK_FINE_VELLUM,
+            Self::BendisRoot => &GIZMO_BENDIS_ROOT,
+            Self::Bezoar => &GIZMO_BEZOAR,
+            Self::Naphtha => &GIZMO_NAPHTHA,
+            Self::SilverAlloyDagger => &GIZMO_SILVER_ALLOY_DAGGER,
+            Self::Salt => &GIZMO_SALT,
+            Self::SkinOfWhiskyFine => &GIZMO_SKIN_OF_WHISKY_FINE,
+            Self::PurseOfCoppers => &GIZMO_PURSE_OF_COPPERS,
+            Self::FirkinOfWhiskyFine => &GIZMO_FIRKIN_OF_WHISKY_FINE,
+            Self::HandfulOfSilvers => &GIZMO_HANDFUL_OF_SILVERS,
+            Self::PurseOfSilvers => &GIZMO_PURSE_OF_SILVERS,
+            Self::MessKit => &GIZMO_MESS_KIT,
+            Self::Bedroll => &GIZMO_BEDROLL,
+            Self::Blanket => &GIZMO_BLANKET,
+            Self::ChangeOfClothes => &GIZMO_CHANGE_OF_CLOTHES,
+            Self::Rope => &GIZMO_ROPE,
+            Self::Shovel => &GIZMO_SHOVEL,
+            Self::SledgeLitterTravois => &GIZMO_SLEDGE_LITTER_TRAVOIS,
+            Self::SnowShoes => &GIZMO_SNOW_SHOES,
+            Self::Torch => &GIZMO_TORCH,
+            Self::OilLamp => &GIZMO_OIL_LAMP,
+            Self::ExtraOil => &GIZMO_EXTRA_OIL,
+            Self::Firewood => &GIZMO_FIREWOOD,
+            Self::Hatchet => &GIZMO_HATCHET,
+            Self::Mallet => &GIZMO_MALLET,
+            Self::Mattock => &GIZMO_MATTOCK,
+            Self::Maul => &GIZMO_MAUL,
+            Self::Staff => &GIZMO_STAFF,
+            Self::Spear => &GIZMO_SPEAR,
+            Self::LongSpear => &GIZMO_LONG_SPEAR,
+            Self::BowIronArrows => &GIZMO_BOW_IRON_ARROWS,
+            Self::ExtraArrows => &GIZMO_EXTRA_ARROWS,
+            Self::Javelins => &GIZMO_JAVELINS,
+            Self::Shield => &GIZMO_SHIELD,
+            Self::ThickHides => &GIZMO_THICK_HIDES,
+            Self::Cloak => &GIZMO_CLOAK,
+            Self::KnifeOrDagger => &GIZMO_KNIFE_OR_DAGGER,
+            Self::Sling => &GIZMO_SLING,
+            Self::Rushlight => &GIZMO_RUSHLIGHT,
+            Self::Tinderbox => &GIZMO_TINDERBOX,
+            Self::NeedleThread => &GIZMO_NEEDLE_THREAD,
+            Self::HandfulOfCoppers => &GIZMO_HANDFUL_OF_COPPERS,
+            Self::WhiskySkin => &GIZMO_WHISKY_SKIN,
+            Self::Awl => &GIZMO_AWL,
+            Self::Bowstring => &GIZMO_BOWSTRING,
+            Self::Chalk => &GIZMO_CHALK,
+            Self::Charcoal => &GIZMO_CHARCOAL,
+            Self::ClayJar => &GIZMO_CLAY_JAR,
+            Self::ClothRag => &GIZMO_CLOTH_RAG,
+            Self::Comb => &GIZMO_COMB,
+            Self::Cup => &GIZMO_CUP,
+            Self::ExtraSocks => &GIZMO_EXTRA_SOCKS,
+            Self::Gloves => &GIZMO_GLOVES,
+            Self::LittleBox => &GIZMO_LITTLE_BOX,
+            Self::Sack => &GIZMO_SACK,
+            Self::Sawdust => &GIZMO_SAWDUST,
+            Self::Tallow => &GIZMO_TALLOW,
+            Self::TwineCord => &GIZMO_TWINE_CORD,
+            Self::Waterskin => &GIZMO_WATERSKIN,
+            Self::Whetstone => &GIZMO_WHETSTONE,
+            Self::Whistle => &GIZMO_WHISTLE,
+            Self::SacredPouch => &GIZMO_SACRED_POUCH,
+            Self::Beeswax => &GIZMO_BEESWAX,
+            Self::Honey => &GIZMO_HONEY,
+            Self::BeeSmokers => &GIZMO_BEE_SMOKERS,
+            Self::HatsVeils => &GIZMO_HATS_VEILS,
+            Self::Milk => &GIZMO_MILK,
+            Self::Cheese => &GIZMO_CHEESE,
+            Self::Pelts => &GIZMO_PELTS,
+            Self::Meat => &GIZMO_MEAT,
+            Self::Blood => &GIZMO_BLOOD,
+            Self::Horn => &GIZMO_HORN,
+            Self::Wool => &GIZMO_WOOL,
+            Self::Shears => &GIZMO_SHEARS,
+            Self::MortarsPestles => &GIZMO_MORTARS_PESTLES,
+            Self::Herbs => &GIZMO_HERBS,
+            Self::Seeds => &GIZMO_SEEDS,
+            Self::Remedies => &GIZMO_REMEDIES,
+            Self::MildPoisons => &GIZMO_MILD_POISONS,
+            Self::Spades => &GIZMO_SPADES,
+            Self::Picks => &GIZMO_PICKS,
+            Self::Files => &GIZMO_FILES,
+            Self::Snippers => &GIZMO_SNIPPERS,
+            Self::Wire => &GIZMO_WIRE,
+            Self::Prybars => &GIZMO_PRYBARS,
+            Self::Hacksaws => &GIZMO_HACKSAWS,
+            Self::GrapplingHook => &GIZMO_GRAPPLING_HOOK,
+            Self::Chisels => &GIZMO_CHISELS,
+            Self::Nails => &GIZMO_NAILS,
+            Self::Pitch => &GIZMO_PITCH,
+            Self::Saws => &GIZMO_SAWS,
+            Self::Firkins => &GIZMO_FIRKINS,
+            Self::CopperTubes => &GIZMO_COPPER_TUBES,
+            Self::Malt => &GIZMO_MALT,
+            Self::JugglingBalls => &GIZMO_JUGGLING_BALLS,
+            Self::WhirlybirdSeeds => &GIZMO_WHIRLYBIRD_SEEDS,
+            Self::Motley => &GIZMO_MOTLEY,
+            Self::Ribbons => &GIZMO_RIBBONS,
+            Self::Bells => &GIZMO_BELLS,
+            Self::Puppets => &GIZMO_PUPPETS,
+            Self::Fiddle => &GIZMO_FIDDLE,
+            Self::Ink => &GIZMO_INK,
+            Self::Pigments => &GIZMO_PIGMENTS,
+            Self::Quills => &GIZMO_QUILLS,
+            Self::Notebook => &GIZMO_NOTEBOOK,
+            Self::Lime => &GIZMO_LIME,
+            Self::Acid => &GIZMO_ACID,
+            Self::Salts => &GIZMO_SALTS,
+            Self::ThickGloves => &GIZMO_THICK_GLOVES,
+            Self::Glass => &GIZMO_GLASS,
+            Self::Silk => &GIZMO_SILK,
+            Self::Spice => &GIZMO_SPICE,
+            Self::MedicinalHerbs => &GIZMO_MEDICINAL_HERBS,
+            Self::Ivory => &GIZMO_IVORY,
+            Self::Catgut => &GIZMO_CATGUT,
+            Self::Straps => &GIZMO_STRAPS,
+            Self::Bandages => &GIZMO_BANDAGES,
+            Self::Tubes => &GIZMO_TUBES,
+            Self::Poultices => &GIZMO_POULTICES,
+            Self::WillowBark => &GIZMO_WILLOW_BARK,
+            Self::Bonesaws => &GIZMO_BONESAWS,
+            Self::Brushes => &GIZMO_BRUSHES,
+            Self::Muzzles => &GIZMO_MUZZLES,
+            Self::Collars => &GIZMO_COLLARS,
+            Self::Feed => &GIZMO_FEED,
+            Self::Whips => &GIZMO_WHIPS,
+            Self::Bridles => &GIZMO_BRIDLES,
+            Self::IronGoods => &GIZMO_IRON_GOODS,
+            Self::Ingots => &GIZMO_INGOTS,
+            Self::Tongs => &GIZMO_TONGS,
+            Self::Bellows => &GIZMO_BELLOWS,
+            Self::Drills => &GIZMO_DRILLS,
+            Self::Spikes => &GIZMO_SPIKES,
+            Self::BlackIronMaul => &GIZMO_BLACK_IRON_MAUL,
+            Self::MakerglassShield => &GIZMO_MAKERGLASS_SHIELD,
+            Self::DarkIceHelm => &GIZMO_DARK_ICE_HELM,
+            Self::BirdHoods => &GIZMO_BIRD_HOODS,
+            Self::Tethers => &GIZMO_TETHERS,
+            Self::Seed => &GIZMO_SEED,
+            Self::MessengerBirds => &GIZMO_MESSENGER_BIRDS,
+            Self::Birdcages => &GIZMO_BIRDCAGES,
+            Self::Rulers => &GIZMO_RULERS,
+            Self::Tapes => &GIZMO_TAPES,
+            Self::Rods => &GIZMO_RODS,
+            Self::PlumbBobs => &GIZMO_PLUMB_BOBS,
+            Self::Tripods => &GIZMO_TRIPODS,
+            Self::Wicks => &GIZMO_WICKS,
+            Self::ScentedHerbs => &GIZMO_SCENTED_HERBS,
+            Self::Soap => &GIZMO_SOAP,
+            Self::Lye => &GIZMO_LYE,
+            Self::Ash => &GIZMO_ASH,
+            Self::Charms => &GIZMO_CHARMS,
+            Self::Lenses => &GIZMO_LENSES,
+            Self::Sand => &GIZMO_SAND,
+            Self::Marbles => &GIZMO_MARBLES,
+            Self::VariousWoods => &GIZMO_VARIOUS_WOODS,
+            Self::Stains => &GIZMO_STAINS,
+            Self::Lute => &GIZMO_LUTE,
+            Self::LongSpearFineSteel => &GIZMO_LONG_SPEAR_FINE_STEEL,
+            Self::Snares => &GIZMO_SNARES,
+            Self::Musk => &GIZMO_MUSK,
+            Self::Bait => &GIZMO_BAIT,
+            Self::Chemics => &GIZMO_CHEMICS,
+            Self::Reagents => &GIZMO_REAGENTS,
+            Self::Measures => &GIZMO_MEASURES,
+            Self::Scales => &GIZMO_SCALES,
+            Self::Decanters => &GIZMO_DECANTERS,
+            Self::Crystals => &GIZMO_CRYSTALS,
+            Self::Incense => &GIZMO_INCENSE,
+            Self::Talismans => &GIZMO_TALISMANS,
+            Self::Bone => &GIZMO_BONE,
+            Self::EyeOfNewt => &GIZMO_EYE_OF_NEWT,
+            Self::Braziers => &GIZMO_BRAZIERS,
+            Self::Cauldron => &GIZMO_CAULDRON,
+            Self::CrestedShield => &GIZMO_CRESTED_SHIELD,
+            Self::WoolCloak => &GIZMO_WOOL_CLOAK,
+            Self::Letter => &GIZMO_LETTER,
+            Self::Flute => &GIZMO_FLUTE,
+            Self::Locket => &GIZMO_LOCKET,
+            Self::EngravedTinderbox => &GIZMO_ENGRAVED_TINDERBOX,
         }
     }
 }

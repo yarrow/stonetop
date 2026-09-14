@@ -7,13 +7,16 @@
 
 use crate::fixed::{
     BackgroundChecklist, BackgroundChunk, BackgroundFixed, BackstoryFixed, BackstoryItem,
-    MoveChecklist, MoveFixed, Naming, Origin, PlaybookFixed, Requirement, SpecialPossessionFixed,
-    TaggedRow,
+    GizmoFixed, GizmoKit, MoveChecklist, MoveFixed, Naming, Origin, PlaybookFixed, Requirement,
+    SpecialPossessionFixed, TaggedRow, gizmo_references,
 };
 use crate::keys::{MoveKey, PlaybookKey};
 
 use super::markdown::html_to_markdown;
-use super::spoken::{expand_resource, join_with, move_resource_line, speak_slots};
+use super::spoken::{
+    expand_gizmos, gizmo_body, gizmo_head, join_with, move_resource_line, speak_resource,
+    speak_slots,
+};
 use super::starting_moves;
 
 const UNCHECKED: &str = "☐";
@@ -195,23 +198,54 @@ fn special_possessions(doc: &mut Document, playbook: &PlaybookFixed) {
     let mut lines = Vec::new();
     for (index, possession) in possessions.options.iter().enumerate() {
         let preselected = index < usize::from(possessions.preselected);
-        lines.push(format!("- {} {}", checkbox(preselected), possession_text(possession)));
+        let mut kit = KitCursor::of(possession);
+        lines.push(format!(
+            "- {} {}",
+            checkbox(preselected),
+            possession_text(possession, &mut kit)
+        ));
         for option in possession.pick {
-            lines.push(format!("  - {UNCHECKED} {}", speak(option)));
+            lines.push(format!("  - {UNCHECKED} {}", speak(&kit.expand(option))));
         }
     }
     lines.push(format!("- {UNCHECKED} {BLANK} (discuss with GM)"));
     doc.lines(lines);
 }
 
+/// A cursor over a possession's kit, handing its gizmos out in order as the description and
+/// then each pick entry are expanded, since the kit lists them in that order. A kit of one
+/// has no references to expand, so its gizmo is never handed out.
+struct KitCursor(std::vec::IntoIter<&'static GizmoFixed>);
+
+impl KitCursor {
+    fn of(possession: &SpecialPossessionFixed) -> Self {
+        let gizmos: Vec<&'static GizmoFixed> =
+            possession.kit.gizmos().iter().map(|key| key.fixed_part()).collect();
+        Self(gizmos.into_iter())
+    }
+
+    /// `text` with its references expanded from the next gizmos of the kit.
+    fn expand(&mut self, text: &str) -> String {
+        let gizmos: Vec<&GizmoFixed> = self.0.by_ref().take(gizmo_references(text).len()).collect();
+        expand_gizmos(text, &gizmos)
+    }
+}
+
 /// "**Name:** description", except that a description beginning with a parenthesis or a
-/// comma continues the name: "**Smithy** (or access to it): iron goods…".
-fn possession_text(possession: &SpecialPossessionFixed) -> String {
-    let name = speak(possession.name);
-    let description = match &possession.resource {
-        Some(resource) => expand_resource(possession.description, resource),
-        None => possession.description.to_string(),
+/// comma continues the name: "**Smithy** (or access to it): iron goods…". A kit of one is
+/// its gizmo: the gizmo's diamonds go before the name and its description serves.
+fn possession_text(possession: &SpecialPossessionFixed, kit: &mut KitCursor) -> String {
+    let (name, description) = match possession.kit {
+        GizmoKit::One(key) => {
+            let gizmo = key.fixed_part();
+            (gizmo_head(possession.name, gizmo), gizmo_body(gizmo))
+        }
+        GizmoKit::Referenced(_) => {
+            let description = speak_resource(possession.description, possession.resource.as_ref());
+            (possession.name.to_string(), kit.expand(&description))
+        }
     };
+    let name = speak(&name);
     let description = speak(&description);
     if description.starts_with('(') {
         format!("**{name}** {description}")
@@ -369,6 +403,53 @@ mod tests {
             .iter()
             .find(|possession| possession.name == "Smithy")
             .expect("the Heavy has a Smithy");
-        assert!(possession_text(smithy).starts_with("**Smithy** (or access to it): iron goods"));
+        assert!(
+            possession_text(smithy, &mut KitCursor::of(smithy))
+                .starts_with("**Smithy** (or access to it): iron goods")
+        );
+    }
+
+    fn possession(playbook: PlaybookKey, name: &str) -> &'static SpecialPossessionFixed {
+        playbook
+            .fixed_part()
+            .special_possessions
+            .options
+            .iter()
+            .find(|possession| possession.name == name)
+            .unwrap_or_else(|| panic!("{playbook:?} has no {name}"))
+    }
+
+    #[test]
+    fn a_kit_of_one_speaks_its_gizmos_slots_before_the_name_and_its_description_after() {
+        let bow = possession(PlaybookKey::TheRanger, "Composite bow");
+        assert_eq!(
+            possession_text(bow, &mut KitCursor::of(bow)),
+            "**1-slot Composite bow** (*far*, +1 damage, x piercing; Arrows: plenty left, low ammo, or all out)"
+        );
+        let pouch = possession(PlaybookKey::TheBlessed, "Sacred pouch (<em>magical</em>)");
+        assert_eq!(
+            possession_text(pouch, &mut KitCursor::of(pouch)),
+            "**Sacred pouch (*magical*):** see back page. Stock: 3"
+        );
+    }
+
+    #[test]
+    fn a_kits_gizmos_are_spoken_with_their_slots_and_their_own_descriptions() {
+        let kit = possession(PlaybookKey::TheFox, "Burglar's kit");
+        assert_eq!(
+            possession_text(kit, &mut KitCursor::of(kit)),
+            "**Burglar's kit:** picks, files, snippers, wire, 1-slot prybars, 1-slot hacksaws, \
+             a 1-slot lantern (5 hours, *close, area*), a 1-slot grappling hook, etc."
+        );
+    }
+
+    #[test]
+    fn pick_entries_take_their_gizmos_from_the_kit_after_the_description() {
+        let token = possession(PlaybookKey::TheWouldBeHero, "Personal token, fraught with meaning");
+        let mut kit = KitCursor::of(token);
+        possession_text(token, &mut kit);
+        assert_eq!(kit.expand(token.pick[0]), "◇◇ A shield, bearing ▁▁▁▁▁▁▁▁'s crest");
+        assert_eq!(kit.expand(token.pick[1]), "◇ A wool cloak, woven just for you by ▁▁▁▁▁▁▁▁");
+        assert_eq!(kit.expand(token.pick[2]), "A letter, spattered with tears & blood");
     }
 }
