@@ -421,6 +421,7 @@ impl schema::BackstoryItem {
             Self::Text { text } => fixed::BackstoryItem::Text(leak_str(text)),
             Self::Choices { choices } => fixed::BackstoryItem::Choices(leak_strs(choices)),
             Self::ChoiceRow(row) => fixed::BackstoryItem::ChoiceRow(row.to_fixed()),
+            Self::Heading { heading } => fixed::BackstoryItem::Heading(leak_str(heading)),
         }
     }
 }
@@ -761,6 +762,7 @@ mod backstory_test {
                     { text: "Some text." },
                     { choices: ["a", "b"] },
                     { tag: "Tag", items: ["x", "y"] },
+                    { heading: "Major Arcana" },
                 ],
             }"#,
         )
@@ -772,6 +774,7 @@ mod backstory_test {
             fixed.list[2],
             BackstoryItem::ChoiceRow(TaggedRow { tag: "Tag", items: &["x", "y"] })
         );
+        assert_eq!(fixed.list[3], BackstoryItem::Heading("Major Arcana"));
     }
 }
 

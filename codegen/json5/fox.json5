@@ -272,19 +272,43 @@
           text: "<p>There was that time that you… (choose 1 per tale)</p>",
         },
         {
-          text: "<ul><li>got lost in (choose 1) the Great Wood, or the Flats, or the Steplands, or Ferrier's Fen, or the Foothills, or the Huffel Peaks</li><li>were on watch when the crinwin raided</li><li>dared each other to explore the Ruined Tower</li><li>managed to rile up a small band of Hillfolk</li><li>braved the Labyrinth, just a little</li><li>stole that crazy old man's book</li><li>went poking about the old Barrow Mounds</li></ul>",
+          choices: [
+            "… got lost in (choose 1) ☐ the Great Wood ☐ the Flats ☐ the Steplands ☐ Ferrier's Fen ☐ the Foothills ☐ the Huffel Peaks",
+            "… were on watch when the crinwin raided",
+            "… dared each other to explore the Ruined Tower",
+            "… managed to rile up a small band of Hillfolk",
+            "… braved the Labyrinth, just a little",
+            "… stole that crazy old man's book",
+            "… went poking about the old Barrow Mounds",
+          ],
         },
         {
           text: "<p>And you ended up… (choose 1 or 2 per tale)</p>",
         },
         {
-          text: "<ul><li>running for your life from ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</li><li>landing a well-placed blow</li><li>interrupting a strange, creepy gathering</li><li>stumbling on a beast, bigger'n anything</li><li>with a sack full of treasure</li><li>getting ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ to fight them for you</li><li>face to face with a ghost/Fae/demon</li><li>finding those strange old runes</li><li>getting to know that fine-looking fellow/lady/person/couple</li></ul>",
+          choices: [
+            "… running for your life from ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁",
+            "… landing a well-placed blow",
+            "… interrupting a strange, creepy gathering",
+            "… stumbling on a beast, bigger'n anything",
+            "… with a sack full of treasure",
+            "… getting ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ to fight them for you",
+            "… face to face with a ghost/Fae/demon",
+            "… finding those strange old runes",
+            "… getting to know that fine-looking fellow/lady/person/couple",
+          ],
         },
         {
           text: "<p>But all you've got left to show for it is…</p>",
         },
         {
-          text: "<ul><li>a story no one believes.</li><li>a nasty scar; wanna see?</li><li>the occasional nightmare.</li><li>this map with runes no one can read.</li><li>this key that opens who-knows-what.</li></ul>",
+          choices: [
+            "… a story no one believes.",
+            "… a nasty scar; wanna see?",
+            "… the occasional nightmare.",
+            "… this map with runes no one can read.",
+            "… this key that opens who-knows-what.",
+          ],
         },
       ],
     },

@@ -12,7 +12,15 @@ use stonetop::render::render_markdown;
 use test_case::test_case;
 
 /// Fails with a unified line diff if `key`'s rendering differs from `tests/golden/<file>`.
+#[test_case(PlaybookKey::TheBlessed, "blessed.md")]
+#[test_case(PlaybookKey::TheFox, "fox.md")]
 #[test_case(PlaybookKey::TheHeavy, "heavy.md")]
+#[test_case(PlaybookKey::TheJudge, "judge.md")]
+#[test_case(PlaybookKey::TheLightbearer, "lightbearer.md")]
+#[test_case(PlaybookKey::TheMarshal, "marshal.md")]
+#[test_case(PlaybookKey::TheRanger, "ranger.md")]
+#[test_case(PlaybookKey::TheSeeker, "seeker.md")]
+#[test_case(PlaybookKey::TheWouldBeHero, "would-be-hero.md")]
 fn renders_as_its_golden_file(key: PlaybookKey, file: &str) {
     let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/golden").join(file);
     let golden =

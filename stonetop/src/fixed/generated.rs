@@ -4129,7 +4129,7 @@ static MOVE_ON_THE_HOOF: stonetop::fixed::MoveFixed = stonetop::fixed::MoveFixed
 static MOVE_PACK_HORSE: stonetop::fixed::MoveFixed = stonetop::fixed::MoveFixed {
     key: stonetop::keys::MoveKey::PackHorse,
     name: "Pack Horse",
-    description: "<p>You can carry up to 4 ◆ with a light load, 7 ◆ with a normal load, and 10 ◆ with a heavy load.</p>",
+    description: "<p>You can carry up to 4 inventory slots with a light load, 7 inventory slots with a normal load, and 10 inventory slots with a heavy load.</p>",
     requires: &[],
     max_picks: 1u8,
     resource: &[],
@@ -6019,7 +6019,7 @@ static SPECIAL_POSSESSION_A_GOOD_DOG: stonetop::fixed::SpecialPossessionFixed =
     stonetop::fixed::SpecialPossessionFixed {
         key: stonetop::keys::SpecialPossessionKey::AGoodDog,
         name: "A good dog",
-        description: ", follower (☐ <em>retriever</em> or ☐ <em>herder</em>, <em>keen-nosed, clever</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct to play; Cost: affection.",
+        description: ", follower (<em>retriever</em> or <em>herder</em>, <em>keen-nosed, clever</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct to play; Cost: affection.",
         resource: None,
         pick: &["retriever", "herder"],
         kit: stonetop::fixed::GizmoKit::Referenced(&[]),
@@ -6134,17 +6134,35 @@ static BACKSTORY_TALL_TALES: stonetop::fixed::BackstoryFixed = stonetop::fixed::
         stonetop::fixed::BackstoryItem::Text(
             "<p>There was that time that you… (choose 1 per tale)</p>",
         ),
-        stonetop::fixed::BackstoryItem::Text(
-            "<ul><li>got lost in (choose 1) the Great Wood, or the Flats, or the Steplands, or Ferrier's Fen, or the Foothills, or the Huffel Peaks</li><li>were on watch when the crinwin raided</li><li>dared each other to explore the Ruined Tower</li><li>managed to rile up a small band of Hillfolk</li><li>braved the Labyrinth, just a little</li><li>stole that crazy old man's book</li><li>went poking about the old Barrow Mounds</li></ul>",
-        ),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "… got lost in (choose 1) ☐ the Great Wood ☐ the Flats ☐ the Steplands ☐ Ferrier's Fen ☐ the Foothills ☐ the Huffel Peaks",
+            "… were on watch when the crinwin raided",
+            "… dared each other to explore the Ruined Tower",
+            "… managed to rile up a small band of Hillfolk",
+            "… braved the Labyrinth, just a little",
+            "… stole that crazy old man's book",
+            "… went poking about the old Barrow Mounds",
+        ]),
         stonetop::fixed::BackstoryItem::Text("<p>And you ended up… (choose 1 or 2 per tale)</p>"),
-        stonetop::fixed::BackstoryItem::Text(
-            "<ul><li>running for your life from ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</li><li>landing a well-placed blow</li><li>interrupting a strange, creepy gathering</li><li>stumbling on a beast, bigger'n anything</li><li>with a sack full of treasure</li><li>getting ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ to fight them for you</li><li>face to face with a ghost/Fae/demon</li><li>finding those strange old runes</li><li>getting to know that fine-looking fellow/lady/person/couple</li></ul>",
-        ),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "… running for your life from ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁",
+            "… landing a well-placed blow",
+            "… interrupting a strange, creepy gathering",
+            "… stumbling on a beast, bigger'n anything",
+            "… with a sack full of treasure",
+            "… getting ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ to fight them for you",
+            "… face to face with a ghost/Fae/demon",
+            "… finding those strange old runes",
+            "… getting to know that fine-looking fellow/lady/person/couple",
+        ]),
         stonetop::fixed::BackstoryItem::Text("<p>But all you've got left to show for it is…</p>"),
-        stonetop::fixed::BackstoryItem::Text(
-            "<ul><li>a story no one believes.</li><li>a nasty scar; wanna see?</li><li>the occasional nightmare.</li><li>this map with runes no one can read.</li><li>this key that opens who-knows-what.</li></ul>",
-        ),
+        stonetop::fixed::BackstoryItem::Choices(&[
+            "… a story no one believes.",
+            "… a nasty scar; wanna see?",
+            "… the occasional nightmare.",
+            "… this map with runes no one can read.",
+            "… this key that opens who-knows-what.",
+        ]),
     ],
 };
 
@@ -6390,15 +6408,11 @@ static BACKSTORY_SOMETHING_WICKED_THIS_WAY_COMES: stonetop::fixed::BackstoryFixe
 static BACKSTORY_COLLECTION: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
     key: stonetop::keys::BackstoryKey::Collection,
     name: "Collection",
-    list: &[stonetop::fixed::BackstoryItem::Text(
-        "<p>In your travels and investigations you have acquired arcana—artifacts of power and mystery.</p>",
-    )],
-};
-
-static BACKSTORY_MAJOR_ARCANA: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
-    key: stonetop::keys::BackstoryKey::MajorArcana,
-    name: "Major Arcana",
     list: &[
+        stonetop::fixed::BackstoryItem::Text(
+            "<p>In your travels and investigations you have acquired arcana—artifacts of power and mystery.</p>",
+        ),
+        stonetop::fixed::BackstoryItem::Heading("Major Arcana"),
         stonetop::fixed::BackstoryItem::Text(
             "<p>Your Background grants you 1 major arcanum. Answer at least 2 questions about it:</p>",
         ),
@@ -6413,13 +6427,7 @@ static BACKSTORY_MAJOR_ARCANA: stonetop::fixed::BackstoryFixed = stonetop::fixed
         ),
         stonetop::fixed::BackstoryItem::Text("<p>When and how did that happen?</p>"),
         stonetop::fixed::BackstoryItem::Text("<p>▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁</p>"),
-    ],
-};
-
-static BACKSTORY_MINOR_ARCANA: stonetop::fixed::BackstoryFixed = stonetop::fixed::BackstoryFixed {
-    key: stonetop::keys::BackstoryKey::MinorArcana,
-    name: "Minor Arcana",
-    list: &[
+        stonetop::fixed::BackstoryItem::Heading("Minor Arcana"),
         stonetop::fixed::BackstoryItem::Text(
             "<p>Ask the GM for the minor arcana cards. Draw 3 at random and review both sides.</p>",
         ),
@@ -7690,7 +7698,7 @@ static PLAYBOOK_THE_SEEKER: stonetop::fixed::PlaybookFixed = stonetop::fixed::Pl
         title: "Introductions",
         text: "<p>Wait here for everyone else. When everyone's ready, take turns introducing your characters. When <strong><em>someone reveals something and you want to know more</em></strong>, ask them about it. When <strong><em>someone asks you a question</em></strong>, answer it truthfully.</p><ol><li>On your first turn, <strong>introduce yourself</strong> by name, pronouns, background, origin, and appearance.</li><li>On your second turn, <strong>describe your special possessions</strong> and how you contribute to the village (beyond working the fields).</li><li>On your third turn, <strong>describe your major arcana</strong>. Tell us your answers to the questions you chose. Then, <strong>tell us about your minor arcana</strong>, too.</li><li>On your next turn, <strong>answer one of the following</strong>, naming one or more NPCs who live in Stonetop.<ul><li>☐ Who is your closest kin?</li><li>☐ Who is your spouse/lover/betrothed?</li><li>☐ Whom do you trust, even more than yourself?</li><li>☐ Whom do you secretly watch over, and why?</li></ul></li><li>Go around again. Answer another question from 4, or pass. When everyone has passed, go on.</li><li>On your next turn, <strong>ask your fellow PCs one of these</strong>. When others ask you, answer as you like.<ul><li>☐ Which one of you led me to a key discovery?</li><li>☐ Which one of you has been at my side the entire way?</li><li>☐ Which one of you most fears the path I tread?</li><li>☐ Which one of you is keeping secrets from me?</li></ul></li><li>Go around again. Ask another question from 6, or pass. When everyone has passed, go on.</li><li>Add your home to the steading playbook. When everyone is done, let spring break forth!</li></ol>",
     },
-    backstory: &[&BACKSTORY_COLLECTION, &BACKSTORY_MAJOR_ARCANA, &BACKSTORY_MINOR_ARCANA],
+    backstory: &[&BACKSTORY_COLLECTION],
 };
 
 // The Would-be Hero
@@ -7825,7 +7833,7 @@ static PLAYBOOK_THE_WOULD_BE_HERO: stonetop::fixed::PlaybookFixed =
             &MOVE_VOICE_OF_EXPERIENCE,
         ],
         moves_footnote: Some(
-            "The first time you use any move marked with an asterisk (*), cross off \"Would-be\" on the front page.",
+            "The first time you use A Force to Be Reckoned With, Big Damn Hero, Undaunted, or Voice of Experience, cross off \"Would-be\" from your title.",
         ),
         intro: stonetop::fixed::Intro {
             title: "Introductions",
@@ -8166,8 +8174,6 @@ impl stonetop::keys::BackstoryKey {
             Self::WarStories => &BACKSTORY_WAR_STORIES,
             Self::SomethingWickedThisWayComes => &BACKSTORY_SOMETHING_WICKED_THIS_WAY_COMES,
             Self::Collection => &BACKSTORY_COLLECTION,
-            Self::MajorArcana => &BACKSTORY_MAJOR_ARCANA,
-            Self::MinorArcana => &BACKSTORY_MINOR_ARCANA,
             Self::FearAnger => &BACKSTORY_FEAR_ANGER,
         }
     }

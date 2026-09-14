@@ -254,6 +254,7 @@ pub enum BackstoryItem {
     Text { text: String },
     Choices { choices: Vec<String> },
     ChoiceRow(TaggedRow),
+    Heading { heading: String },
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

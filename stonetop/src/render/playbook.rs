@@ -108,7 +108,7 @@ fn backgrounds(doc: &mut Document, backgrounds: [&BackgroundFixed; 3]) {
         for chunk in background.description {
             match chunk {
                 BackgroundChunk::Flavor(html) => doc.block(speak(html)),
-                BackgroundChunk::Move(anonymous) => doc.block(speak(anonymous.description)),
+                BackgroundChunk::Move(anonymous) => move_body(doc, anonymous),
                 BackgroundChunk::Checklist(checklist) => background_checklist(doc, checklist),
             }
         }
@@ -269,6 +269,13 @@ fn moves(doc: &mut Document, playbook: &PlaybookFixed) {
 
 fn move_section(doc: &mut Document, a_move: &MoveFixed, granted: bool) {
     doc.block(format!("### {} {}", checkbox(granted), speak(a_move.name)));
+    move_body(doc, a_move);
+}
+
+/// Everything under a Move's heading: the Requires, pick-count, and resource lines, the
+/// description, then any checklist. A background's anonymous Move has no heading and
+/// renders as this alone.
+fn move_body(doc: &mut Document, a_move: &MoveFixed) {
     let mut lines = Vec::new();
     if !a_move.requires.is_empty() {
         lines.push(requires_line(a_move.requires));
@@ -346,6 +353,7 @@ fn backstory_section(doc: &mut Document, backstory: &BackstoryFixed) {
             BackstoryItem::Text(html) => doc.block(speak(html)),
             BackstoryItem::Choices(choices) => unchecked_list(doc, choices),
             BackstoryItem::ChoiceRow(row) => doc.block(format!("- {}", boxed_row(row))),
+            BackstoryItem::Heading(heading) => doc.block(format!("### {}", speak(heading))),
         }
     }
 }
@@ -353,6 +361,7 @@ fn backstory_section(doc: &mut Document, backstory: &BackstoryFixed) {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::keys::BackstoryKey;
 
     #[test]
     fn requirements_are_joined_with_and() {
@@ -391,6 +400,38 @@ mod tests {
         assert_eq!(
             requires_line(&[Requirement::Level(6), Requirement::Replaces(MoveKey::Musclebound)]),
             "(Requires level 6+; replaces Musclebound)"
+        );
+    }
+
+    #[test]
+    fn a_backgrounds_anonymous_move_lists_its_checklist_after_its_description() {
+        let ranger = PlaybookKey::TheRanger.fixed_part();
+        let mut doc = Document::default();
+        backgrounds(&mut doc, ranger.backgrounds);
+        assert!(doc.finish().contains(
+            "Mark 1 action at 1st level, then another at 3rd, 5th, 7th, and 9th.\n\n\
+             - ☐ Gauge its distance and direction from you\n\
+             - ☐ Call it back to your side\n"
+        ));
+    }
+
+    #[test]
+    fn a_backstory_subheading_is_an_h3_under_the_backstorys_h2() {
+        let collection = BackstoryFixed {
+            key: BackstoryKey::Collection,
+            name: "Collection",
+            list: &[
+                BackstoryItem::Text("<p>You have acquired arcana.</p>"),
+                BackstoryItem::Heading("Major Arcana"),
+                BackstoryItem::Choices(&["Where did you acquire it?"]),
+            ],
+        };
+        let mut doc = Document::default();
+        backstory_section(&mut doc, &collection);
+        assert_eq!(
+            doc.finish(),
+            "## Collection\n\nYou have acquired arcana.\n\n### Major Arcana\n\n\
+             - ☐ Where did you acquire it?\n"
         );
     }
 

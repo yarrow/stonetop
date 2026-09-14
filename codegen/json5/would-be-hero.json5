@@ -43,6 +43,8 @@
         { flavor: "<p>Fate has laid her hand upon you. Choose 3-4 of the items below to describe your destiny:</p>" },
         {
           checklist: {
+            // The print runs these as one wrapped list; the rows and their tags are our
+            // grouping, so where a word sits (darkness, life, storms) is a judgement.
             rows: [
               { tag: "Portents", items: ["anointed", "marked at birth", "your coming foretold"] },
               { tag: "Actions", items: ["destroy", "discover", "free", "protect", "restore", "unify"] },
@@ -129,7 +131,7 @@
       },
       {
         name: "A good dog",
-        description: ", follower (☐ <em>retriever</em> or ☐ <em>herder</em>, <em>keen-nosed, clever</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct to play; Cost: affection.",
+        description: ", follower (<em>retriever</em> or <em>herder</em>, <em>keen-nosed, clever</em>); HP 6; Damage d6 (<em>hand, grabby</em>); Instinct to play; Cost: affection.",
         pick: [
           "retriever",
           "herder",
@@ -300,7 +302,7 @@
       ],
     },
   ],
-  movesFootnote: "The first time you use any move marked with an asterisk (*), cross off \"Would-be\" on the front page.",
+  movesFootnote: "The first time you use A Force to Be Reckoned With, Big Damn Hero, Undaunted, or Voice of Experience, cross off \"Would-be\" from your title.",
   backstory: [
     {
       name: "Fear & anger",

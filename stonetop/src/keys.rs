@@ -730,8 +730,6 @@ pub enum BackstoryKey {
 
     // Backstories for the Seeker
     Collection,
-    MajorArcana,
-    MinorArcana,
 
     // Backstories for the Would-be Hero
     FearAnger,

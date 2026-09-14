@@ -8,31 +8,31 @@ These people are family. Chaos grows all around, but you'll be damned if you'll 
 
 You have sought out and embraced dark power to protect that which you hold dear. Or perhaps that power fell upon you, and you took it up for the greater good. Either way, you seek more.
 
-You start with the Let's Make a Deal move and are Well Versed in the Things Below (go mark them now). You've also acquired 1 major arcanum:
+You start with the Let's Make a Deal move and are Well Versed in the Things Below. You've also acquired 1 major arcanum:
 
-- ☐ The Hec'tumel Codex (1 slot)
-- ☐ The Red Scepter (1 slot)
-- ☐ The Staff of the Lidless Orb (1 slot)
+- ☐ 1-slot The Hec'tumel Codex
+- ☐ 1-slot The Red Scepter
+- ☐ 1-slot The Staff of the Lidless Orb
 
 ### ☐ Antiquarian
 
 The past has buried many secrets, and you are determined to dig them up. Years of study across the land have led you here, and you are convinced that this town holds the key to your greatest discoveries. What is it you hope to find? What is it that keeps you here?
 
-In any case, your travels and studies mean that you start with the Polyglot move and that you are Well Versed in the Makers and their arts (go mark them now). You've also acquired 1 major arcanum:
+In any case, your travels and studies mean that you start with the Polyglot move and that you are Well Versed in the Makers and their arts. You've also acquired 1 major arcanum:
 
-- ☐ Noruba's Ice Sphere (1 slot)
-- ☐ The Azure Hand (1 slot)
-- ☐ The Mindgem (2 slots)
+- ☐ 1-slot Noruba's Ice Sphere
+- ☐ 1-slot The Azure Hand
+- ☐ 2-slot The Mindgem
 
 ### ☐ Witch Hunter
 
 You've dedicated your life to rooting out and destroying horrors and their servants. What set you down this path? What did you sacrifice to walk it? What led you to call Stonetop home?
 
-Regardless, you start with the Everything Bleeds move and are Well Versed in (pick 1) the Fae, the Things Below, or the Last Door and what lies beyond (go mark them now). You've also acquired 1 major arcanum:
+Regardless, you start with the Everything Bleeds move and are Well Versed in (pick 1) the Fae, the Things Below, or the Last Door and what lies beyond. You've also acquired 1 major arcanum:
 
-- ☐ The Demonhide Cloak (1 slot)
+- ☐ 1-slot The Demonhide Cloak
 - ☐ The Redwood Effigy
-- ☐ The Twisted Spear (2 slots)
+- ☐ 2-slot The Twisted Spear
 
 ## Instinct (Choose 1)
 
@@ -71,114 +71,36 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 
 Assign these scores: +2, +1, +1, +0, +0, -1. When a debility is marked, you roll with disadvantage.
 
-- Stir: ▁▁▁▁ · Dex: ▁▁▁▁ — ◯ weakened
-- Int: ▁▁▁▁ · Wiz: ▁▁▁▁ — ◯ dazed
+- Str: ▁▁▁▁ · Dex: ▁▁▁▁ — ◯ weakened
+- Int: ▁▁▁▁ · Wis: ▁▁▁▁ — ◯ dazed
 - Con: ▁▁▁▁ · Cha: ▁▁▁▁ — ◯ miserable
 
 Damage: d6 · HP (max 16): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁▁ · Level: ▁▁▁▁
+
+## Special possessions (Pick 2, in addition to your scribe's tools)
+
+- ☑︎ **Scribe's tools:** parchment, a few sheets (*fragile*), ink, pigments, vials (*fragile*), quills, a 1-slot notebook, etc.
+- ☐ **Books & scrolls** (5 uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.
+- ☐ **Distillery:** skins of whisky, fine (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
+- ☐ **Engineer's tools:** rulers, tapes, rods, plumb-bobs, 1-slot tripods, 1-slot block & tackles, wheelbarrow, etc.
+- ☐ **Laboratory:** chemics, reagents, vials (*fragile*), measures, 1-slot scales, 1-slot decanters, etc. Every season, produce d4-1 uses of 1-slot naphtha (burns hot & sticky; damage d8; 3 uses, *thrown, area, dangerous*, ignores armor).
+- ☐ **Paraphernalia:** crystals, incense, talismans, blood, bone, horn, eye of newt, 1-slot braziers, a 2-slot cauldron, etc.
+- ☐ **Trade contacts:** small amounts of salt (a little box), glass, silk, spice, medicinal herbs, pigments, ivory, etc.
+- ☐ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ (discuss with GM)
 
 ## Moves
 
 You start with Well Versed, Work With What You've Got, and 1 from your Background.
 
-### ☑︎☐☐ Well Versed
-
-Mark 1 topic, in addition to the one noted in your Background. Each additional time you take this move, mark 2 more topics.
-
-- ☐ The Last Door, death, and the undead
-- ☐ The civilizations of humanity
-- ☐ The Fae and their strange ways
-- ☐ The Makers and their arts
-- ☐ The primordial powers
-- ☐ The Things Below
-- ☐ The wild world and its spirits
-
-When you ***Know Things about one of your topics***, you can ask the GM a follow-up question of your choice (even on a 6-).
-
-### ☑︎ Work With What You've Got
-
-When you ***cleverly use your environment to harm or impede your foe(s)***, roll +INT: **on a 10+**, pick 2; **on a 7-9**, pick 1:
-
-- Interrupt or thwart their action(s)
-- Create an opportunity that grants you or an ally advantage on the next roll to exploit it
-- Deal damage appropriate to the source (d4 for bruises/scrapes, d6 for bloodshed, d8 if it'd break bones, d10 if it'd kill a common person)
-
-## Special possessions (Pick 2, in addition to your scribe's tools)
-
-- ☑︎ **Scribe's tools:** parchment, ink, pigments, vials, quills, a 1-slot notebook, etc.
-- ☐ **Books & scrolls** (5 uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.
-- ☐ **Distillery:** skins of fine whisky (◯◯ uses, grants advantage to Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
-- ☐ **Engineer's tools:** rulers, tapes, rods, plumb-bobs, 1-slot tripods, 1-slot block & tackles, wheelbarrow, etc.
-- ☐ **Laboratory:** chemics, reagents, vials, measures, 1-slot scales, 1-slot decanters, etc. Every season, produce d4-1 uses of 1-slot naphtha (*thrown, area, dangerous*, ignores armor).
-- ☐ **Paraphernalia:** crystals, incense, talismans, blood, bone, horn, eye of newt, 1-slot braziers, a 2-slot cauldron, etc.
-- ☐ **Trade contacts:** small amounts of salt, glass, silk, spice, medicinal herbs, pigments, ivory, etc.
-- ☐ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ (discuss with GM)
-
-## Collection
-
-In your travels and investigations you have acquired arcana—artifacts of power and mystery.
-
-### Major Arcana
-
-Your Background grants you 1 major arcanum. Answer at least 2 questions about it:
-
-- ☐ Where did you acquire it?
-- ☐ From whose grasp did you wrest it?
-- ☐ Who else wants it?
-- ☐ What did it cost you?
-
-You've begun to unlock the mysteries of your major arcanum; mark 1 ☐ or ◯ on the front of its insert.
-
-When and how did that happen?
-
-▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-
-### Minor Arcana
-
-Ask the GM for the minor arcana cards. Draw 3 at random and review both sides.
-
-Choose one whose secrets you have unlocked. If it's portable, you either keep it on your person or hidden away somewhere safe. Where is it now? How did you come to master it?
-
-▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-
-Choose another, which you have not yet mastered. It is either in your possession or in a secret place known only to you. Where is it? How did you find it?
-
-▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-
-The third you have not yet found, but you have a lead on it. Give the card back to the GM, but make note of it below. During play, ask the GM what you know about it.
-
-▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
-
-## Introductions
-
-Wait here for everyone else. When everyone's ready, take turns introducing your characters. When ***someone reveals something and you want to know more***, ask them about it. When ***someone asks you a question***, answer it truthfully.
-
-1. On your first turn, **introduce yourself** by name, pronouns, background, origin, and appearance.
-2. On your second turn, **describe your special possessions** and how you contribute to the village (beyond working the fields).
-3. On your third turn, **describe your major arcana**. Tell us your answers to the questions you chose. Then, **tell us about your minor arcana**, too.
-4. On your next turn, **answer one of the following**, naming one or more NPCs who live in Stonetop.
-   - ☐ Who is your closest kin?
-   - ☐ Who is your spouse/lover/betrothed?
-   - ☐ Whom do you trust, even more than yourself?
-   - ☐ Whom do you secretly watch over, and why?
-5. Go around again. Answer another question from 4, or pass. When everyone has passed, go on.
-6. On your next turn, **ask your fellow PCs one of these**. When others ask you, answer as you like.
-   - ☐ Which one of you led me to a key discovery?
-   - ☐ Which one of you has been at my side the entire way?
-   - ☐ Which one of you most fears the path I tread?
-   - ☐ Which one of you is keeping secrets from me?
-7. Go around again. Ask another question from 6, or pass. When everyone has passed, go on.
-8. Add your home to the steading playbook. When everyone is done, let spring break forth!
-
-## Moves not yet chosen
-
 ### ☐ Attuned
 
 When you ***Seek Insight***, you can always ask, "What here is infused with magic?" for free, even on a 6-.
 
-### ☐ Conduit of Power — ☐☐☐
+### ☐ Conduit of Power
 
-When you ***would mark a Consequence from a major arcanum***, you can mark 1 box here instead, with no negative effect. (These marks never clear.)
+Evade consequence: 3
+
+When you ***would mark a Consequence from a major arcanum***, you can mark 1 use here instead, with no negative effect. (There is no reset)
 
 ### ☐ Countermeasures
 
@@ -192,13 +114,16 @@ When you ***exploit an unnatural foe's specific weakness or vulnerability***, de
 
 When you ***inspect a work of artifice or magic for a fatal flaw***, roll +INT: **on a 7+**, the GM will reveal the best way to destroy/sabotage it; **on a 10+**, you or an ally also gain advantage to act on the info.
 
-### ☐☐☐ Improved Stat
+### ☐ Improved Stat
+
+Take up to 3 times
 
 Each time you take this move, increase one of your stats by 1 (to a max of +2).
 
-### ☐☐☐ Initiate of the Secret Arts
+### ☐ Initiate of the Secret Arts
 
-(Requires level 2+ and the Seeker)
+(Requires level 2+ and the Seeker)  
+Take up to 3 times
 
 You have a "Sacred Pouch" (3 Stock, *magical*), as per the Blessed, but with no remarkable traits. Each time you take this move, choose a Blessed move for which you otherwise qualify. (You can't take Improved Stat or Superior Stat.)
 
@@ -206,7 +131,9 @@ You have a "Sacred Pouch" (3 Stock, *magical*), as per the Blessed, but with no 
 
 When you ***Seek Insight***, add "What do they really want or need?" to the list of questions. When you ***Persuade by offering them something that you know they want or need***, treat a 7-9 as a 10+.
 
-### ☐ Logbook — ◯◯
+### ☐ Logbook
+
+Uses: 2
 
 You have a logbook (2 uses, *slow*) that doesn't take up space in your inventory. When you (and only you) ***consult your logbook and expend a use***, you can ignore a Know Things roll you just made and treat the result as a 10+. When ***the Seasons Change***, reset your logbook to 2 uses.
 
@@ -239,13 +166,39 @@ When you ***study encoded, forgotten, or arcane marks or writing***, roll +INT: 
 
 When you ***study something magical that should take months to understand***, it instead takes mere weeks. If it should take weeks, it takes days. If it should take days, it takes only a few hours.
 
-### ☐ Safety First — ◯◯
+### ☐ Safety First
+
+Protection: 2
 
 When you ***spend an hour or so preparing your mystical defenses***, hold 2 Protection. When you ***are affected by harmful magic***, spend 1 Protection either to gain advantage on any roll to resist it or to halve its damage/effects.
 
 ### ☐ Sage Advice
 
 When ***another PC asks you for guidance***, they get advantage on their next roll to follow your advice.
+
+### ☑︎ Well Versed
+
+Take up to 3 times
+
+Mark 1 topic, in addition to the one noted in your Background. Each additional time you take this move, mark 2 more topics.
+
+When you ***Know Things about one of your topics***, you can ask the GM a follow-up question of your choice (even on a 6-).
+
+- ☐ The Last Door, death, and the undead
+- ☐ The civilizations of humanity
+- ☐ The Fae and their strange ways
+- ☐ The Makers and their arts
+- ☐ The primordial powers
+- ☐ The Things Below
+- ☐ The wild world and its spirits
+
+### ☑︎ Work With What You've Got
+
+When you ***cleverly use your environment to harm or impede your foe(s)***, roll +INT: **on a 10+**, pick 2; **on a 7-9**, pick 1:
+
+- Interrupt or thwart their action(s)
+- Create an opportunity that grants you or an ally advantage on the next roll to exploit it
+- Deal damage appropriate to the source (d4 for bruises/scrapes, d6 for bloodshed, d8 if it'd break bones, d10 if it'd kill a common person)
 
 ### ☐ Arcane Adept
 
@@ -288,3 +241,59 @@ When you ***would mark a Consequence from a major arcanum***, you may mark a deb
 (Requires level 6+ and Safety First)
 
 When you ***hold Protection***, you can't be scried upon or sensed by magical means, and have advantage to Defy Danger by being stealthy.
+
+## Collection
+
+In your travels and investigations you have acquired arcana—artifacts of power and mystery.
+
+### Major Arcana
+
+Your Background grants you 1 major arcanum. Answer at least 2 questions about it:
+
+- ☐ Where did you acquire it?
+- ☐ From whose grasp did you wrest it?
+- ☐ Who else wants it?
+- ☐ What did it cost you?
+
+You've begun to unlock the mysteries of your major arcanum; mark 1 ☐ or ○ on the front of its insert.
+
+When and how did that happen?
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+### Minor Arcana
+
+Ask the GM for the minor arcana cards. Draw 3 at random and review both sides.
+
+Choose one whose secrets you have unlocked. If it's portable, you either keep it on your person or hidden away somewhere safe. Where is it now? How did you come to master it?
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+Choose another, which you have not yet mastered. It is either in your possession or in a secret place known only to you. Where is it? How did you find it?
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+The third you have not yet found, but you have a lead on it. Give the card back to the GM, but make note of it below. During play, ask the GM what you know about it.
+
+▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+
+## Introductions
+
+Wait here for everyone else. When everyone's ready, take turns introducing your characters. When ***someone reveals something and you want to know more***, ask them about it. When ***someone asks you a question***, answer it truthfully.
+
+1. On your first turn, **introduce yourself** by name, pronouns, background, origin, and appearance.
+2. On your second turn, **describe your special possessions** and how you contribute to the village (beyond working the fields).
+3. On your third turn, **describe your major arcana**. Tell us your answers to the questions you chose. Then, **tell us about your minor arcana**, too.
+4. On your next turn, **answer one of the following**, naming one or more NPCs who live in Stonetop.
+   - ☐ Who is your closest kin?
+   - ☐ Who is your spouse/lover/betrothed?
+   - ☐ Whom do you trust, even more than yourself?
+   - ☐ Whom do you secretly watch over, and why?
+5. Go around again. Answer another question from 4, or pass. When everyone has passed, go on.
+6. On your next turn, **ask your fellow PCs one of these**. When others ask you, answer as you like.
+   - ☐ Which one of you led me to a key discovery?
+   - ☐ Which one of you has been at my side the entire way?
+   - ☐ Which one of you most fears the path I tread?
+   - ☐ Which one of you is keeping secrets from me?
+7. Go around again. Ask another question from 6, or pass. When everyone has passed, go on.
+8. Add your home to the steading playbook. When everyone is done, let spring break forth!

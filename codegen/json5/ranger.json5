@@ -199,7 +199,7 @@
     },
     {
       name: "Pack Horse",
-      description: "<p>You can carry up to 4 ◆ with a light load, 7 ◆ with a normal load, and 10 ◆ with a heavy load.</p>",
+      description: "<p>You can carry up to 4 inventory slots with a light load, 7 inventory slots with a normal load, and 10 inventory slots with a heavy load.</p>",
     },
     {
       name: "Pathfinder",

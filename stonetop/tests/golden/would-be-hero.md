@@ -1,4 +1,4 @@
-# The Would-Be Hero
+# The Would-be Hero
 
 ## Background (Choose 1)
 
@@ -24,16 +24,17 @@ You once led a simple life, but something happened. Something changed you, burde
 
 You always have the option to Burn Brightly; you can spend 2 XP after you roll to add +1, even if you don't have enough XP to level.
 
-### ☐ Destined — ◯◯◯
+### ☐ Destined
 
 Fate has laid her hand upon you. Choose 3-4 of the items below to describe your destiny:
 
 - ☐ anointed ☐ marked at birth ☐ your coming foretold
-- ☐ destroy ☐ discover ☐ free ☐ protect ☐ restore
-- ☐ unify ☐ blood ☐ civilization ☐ darkness
-- ☐ earth & stone ☐ fire ☐ ice ☐ light ☐ life ☐ storms
-- ☐ war ☐ water ☐ the Fae ☐ the gods ☐ the Makers
-- ☐ the Stone ☐ the Things Below
+- ☐ destroy ☐ discover ☐ free ☐ protect ☐ restore ☐ unify
+- ☐ earth & stone ☐ darkness ☐ fire ☐ ice ☐ light ☐ water
+- ☐ blood ☐ civilization ☐ life ☐ storms ☐ war
+- ☐ the Fae ☐ the gods ☐ the Makers ☐ the Stone ☐ the Things Below
+
+Omens: 3
 
 At ***the start of a session***, roll +Omens: **on a 7+**, lose all Omens and the GM will describe a vision or portent that points toward your fate and/or clarifies your current situation; also, **on a 10+**, ask the GM a follow-up question and get a clear, helpful answer; **on a 6-**, don't mark XP, hold +1 Omen, and tell us of your recent nightmares or a troubling vision, and how your fears play into them.
 
@@ -76,17 +77,38 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 
 Assign these scores: +1, +0, +0, +0, +0, -1. When a debility is marked, you roll with disadvantage.
 
-- Stir: ▁▁▁▁ · Dex: ▁▁▁▁ — ◯ weakened
-- Int: ▁▁▁▁ · Wiz: ▁▁▁▁ — ◯ dazed
+- Str: ▁▁▁▁ · Dex: ▁▁▁▁ — ◯ weakened
+- Int: ▁▁▁▁ · Wis: ▁▁▁▁ — ◯ dazed
 - Con: ▁▁▁▁ · Cha: ▁▁▁▁ — ◯ miserable
 
 Damage: d6 · HP (max 16): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁▁ · Level: ▁▁▁▁
+
+## Special possessions (Pick 2)
+
+- ☐ **A heap of expectations:** of little use
+- ☐ **A good dog**, follower (*retriever* or *herder*, *keen-nosed, clever*); HP 6; Damage d6 (*hand, grabby*); Instinct to play; Cost: affection.
+  - ☐ retriever
+  - ☐ herder
+- ☐ **Husbandry tools:** brushes, muzzles, collars, feed, 1-slot whips, 1-slot bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).
+- ☐ **Smithy** (or access to it): iron goods, ingots, thick gloves, 1-slot tongs, 1-slot bellows, an anvil, etc.
+- ☐ **Stoneworker's tools:** chisels, drills, 1-slot prybars, 1-slot spikes, 1-slot block & tackles, wheelbarrow, etc.
+- ☐ **Personal token, fraught with meaning** (pick 1)
+  - ☐ A 2-slot shield, bearing ▁▁▁▁▁▁▁▁'s crest
+  - ☐ A 1-slot wool cloak, woven just for you by ▁▁▁▁▁▁▁▁
+  - ☐ A letter, spattered with tears & blood
+  - ☐ A flute, a gift from someone you loved
+  - ☐ A fine locket, holding a strand of hair
+  - ☐ A tinderbox, lovingly engraved
+- ☐ **Tannery** (or access to it): lime, acid, salts, thick gloves, a 1-slot cuirass, boiled leather (1 armor), etc.
+- ☐ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ (discuss with GM)
 
 ## Moves
 
 You start with Anger is a Gift, Potential for Greatness, and 2 of your choice.
 
-### ☑︎ Anger is a Gift — ◯◯
+### ☑︎ Anger is a Gift
+
+Resolve: 2
 
 When you ***burn with righteous anger*** (see Fear & Anger on back of playbook), hold 2 Resolve. You can spend your Resolve 1-for-1 to:
 
@@ -95,6 +117,58 @@ When you ***burn with righteous anger*** (see Fear & Anger on back of playbook),
 - Inspire allies or bystanders to follow your lead
 - Strike hard (+1d4 damage, *forceful*)
 - Keep your footing, position, and/or your course despite what befalls you
+
+### ☐ Speak Truth to Power
+
+(Requires Anger is a Gift)
+
+When you ***demand that someone does what is clearly good and right***, you have advantage to Persuade. If they refuse, gain +1 Resolve.
+
+### ☐ Better Part of Valor
+
+When you ***are outnumbered or facing a foe bigger than you***, you have advantage to hide from, escape from, or sneak past them.
+
+### ☐ I Get Knocked Down
+
+When you ***take damage despite your best efforts to avoid it***, you can choose to halve the damage but pick 1 of the following:
+
+- You lose something (footing, grip, etc.)
+- Something on your person breaks
+- You're out of it for a moment
+
+Whatever you choose, the GM will describe the details.
+
+### ☐ But I Get Up Again
+
+(Requires I Get Knocked Down)
+
+When you ***use I Get Knocked Down***, you have advantage on your next roll against whatever dealt the damage and your next blow against them does +1d4 damage.
+
+### ☐ Improved Stat
+
+Take up to 3 times
+
+Each time you take this move, increase one of your stats by 1 (to a max of +2).
+
+### ☐ In Over Your Head
+
+When ***another PC rescues you from danger***, mark XP.
+
+### ☐ Iron Will
+
+When you ***are subject to mind control or magic that affects your feelings***, you can take 1d4 damage (ignoring armor) to disregard its influence.
+
+### ☐ Inquiring Minds
+
+When you ***seek out and receive honest advice***, gain advantage on your next roll to follow that advice.
+
+### ☐ Never Gonna Keep Me Down
+
+Skip Death's Door: 1
+
+When you ***have 5 or fewer current HP***, you impose disadvantage on any damage you take.
+
+Once per session, when you ***are at Death's Door***, don't roll. You get a 10+.
 
 ### ☑︎ Potential for Greatness
 
@@ -109,22 +183,80 @@ Once per level, ***when you roll a stat and get a 10+***, mark one of the follow
 - ☐ Increase your max HP by 4 (at level ▁▁▁▁)
 - ☐ Increase your damage die to a d8 (at level ▁▁▁▁)
 
-## Special possessions (Pick 2)
+### ☐ Resourceful
 
-- ☐ **A heap of expectations:** of little use
-- ☐ **A good dog**, follower (☐ *retriever* or ☐ *herder*, *keen-nosed, clever*); HP 6; Damage d6 (*hand, grabby*); Instinct to play; Cost: affection.
-- ☐ **Husbandry tools:** brushes, muzzles, collars, feed, 1-slot whips, 1-slot bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).
-- ☐ **Smithy** (or access to it): iron goods, ingots, thick gloves, 1-slot tongs, 1-slot bellows, an anvil, etc.
-- ☐ **Stoneworker's tools:** chisels, drills, 1-slot prybars, 1-slot spikes, 1-slot block & tackles, wheelbarrow, etc.
-- ☐ **Personal token, fraught with meaning:** (pick 1)
-  - ☐ A 2-slot shield, bearing ▁▁▁▁▁▁▁▁'s crest
-  - ☐ A 1-slot wool cloak, woven just for you by ▁▁▁▁▁▁▁▁
-  - ☐ A letter, spattered with tears & blood
-  - ☐ A flute, a gift from someone you loved
-  - ☐ A fine locket, holding a strand of hair
-  - ☐ A tinderbox, lovingly engraved
-- ☐ **Tannery** (or access to it): lime, acid, salts, thick gloves, a 1-slot boiled leather cuirass (1 armor), etc.
-- ☐ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ (discuss with GM)
+When you ***Defy Danger and roll a 6-***, ask the GM a question from Seek Insight after they describe what happens. Gain advantage on your next roll to act on the answer.
+
+### ☐ Something to Remember Me By
+
+When you ***spend Readiness (from Defend) to strike back at an attacker***, you deal +1d4 damage and scar, mark, or diminish them in some way (the GM will say how, or ask you to).
+
+### ☐ Tough Love
+
+When you ***honestly think another PC is in the wrong and call them on it***, they have disadvantage on any rolls against you until you two work it out.
+
+### ☐ Underestimated
+
+As long as you ***avoid overt hostility***, no enemy will consider you a threat.
+
+When you ***first make your move against an enemy who underestimates you***, you have advantage.
+
+### ☐ Up With People
+
+Your Rapport: 2  
+Their Rapport: 1
+
+When you ***converse with someone*** (PC or NPC) you can hold 2 Rapport with them. If you do, they hold 1 Rapport with you. During the conversation, either of you can spend 1 Rapport to ask the other player one of the following and get an honest answer.
+
+- What weighs you down or holds you back?
+- What drives you forward?
+- What lesson would you have me learn?
+- What do you think of me, truly?
+
+### ☐ Versatile
+
+(Requires level 2+ and the Would-be Hero)  
+Take up to 4 times
+
+Choose a move from any other playbook, as long as you meet its requirements. You can pick from a different playbook each time. You can't take Improved Stat or Superior Stat.
+
+### ☐ A Force to Be Reckoned With
+
+(Requires level 6+; replaces Underestimated)
+
+Any intelligent creature who looks you in the eye or hears the steel in your voice instinctively knows that you are a force to be reckoned with, and treats you appropriately.
+
+When you ***Defy Danger against something trying to harm or constrain you***, on a 12+ you turn the tables on them (the GM will say how, or ask you to).
+
+### ☐ Big Damn Hero
+
+(Requires level 6+; replaces In Over Your Head)
+
+When you ***first leap into danger to protect someone***, don't roll to Defend. Instead, treat it as though you rolled a 10+.
+
+When you ***Defend***, you can spend 1 Readiness to lock eyes with an attacker; they have disadvantage on damage rolls against you and your ward for the rest of the fight.
+
+### ☐ Superior Stat
+
+(Requires all 6 marks in Potential for Greatness)
+
+Increase one of your stats by +1 (to a max of +3).
+
+### ☐ Undaunted
+
+(Requires level 6+; replaces Better Part of Valor)
+
+When you ***are outnumbered or facing a foe bigger than you***, you get +1 armor and deal +1d6 damage.
+
+### ☐ Voice of Experience
+
+(Requires level 6+; replaces Inquiring Minds)
+
+When ***another PC comes to you for advice and you tell them what you think is best***, they have advantage on their first roll to follow your advice.
+
+When you ***Seek Insight***, you can always ask, "What is about to happen?" for free, even on a 6-.
+
+The first time you use A Force to Be Reckoned With, Big Damn Hero, Undaunted, or Voice of Experience, cross off "Would-be" from your title.
 
 ## Fear & anger
 
@@ -183,124 +315,3 @@ Wait here for everyone else. When everyone's ready, take turns introducing your 
    - ☐ Which one of you have I hurt, through what I have done or what I've failed to do?
 7. Go around again. Ask another question from 6, or pass. When everyone has passed, go on.
 8. Add your home to the steading playbook. When everyone is done, let spring break forth!
-
-## Moves not yet chosen
-
-### ☐ Speak Truth to Power
-
-(Requires Anger is a Gift)
-
-When you ***demand that someone does what is clearly good and right***, you have advantage to Persuade. If they refuse, gain +1 Resolve.
-
-### ☐ Better Part of Valor
-
-When you ***are outnumbered or facing a foe bigger than you***, you have advantage to hide from, escape from, or sneak past them.
-
-### ☐ I Get Knocked Down
-
-When you ***take damage despite your best efforts to avoid it***, you can choose to halve the damage but pick 1 of the following:
-
-- You lose something (footing, grip, etc.)
-- Something on your person breaks
-- You're out of it for a moment
-
-Whatever you choose, the GM will describe the details.
-
-### ☐ But I Get Up Again
-
-(Requires I Get Knocked Down)
-
-When you ***use I Get Knocked Down***, you have advantage on your next roll against whatever dealt the damage and your next blow against them does +1d4 damage.
-
-### ☐☐☐ Improved Stat
-
-Each time you take this move, increase one of your stats by 1 (to a max of +2).
-
-### ☐ In Over Your Head
-
-When ***another PC rescues you from danger***, mark XP.
-
-### ☐ Iron Will
-
-When you ***are subject to mind control or magic that affects your feelings***, you can take 1d4 damage (ignoring armor) to disregard its influence.
-
-### ☐ Inquiring Minds
-
-When you ***seek out and receive honest advice***, gain advantage on your next roll to follow that advice.
-
-### ☐ Never Gonna Keep Me Down — ◯
-
-When you ***have 5 or fewer current HP***, you impose disadvantage on any damage you take.
-
-Once per session, when you ***are at Death's Door***, don't roll. You get a 10+.
-
-### ☐ Resourceful
-
-When you ***Defy Danger and roll a 6-***, ask the GM a question from Seek Insight after they describe what happens. Gain advantage on your next roll to act on the answer.
-
-### ☐ Something to Remember Me By
-
-When you ***spend Readiness (from Defend) to strike back at an attacker***, you deal +1d4 damage and scar, mark, or diminish them in some way (the GM will say how, or ask you to).
-
-### ☐ Tough Love
-
-When you ***honestly think another PC is in the wrong and call them on it***, they have disadvantage on any rolls against you until you two work it out.
-
-### ☐ Underestimated
-
-As long as you ***avoid overt hostility***, no enemy will consider you a threat.
-
-When you ***first make your move against an enemy who underestimates you***, you have advantage.
-
-### ☐ Up With People — ◯◯|◯
-
-When you ***converse with someone*** (PC or NPC) you can hold 2 Rapport with them. If you do, they hold 1 Rapport with you. During the conversation, either of you can spend 1 Rapport to ask the other player one of the following and get an honest answer.
-
-- What weighs you down or holds you back?
-- What drives you forward?
-- What lesson would you have me learn?
-- What do you think of me, truly?
-
-### ☐☐☐☐ Versatile
-
-(Requires level 2+, the Would-be Hero)
-
-Choose a move from any other playbook, as long as you meet its requirements. You can pick from a different playbook each time. You can't take Improved Stat or Superior Stat.
-
-### ☐ A Force to Be Reckoned With*
-
-(Requires level 6+; replaces Underestimated)
-
-Any intelligent creature who looks you in the eye or hears the steel in your voice instinctively knows that you are a force to be reckoned with, and treats you appropriately.
-
-When you ***Defy Danger against something trying to harm or constrain you***, on a 12+ you turn the tables on them (the GM will say how, or ask you to).
-
-### ☐ Big Damn Hero*
-
-(Requires level 6+; replaces In Over Your Head)
-
-When you ***first leap into danger to protect someone***, don't roll to Defend. Instead, treat it as though you rolled a 10+.
-
-When you ***Defend***, you can spend 1 Readiness to lock eyes with an attacker; they have disadvantage on damage rolls against you and your ward for the rest of the fight.
-
-### ☐ Superior Stat
-
-(Requires all 6 marks in Potential for Greatness)
-
-Increase one of your stats by +1 (to a max of +3).
-
-### ☐ Undaunted*
-
-(Requires level 6+; replaces Better Part of Valor)
-
-When you ***are outnumbered or facing a foe bigger than you***, you get +1 armor and deal +1d6 damage.
-
-### ☐ Voice of Experience*
-
-(Requires level 6+; replaces Inquiring Minds)
-
-When ***another PC comes to you for advice and you tell them what you think is best***, they have advantage on their first roll to follow your advice.
-
-When you ***Seek Insight***, you can always ask, "What is about to happen?" for free, even on a 6-.
-
-\* The first time you use any move marked with an asterisk (*), cross off "Would-be" on the front page.

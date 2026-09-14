@@ -390,6 +390,9 @@ pub enum BackstoryItem {
     Text(&'static str),
     Choices(&'static [&'static str]),
     ChoiceRow(TaggedRow),
+    /// A printed sub-heading within the backstory, one level below its name: the Seeker's
+    /// Collection has "Major Arcana" and "Minor Arcana".
+    Heading(&'static str),
 }
 
 #[cfg(test)]

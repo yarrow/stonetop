@@ -6,7 +6,7 @@
 
 You are a hunter of the Great Wood, the best the town has seen in generations. You know every part of the Wood within a two-day march.
 
-You start with both the Expert Tracker move and the Stalker move. Go mark them now.
+You start with both the Expert Tracker move and the Stalker move.
 
 ### ☐ Wide Wanderer
 
@@ -18,7 +18,7 @@ You have travelled much of the known world and perhaps parts beyond. Add each of
 - **Tovia** (from Lygos)
 - **Sasca** (from the northern Manmarch)
 
-You start with the Mental Map move. Mark it now.
+You start with the Mental Map move.
 
 When you ***Know Things about the wider world***, you can roll +WIS instead of +INT.
 
@@ -26,7 +26,7 @@ When you ***arrive somewhere you've visited before*** (your call), tell the GM w
 
 ### ☐ Beast-Bonded
 
-You grew up civilized, but your soul is bound to a beast of the wild. You're closer to it than to any man or woman. How did this bond come about? How long ago? Regardless, you start with the Animal Companion move. Go mark it now.
+You grew up civilized, but your soul is bound to a beast of the wild. You're closer to it than to any man or woman. How did this bond come about? How long ago? Regardless, you start with the Animal Companion move.
 
 When you ***focus on your animal companion for a few moments***, you can use any of the actions you've marked below, no matter the distance between you. Mark 1 action at 1st level, then another at 3rd, 5th, 7th, and 9th.
 
@@ -58,7 +58,7 @@ Choose 1 on each line, or make something up:
 
 Stonetop is your home, or close enough, but where are you (or your family) from originally? Pick 1 and a name to match (or make up something similar).
 
-- ☐ **Stonetop:** Aran, Bledyn, Branwen, Deryn, Ifur, Meinir, Rhys or Teagan
+- ☐ **Stonetop:** Aran, Bledyn, Branwen, Deryn, Ifur, Meinir, Rhys, or Teagan
 - ☐ **Barrier Pass:** Anarba, Arslan, Bolormaa, Cirina, Nergui, Nomolun, Saran, or Shigi-Qutuqu
 - ☐ **Marshedge:** Asling, Conar, Enna, Flannan, Macha, Mave, Proinsias, or Rowen
 - ☐ **The Steplands (Hillfolk):** Bernd, Elown, Irn, Kani, Pol, Nol, Rozn, or Sterin
@@ -73,24 +73,16 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 
 Assign these scores: +2, +1, +1, +0, +0, -1. When a debility is marked, you roll with disadvantage.
 
-- Stir: ▁▁▁▁ · Dex: ▁▁▁▁ — ◯ weakened
-- Int: ▁▁▁▁ · Wiz: ▁▁▁▁ — ◯ dazed
+- Str: ▁▁▁▁ · Dex: ▁▁▁▁ — ◯ weakened
+- Int: ▁▁▁▁ · Wis: ▁▁▁▁ — ◯ dazed
 - Con: ▁▁▁▁ · Cha: ▁▁▁▁ — ◯ miserable
 
 Damage: d8 · HP (max 18): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁▁ · Level: ▁▁▁▁
 
-## Moves
-
-You start with Home on the Range, any moves from your Background, and 1 of your choice.
-
-### ☑︎ Home on the Range
-
-When ***a journey requires you to Defy Danger or Struggle as One***, treat a 6- as a 7-9.
-
 ## Special possessions (Pick 2, in addition to your composite bow)
 
-- ☑︎ 1-slot **Composite bow** (*far*, +1 damage, x piercing; Arrows: plenty left, low ammo, or all out)
-- ☐ **Distillery:** skins of fine whisky (◯◯ uses, grants advantage to Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
+- ☑︎ **1-slot Composite bow** (*far*, +1 damage, x piercing; Arrows: plenty left, low ammo, or all out)
+- ☐ **Distillery:** skins of whisky, fine (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
 - ☐ **Hideouts** (3 uses): expend a use to have a well-stocked, safe shelter nearby; GM can veto.
 - ☐ **Husbandry tools:** brushes, muzzles, collars, feed, 1-slot whips, 1-slot bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).
 - ☐ **Hounds**, 2-3 followers (*trackers, keen-nosed, fast*); HP 6; Damage d6 (*hand, grabby*); Instinct: to give chase; Cost: training.
@@ -98,50 +90,13 @@ When ***a journey requires you to Defy Danger or Struggle as One***, treat a 6- 
 - ☐ **Trapping gear:** snares, pelts, musk, bait, etc. When you ***Forage***, get +1 use of provisions.
 - ☐ ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁ (discuss with GM)
 
-## Something wicked this way comes
+## Moves
 
-You know firsthand that trouble is out there, and like it or not, one of these days the folk of Stonetop are going to have to face it. What is it that you're so worried about? (choose 1)
+You start with Home on the Range, any moves from your Background, and 1 of your choice.
 
-- ☐ A dark, unwholesome presence lurking in the Great Wood
-- ☐ A strange, furtive figure seen near the Ruined Tower
-- ☐ Something big & savage stalking the northern foothills
-- ☐ Whatever's made the lizard-like suarachan of Ferrier's Fen so bold
-- ☐ That of which the Hillfolk refuse to speak
+### ☐ A Safe Place
 
-Then, answer at least 3 of the following questions about this threat:
-
-- ☐ What, exactly, do you think it is?
-- ☐ What did you see, and how close did you have to get to see it?
-- ☐ Whom or what have you lost to it?
-- ☐ What did it leave behind?
-- ☐ What do you think it wants?
-- ☐ Who refuses to believe you?
-- ☐ Who can tell you more, if you can only convince them?
-
-## Introductions
-
-Wait here for everyone else. When everyone's ready, take turns introducing your characters. When ***someone reveals something and you want to know more***, ask them about it. When ***someone asks you a question***, answer it truthfully.
-
-1. On your first turn, **introduce yourself** by name, pronouns, background, origin, and appearance.
-2. On your second turn, **describe your special possessions** and how you contribute to the village (beyond working the fields).
-3. On your third turn, **tell us what you're worried about** (see "Something wicked this way comes").
-4. On your next turn, **answer one of the following**, naming one or more NPCs who live in Stonetop.
-   - ☐ Who is your closest kin?
-   - ☐ To whom do you always return home?
-   - ☐ Who would be lost without you?
-   - ☐ Who has much to learn from you?
-5. Go around again. Answer another question from 4, or pass. When everyone has passed, go on.
-6. On your next turn, **ask your fellow PCs one of these**. When others ask you, answer as you like.
-   - ☐ Which one of you fears the wider world?
-   - ☐ Which one of you has shown me great beauty?
-   - ☐ Which one of you have I caught sometimes staring out at the horizon?
-   - ☐ Which one of you lacked the stomach to put something out of its misery?
-7. Go around again. Ask another question from 6, or pass. When everyone has passed, go on.
-8. Add your home to the steading playbook. When everyone is done, let spring break forth!
-
-## Moves not yet chosen
-
-### ☐ A Safe Place — ◯◯
+Precaution: 2
 
 When you ***select and prepare the party's camp site***, hold 1 Precaution, or 2 Precaution if you are well-versed with this area and its dangers.
 
@@ -151,9 +106,10 @@ If trouble finds your camp site, you can spend 1 Precaution to reveal a simple d
 
 You are accompanied by a beast of uncommon loyalty and cleverness. See the Animal Companion insert for details.
 
-### ☐☐ Magnificent Specimen
+### ☐ Magnificent Specimen
 
-(Requires Animal Companion)
+(Requires Animal Companion)  
+Take up to 2 times
 
 Each time you take this move, your companion gains 2 additional options of your choice.
 
@@ -183,7 +139,13 @@ When you ***Seek Insight by searching for or studying the signs left by passing 
 
 When you ***follow a creature's trail***, roll +WIS: **on a 7+** you follow it to a significant change in terrain or activity; **on a 10+**, you can ask the GM a reasonable question about your quarry and get a useful answer.
 
-### ☐☐☐ Improved Stat
+### ☑︎ Home on the Range
+
+When ***a journey requires you to Defy Danger or Struggle as One***, treat a 6- as a 7-9.
+
+### ☐ Improved Stat
+
+Take up to 3 times
 
 Each time you take this move, increase one of your stats by 1 (to a max of +2).
 
@@ -241,15 +203,16 @@ When you ***defeat a perversion of nature***, you can ask the GM 2 of the follow
 
 The grunts, barks, chirps, and calls of natural beasts are as a language to you. You can understand their intentions and communicate basic ideas. When you ***Persuade a beast***, you can choose to roll +WIS.
 
-### ☐☐ Worldly
+### ☐ Worldly
 
-(Requires level 2+ and the Ranger)
+(Requires level 2+ and the Ranger)  
+Take up to 2 times
 
 Take a move from the Blessed, Fox, Heavy, Marshal, or Seeker playbooks, for which you otherwise qualify. You can pick from a different playbook each time. You can't pick Improved Stat or Superior Stat.
 
 ### ☐ Alpha
 
-(Requires level 6+, and Wild Speech or Spirit Tongue)
+(Requires level 6+ and Wild Speech or Spirit Tongue)
 
 When you ***assert dominance over another (beast, spirit, Fae, or person)***, roll +WIS: **on a 7+**, they must pick 1 from the list below; **on a 10+**, you also have advantage on your next roll against them.
 
@@ -257,9 +220,10 @@ When you ***assert dominance over another (beast, spirit, Fae, or person)***, ro
 - Slink away or flee, then avoid you
 - Fight you for dominance
 
-### ☐☐ Beast of Legend
+### ☐ Beast of Legend
 
-(Requires level 6+ and Magnificent Specimen)
+(Requires level 6+ and Magnificent Specimen)  
+Take up to 2 times
 
 Each time you take this move, pick 1:
 
@@ -291,8 +255,50 @@ Increase one of your stats by +1 (to a max of +3).
 
 When ***a journey causes you to Defy Danger or Struggle as One***, on a 10+ you also learn or discover something interesting and useful—ask the GM what.
 
-### ☐ Walk It Off — ◯
+### ☐ Walk It Off
 
-(Requires level 6+)
+(Requires level 6+)  
+Avoid debility: 1
 
 When you'd ***mark a debility***, you can mark this move instead to no ill effect. Clear it as you would a debility.
+
+## Something wicked this way comes
+
+You know firsthand that trouble is out there, and like it or not, one of these days the folk of Stonetop are going to have to face it. What is it that you're so worried about? (choose 1)
+
+- ☐ A dark, unwholesome presence lurking in the Great Wood
+- ☐ A strange, furtive figure seen near the Ruined Tower
+- ☐ Something big & savage stalking the northern foothills
+- ☐ Whatever's made the lizard-like suarachan of Ferrier's Fen so bold
+- ☐ That of which the Hillfolk refuse to speak
+
+Then, answer at least 3 of the following questions about this threat:
+
+- ☐ What, exactly, do you think it is?
+- ☐ What did you see, and how close did you have to get to see it?
+- ☐ Whom or what have you lost to it?
+- ☐ What did it leave behind?
+- ☐ What do you think it wants?
+- ☐ Who refuses to believe you?
+- ☐ Who can tell you more, if you can only convince them?
+
+## Introductions
+
+Wait here for everyone else. When everyone's ready, take turns introducing your characters. When ***someone reveals something and you want to know more***, ask them about it. When ***someone asks you a question***, answer it truthfully.
+
+1. On your first turn, **introduce yourself** by name, pronouns, background, origin, and appearance.
+2. On your second turn, **describe your special possessions** and how you contribute to the village (beyond working the fields).
+3. On your third turn, **tell us what you're worried about** (see "Something wicked this way comes").
+4. On your next turn, **answer one of the following**, naming one or more NPCs who live in Stonetop.
+   - ☐ Who is your closest kin?
+   - ☐ To whom do you always return home?
+   - ☐ Who would be lost without you?
+   - ☐ Who has much to learn from you?
+5. Go around again. Answer another question from 4, or pass. When everyone has passed, go on.
+6. On your next turn, **ask your fellow PCs one of these**. When others ask you, answer as you like.
+   - ☐ Which one of you fears the wider world?
+   - ☐ Which one of you has shown me great beauty?
+   - ☐ Which one of you have I caught sometimes staring out at the horizon?
+   - ☐ Which one of you lacked the stomach to put something out of its misery?
+7. Go around again. Ask another question from 6, or pass. When everyone has passed, go on.
+8. Add your home to the steading playbook. When everyone is done, let spring break forth!
