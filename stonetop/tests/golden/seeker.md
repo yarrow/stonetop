@@ -81,7 +81,7 @@ Damage: d6 · HP (max 16): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 
 - ☑︎ **Scribe's tools:** parchment, a few sheets (*fragile*), ink, pigments, vials (*fragile*), quills, a 1-slot notebook, etc.
 - ☐ **Books & scrolls** (5 uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.
-- ☐ **Distillery:** skins of whisky, fine (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
+- ☐ **Distillery:** skins of fine whisky (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
 - ☐ **Engineer's tools:** rulers, tapes, rods, plumb-bobs, 1-slot tripods, 1-slot block & tackles, wheelbarrow, etc.
 - ☐ **Laboratory:** chemics, reagents, vials (*fragile*), measures, 1-slot scales, 1-slot decanters, etc. Every season, produce d4-1 uses of 1-slot naphtha (burns hot & sticky; damage d8; 3 uses, *thrown, area, dangerous*, ignores armor).
 - ☐ **Paraphernalia:** crystals, incense, talismans, blood, bone, horn, eye of newt, 1-slot braziers, a 2-slot cauldron, etc.

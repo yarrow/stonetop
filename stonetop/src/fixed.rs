@@ -291,16 +291,17 @@ impl GizmoKit {
 #[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
 pub struct GizmoFixed {
     pub key: GizmoKey,
-    /// The bold head as printed: "Long spear", "Battleaxe".
+    /// The bold head as printed: "Long spear", "Battleaxe". A grade of what the gizmo holds
+    /// belongs in the name instead: "Skin of fine whisky", "Skin of common whisky".
     pub name: &'static str,
-    /// The material or grade printed after the name (iron, bronze, fine steel, boiled leather),
-    /// which tells same-named gizmos apart. Iron is the unmarked default in the key.
-    pub qualifier: Option<&'static str>,
+    /// The material printed after the name (iron, bronze, fine steel, boiled leather), which
+    /// tells same-named gizmos apart. Iron is the unmarked default in the key.
+    pub material: Option<&'static str>,
     /// The gear sheet's starred piercing upgrade, when this is the upgraded variant.
     pub piercing: Option<u8>,
     pub slots: SlotCount,
-    /// Everything after the name as printed, qualifier and tags included, with `{resource}`
-    /// where a run of circles was.
+    /// Everything after the name as printed once the name has taken what belongs to it,
+    /// material and tags included, with `{resource}` where a run of circles was.
     pub description: &'static str,
     pub resource: Option<Resource>,
 }
@@ -334,7 +335,7 @@ impl SlotCount {
 pub struct GizmoReference<'a> {
     /// The printed phrase, when it differs from the name.
     pub phrase: Option<&'a str>,
-    /// The gizmo's name, with its qualifier if it has one: "Lantern", "Long spear, fine steel".
+    /// The gizmo's name, with its material if it has one: "Lantern", "Long spear, fine steel".
     pub target: &'a str,
     /// Where the whole `{…}` sits in the text.
     pub span: std::ops::Range<usize>,

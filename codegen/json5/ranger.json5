@@ -116,7 +116,7 @@
       },
       {
         name: "Distillery",
-        description: "{skins of whisky|Skin of whisky, fine}, {copper tubes}, {malt}, {firkins}, stills, barrels, etc.",
+        description: "{skins of fine whisky|Skin of fine whisky}, {copper tubes}, {malt}, {firkins}, stills, barrels, etc.",
       },
       {
         name: "Hideouts",

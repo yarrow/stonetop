@@ -82,7 +82,7 @@ Damage: d4 · HP (max 18): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 - ☐ **Apiary:** beeswax, candles (lasts ~1 hour, *close, area*), honey, 1-slot bee smokers, 1-slot hats & veils, etc.
 - ☐ **Books & scrolls** (5 uses): expend a use to consult your collection and turn a Know Things roll you just made into a 10+.
 - ☐ **Chandlery:** beeswax, candles (lasts ~1 hour, *close, area*), wicks, scented herbs, soap, lye, ash, etc.
-- ☐ **Distillery:** skins of whisky, fine (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
+- ☐ **Distillery:** skins of fine whisky (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
 - ☐ **Glassworks:** vials (*fragile*), charms, lenses, sand, marbles, 1-slot bellows, crucible, 1-slot lanterns (5 hours, *close, area*), etc.
 - ☐ **Holy relics** (3 uses): if you have one in inventory when you Invoke the Sun God, you can mark a use in lieu of choosing a consequence.
 - ☐ **Luthier's tools:** chisels, files, catgut, various woods, stains, a 1-slot lute, a 1-slot fiddle, etc.

@@ -387,7 +387,7 @@ impl schema::Gizmo {
         fixed::GizmoFixed {
             key: self.key(),
             name: leak_str(&self.name),
-            qualifier: self.qualifier.as_deref().map(leak_str),
+            material: self.material.as_deref().map(leak_str),
             piercing: self.piercing,
             slots,
             description: leak_str(&self.description),
@@ -697,7 +697,7 @@ mod gizmo_test {
         let fixed = parse(
             r#"{
                 name: "Battleaxe",
-                qualifier: "bronze",
+                material: "bronze",
                 piercing: 1,
                 slots: 2,
                 value: 2,
@@ -711,7 +711,7 @@ mod gizmo_test {
             GizmoFixed {
                 key: GizmoKey::BattleaxeBronzePiercing1,
                 name: "Battleaxe",
-                qualifier: Some("bronze"),
+                material: Some("bronze"),
                 piercing: Some(1),
                 slots: SlotCount::Two,
                 description: ", bronze (<em>close, messy</em>, 1 piercing; {resource} uses)",
@@ -728,7 +728,7 @@ mod gizmo_test {
     fn defaults_come_across_as_empty() {
         let fixed = parse(r#"{ name: "Awl", slots: 0 }"#).to_fixed();
         assert_eq!(fixed.key, GizmoKey::Awl);
-        assert_eq!(fixed.qualifier, None);
+        assert_eq!(fixed.material, None);
         assert_eq!(fixed.piercing, None);
         assert_eq!(fixed.slots, SlotCount::Zero);
         assert_eq!(fixed.description, "");

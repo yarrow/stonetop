@@ -3,7 +3,7 @@
 //! playbook uses a key twice; and if different playbooks have identically-named keys, then those
 //! keys have the same value. For gear: every `GizmoKey` is produced by exactly one gizmo, every
 //! reference from a possession resolves to a gizmo and names it as the gear file does, a
-//! possession's kit is its references in order, and a qualifier appears in its gizmo's prose.
+//! possession's kit is its references in order, and a material appears in its gizmo's prose.
 
 use std::any::type_name;
 use std::collections::BTreeMap;
@@ -189,7 +189,7 @@ fn every_reference_resolves_and_names_its_gizmo_and_kits_are_the_references_in_o
                 expected.push(key);
                 // A bare reference is spoken as written, so it must be the gizmo's own name;
                 // a qualified gizmo needs the phrase form, since its description carries the
-                // qualifier.
+                // material.
                 if reference.phrase.is_none()
                     && !by_key[&key].name.eq_ignore_ascii_case(reference.target)
                 {
@@ -214,20 +214,20 @@ fn every_reference_resolves_and_names_its_gizmo_and_kits_are_the_references_in_o
 }
 
 #[test]
-fn a_gizmos_qualifier_appears_in_its_description() {
+fn a_gizmos_material_appears_in_its_description() {
     let gear = json5_gear().unwrap_or_else(|e| panic!("{e:#}"));
     let mut problems = Vec::new();
     for gizmo in gear.gizmos() {
-        if let Some(qualifier) = &gizmo.qualifier
-            && !gizmo.description.to_lowercase().contains(&qualifier.to_lowercase())
+        if let Some(material) = &gizmo.material
+            && !gizmo.description.to_lowercase().contains(&material.to_lowercase())
         {
             problems.push(format!(
-                "{}: qualifier {qualifier:?} is not in the description {:?}",
+                "{}: material {material:?} is not in the description {:?}",
                 gizmo.key(),
                 gizmo.description
             ));
         }
     }
     problems.sort();
-    assert!(problems.is_empty(), "Qualifiers missing from prose:\n{}", problems.join("\n"));
+    assert!(problems.is_empty(), "Materials missing from prose:\n{}", problems.join("\n"));
 }

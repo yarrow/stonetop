@@ -72,7 +72,7 @@ Damage: d8 · HP (max 20): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 ## Special possessions (Pick 2)
 
 - ☐ **Chirurgeon's tools:** catgut, straps, bandages, tubes, poultices, willow bark, 1-slot bonesaws, etc.
-- ☐ **Distillery:** skins of whisky, fine (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
+- ☐ **Distillery:** skins of fine whisky (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
 - ☐ **Engineer's tools:** rulers, tapes, rods, plumb-bobs, 1-slot tripods, 1-slot block & tackles, wheelbarrow, etc.
 - ☐ **Personal symbol** (a flag, crest, marking, etc.): when you ***display or reveal it in a dramatic fashion***, your crew holds +1 Loyalty (max 3).
 - ☐ **Scribe's tools:** parchment, a few sheets (*fragile*), ink, pigments, vials (*fragile*), quills, a 1-slot notebook, etc.

@@ -82,7 +82,7 @@ Damage: d8 · HP (max 18): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 ## Special possessions (Pick 2, in addition to your composite bow)
 
 - ☑︎ **1-slot Composite bow** (*far*, +1 damage, x piercing; Arrows: plenty left, low ammo, or all out)
-- ☐ **Distillery:** skins of whisky, fine (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
+- ☐ **Distillery:** skins of fine whisky (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
 - ☐ **Hideouts** (3 uses): expend a use to have a well-stocked, safe shelter nearby; GM can veto.
 - ☐ **Husbandry tools:** brushes, muzzles, collars, feed, 1-slot whips, 1-slot bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).
 - ☐ **Hounds**, 2-3 followers (*trackers, keen-nosed, fast*); HP 6; Damage d6 (*hand, grabby*); Instinct: to give chase; Cost: training.

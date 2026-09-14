@@ -3,31 +3,37 @@
 // transport, livestock, followers, and Supplies (whose capacity depends on Prosperity) are
 // left out.
 //
-// A gizmo's `name` is the bold head as printed; `qualifier` is the material or grade after it
-// (iron, bronze, fine steel, boiled leather, parchment, fine vellum, fine); `piercing` is the
-// starred upgrade on the gear sheet; `slots` counts the diamonds; `value` is the gear sheet's
-// price band (nothing reads it yet); `description` is everything after the name as printed,
-// qualifier and tags included. A run of circles becomes a `resource` with a `{resource}`
+// A gizmo's `name` is the bold text from the gear ("Special Items") sheet, the
+// Inventory sheet, or the playbooks as printed. We prioritize the playbooks'
+// use of "skin(s) fine whisky" by sticking "fine" in the name everywhere, and
+// even in "Firkins of fine whisky", and removing the ", fine" suffix.
+//
+// Then `material` is the material after the name (iron, bronze, fine steel, boiled
+// leather, parchment, fine vellum); `piercing` is the starred upgrade on the
+// gear sheet; `slots` counts the diamonds; `value` is the gear sheet's price
+// band (nothing reads it yet); `description` is everything after the name as
+// printed, once the name has taken what belongs to it, material and tags
+// included. A run of circles becomes a `resource` with a `{resource}`
 // placeholder where the run was.
 {
   weaponsOfWar: [
     {
       name: "Mace or flail",
-      qualifier: "iron",
+      material: "iron",
       slots: 1,
       value: 1,
       description: ", iron (<em>close, forceful</em>)",
     },
     {
       name: "Battleaxe",
-      qualifier: "iron",
+      material: "iron",
       slots: 1,
       value: 1,
       description: ", iron (<em>close, messy</em>)",
     },
     {
       name: "Battleaxe",
-      qualifier: "iron",
+      material: "iron",
       piercing: 1,
       slots: 1,
       value: 2,
@@ -35,7 +41,7 @@
     },
     {
       name: "Battleaxe",
-      qualifier: "iron",
+      material: "iron",
       piercing: 2,
       slots: 1,
       value: 2,
@@ -43,14 +49,14 @@
     },
     {
       name: "Short sword",
-      qualifier: "iron",
+      material: "iron",
       slots: 1,
       value: 1,
       description: ", iron (<em>hand, close</em>)",
     },
     {
       name: "Short sword",
-      qualifier: "iron",
+      material: "iron",
       piercing: 1,
       slots: 1,
       value: 2,
@@ -58,7 +64,7 @@
     },
     {
       name: "Short sword",
-      qualifier: "iron",
+      material: "iron",
       piercing: 2,
       slots: 1,
       value: 2,
@@ -66,14 +72,14 @@
     },
     {
       name: "Sword",
-      qualifier: "iron",
+      material: "iron",
       slots: 1,
       value: 1,
       description: ", iron (<em>close</em>, +1 damage)",
     },
     {
       name: "Sword",
-      qualifier: "iron",
+      material: "iron",
       piercing: 1,
       slots: 1,
       value: 2,
@@ -81,7 +87,7 @@
     },
     {
       name: "Sword",
-      qualifier: "iron",
+      material: "iron",
       piercing: 2,
       slots: 1,
       value: 2,
@@ -89,7 +95,7 @@
     },
     {
       name: "Warhammer",
-      qualifier: "iron",
+      material: "iron",
       slots: 1,
       value: 1,
       description: ", iron (<em>close</em>, 2 piercing)",
@@ -111,25 +117,25 @@
   ],
 
   // The gear sheet gives bronze weapons of war no rows of their own: each is the iron line with
-  // the qualifier swapped, and no bronze weapon has x piercing.
+  // the material swapped, and no bronze weapon has x piercing.
   bronzeWeapons: [
     {
       name: "Mace or flail",
-      qualifier: "bronze",
+      material: "bronze",
       slots: 1,
       value: 1,
       description: ", bronze (<em>close, forceful</em>)",
     },
     {
       name: "Battleaxe",
-      qualifier: "bronze",
+      material: "bronze",
       slots: 1,
       value: 1,
       description: ", bronze (<em>close, messy</em>)",
     },
     {
       name: "Battleaxe",
-      qualifier: "bronze",
+      material: "bronze",
       piercing: 1,
       slots: 1,
       value: 2,
@@ -137,7 +143,7 @@
     },
     {
       name: "Battleaxe",
-      qualifier: "bronze",
+      material: "bronze",
       piercing: 2,
       slots: 1,
       value: 2,
@@ -145,14 +151,14 @@
     },
     {
       name: "Short sword",
-      qualifier: "bronze",
+      material: "bronze",
       slots: 1,
       value: 1,
       description: ", bronze (<em>hand, close</em>)",
     },
     {
       name: "Short sword",
-      qualifier: "bronze",
+      material: "bronze",
       piercing: 1,
       slots: 1,
       value: 2,
@@ -160,7 +166,7 @@
     },
     {
       name: "Short sword",
-      qualifier: "bronze",
+      material: "bronze",
       piercing: 2,
       slots: 1,
       value: 2,
@@ -168,14 +174,14 @@
     },
     {
       name: "Sword",
-      qualifier: "bronze",
+      material: "bronze",
       slots: 1,
       value: 1,
       description: ", bronze (<em>close</em>, +1 damage)",
     },
     {
       name: "Sword",
-      qualifier: "bronze",
+      material: "bronze",
       piercing: 1,
       slots: 1,
       value: 2,
@@ -183,7 +189,7 @@
     },
     {
       name: "Sword",
-      qualifier: "bronze",
+      material: "bronze",
       piercing: 2,
       slots: 1,
       value: 2,
@@ -191,7 +197,7 @@
     },
     {
       name: "Warhammer",
-      qualifier: "bronze",
+      material: "bronze",
       slots: 1,
       value: 1,
       description: ", bronze (<em>close</em>, 2 piercing)",
@@ -201,7 +207,7 @@
   armor: [
     {
       name: "Cuirass",
-      qualifier: "boiled leather",
+      material: "boiled leather",
       slots: 1,
       value: 1,
       description: ", boiled leather (1 armor)",
@@ -311,14 +317,14 @@
     },
     {
       name: "Empty book",
-      qualifier: "parchment",
+      material: "parchment",
       slots: 1,
       value: 1,
       description: ", parchment (<em>fragile</em>)",
     },
     {
       name: "Empty book",
-      qualifier: "fine vellum",
+      material: "fine vellum",
       slots: 1,
       value: 2,
       description: ", fine vellum (<em>fragile</em>)",
@@ -361,11 +367,10 @@
       description: "(a little box)",
     },
     {
-      name: "Skin of whisky",
-      qualifier: "fine",
+      name: "Skin of fine whisky",
       slots: 0,
       value: 0,
-      description: ", fine ({resource} uses; share a use with someone to get advantage on Persuade)",
+      description: "({resource} uses; share a use with someone to get advantage on Persuade)",
       resource: { hold: "Uses", canBe: 2, start: "full" },
     },
     {
@@ -375,11 +380,9 @@
       description: "(~10 handfuls)",
     },
     {
-      name: "Firkin of whisky",
-      qualifier: "fine",
+      name: "Firkin of fine whisky",
       slots: 2,
       value: 1,
-      description: ", fine",
     },
     {
       name: "Handful of silvers",
@@ -469,7 +472,7 @@
     },
     {
       name: "Hatchet",
-      qualifier: "iron",
+      material: "iron",
       slots: 1,
       value: 0,
       description: ", iron (<em>hand, thrown</em>, x piercing)",
@@ -482,14 +485,14 @@
     },
     {
       name: "Mattock",
-      qualifier: "iron",
+      material: "iron",
       slots: 1,
       value: 0,
       description: ", iron (<em>close</em>, x piercing, <em>messy, awkward</em>)",
     },
     {
       name: "Maul",
-      qualifier: "iron",
+      material: "iron",
       slots: 2,
       value: 0,
       description: ", iron (<em>close, forceful, awkward</em>)",
@@ -502,14 +505,14 @@
     },
     {
       name: "Spear",
-      qualifier: "iron",
+      material: "iron",
       slots: 1,
       value: 0,
       description: ", iron (<em>close, thrown</em>, x piercing)",
     },
     {
       name: "Long spear",
-      qualifier: "iron",
+      material: "iron",
       slots: 2,
       value: 0,
       description: ", iron (<em>reach</em>, x piercing)",
@@ -534,7 +537,7 @@
     },
     {
       name: "Javelins",
-      qualifier: "iron",
+      material: "iron",
       slots: 1,
       value: 0,
       description: ", a few, iron (<em>thrown</em>, x piercing, +1 damage; Javelins: {resource})",
@@ -564,7 +567,7 @@
   smallItems: [
     {
       name: "Knife or dagger",
-      qualifier: "iron",
+      material: "iron",
       slots: 0,
       value: 0,
       description: ", iron (<em>hand</em>)",
@@ -599,7 +602,7 @@
       value: 0,
     },
     {
-      name: "Whisky, skin",
+      name: "Skin of common whisky",
       slots: 0,
       value: 0,
       description: "({resource} uses)",
@@ -767,7 +770,7 @@
     // The Marshal: Weapons of war
     {
       name: "Long spear",
-      qualifier: "fine steel",
+      material: "fine steel",
       slots: 2,
       description: ", fine steel (<em>reach</em>, 2 piercing)",
     },

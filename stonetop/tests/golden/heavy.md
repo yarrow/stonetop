@@ -75,7 +75,7 @@ Damage: d10 · HP (max 20): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁
 
 ## Special possessions (Pick 2)
 
-- ☐ **Distillery:** skins of whisky, fine (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
+- ☐ **Distillery:** skins of fine whisky (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
 - ☐ **Chirurgeon's tools:** catgut, straps, bandages, tubes, poultices, willow bark, 1-slot bonesaws, etc.
 - ☐ **Husbandry tools:** brushes, muzzles, collars, feed, 1-slot whips, 1-slot bridles, etc. Gain advantage to Persuade domestic beasts (livestock, dogs, etc.).
 - ☐ **Smithy** (or access to it): iron goods, ingots, thick gloves, 1-slot tongs, 1-slot bellows, an anvil, etc.

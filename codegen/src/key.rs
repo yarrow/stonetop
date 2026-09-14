@@ -36,7 +36,7 @@ pub trait Key {
     }
 }
 
-/// Shape `phrase` like a variant identifier: HTML tags and parenthesised qualifiers are
+/// Shape `phrase` like a variant identifier: HTML tags and parenthesised materials are
 /// dropped, apostrophes are removed, and the remaining words are run together in
 /// `UpperCamelCase`.
 fn enumable(phrase: &str) -> String {
@@ -162,14 +162,13 @@ impl Key for Playbook {
 impl Key for Gizmo {
     type Key = GizmoKey;
 
-    /// The name, then the qualifier unless it is iron, then `PiercingN` for the starred
+    /// The name, then the material unless it is iron, then `PiercingN` for the starred
     /// upgrade: `Battleaxe`, `BattleaxePiercing1`, `BattleaxeBronze`, `LongSpearFineSteel`.
     fn variant_name(&self) -> String {
         let mut variant = enumable(&self.name);
-        if let Some(qualifier) =
-            self.qualifier.as_deref().filter(|q| !q.eq_ignore_ascii_case("iron"))
+        if let Some(material) = self.material.as_deref().filter(|q| !q.eq_ignore_ascii_case("iron"))
         {
-            variant.push_str(&enumable(qualifier));
+            variant.push_str(&enumable(material));
         }
         if let Some(piercing) = self.piercing {
             let _ = write!(variant, "Piercing{piercing}");
@@ -179,7 +178,7 @@ impl Key for Gizmo {
 }
 
 /// The key a gizmo reference's target resolves to. A target is the gizmo's name with its
-/// qualifier if it has one, so it shapes to the variant the same way the gizmo's own name does:
+/// material if it has one, so it shapes to the variant the same way the gizmo's own name does:
 /// `Lantern`, `Long spear, fine steel`, `Cuirass, boiled leather`.
 ///
 /// # Errors
@@ -223,24 +222,24 @@ mod test {
     }
 
     #[test]
-    fn a_gizmos_variant_drops_iron_and_keeps_other_qualifiers_and_the_piercing_upgrade() {
+    fn a_gizmos_variant_drops_iron_and_keeps_other_materials_and_the_piercing_upgrade() {
         assert_eq!(
-            gizmo(r#"{ name: "Spear", qualifier: "iron", slots: 1 }"#).key(),
+            gizmo(r#"{ name: "Spear", material: "iron", slots: 1 }"#).key(),
             GizmoKey::Spear
         );
         assert_eq!(
-            gizmo(r#"{ name: "Battleaxe", qualifier: "bronze", piercing: 2, slots: 1 }"#).key(),
+            gizmo(r#"{ name: "Battleaxe", material: "bronze", piercing: 2, slots: 1 }"#).key(),
             GizmoKey::BattleaxeBronzePiercing2
         );
         assert_eq!(
-            gizmo(r#"{ name: "Empty book", qualifier: "fine vellum", slots: 1 }"#).key(),
+            gizmo(r#"{ name: "Empty book", material: "fine vellum", slots: 1 }"#).key(),
             GizmoKey::EmptyBookFineVellum
         );
         assert_eq!(gizmo(r#"{ name: "Block & tackle", slots: 1 }"#).key(), GizmoKey::BlockTackle);
     }
 
     #[test]
-    fn a_reference_target_resolves_like_a_name_with_its_qualifier() {
+    fn a_reference_target_resolves_like_a_name_with_its_material() {
         assert_eq!(gizmo_key("Lantern"), Ok(GizmoKey::Lantern));
         assert_eq!(gizmo_key("Long spear, fine steel"), Ok(GizmoKey::LongSpearFineSteel));
         assert_eq!(gizmo_key("Sword"), Ok(GizmoKey::Sword));

@@ -77,7 +77,7 @@ Damage: d8 · HP (max 16): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁�
 
 - ☐ **Burglar's kit:** picks, files, snippers, wire, 1-slot prybars, 1-slot hacksaws, a 1-slot lantern (5 hours, *close, area*), a 1-slot grappling hook, etc.
 - ☐ **Carpenter's tools:** chisels, files, nails, pitch, 1-slot prybars, 1-slot saws, 2-slot firkins, barrels, etc.
-- ☐ **Distillery:** skins of whisky, fine (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
+- ☐ **Distillery:** skins of fine whisky (2 uses; share a use with someone to get advantage on Persuade), copper tubes, malt, 2-slot firkins, stills, barrels, etc.
 - ☐ **Hidden stash** (3 uses): each use produces valuables worth a purse of silvers (Value 2)
 - ☐ **Mummer's kit:** juggling balls, whirlybird seeds, motley, ribbons, bells, 1-slot puppets, a 1-slot fiddle, etc.
 - ☐ **Scribe's tools:** parchment, a few sheets (*fragile*), ink, pigments, vials (*fragile*), quills, a 1-slot notebook, etc.

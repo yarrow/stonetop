@@ -271,7 +271,7 @@ mod tests {
         GizmoFixed {
             key: GizmoKey::Lantern,
             name,
-            qualifier: None,
+            material: None,
             piercing: None,
             slots,
             description,

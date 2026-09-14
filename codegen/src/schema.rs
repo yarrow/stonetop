@@ -228,7 +228,7 @@ impl Gear {
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct Gizmo {
     pub name: String,
-    pub qualifier: Option<String>,
+    pub material: Option<String>,
     pub piercing: Option<u8>,
     pub slots: u8,
     /// The gear sheet's price band, 0 to 4. Recorded while the sheet is open; nothing reads it

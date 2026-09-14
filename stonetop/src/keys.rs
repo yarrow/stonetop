@@ -10,7 +10,7 @@
 //! comment where that variant would have been.
 //!
 //! Gizmos are defined once, in `gear.json5`, and listed here by that file's sections. A gizmo's
-//! variant is its name, then its qualifier unless that is iron, then `PiercingN` for the starred
+//! variant is its name, then its material unless that is iron, then `PiercingN` for the starred
 //! piercing upgrade: `Battleaxe`, `BattleaxePiercing1`, `BattleaxeBronze`, `LongSpearFineSteel`.
 //!
 //! The strum derives (`Display`, `EnumString`, `EnumIter`) and databake's `Bake` are behind the
@@ -238,9 +238,9 @@ pub enum GizmoKey {
 
     // Trade goods (gear sheet)
     Salt,
-    SkinOfWhiskyFine,
+    SkinOfFineWhisky,
     PurseOfCoppers,
-    FirkinOfWhiskyFine,
+    FirkinOfFineWhisky,
     HandfulOfSilvers,
     PurseOfSilvers,
 
@@ -278,7 +278,7 @@ pub enum GizmoKey {
     Tinderbox,
     NeedleThread,
     HandfulOfCoppers,
-    WhiskySkin,
+    SkinOfCommonWhisky,
     Awl,
     Bowstring,
     Chalk,
