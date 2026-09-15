@@ -396,6 +396,40 @@ impl schema::Gizmo {
     }
 }
 
+// Setting overview -------------------------------------------------------
+
+impl schema::SettingOverview {
+    #[must_use]
+    pub fn to_fixed(&self) -> fixed::SettingOverviewFixed {
+        fixed::SettingOverviewFixed {
+            title: leak_str(&self.title),
+            sections: leak_vec(
+                self.sections.iter().map(schema::SettingSection::to_fixed).collect(),
+            ),
+        }
+    }
+}
+
+impl schema::SettingSection {
+    #[must_use]
+    pub fn to_fixed(&self) -> fixed::SettingSection {
+        fixed::SettingSection {
+            heading: leak_str(&self.heading),
+            html: leak_str(&self.html),
+            subsections: leak_vec(
+                self.subsections.iter().map(schema::SettingSubsection::to_fixed).collect(),
+            ),
+        }
+    }
+}
+
+impl schema::SettingSubsection {
+    #[must_use]
+    pub fn to_fixed(&self) -> fixed::SettingSubsection {
+        fixed::SettingSubsection { heading: leak_str(&self.heading), html: leak_str(&self.html) }
+    }
+}
+
 // Backstory --------------------------------------------------------------
 
 impl schema::Backstory {

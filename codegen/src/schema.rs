@@ -239,6 +239,37 @@ pub struct Gizmo {
     pub resource: Option<Resource>,
 }
 
+// Setting overview -------------------------------------------------------
+
+/// `setting-overview.json5`: the four-page overview as one document. See the comment at the
+/// top of that file for how the PDF's pages map onto sections.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct SettingOverview {
+    pub title: String,
+    pub sections: Vec<SettingSection>,
+}
+
+/// One section of the overview: a heading, an HTML body, and any subsections under it. The
+/// nesting is explicit so that no renderer decides a heading's level from its text.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct SettingSection {
+    pub heading: String,
+    pub html: String,
+    #[serde(default)]
+    pub subsections: Vec<SettingSubsection>,
+}
+
+/// A subsection of a section: the text description of a map. It carries no subsections of its
+/// own; the overview is two levels deep.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", deny_unknown_fields)]
+pub struct SettingSubsection {
+    pub heading: String,
+    pub html: String,
+}
+
 // Backstory and Intro ----------------------------------------------------
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

@@ -1,8 +1,8 @@
-//! Bake the Fixed content into `stonetop/src/fixed/generated.rs`: one named static per item, and a
-//! `fixed_part()` method on each key enum that matches every variant to its static. The match is
-//! exhaustive, so a key added to `keys.rs` without a re-bake is a compile error in the `ssr`
-//! build, not a gap. Run as `cargo xtask bake`, which writes the file and then runs `rustfmt` on
-//! it.
+//! Bake the Fixed content into `stonetop/src/fixed/generated.rs`: one named static per item, a
+//! `fixed_part()` method on each key enum that matches every variant to its static, and one
+//! static for the Setting overview. The match is exhaustive, so a key added to `keys.rs` without
+//! a re-bake is a compile error in the `ssr` build, not a gap. Run as `cargo xtask bake`, which
+//! writes the file and then runs `rustfmt` on it.
 
 use std::collections::BTreeMap;
 use std::fmt::{Display, Write as _};
@@ -18,8 +18,8 @@ use stonetop::keys::{
 };
 
 use crate::key::Key;
-use crate::schema::{self, Gear, Playbook};
-use crate::{json5_gear, json5_playbook, playbook_names};
+use crate::schema::{self, Gear, Playbook, SettingOverview};
+use crate::{json5_gear, json5_playbook, json5_setting_overview, playbook_names};
 
 /// Where the baked file lives.
 #[must_use]
@@ -39,14 +39,17 @@ fn workspace_root() -> PathBuf {
 ///
 /// # Errors
 ///
-/// If the gear file or a playbook fails to parse, or rustfmt is missing or rejects the output.
+/// If the Setting overview, the gear file, or a playbook fails to parse, or rustfmt is missing
+/// or rejects the output.
 pub fn baked_source() -> Result<String> {
+    let overview = json5_setting_overview()?;
     let gear = json5_gear()?;
     let playbooks = playbook_names()
         .iter()
         .map(|name| json5_playbook(name))
         .collect::<Result<Vec<Playbook>>>()?;
     let mut out = String::from(HEADER);
+    bake_setting_overview(&overview, &mut out)?;
     let gizmos = bake_gizmos(&gear, &mut out)?;
     let moves = bake_moves(&playbooks, &mut out)?;
     let backgrounds = bake_backgrounds(&playbooks, &moves, &mut out)?;
@@ -72,12 +75,25 @@ const HEADER: &str = "\
 //! Baked Fixed content: written by `cargo xtask bake` from `codegen/json5/`, checked by
 //! `codegen/tests/generated_fresh.rs`. Do not edit; change the json5 and run the command.
 //!
-//! Gizmos come first, grouped by the gear file's sections. The playbook statics are grouped
-//! by playbook, a shared item appearing once under the first playbook that uses it, as in
-//! `keys.rs`. Each playbook's static references its items' statics; a Special Possession's
-//! kit names its gizmos by key. Each kind's `fixed_part()` matches every key to its static.
+//! The Setting overview comes first, then gizmos grouped by the gear file's sections. The
+//! playbook statics are grouped by playbook, a shared item appearing once under the first
+//! playbook that uses it, as in `keys.rs`. Each playbook's static references its items'
+//! statics; a Special Possession's kit names its gizmos by key. Each kind's `fixed_part()`
+//! matches every key to its static.
 
 ";
+
+/// Write the Setting overview's one static, which `fixed::setting_overview()` returns.
+fn bake_setting_overview(overview: &SettingOverview, out: &mut String) -> Result<()> {
+    let env = CrateEnv::default();
+    writeln!(out, "// Setting overview\n")?;
+    let baked = overview.to_fixed().bake(&env);
+    writeln!(
+        out,
+        "pub(super) static SETTING_OVERVIEW: stonetop::fixed::SettingOverviewFixed = {baked};\n"
+    )?;
+    Ok(())
+}
 
 /// Write one static per gizmo, section by section in the gear file's order, returning each
 /// key's static's name.

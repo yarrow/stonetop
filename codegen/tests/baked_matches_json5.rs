@@ -1,11 +1,13 @@
 //! The baked content equals the json5 content. For every Move, Background, Special Possession,
 //! and Backstory of every playbook, for every playbook itself, and for every gizmo in the gear
 //! file, `key.fixed_part()` is the item freshly converted from the json5 and carries its own
-//! key. Together these tests cover the conversion, the baking, the checked-in file, and the
-//! match in `fixed_part()`, so they need `stonetop` built with `ssr` (a dev-dependency here).
+//! key; the one Setting overview is `setting_overview()`. Together these tests cover the
+//! conversion, the baking, the checked-in file, and the match in `fixed_part()`, so they need
+//! `stonetop` built with `ssr` (a dev-dependency here).
 
 use codegen::key::Key;
-use codegen::{json5_gear, json5_playbook, playbook_names};
+use codegen::{json5_gear, json5_playbook, json5_setting_overview, playbook_names};
+use stonetop::fixed::setting_overview;
 
 #[test]
 fn every_move_bakes_to_itself() {
@@ -95,4 +97,11 @@ fn every_gizmo_bakes_to_itself() {
         assert_eq!(key.fixed_part(), &fresh, "{key}: baked gizmo differs from gear.json5");
         assert_eq!(key.fixed_part().key, key, "{key}: baked gizmo carries the wrong key");
     }
+}
+
+#[test]
+fn the_setting_overview_bakes_to_itself() {
+    let overview = json5_setting_overview().unwrap_or_else(|e| panic!("{e:#}"));
+    let fresh = overview.to_fixed();
+    assert_eq!(setting_overview(), &fresh, "baked Setting overview differs from its json5");
 }

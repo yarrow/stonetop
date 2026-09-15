@@ -1,4 +1,4 @@
-use codegen::{json5_gear, json5_playbook};
+use codegen::{json5_gear, json5_playbook, json5_setting_overview};
 
 fn loads_ok(playbook_name: &str) {
     if let Err(e) = json5_playbook(playbook_name) {
@@ -44,6 +44,12 @@ fn would_be_hero() {
 #[test]
 fn gear() {
     if let Err(e) = json5_gear() {
+        panic!("Failed: {e:#?}");
+    }
+}
+#[test]
+fn setting_overview() {
+    if let Err(e) = json5_setting_overview() {
         panic!("Failed: {e:#?}");
     }
 }

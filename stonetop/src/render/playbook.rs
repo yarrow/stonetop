@@ -1,9 +1,9 @@
 //! The walk of a `PlaybookFixed` into one Markdown document in the printed booklet's order,
 //! with Special possessions ahead of Moves: H1 the playbook name, H2 each section, H3 each
-//! background and each Move. Every piece of content
-//! passes through the spoken forms in [`super::spoken`] and the converter in
-//! [`super::markdown`]. The fixed prose here (section lead-ins, the Stats block, the blank
-//! lines to fill in) is the Heavy's golden file's wording, shared by every playbook.
+//! background and each Move. Every piece of content passes through the spoken forms in
+//! [`super::spoken`] and the converter in [`super::markdown`], by way of
+//! [`super::document::speak`]. The fixed prose here (section lead-ins, the Stats block, the
+//! blank lines to fill in) is the Heavy's golden file's wording, shared by every playbook.
 
 use crate::fixed::{
     BackgroundChecklist, BackgroundChunk, BackgroundFixed, BackstoryFixed, BackstoryItem,
@@ -12,10 +12,9 @@ use crate::fixed::{
 };
 use crate::keys::{MoveKey, PlaybookKey};
 
-use super::markdown::html_to_markdown;
+use super::document::{Document, speak};
 use super::spoken::{
     expand_gizmos, gizmo_body, gizmo_head, join_with, move_resource_line, speak_resource,
-    speak_slots,
 };
 use super::starting_moves;
 
@@ -46,36 +45,6 @@ pub fn render_markdown(playbook: &PlaybookFixed) -> String {
     doc.block(format!("## {}", speak(playbook.intro.title)));
     doc.block(speak(playbook.intro.text));
     doc.finish()
-}
-
-/// The document under construction: blocks separated by blank lines. A heading, a
-/// paragraph, and a whole list are each one block.
-#[derive(Default)]
-struct Document {
-    blocks: Vec<String>,
-}
-
-impl Document {
-    fn block(&mut self, block: impl Into<String>) {
-        self.blocks.push(block.into());
-    }
-
-    /// One block of lines, such as a list.
-    fn lines(&mut self, lines: impl IntoIterator<Item = String>) {
-        self.block(lines.into_iter().collect::<Vec<_>>().join("\n"));
-    }
-
-    fn finish(self) -> String {
-        let mut text = self.blocks.join("\n\n");
-        text.push('\n');
-        text
-    }
-}
-
-/// Content text as spoken Markdown: resource placeholders are the caller's business, since
-/// only a possession has one; here slot diamonds become words and the HTML becomes Markdown.
-fn speak(text: &str) -> String {
-    html_to_markdown(&speak_slots(text))
 }
 
 /// Each of `texts` as spoken Markdown.

@@ -1,12 +1,13 @@
-//! The Fixed half of the Fixed/State split: playbook and gear content as printed, immutable
-//! and identical for everyone. The shapes follow `codegen/src/schema.rs` with three changes:
-//! every `String` is a `&'static str`, every `Vec<T>` is a `&'static [T]`, and every keyed
-//! item carries a `key` of its kind's enum and has no `key_prefix`.
+//! The Fixed half of the Fixed/State split: playbook, gear, and Setting overview content as
+//! printed, immutable and identical for everyone. The shapes follow `codegen/src/schema.rs`
+//! with three changes: every `String` is a `&'static str`, every `Vec<T>` is a `&'static [T]`,
+//! and every keyed item carries a `key` of its kind's enum and has no `key_prefix`.
 //!
 //! Values are built by `codegen` from the json5 and baked into `generated.rs`, which is
-//! compiled only behind the `ssr` feature and gives each key enum a total `fixed_part()` method.
-//! The `Bake` derives are behind the `codegen` feature and name the path each type is reached
-//! by from the generated file.
+//! compiled only behind the `ssr` feature and gives each key enum a total `fixed_part()` method
+//! and the one Setting overview its [`setting_overview()`] accessor. The `Bake` derives are
+//! behind the `codegen` feature and name the path each type is reached by from the generated
+//! file.
 
 #[cfg(feature = "codegen")]
 use databake::Bake;
@@ -394,6 +395,44 @@ pub enum BackstoryItem {
     /// A printed sub-heading within the backstory, one level below its name: the Seeker's
     /// Collection has "Major Arcana" and "Minor Arcana".
     Heading(&'static str),
+}
+
+// Setting overview -------------------------------------------------------
+
+/// The Setting overview as one document: the four-page overview's title and its sections in
+/// reading order. Fixed content shared by every campaign, with no key because there is one.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct SettingOverviewFixed {
+    pub title: &'static str,
+    pub sections: &'static [SettingSection],
+}
+
+/// One section of the overview: a heading, an HTML body, and any subsections under it. The
+/// nesting is explicit so that a renderer takes a heading's level from where it sits, never
+/// from its text.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct SettingSection {
+    pub heading: &'static str,
+    pub html: &'static str,
+    pub subsections: &'static [SettingSubsection],
+}
+
+/// A subsection of a section: a map re-expressed as a text description. It carries no
+/// subsections of its own; the overview is two levels deep.
+#[derive(Debug, Clone, PartialEq, Eq)]
+#[cfg_attr(feature = "codegen", derive(Bake), databake(path = stonetop::fixed))]
+pub struct SettingSubsection {
+    pub heading: &'static str,
+    pub html: &'static str,
+}
+
+/// The baked Setting overview.
+#[cfg(feature = "ssr")]
+#[must_use]
+pub fn setting_overview() -> &'static SettingOverviewFixed {
+    &generated::SETTING_OVERVIEW
 }
 
 #[cfg(test)]
