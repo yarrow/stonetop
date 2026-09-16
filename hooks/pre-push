@@ -2,9 +2,20 @@
 set -e
 set -x
 export RUSTDOCFLAGS=-Dwarnings
+# Not --all-features: `stonetop`'s `ssr` and `hydrate` are mutually exclusive.
+SERVER_FEATURES=stonetop/codegen,stonetop/ssr
+
 typos
 cargo fmt -- --check
-cargo doc --workspace --no-deps --document-private-items --all-features
-cargo clippy --profile=test --all-targets --all-features --no-deps
-cargo clippy --profile=release --all-targets --all-features --no-deps
-cargo nextest run --run-ignored all --all-features --cargo-quiet --cargo-quiet --status-level none
+cargo doc --workspace --no-deps --document-private-items --features "$SERVER_FEATURES"
+cargo clippy --profile=test --all-targets --features "$SERVER_FEATURES" --no-deps
+cargo clippy --profile=release --all-targets --features "$SERVER_FEATURES" --no-deps
+# The client half: a different target and a different feature set. `--lib` because the tests
+# and the binary are the server's.
+cargo clippy --target wasm32-unknown-unknown --package stonetop --lib \
+  --no-default-features --features hydrate --no-deps
+# The ignored tests include the one that fetches the client half through the app, so the
+# client half has to exist first.
+cargo leptos build
+cargo nextest run --run-ignored all --workspace --features "$SERVER_FEATURES" \
+  --cargo-quiet --cargo-quiet --status-level none

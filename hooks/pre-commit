@@ -1,6 +1,10 @@
 #!/bin/sh
 set -e
 set -x
+# Not --all-features: `stonetop`'s `ssr` and `hydrate` are mutually exclusive.
+SERVER_FEATURES=stonetop/codegen,stonetop/ssr
+
 cargo fmt -- --check
 typos
-cargo nextest run --all-features --cargo-quiet --cargo-quiet --status-level none
+cargo nextest run --workspace --features "$SERVER_FEATURES" \
+  --cargo-quiet --cargo-quiet --status-level none

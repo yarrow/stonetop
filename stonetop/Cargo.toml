@@ -5,19 +5,75 @@ edition.workspace = true
 authors.workspace = true
 license.workspace = true
 
+[lib]
+# `cdylib` is the WASM half; `rlib` is what the server binary and the tests link against.
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "stonetop"
+path = "src/main.rs"
+required-features = ["ssr"]
+
 [dependencies]
 databake = { version = "0.2.1", features = ["derive"], optional = true }
+# Both halves need it, and neither the bake tool nor a plain `cargo check` does.
+leptos = { version = "0.8.20", features = ["islands"], optional = true }
 regex-lite = { version = "0.1.9", optional = true }
 serde = { version = "1.0.229", features = ["derive"] }
 strum = { version = "0.28.0", features = ["derive"] }
+
+# The server half.
+any_spawner = { version = "0.3.0", features = ["tokio"], optional = true }
+axum = { version = "0.8.7", optional = true }
+leptos_axum = { version = "0.8.9", optional = true }
+tokio = { version = "1.49.0", features = [
+    "macros",
+    "rt-multi-thread",
+], optional = true }
+
+# The client half. wasm-bindgen is pinned because the `wasm-bindgen` CLI that cargo-leptos
+# runs must be the same version as the crate the WASM was built against.
+console_error_panic_hook = { version = "0.1.7", optional = true }
+wasm-bindgen = { version = "=0.2.128", optional = true }
 
 [features]
 # What the `codegen` crate needs to resolve names, walk every variant, and bake Fixed
 # values. Never on in the WASM build.
 codegen = ["dep:databake"]
-# The baked Fixed content (and later the Leptos server). Never on in the WASM build.
-ssr = ["dep:regex-lite"]
+# The server: the baked Fixed content, the renderers over it, and the axum app. Never on in
+# the WASM build.
+ssr = [
+    "dep:any_spawner",
+    "dep:axum",
+    "dep:leptos",
+    "dep:leptos_axum",
+    "dep:regex-lite",
+    "dep:tokio",
+    "leptos/ssr",
+]
+# The WASM client: the islands, and nothing else. It is mutually exclusive with both of the
+# others, which `src/lib.rs` refuses at compile time rather than leave to be noticed.
+hydrate = [
+    "dep:console_error_panic_hook",
+    "dep:leptos",
+    "dep:wasm-bindgen",
+    "leptos/hydrate",
+]
 
 [dev-dependencies]
+http-body-util = "0.1.3"
+scraper = "0.24.0"
 similar = "3.2.0"
 test-case = "3.3.1"
+tower = { version = "0.5.2", features = ["util"] }
+
+[package.metadata.leptos]
+output-name = "stonetop"
+site-root = "target/site"
+site-pkg-dir = "pkg"
+site-addr = "0.0.0.0:3000"
+reload-port = 3001
+bin-features = ["ssr"]
+bin-default-features = false
+lib-features = ["hydrate"]
+lib-default-features = false

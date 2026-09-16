@@ -1,2 +1,28 @@
 [alias]
 xtask = "run --package xtask --"
+
+# `leptos`'s `HydrationScripts` settles the client half's file names at *compile* time, not
+# at run time: with `LEPTOS_OUTPUT_NAME` unset it appends `_bg`, wasm-bindgen's name for the
+# WASM, and with it set it uses cargo-leptos's name. cargo-leptos sets it; plain `cargo
+# build`, `cargo test` and `cargo clippy` do not. Without this the two disagree, and a
+# document built by one asks the browser for a file the other never wrote — a page that
+# renders perfectly, loads nothing, and says nothing about it. Setting it here makes every
+# build in this workspace agree with cargo-leptos, and stops the two from invalidating each
+# other's build of `leptos`. It must stay equal to `output-name` in `stonetop/Cargo.toml`.
+[env]
+LEPTOS_OUTPUT_NAME = "stonetop"
+
+# Don't print the end-of-build future-incompatibility notice. One dependency triggers it:
+# `proc-macro-error2`, which three of leptos's proc-macro crates pull in, and which
+# re-exports `extern crate proc_macro` in a way that will one day be E0365. Nothing we can
+# reach fixes it — 2.0.1 is the last of its line, and the fork that did fix it is a different
+# crate under a different major version, so no `[patch]` can substitute it. Only leptos moving
+# off it will.
+#
+# This silences the notice and nothing else: ordinary warnings in our own code still print,
+# and the report is still recorded — `cargo report future-incompatibilities --id 1` prints it
+# in full. It is global, though, so a *new* offending dependency would also arrive silently;
+# worth running that command by hand when dependencies change, and worth removing this
+# section once leptos no longer needs it.
+[future-incompat-report]
+frequency = "never"
