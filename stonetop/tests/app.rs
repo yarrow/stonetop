@@ -60,6 +60,20 @@ async fn the_setting_document_carries_the_overviews_prose_as_markup() {
     );
 }
 
+/// Inline markup makes VoiceOver stop at every emphasis change and re-read the text in
+/// chunks, which is the difference between hearing a sentence and hearing its pieces. The
+/// overview's bodies are full of `<strong>` and `<em>`, so this is the document where it
+/// shows.
+#[tokio::test]
+async fn nothing_in_the_setting_document_speaks_in_chunks() {
+    let chunking = seam::get("/setting").await.document().chunking_elements();
+    assert!(
+        chunking.is_empty(),
+        "{} element(s) hold inline markup and would be read in chunks: {chunking:#?}",
+        chunking.len()
+    );
+}
+
 /// The root is not a blank document, and it is the way to the overview.
 #[tokio::test]
 async fn the_home_view_links_to_the_setting_overview() {

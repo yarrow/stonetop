@@ -10,6 +10,7 @@ mod playbook;
 mod setting;
 pub mod spoken;
 pub mod starting_moves;
+pub mod text_role;
 
 pub use playbook::render_markdown;
 pub use setting::render_setting_markdown;

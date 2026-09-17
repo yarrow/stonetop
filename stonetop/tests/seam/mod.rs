@@ -102,6 +102,31 @@ impl Document {
             .collect()
     }
 
+    /// Every element VoiceOver would chunk: one holding inline markup that is not marked to
+    /// speak as one utterance, given as its text. An empty answer is the passing one.
+    ///
+    /// A paragraph takes `role="text"` itself, having no role to lose. A list item and a
+    /// heading both have one worth keeping — `listitem` carries the list's item count, and
+    /// `heading` is the rotor — so their text goes inside a marked `<span>` instead, and the
+    /// element itself must carry no role at all.
+    pub fn chunking_elements(&self) -> Vec<String> {
+        let span = selector(r#"span[role="text"]"#);
+        self.0
+            .select(&selector("p, li, h1, h2, h3, h4, h5, h6"))
+            .filter(|element| emphasised(*element))
+            .filter(|element| {
+                let marked = if element.value().name() == "p" {
+                    element.attr("role") == Some("text")
+                } else {
+                    // `role="text"` on the `<li>` itself would replace `listitem`.
+                    element.attr("role").is_none() && element.select(&span).next().is_some()
+                };
+                !marked
+            })
+            .map(|element| text(element))
+            .collect()
+    }
+
     /// The `href` of every link whose text is `label`.
     pub fn links_labelled(&self, label: &str) -> Vec<String> {
         self.0
@@ -110,6 +135,16 @@ impl Document {
             .map(|element| element.attr("href").unwrap_or_default().to_string())
             .collect()
     }
+}
+
+/// Whether `element` holds inline markup of its own. Emphasis is a *direct* child in the
+/// six-tag grammar the content is authored in, so this deliberately does not descend: a
+/// nested list's emphasis belongs to the nested item, not to this one.
+fn emphasised(element: scraper::ElementRef<'_>) -> bool {
+    element
+        .children()
+        .filter_map(scraper::ElementRef::wrap)
+        .any(|child| matches!(child.value().name(), "strong" | "em"))
 }
 
 fn text(element: scraper::ElementRef<'_>) -> String {
