@@ -64,7 +64,7 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
   - Quick, Quiet, Rain, Red, Sharp, Snake, Snow, Spring, Summer
   - Tall, Tree, Yellow, White, Wind, Winter, Wolf, Whisper
 
-## I am called...
+## I am called…
 
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 
@@ -238,7 +238,7 @@ When you ***have a few days of downtime in familiar terrain***, you may replenis
 
 When you ***Forage***, you can produce Stock instead of provisions.
 
-Your sacred pouch is... (choose 1 on each line)
+Your sacred pouch is… (choose 1 on each line)
 
 - ☐ an heirloom ☐ made just for you ☐ your own work
 
@@ -255,12 +255,12 @@ What remarkable trait does it possess? (choose 1)
 
 ## The Earth Mother
 
-Danu has long been revered by all peoples, though not always worshipped or served by priests. In Stonetop's Pavilion of the Gods, Danu's shrine is... (choose 1)
+Danu has long been revered by all peoples, though not always worshipped or served by priests. In Stonetop's Pavilion of the Gods, Danu's shrine is… (choose 1)
 
-- ☐ ... loved, well-used, dripping with offerings and petitions.
-- ☐ ... little more than a token of respect, for her holy places are anywhere but here.
-- ☐ ... given wide berth by most, and approached only with care and propitiation.
-- ☐ ... neglected and all but forgotten, except by a few.
+- ☐ … loved, well-used, dripping with offerings and petitions.
+- ☐ … little more than a token of respect, for her holy places are anywhere but here.
+- ☐ … given wide berth by most, and approached only with care and propitiation.
+- ☐ … neglected and all but forgotten, except by a few.
 
 What do the folk of Stonetop leave as offerings? (choose 2-3)
 

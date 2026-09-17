@@ -34,7 +34,7 @@ pub fn render_markdown(playbook: &PlaybookFixed) -> String {
     instincts(&mut doc, playbook);
     appearance(&mut doc, &playbook.appearance);
     origins(&mut doc, playbook.origin_choices);
-    doc.block("## I am called...");
+    doc.block("## I am called…");
     doc.block(BLANK);
     stats(&mut doc, playbook);
     special_possessions(&mut doc, playbook);

@@ -69,7 +69,7 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 - ☐ **Marshedge:** Bridin, Clian, Engis, Fearghul, Lan, Neasa, Nill, or Una
 - ☐ **Lygos or some other point south:** Chara, Davud, Korina, Omid, Parvaneh, Tamir, Takish, or Yannis
 
-## I am called...
+## I am called…
 
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 

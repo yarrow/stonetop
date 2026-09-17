@@ -63,7 +63,7 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 - ☐ **Marshedge:** Adfin, Callach, Conlad, Eadna, Fionntan, Niamh, Orlaith, or Sorsha
 - ☐ **Lygos or some other point south:** Arash, Azar, Hafiz, Murat, Roshan, Shideh, Zara, or Zohara
 
-## I am called...
+## I am called…
 
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 

@@ -281,7 +281,7 @@
           text: "<p>When you <strong><em>Forage</em></strong>, you can produce Stock instead of provisions.</p>",
         },
         {
-          text: "<p>Your sacred pouch is... (choose 1 on each line)</p>",
+          text: "<p>Your sacred pouch is… (choose 1 on each line)</p>",
         },
         { tag: "Provenance", items: ["an heirloom", "made just for you", "your own work"] },
         { tag: "Materials", items: ["fur", "drakescale", "leather", "woven", "demonflesh"] },
@@ -303,14 +303,14 @@
       name: "The Earth Mother",
       list: [
         {
-          text: "<p>Danu has long been revered by all peoples, though not always worshipped or served by priests. In Stonetop's Pavilion of the Gods, Danu's shrine is... (choose 1)</p>",
+          text: "<p>Danu has long been revered by all peoples, though not always worshipped or served by priests. In Stonetop's Pavilion of the Gods, Danu's shrine is… (choose 1)</p>",
         },
         {
           choices: [
-            "... loved, well-used, dripping with offerings and petitions.",
-            "... little more than a token of respect, for her holy places are anywhere but here.",
-            "... given wide berth by most, and approached only with care and propitiation.",
-            "... neglected and all but forgotten, except by a few.",
+            "… loved, well-used, dripping with offerings and petitions.",
+            "… little more than a token of respect, for her holy places are anywhere but here.",
+            "… given wide berth by most, and approached only with care and propitiation.",
+            "… neglected and all but forgotten, except by a few.",
           ],
         },
         {

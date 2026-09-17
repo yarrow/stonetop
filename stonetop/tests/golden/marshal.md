@@ -55,7 +55,7 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 - ☐ **The Manmarch:** Berkhard, Gerhild, Hartig, Hilde, Sabrinne, Ulrike, Urrsla, or Weillem
 - ☐ **Lygos or some other point south:** Ameer, Calixta, Hadar, Kelila, Sulaim, Ursa, or Xandros
 
-## I am called...
+## I am called…
 
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 
@@ -247,14 +247,14 @@ Increase one of your stats by +1 (to a max of +3).
 
 ## War stories
 
-The last time the militia saw serious action, it was... (pick 1)
+The last time the militia saw serious action, it was… (pick 1)
 
-- ☐ ...to repel a nighttime raid by crinwin from the Great Wood.
-- ☐ ...to drive off bandits who'd taken up near the Ruined Tower.
-- ☐ ...to fend off Hillfolk pursuing a blood feud.
-- ☐ ...against Brennan and his Claws, before they settled in Marshedge.
-- ☐ ...to face a brutish hagr, come down from the Foothills to wreak havoc.
-- ☐ ...to hunt down beasts (wolves, drakes, or bears maybe?) who'd been preying on the village.
+- ☐ …to repel a nighttime raid by crinwin from the Great Wood.
+- ☐ …to drive off bandits who'd taken up near the Ruined Tower.
+- ☐ …to fend off Hillfolk pursuing a blood feud.
+- ☐ …against Brennan and his Claws, before they settled in Marshedge.
+- ☐ …to face a brutish hagr, come down from the Foothills to wreak havoc.
+- ☐ …to hunt down beasts (wolves, drakes, or bears maybe?) who'd been preying on the village.
 
 Answer at least 3 of the following questions about that action:
 

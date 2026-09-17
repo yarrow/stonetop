@@ -65,7 +65,7 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 - ☐ **The Manmarch:** Alfher, Bertrim, Dagmar, Elfrida, Hramn, Meike, Swanhilde, or Wulfrim
 - ☐ **Lygos or some other point south:** Ari, Boriz, Dimitra, Gorhan, Nitza, Selen, Todora, or Vasil
 
-## I am called...
+## I am called…
 
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 

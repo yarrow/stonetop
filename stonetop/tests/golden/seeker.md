@@ -63,7 +63,7 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 - ☐ **Marshedge:** Aiden, Barrfind, Caolan, Ciara, Deirbhile, Moirin, Tiern, or Reamann
 - ☐ **Lygos or some other point south:** Dana, Eliana, Erez, Fikri, Isra, Persefoni, Spiro, or Vahid
 
-## I am called...
+## I am called…
 
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 

@@ -59,7 +59,7 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 - ☐ **The Manmarch:** Bathhilde, Clothar, Ganter, Hiltrude, Ludig, Luise, Modd, or Wiland
 - ☐ **Lygos or some other point south:** Arihl, Akios, Bhadur, Seble, Shahnaz, Shay, Tisi, or Zubin
 
-## I am called...
+## I am called…
 
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 

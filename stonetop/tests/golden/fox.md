@@ -12,7 +12,7 @@ When you ***Seek Insight***, you may roll +INT instead of +WIS and add "What opp
 
 ### ☐ A Life of Crime
 
-You're new to Stonetop, having left behind a... *colorful* past. How did you get into that life? Why and how did you get out? Who and what did you leave behind?
+You're new to Stonetop, having left behind a… *colorful* past. How did you get into that life? Why and how did you get out? Who and what did you leave behind?
 
 Regardless, these people have taken you in. Time to lead an honest life, right?
 
@@ -59,7 +59,7 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 - ☐ **Marshedge:** Comyna, Crevan, Fitz, Greagir, Maired, Nainsi, Naiclas, or Saraid
 - ☐ **Lygos or some other point south:** Amit, Baz, Dafna, Mahsa, Parviz, Sanaz, Tzofiya, or Yaniv
 
-## I am called...
+## I am called…
 
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 

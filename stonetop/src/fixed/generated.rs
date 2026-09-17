@@ -19,8 +19,8 @@ pub(super) static SETTING_OVERVIEW: stonetop::fixed::SettingOverviewFixed =
                 subsections: &[],
             },
             stonetop::fixed::SettingSection {
-                heading: "The village itself...",
-                html: "<p><strong>...is home to around 300 folks.</strong> It's a nice place, though poor. People look out for each other, here.</p><p><strong>...is built around a massive standing stone of unknown origin</strong>, carved with faint runes. Lightning strikes the Stone often.</p><p><strong>...stands at the edge of the Great Wood.</strong> Villagers hunt and trap but—per a compact with the Forest Folk—never fell a living tree.</p>",
+                heading: "The village itself…",
+                html: "<p><strong>…is home to around 300 folks.</strong> It's a nice place, though poor. People look out for each other, here.</p><p><strong>…is built around a massive standing stone of unknown origin</strong>, carved with faint runes. Lightning strikes the Stone often.</p><p><strong>…stands at the edge of the Great Wood.</strong> Villagers hunt and trap but—per a compact with the Forest Folk—never fell a living tree.</p>",
                 subsections: &[],
             },
             stonetop::fixed::SettingSection {
@@ -40,17 +40,17 @@ pub(super) static SETTING_OVERVIEW: stonetop::fixed::SettingOverviewFixed =
             },
             stonetop::fixed::SettingSection {
                 heading: "The characters",
-                html: "<p>You'll play a local hero, someone with deep ties to Stonetop. You might be...</p><ul><li><strong>The Blessed</strong> (medium complexity): nature priest. Speaks to spirits and beasts. Works subtle magics via sacred markings and materials.</li><li><strong>The Fox</strong> (low complexity): clever, quick, and skillful. Not above bending the rules or fighting dirty. Can be quite the charmer, too.</li><li><strong>The Heavy</strong> (low/medium complexity): not just a violent individual—<em>our</em> violent individual. A champion, yes, but a bit of a liability, too.</li><li><strong>The Judge</strong> (low complexity): settler of disputes, chronicler, and divine bulwark against chaos. Insightful, tough, not necessarily persuasive.</li><li><strong>The Lightbearer</strong> (high complexity): invokes divine power via flame and candle. Beacon of hope, charity, and mercy. Fiery foe of the dark.</li><li><strong>The Marshal</strong> (high complexity): leads the town's militia, plus a crew of followers. Makes choices about who lives and who dies.</li><li><strong>The Ranger</strong> (low complexity): at home in the wild, the one you want with you when you travel. A resourceful guide and deadly hunter.</li><li><strong>The Seeker</strong> (high complexity): collector of lost lore and power, with potent artifacts that might well lead to their ruin.</li><li><strong>The Would-Be Hero</strong> (medium complexity): They're in over their head and full of fear and anger, but they just might outshine us all.</li></ul>",
+                html: "<p>You'll play a local hero, someone with deep ties to Stonetop. You might be…</p><ul><li><strong>The Blessed</strong> (medium complexity): nature priest. Speaks to spirits and beasts. Works subtle magics via sacred markings and materials.</li><li><strong>The Fox</strong> (low complexity): clever, quick, and skillful. Not above bending the rules or fighting dirty. Can be quite the charmer, too.</li><li><strong>The Heavy</strong> (low/medium complexity): not just a violent individual—<em>our</em> violent individual. A champion, yes, but a bit of a liability, too.</li><li><strong>The Judge</strong> (low complexity): settler of disputes, chronicler, and divine bulwark against chaos. Insightful, tough, not necessarily persuasive.</li><li><strong>The Lightbearer</strong> (high complexity): invokes divine power via flame and candle. Beacon of hope, charity, and mercy. Fiery foe of the dark.</li><li><strong>The Marshal</strong> (high complexity): leads the town's militia, plus a crew of followers. Makes choices about who lives and who dies.</li><li><strong>The Ranger</strong> (low complexity): at home in the wild, the one you want with you when you travel. A resourceful guide and deadly hunter.</li><li><strong>The Seeker</strong> (high complexity): collector of lost lore and power, with potent artifacts that might well lead to their ruin.</li><li><strong>The Would-Be Hero</strong> (medium complexity): They're in over their head and full of fear and anger, but they just might outshine us all.</li></ul>",
                 subsections: &[],
             },
             stonetop::fixed::SettingSection {
                 heading: "Your agenda",
-                html: "<p>As a player, your chief goals should be to...</p><ul><li>Portray a compelling character</li><li>Engage with the fictional world</li><li>Play to find out what happens</li></ul>",
+                html: "<p>As a player, your chief goals should be to…</p><ul><li>Portray a compelling character</li><li>Engage with the fictional world</li><li>Play to find out what happens</li></ul>",
                 subsections: &[],
             },
             stonetop::fixed::SettingSection {
                 heading: "Your principles",
-                html: "<p>The game works best if you...</p><ul><li><strong>Begin and end with the fiction</strong>. Tell us how you do what you do, what it looks like.</li><li><strong>Connect with the other PCs</strong>. Explore your relationships. Play out scenes together.</li><li><strong>Show us what's important to you</strong>. Who and what will your character fight for?</li><li><strong>Have goals and pursue them</strong>. Don't just react to threats that the GM presents.</li><li><strong>Be bold, take risks</strong>. If you don't act like a hero, who will?</li><li><strong>Embrace difficulty, setback, and failure</strong>. Show us how your character deals with it.</li><li><strong>Participate in worldbuilding</strong>. Answer the GM's questions with color and life.</li><li><strong>Build on what others have said</strong>. Let yourself be inspired by your fellow players.</li><li><strong>Give others a chance to shine</strong>. Don't hog the spotlight. Set others up for greatness!</li><li><strong>Participate in the conversation</strong>. Pay attention, ask questions, offer suggestions.</li></ul>",
+                html: "<p>The game works best if you…</p><ul><li><strong>Begin and end with the fiction</strong>. Tell us how you do what you do, what it looks like.</li><li><strong>Connect with the other PCs</strong>. Explore your relationships. Play out scenes together.</li><li><strong>Show us what's important to you</strong>. Who and what will your character fight for?</li><li><strong>Have goals and pursue them</strong>. Don't just react to threats that the GM presents.</li><li><strong>Be bold, take risks</strong>. If you don't act like a hero, who will?</li><li><strong>Embrace difficulty, setback, and failure</strong>. Show us how your character deals with it.</li><li><strong>Participate in worldbuilding</strong>. Answer the GM's questions with color and life.</li><li><strong>Build on what others have said</strong>. Let yourself be inspired by your fellow players.</li><li><strong>Give others a chance to shine</strong>. Don't hog the spotlight. Set others up for greatness!</li><li><strong>Participate in the conversation</strong>. Pay attention, ask questions, offer suggestions.</li></ul>",
                 subsections: &[],
             },
             stonetop::fixed::SettingSection {
@@ -5021,7 +5021,7 @@ static BACKGROUND_A_LIFE_OF_CRIME: stonetop::fixed::BackgroundFixed =
         name: "A Life of Crime",
         description: &[
             stonetop::fixed::BackgroundChunk::Flavor(
-                "<p>You're new to Stonetop, having left behind a... <em>colorful</em> past. How did you get into that life? Why and how did you get out? Who and what did you leave behind?</p>",
+                "<p>You're new to Stonetop, having left behind a… <em>colorful</em> past. How did you get into that life? Why and how did you get out? Who and what did you leave behind?</p>",
             ),
             stonetop::fixed::BackgroundChunk::Flavor(
                 "<p>Regardless, these people have taken you in. Time to lead an honest life, right?</p>",
@@ -6145,7 +6145,7 @@ static BACKSTORY_YOUR_SACRED_POUCH: stonetop::fixed::BackstoryFixed =
                 "<p>When you <strong><em>Forage</em></strong>, you can produce Stock instead of provisions.</p>",
             ),
             stonetop::fixed::BackstoryItem::Text(
-                "<p>Your sacred pouch is... (choose 1 on each line)</p>",
+                "<p>Your sacred pouch is… (choose 1 on each line)</p>",
             ),
             stonetop::fixed::BackstoryItem::ChoiceRow(stonetop::fixed::TaggedRow {
                 tag: "Provenance",
@@ -6177,13 +6177,13 @@ static BACKSTORY_THE_EARTH_MOTHER: stonetop::fixed::BackstoryFixed =
         name: "The Earth Mother",
         list: &[
             stonetop::fixed::BackstoryItem::Text(
-                "<p>Danu has long been revered by all peoples, though not always worshipped or served by priests. In Stonetop's Pavilion of the Gods, Danu's shrine is... (choose 1)</p>",
+                "<p>Danu has long been revered by all peoples, though not always worshipped or served by priests. In Stonetop's Pavilion of the Gods, Danu's shrine is… (choose 1)</p>",
             ),
             stonetop::fixed::BackstoryItem::Choices(&[
-                "... loved, well-used, dripping with offerings and petitions.",
-                "... little more than a token of respect, for her holy places are anywhere but here.",
-                "... given wide berth by most, and approached only with care and propitiation.",
-                "... neglected and all but forgotten, except by a few.",
+                "… loved, well-used, dripping with offerings and petitions.",
+                "… little more than a token of respect, for her holy places are anywhere but here.",
+                "… given wide berth by most, and approached only with care and propitiation.",
+                "… neglected and all but forgotten, except by a few.",
             ]),
             stonetop::fixed::BackstoryItem::Text(
                 "<p>What do the folk of Stonetop leave as offerings? (choose 2-3)</p>",
@@ -6424,15 +6424,15 @@ static BACKSTORY_WAR_STORIES: stonetop::fixed::BackstoryFixed = stonetop::fixed:
     name: "War stories",
     list: &[
         stonetop::fixed::BackstoryItem::Text(
-            "<p>The last time the militia saw serious action, it was... (pick 1)</p>",
+            "<p>The last time the militia saw serious action, it was… (pick 1)</p>",
         ),
         stonetop::fixed::BackstoryItem::Choices(&[
-            "...to repel a nighttime raid by crinwin from the Great Wood.",
-            "...to drive off bandits who'd taken up near the Ruined Tower.",
-            "...to fend off Hillfolk pursuing a blood feud.",
-            "...against Brennan and his Claws, before they settled in Marshedge.",
-            "...to face a brutish hagr, come down from the Foothills to wreak havoc.",
-            "...to hunt down beasts (wolves, drakes, or bears maybe?) who'd been preying on the village.",
+            "…to repel a nighttime raid by crinwin from the Great Wood.",
+            "…to drive off bandits who'd taken up near the Ruined Tower.",
+            "…to fend off Hillfolk pursuing a blood feud.",
+            "…against Brennan and his Claws, before they settled in Marshedge.",
+            "…to face a brutish hagr, come down from the Foothills to wreak havoc.",
+            "…to hunt down beasts (wolves, drakes, or bears maybe?) who'd been preying on the village.",
         ]),
         stonetop::fixed::BackstoryItem::Text(
             "<p>Answer at least 3 of the following questions about that action:</p>",

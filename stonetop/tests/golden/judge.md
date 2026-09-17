@@ -61,7 +61,7 @@ Stonetop is your home, or close enough, but where are you (or your family) from 
 - ☐ **Marshedge:** Briget, Comhall, Elnor, Liadain, Mirdach, Onghus, Somha, or Toal
 - ☐ **Lygos or some other southern town:** Abrim, Cassander, Despina, Hypatta, Morecai, Nomika, Sofia, or Yose
 
-## I am called...
+## I am called…
 
 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
 

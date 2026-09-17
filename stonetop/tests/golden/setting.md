@@ -4,13 +4,13 @@
 
 You play the heroes of **Stonetop**, an isolated village near the edge of the known world. Adventures focus on dealing with threats to the village, seizing opportunities for the village, or pursuing personal goals. Months or years might pass between adventures.
 
-## The village itself...
+## The village itself…
 
-**...is home to around 300 folks.** It's a nice place, though poor. People look out for each other, here.
+**…is home to around 300 folks.** It's a nice place, though poor. People look out for each other, here.
 
-**...is built around a massive standing stone of unknown origin**, carved with faint runes. Lightning strikes the Stone often.
+**…is built around a massive standing stone of unknown origin**, carved with faint runes. Lightning strikes the Stone often.
 
-**...stands at the edge of the Great Wood.** Villagers hunt and trap but—per a compact with the Forest Folk—never fell a living tree.
+**…stands at the edge of the Great Wood.** Villagers hunt and trap but—per a compact with the Forest Folk—never fell a living tree.
 
 ## Neighbors
 
@@ -46,7 +46,7 @@ Wise folk whisper of the **Things Below**, primeval entities of darkness, corrup
 
 ## The characters
 
-You'll play a local hero, someone with deep ties to Stonetop. You might be...
+You'll play a local hero, someone with deep ties to Stonetop. You might be…
 
 - **The Blessed** (medium complexity): nature priest. Speaks to spirits and beasts. Works subtle magics via sacred markings and materials.
 - **The Fox** (low complexity): clever, quick, and skillful. Not above bending the rules or fighting dirty. Can be quite the charmer, too.
@@ -60,7 +60,7 @@ You'll play a local hero, someone with deep ties to Stonetop. You might be...
 
 ## Your agenda
 
-As a player, your chief goals should be to...
+As a player, your chief goals should be to…
 
 - Portray a compelling character
 - Engage with the fictional world
@@ -68,7 +68,7 @@ As a player, your chief goals should be to...
 
 ## Your principles
 
-The game works best if you...
+The game works best if you…
 
 - **Begin and end with the fiction**. Tell us how you do what you do, what it looks like.
 - **Connect with the other PCs**. Explore your relationships. Play out scenes together.
