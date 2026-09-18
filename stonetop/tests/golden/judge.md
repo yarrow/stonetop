@@ -75,7 +75,7 @@ Assign these scores: +2, +1, +1, +0, +0, -1. When a debility is marked, you roll
 
 Damage: d6 · HP (max 20): ▁▁▁▁ · Armor: ▁▁▁▁ · XP: ▁▁▁▁ · Level: ▁▁▁▁
 
-## Special possessions (Pick 1, in addition to your symbol of authority and scribe's kit)
+## Special possessions (Pick 1, in addition to your symbol of authority and scribe's tools)
 
 - ☑︎ **Your symbol of authority** (pick 1):
   - ☐ 2-slot Black iron maul, utterly immune to all magic (*close, forceful, awkward*, +1 damage)
@@ -190,7 +190,7 @@ When you ***lie or otherwise deceive someone through words***, you have disadvan
 
 (Requires Truth or Consequences)
 
-When you ***bear witness to someone's promise or oath***, henceforth you may ask their player if they have kept their word. They must answer honestly. The character need not be present. If ***they have broken their word***, you gain advantage on all rolls against them until they admit their wrong and suffer an appropriate consequence (your call).
+When you ***bear witness to someone's promise or oath***, henceforth you may ask their player if they have kept their word. They must answer honestly. The character need not be present. If ***they have broken their word***, you gain advantage on all rolls against them until they admit their wrongdoing and suffer an appropriate consequence (your call).
 
 ### ☐ Vision Unclouded
 

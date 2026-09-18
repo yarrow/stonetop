@@ -1,3 +1,4 @@
+// Follows the second-printing PDF plus the June 2026 errata (pdf/01_Stonetop_-_Errata.pdf).
 {
   name: "The Judge",
   description: "Look here at this little town, this candleflame in the darkness. Its very existence is an act of courage and faith. And Aratis has charged you to keep it: to settle its disputes; to chronicle its tales; to defend it from darkness and ruin. Take up your hammer, Judge. Your town needs you.",
@@ -107,7 +108,7 @@
   damage: "d6",
   hp: 20,
   specialPossessions: {
-    pickNote: "Pick 1, in addition to your symbol of authority and scribe's kit",
+    pickNote: "Pick 1, in addition to your symbol of authority and scribe's tools",
     pickCount: 1,
     preselected: 2,
     options: [
@@ -219,7 +220,7 @@
     },
     {
       name: "Binding Arbitration",
-      description: "<p>When you <strong><em>bear witness to someone's promise or oath</em></strong>, henceforth you may ask their player if they have kept their word. They must answer honestly. The character need not be present. If <strong><em>they have broken their word</em></strong>, you gain advantage on all rolls against them until they admit their wrong and suffer an appropriate consequence (your call).</p>",
+      description: "<p>When you <strong><em>bear witness to someone's promise or oath</em></strong>, henceforth you may ask their player if they have kept their word. They must answer honestly. The character need not be present. If <strong><em>they have broken their word</em></strong>, you gain advantage on all rolls against them until they admit their wrongdoing and suffer an appropriate consequence (your call).</p>",
       requires: [{ needs: "Truth or Consequences" }],
     },
     {

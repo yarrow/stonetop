@@ -163,7 +163,7 @@ There's a cave called **the Maw** in the Great Wood, a few hours north of town. 
 
 The **Old Wall** surrounds Stonetop, about a mile out from the Stone itself and at the end of the West Road. It was clearly once a massive rampart, but has tumbled and been buried by the ages. When the villagers need stone for construction, they dig it out of the Old Wall and haul it back to town.
 
-Occasionally, some crack-job scholar from the south comes up to study the remains of the Old Wall, but they can rarely stand the “primitive” conditions out here for long.
+Occasionally, some crackpot scholar from the south comes up to study the remains of the Old Wall, but they can rarely stand the “primitive” conditions out here for long.
 
 On certain nights, **the Pale Hunter** stalks the Great Wood, and when he does even the bravest hunters stay in town. The Forest Folk spoke of him as something like a force of nature, not so much a god to be worshiped as a storm to be weathered.
 

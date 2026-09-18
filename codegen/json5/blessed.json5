@@ -1,3 +1,4 @@
+// Follows the second-printing PDF plus the June 2026 errata (pdf/01_Stonetop_-_Errata.pdf).
 {
   name: "The Blessed",
   description: "Danu, the Great Mother, provides. We need only learn her secrets: the names by which the trees call each other; the mark made with redberry juice to ward off impure spirits; the language of the wolves. A thousand such secrets Danu keeps, to share with only her true children. Her Blessed.",
@@ -183,8 +184,8 @@
     },
     {
       name: "Rites of the Land",
-      description: "<p>Once per season, when you <strong><em>oversee the sacred rites</em></strong>, hold 1 Favor. If you also sacrifice 1 Surplus, hold 4 Favor instead. Spend Favor in lieu of Stock, 1-for-1.</p><p>When you <strong><em>publicly sacrifice something or someone much-loved</em></strong>, either clear a steading debility or gain advantage when the steading next rolls +Fortunes.</p>",
-      resource: { hold: "Favor", canBe: 4, start: "empty" },
+      description: "<p>Once per season, when you <strong><em>oversee the sacred rites</em></strong>, hold 1 Boon. If you also sacrifice 1 Surplus, hold 4 Boon instead. Spend Boon in lieu of Stock, 1-for-1.</p><p>When you <strong><em>publicly sacrifice something or someone much-loved</em></strong>, either clear a steading debility or gain advantage when the steading next rolls +Fortunes.</p>",
+      resource: { hold: "Boon", canBe: 4, start: "empty" },
     },
     {
       name: "Spirit Tongue",

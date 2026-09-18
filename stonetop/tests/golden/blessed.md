@@ -139,9 +139,9 @@ When you ***Defend while touching the earth***, you can spend 1 Readiness to int
 
 ### ☐ Rites of the Land
 
-Favor: 4
+Boon: 4
 
-Once per season, when you ***oversee the sacred rites***, hold 1 Favor. If you also sacrifice 1 Surplus, hold 4 Favor instead. Spend Favor in lieu of Stock, 1-for-1.
+Once per season, when you ***oversee the sacred rites***, hold 1 Boon. If you also sacrifice 1 Surplus, hold 4 Boon instead. Spend Boon in lieu of Stock, 1-for-1.
 
 When you ***publicly sacrifice something or someone much-loved***, either clear a steading debility or gain advantage when the steading next rolls +Fortunes.
 

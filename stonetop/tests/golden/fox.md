@@ -16,7 +16,7 @@ You're new to Stonetop, having left behind a… *colorful* past. How did you get
 
 Regardless, these people have taken you in. Time to lead an honest life, right?
 
-You start with either Burgle or Light Fingers (your choice) as an extra move, and either burglar tools or a hidden stash (your choice) as an additional special possession.
+You start with either Burgle or Light Fingers (your choice) as an extra move, and either a burglar's kit or a hidden stash (your choice) as an additional special possession.
 
 ### ☐ The Prodigal Returned
 
