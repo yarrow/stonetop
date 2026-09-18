@@ -74,6 +74,18 @@ async fn nothing_in_the_setting_document_speaks_in_chunks() {
     );
 }
 
+/// VoiceOver stops at every bullet before it reads the item, so a plain list costs the
+/// reader two flicks per item for the news that this is a list, which they did not need.
+#[tokio::test]
+async fn no_unordered_list_in_the_setting_document_is_read_as_a_list() {
+    let bulleted = seam::get("/setting").await.document().bulleted_lists();
+    assert!(
+        bulleted.is_empty(),
+        "{} unordered list(s) would be read as lists, with a bullet stop per item: {bulleted:#?}",
+        bulleted.len()
+    );
+}
+
 /// The root is not a blank document, and it is the way to the overview.
 #[tokio::test]
 async fn the_home_view_links_to_the_setting_overview() {

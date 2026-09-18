@@ -127,6 +127,16 @@ impl Document {
             .collect()
     }
 
+    /// Every unordered list without `role="none"`. We don't want to see any, because we don't
+    /// want VoiceOver to stop at the bullet heading each list item.
+    pub fn bulleted_lists(&self) -> Vec<String> {
+        self.0
+            .select(&selector("ul"))
+            .filter(|element| element.attr("role") != Some("none"))
+            .map(|element| element.select(&selector("li")).next().map(text).unwrap_or_default())
+            .collect()
+    }
+
     /// The `href` of every link whose text is `label`.
     pub fn links_labelled(&self, label: &str) -> Vec<String> {
         self.0

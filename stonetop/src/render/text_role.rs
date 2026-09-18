@@ -1,6 +1,7 @@
 //! `role="text"` over the six-tag HTML the descriptions are authored in, so that VoiceOver
 //! speaks an element's text as one utterance instead of chunking it at every emphasis
-//! change — "Echo, with", "bold", "inside".
+//! change — "Echo, with", "bold", "inside". Also `role="none"` on every unordered list, so
+//! that VoiceOver does not stop at each item's bullet before reading the item's text.
 
 use std::sync::LazyLock;
 
@@ -19,11 +20,15 @@ static PARAGRAPH: LazyLock<Regex> =
 static LIST_ITEM_TEXT: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"(?s)<li>(.*?)(<ul>|<ol>|</li>)").expect("valid regex"));
 
-/// Marks every element in `html` whose text must be heard as one utterance.
-///
-/// A paragraph takes the role itself: it has no role worth keeping. A list item does not,
-/// because `role="text"` replaces `listitem` and would cost the list its item count and its
-/// place in the rotor, so the run of text goes inside a `<span>` instead.
+/// We want VoiceOver to read the tag within paragraphs and list elements as one thing, but
+/// VoiceOver wants to pause at each change of emphasis (`<strong>`, etc). If a paragraph has any
+/// emphasis tags, we use `<p role="text">`. For a list item, we use `<li><span role="text">` —
+/// otherwise VoiceOver won't treat it as a list. But we actually want *unordered* lists to be
+/// treated as text, not a list, because the stop at each bullet isn't worth it. So we use
+/// `<ul role="none">`, which the list items will inherit. (The numbers introducing ordered list
+/// items, which occur only in a playbook's Introductions section, are worth keeping as they
+/// help make sure the players are in synch.)
+
 pub fn one_utterance(html: &str) -> String {
     let paragraphs = PARAGRAPH.replace_all(html, |caps: &Captures| {
         let content = &caps[1];
@@ -42,14 +47,12 @@ pub fn one_utterance(html: &str) -> String {
                 caps[0].to_string()
             }
         })
-        .into_owned()
+        .replace("<ul>", r#"<ul role="none">"#)
 }
 
-/// Marks a bare run of text that the view, not the string, supplies the element for: a
-/// heading's words arrive without their `<h2>` around them, so there is no tag here to take a
-/// role. The `<span>` goes inside whatever the view wraps this in, which is what a heading
-/// needs anyway — `role="text"` on the `<h2>` itself would replace `heading` and cost the
-/// document its rotor.
+/// Header text comes here without its `<h1>`, `<h2>`, etc.  We need to use `<span role="text">`
+/// in headers for the same reason as ordered list items: We want VoiceOver to treat a header as
+/// a header, just as we want VoicOver to treat an ordered list item as a list item.
 pub fn one_utterance_run(run: &str) -> String {
     if has_emphasis(run) { format!(r#"<span role="text">{run}</span>"#) } else { run.to_string() }
 }
@@ -72,18 +75,28 @@ mod tests {
         "a paragraph with emphasis carries the role"
     )]
     #[test_case(
-        "<ul><li>Gain <strong>+1 STR</strong></li></ul>",
-        r#"<ul><li><span role="text">Gain <strong>+1 STR</strong></span></li></ul>"#;
+        "<ol><li>Gain <strong>+1 STR</strong></li></ol>",
+        r#"<ol><li><span role="text">Gain <strong>+1 STR</strong></span></li></ol>"#;
         "a list item wraps its text rather than taking the role itself"
     )]
     #[test_case(
-        "<ul><li>Choose <em>one</em><ul><li>Or <strong>both</strong></li></ul></li></ul>",
+        "<ul><li>A plain item</li><li>And another</li></ul>",
+        r#"<ul role="none"><li>A plain item</li><li>And another</li></ul>"#;
+        "an unordered list is not a list, whether or not its items hold emphasis"
+    )]
+    #[test_case(
+        "<ul><li>Gain <strong>+1 STR</strong></li></ul>",
+        r#"<ul role="none"><li><span role="text">Gain <strong>+1 STR</strong></span></li></ul>"#;
+        "an unordered item with emphasis still wraps its text"
+    )]
+    #[test_case(
+        "<ol><li>Choose <em>one</em><ul><li>Or <strong>both</strong></li></ul></li></ol>",
         concat!(
-            r#"<ul><li><span role="text">Choose <em>one</em></span>"#,
-            r#"<ul><li><span role="text">Or <strong>both</strong></span></li></ul>"#,
-            "</li></ul>",
+            r#"<ol><li><span role="text">Choose <em>one</em></span>"#,
+            r#"<ul role="none"><li><span role="text">Or <strong>both</strong></span></li></ul>"#,
+            "</li></ol>",
         );
-        "a nested list stays outside its parent's span"
+        "a nested list stays outside its parent's span, and the ordered step keeps its number"
     )]
     fn marked(html: &str, expected: &str) {
         assert_eq!(one_utterance(html), expected);
@@ -99,11 +112,9 @@ mod tests {
         assert_eq!(one_utterance_run(run), expected);
     }
 
-    /// Nothing without inline markup chunks, so nothing without inline markup is touched. The
-    /// role is a fix for a specific VoiceOver behaviour, not decoration to spread over the
-    /// document.
+    /// We don't add `role="text"` where it's not needed.
     #[test_case("<p>Plain prose, start to end.</p>"; "a paragraph of plain text")]
-    #[test_case("<ul><li>A plain item</li><li>And another</li></ul>"; "plain list items")]
+    #[test_case("<ol><li>A plain step</li><li>And another</li></ol>"; "plain ordered items")]
     #[test_case("<p>Prose with an <a href=\"/\">unrelated</a> tag.</p>"; "a tag that is not emphasis")]
     #[test_case(""; "nothing at all")]
     fn unmarked(html: &str) {
