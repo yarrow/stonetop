@@ -55,8 +55,19 @@ async fn the_setting_document_carries_the_overviews_prose_as_markup() {
         "the premise is missing from /setting"
     );
     assert!(
-        response.text().contains("<strong>Stonetop</strong>"),
+        response.text().contains("<strong>Marshedge</strong>"),
         "the bodies' markup did not survive; it reached the document as text"
+    );
+}
+
+/// The US English voice says "ston-eh-top" and "sah-nay"; a label on the word alone, inside
+/// an element read as one utterance, is what corrects it without a pause.
+#[tokio::test]
+async fn the_setting_document_labels_how_stonetop_is_said() {
+    let response = seam::get("/setting").await;
+    assert!(
+        response.text().contains(r#"<span aria-label="Stone-top">Stonetop</span>"#),
+        "the village's name reached the document with no label on how to say it"
     );
 }
 

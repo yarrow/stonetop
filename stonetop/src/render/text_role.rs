@@ -1,8 +1,11 @@
 //! `role="text"` over the six-tag HTML the descriptions are authored in, so that VoiceOver
 //! speaks an element's text as one utterance instead of chunking it at every emphasis
 //! change — "Echo, with", "bold", "inside". Also `role="none"` on every unordered list, so
-//! that VoiceOver does not stop at each item's bullet before reading the item's text.
+//! that VoiceOver does not stop at each item's bullet before reading the item's text. And a
+//! spoken label on each word the US English voice gets wrong, which the `role="text"` around
+//! it lets VoiceOver substitute into the utterance rather than pause on.
 
+use std::borrow::Cow;
 use std::sync::LazyLock;
 
 use regex_lite::{Captures, Regex};
@@ -20,6 +23,35 @@ static PARAGRAPH: LazyLock<Regex> =
 static LIST_ITEM_TEXT: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"(?s)<li>(.*?)(<ul>|<ol>|</li>)").expect("valid regex"));
 
+/// Each word the US English voice mispronounces, exactly as it appears in the content, and
+/// how to spell it so the voice says it right. "Stonetop" is "ston-eh-top", and the hyphen
+/// gives the synthesizer the syllable break. Capitalised "Sane" is the surname "Sané", and
+/// the lowercase spelling dodges the name dictionary; lowercase "sane" in the content is
+/// already said right, so it is not listed. "Fae" is said as "Fey".
+const MISPRONOUNCED: [(&str, &str); 3] =
+    [("Stonetop", "Stone-top"), ("Sane", "sane"), ("Fae", "Fey")];
+
+/// The listed words as one alternation at word boundaries, so that a single pass labels them
+/// all and a label the pass has just written is never matched again.
+static MISPRONOUNCED_WORD: LazyLock<Regex> = LazyLock::new(|| {
+    let words: Vec<&str> = MISPRONOUNCED.iter().map(|(word, _)| *word).collect();
+    Regex::new(&format!(r"\b({})\b", words.join("|"))).expect("valid regex")
+});
+
+/// Every mispronounced word wrapped in a `<span aria-label>` that spells out how to say it.
+/// The span carries no role of its own; it is the enclosing `role="text"` that lets the
+/// label substitute into the utterance instead of splitting it.
+fn label_pronunciations(html: &str) -> Cow<'_, str> {
+    MISPRONOUNCED_WORD.replace_all(html, |caps: &Captures| {
+        let word = &caps[0];
+        let (_, said) = MISPRONOUNCED
+            .iter()
+            .find(|(listed, _)| *listed == word)
+            .expect("the regex is built from the list");
+        format!(r#"<span aria-label="{said}">{word}</span>"#)
+    })
+}
+
 /// We want VoiceOver to read the tag within paragraphs and list elements as one thing, but
 /// VoiceOver wants to pause at each change of emphasis (`<strong>`, etc). If a paragraph has any
 /// emphasis tags, we use `<p role="text">`. For a list item, we use `<li><span role="text">` —
@@ -28,11 +60,11 @@ static LIST_ITEM_TEXT: LazyLock<Regex> =
 /// `<ul role="none">`, which the list items will inherit. (The numbers introducing ordered list
 /// items, which occur only in a playbook's Introductions section, are worth keeping as they
 /// help make sure the players are in synch.)
-
 pub fn one_utterance(html: &str) -> String {
-    let paragraphs = PARAGRAPH.replace_all(html, |caps: &Captures| {
+    let html = label_pronunciations(html);
+    let paragraphs = PARAGRAPH.replace_all(&html, |caps: &Captures| {
         let content = &caps[1];
-        if has_emphasis(content) {
+        if has_inline_markup(content) {
             format!(r#"<p role="text">{content}</p>"#)
         } else {
             caps[0].to_string()
@@ -41,7 +73,7 @@ pub fn one_utterance(html: &str) -> String {
     LIST_ITEM_TEXT
         .replace_all(&paragraphs, |caps: &Captures| {
             let (content, ended_by) = (&caps[1], &caps[2]);
-            if has_emphasis(content) {
+            if has_inline_markup(content) {
                 format!(r#"<li><span role="text">{content}</span>{ended_by}"#)
             } else {
                 caps[0].to_string()
@@ -54,13 +86,20 @@ pub fn one_utterance(html: &str) -> String {
 /// in headers for the same reason as ordered list items: We want VoiceOver to treat a header as
 /// a header, just as we want VoicOver to treat an ordered list item as a list item.
 pub fn one_utterance_run(run: &str) -> String {
-    if has_emphasis(run) { format!(r#"<span role="text">{run}</span>"#) } else { run.to_string() }
+    let run = label_pronunciations(run);
+    if has_inline_markup(&run) {
+        format!(r#"<span role="text">{run}</span>"#)
+    } else {
+        run.into_owned()
+    }
 }
 
 /// Whether `content` holds inline markup, which is what makes VoiceOver chunk it. `<strong>`
-/// and `<em>` are the only inline tags the six-tag grammar has.
-fn has_emphasis(content: &str) -> bool {
-    content.contains("<strong>") || content.contains("<em>")
+/// and `<em>` are the only inline tags the six-tag grammar has; the `<span>` is ours, from
+/// [`label_pronunciations`], and an inline span carrying ARIA splits a paragraph just as
+/// emphasis does.
+fn has_inline_markup(content: &str) -> bool {
+    content.contains("<strong>") || content.contains("<em>") || content.contains("<span")
 }
 
 #[cfg(test)]
@@ -103,11 +142,45 @@ mod tests {
     }
 
     #[test_case(
+        "<p>Welcome to Stonetop.</p>",
+        r#"<p role="text">Welcome to <span aria-label="Stone-top">Stonetop</span>.</p>"#;
+        "Stonetop is labelled with its syllable break, and the paragraph carries the role"
+    )]
+    #[test_case(
+        "<p>Sane is the name of the thing.</p>",
+        r#"<p role="text"><span aria-label="sane">Sane</span> is the name of the thing.</p>"#;
+        "capitalised Sane is labelled lowercase, which the voice says right"
+    )]
+    #[test_case(
+        "<p>The Fae are near.</p>",
+        r#"<p role="text">The <span aria-label="Fey">Fae</span> are near.</p>"#;
+        "Fae is labelled with the spelling the voice says right"
+    )]
+    #[test_case(
+        "<p>A sane choice.</p>",
+        "<p>A sane choice.</p>";
+        "lowercase sane is already said right and is left alone"
+    )]
+    #[test_case(
+        "<ol><li>Go to Stonetop</li></ol>",
+        r#"<ol><li><span role="text">Go to <span aria-label="Stone-top">Stonetop</span></span></li></ol>"#;
+        "a list item with a labelled word wraps its text, keeping the item"
+    )]
+    fn pronounced(html: &str, expected: &str) {
+        assert_eq!(one_utterance(html), expected);
+    }
+
+    #[test_case(
         "The <em>Steplands</em>",
         r#"<span role="text">The <em>Steplands</em></span>"#;
         "a heading's run with emphasis is wrapped"
     )]
     #[test_case("The Steplands", "The Steplands"; "a heading's run of plain text is left alone")]
+    #[test_case(
+        "Welcome to Stonetop",
+        r#"<span role="text">Welcome to <span aria-label="Stone-top">Stonetop</span></span>"#;
+        "a heading's run with a labelled word is wrapped"
+    )]
     fn marked_run(run: &str, expected: &str) {
         assert_eq!(one_utterance_run(run), expected);
     }

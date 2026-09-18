@@ -147,14 +147,15 @@ impl Document {
     }
 }
 
-/// Whether `element` holds inline markup of its own. Emphasis is a *direct* child in the
+/// Whether `element` holds inline markup of its own: emphasis, or a span labelled with how a
+/// word is said, which splits an utterance the same way. Both are *direct* children in the
 /// six-tag grammar the content is authored in, so this deliberately does not descend: a
 /// nested list's emphasis belongs to the nested item, not to this one.
 fn emphasised(element: scraper::ElementRef<'_>) -> bool {
-    element
-        .children()
-        .filter_map(scraper::ElementRef::wrap)
-        .any(|child| matches!(child.value().name(), "strong" | "em"))
+    element.children().filter_map(scraper::ElementRef::wrap).any(|child| {
+        matches!(child.value().name(), "strong" | "em")
+            || (child.value().name() == "span" && child.attr("aria-label").is_some())
+    })
 }
 
 fn text(element: scraper::ElementRef<'_>) -> String {
