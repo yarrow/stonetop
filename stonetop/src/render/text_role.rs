@@ -32,10 +32,12 @@ const MISPRONOUNCED: [(&str, &str); 3] =
     [("Stonetop", "Stone-top"), ("Sane", "sane"), ("Fae", "Fey")];
 
 /// The listed words as one alternation at word boundaries, so that a single pass labels them
-/// all and a label the pass has just written is never matched again.
+/// all and a label the pass has just written is never matched again. A possessive `'s` is
+/// captured along with the word: left outside the span, it is said as a separate "s" after
+/// the label, so the label has to carry it too.
 static MISPRONOUNCED_WORD: LazyLock<Regex> = LazyLock::new(|| {
     let words: Vec<&str> = MISPRONOUNCED.iter().map(|(word, _)| *word).collect();
-    Regex::new(&format!(r"\b({})\b", words.join("|"))).expect("valid regex")
+    Regex::new(&format!(r"\b({})(['’]s)?\b", words.join("|"))).expect("valid regex")
 });
 
 /// Every mispronounced word wrapped in a `<span aria-label>` that spells out how to say it.
@@ -43,12 +45,14 @@ static MISPRONOUNCED_WORD: LazyLock<Regex> = LazyLock::new(|| {
 /// label substitute into the utterance instead of splitting it.
 fn label_pronunciations(html: &str) -> Cow<'_, str> {
     MISPRONOUNCED_WORD.replace_all(html, |caps: &Captures| {
-        let word = &caps[0];
+        let whole = &caps[0];
+        let word = &caps[1];
+        let possessive = caps.get(2).map_or("", |m| m.as_str());
         let (_, said) = MISPRONOUNCED
             .iter()
             .find(|(listed, _)| *listed == word)
             .expect("the regex is built from the list");
-        format!(r#"<span aria-label="{said}">{word}</span>"#)
+        format!(r#"<span aria-label="{said}{possessive}">{whole}</span>"#)
     })
 }
 
@@ -155,6 +159,11 @@ mod tests {
         "<p>The Fae are near.</p>",
         r#"<p role="text">The <span aria-label="Fey">Fae</span> are near.</p>"#;
         "Fae is labelled with the spelling the voice says right"
+    )]
+    #[test_case(
+        "<p>Stonetop's heroes.</p>",
+        r#"<p role="text"><span aria-label="Stone-top's">Stonetop's</span> heroes.</p>"#;
+        "a possessive is kept inside the span and its label, so it is not said as a separate s"
     )]
     #[test_case(
         "<p>A sane choice.</p>",

@@ -6,7 +6,7 @@ You play the heroes of **Stonetop**, an isolated village near the edge of the kn
 
 ## The village itself…
 
-**…is home to around 300 folks.** It's a nice place, though poor. People look out for each other, here.
+**…is home to around 300 folks.** It's a nice place, though poor. Here, people look out for each other.
 
 **…is built around a massive standing stone of unknown origin**, carved with faint runes. Lightning strikes the Stone often.
 
@@ -50,7 +50,7 @@ You'll play a local hero, someone with deep ties to Stonetop. You might be…
 
 - **The Blessed** (medium complexity): nature priest. Speaks to spirits and beasts. Works subtle magics via sacred markings and materials.
 - **The Fox** (low complexity): clever, quick, and skillful. Not above bending the rules or fighting dirty. Can be quite the charmer, too.
-- **The Heavy** (low/medium complexity): not just a violent individual—*our* violent individual. A champion, yes, but a bit of a liability, too.
+- **The Heavy** (low/medium complexity): not just a violent individual—*Stonetop's* violent individual. A champion, yes, but a bit of a liability, too.
 - **The Judge** (low complexity): settler of disputes, chronicler, and divine bulwark against chaos. Insightful, tough, not necessarily persuasive.
 - **The Lightbearer** (high complexity): invokes divine power via flame and candle. Beacon of hope, charity, and mercy. Fiery foe of the dark.
 - **The Marshal** (high complexity): leads the town's militia, plus a crew of followers. Makes choices about who lives and who dies.
@@ -169,7 +169,7 @@ On certain nights, **the Pale Hunter** stalks the Great Wood, and when he does e
 
 The tales differ as to what happens should you cross the Hunter. He might ignore you, call you to join his raid, or mark you as his quarry. But all the tales agree: impress him, and you'll be well rewarded. Get caught or fail to do your part—well, best not to think of it.
 
-**The Red Grove** is a stand of trees in the forest that turn blood red (leaves, bark, and all) near the autumnal equinox. But by springtime, they're back to normal.
+**The Red Grove** is a stand of trees in the forest that turn blood red—leaves, bark, and all—near the autumnal equinox. But by springtime, they're back to normal.
 
 The Forest Folk never went near this grove, and warned the townsfolk to avoid it as well. They never said why.
 
