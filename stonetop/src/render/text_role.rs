@@ -27,17 +27,38 @@ static LIST_ITEM_TEXT: LazyLock<Regex> =
 /// how to spell it so the voice says it right. "Stonetop" is "ston-eh-top", and the hyphen
 /// gives the synthesizer the syllable break. Capitalised "Sane" is the surname "Sané", and
 /// the lowercase spelling dodges the name dictionary; lowercase "sane" in the content is
-/// already said right, so it is not listed. "Fae" is said as "Fey".
-const MISPRONOUNCED: [(&str, &str); 3] =
-    [("Stonetop", "Stone-top"), ("Sane", "sane"), ("Fae", "Fey")];
+/// already said right, so it is not listed. "Fae" is said as "Fey". "Ustrina" and
+/// "Lightbearer" are respelled the same way as "Stonetop". "presents" is only ever the verb
+/// in the content, and the voice says the noun. "compact" is the reverse: the voice says the
+/// adjective, and the content means the noun, the Compact with the Forest Folk — everywhere
+/// but in [`SAID_RIGHT`].
+const MISPRONOUNCED: [(&str, &str); 8] = [
+    ("Stonetop", "Stone-top"),
+    ("Sane", "sane"),
+    ("Fae", "Fey"),
+    ("Ustrina", "Oohstreena"),
+    ("Lightbearer", "Light-bearer"),
+    ("presents", "preSENTS"),
+    ("compact", "com-pact"),
+    ("Compact", "Com-pact"),
+];
 
-/// The listed words as one alternation at word boundaries, so that a single pass labels them
-/// all and a label the pass has just written is never matched again. A possessive `'s` is
-/// captured along with the word: left outside the span, it is said as a separate "s" after
-/// the label, so the label has to carry it too.
+/// Phrases in which a listed word is a different word with the same spelling, one the voice
+/// already says right, so the phrase is left as it is. The Ranger's "compact & sturdy" is the
+/// adjective. The ampersand is listed both bare and escaped, because the content has both.
+const SAID_RIGHT: [&str; 2] = ["compact & sturdy", "compact &amp; sturdy"];
+
+/// The [`SAID_RIGHT`] phrases and then the listed words, as one alternation at word
+/// boundaries, so that a single pass labels every word and a label the pass has just written
+/// is never matched again. The phrases come first because the leftmost alternative wins: a
+/// phrase is matched whole, and its word is never reached. A possessive `'s` is captured
+/// along with a word: left outside the span, it is said as a separate "s" after the label, so
+/// the label has to carry it too.
 static MISPRONOUNCED_WORD: LazyLock<Regex> = LazyLock::new(|| {
+    let phrases: Vec<String> = SAID_RIGHT.iter().map(|phrase| regex_lite::escape(phrase)).collect();
     let words: Vec<&str> = MISPRONOUNCED.iter().map(|(word, _)| *word).collect();
-    Regex::new(&format!(r"\b({})(['’]s)?\b", words.join("|"))).expect("valid regex")
+    Regex::new(&format!(r"\b(?:({})|({})(['’]s)?)\b", phrases.join("|"), words.join("|")))
+        .expect("valid regex")
 });
 
 /// Every mispronounced word wrapped in a `<span aria-label>` that spells out how to say it.
@@ -46,11 +67,13 @@ static MISPRONOUNCED_WORD: LazyLock<Regex> = LazyLock::new(|| {
 fn label_pronunciations(html: &str) -> Cow<'_, str> {
     MISPRONOUNCED_WORD.replace_all(html, |caps: &Captures| {
         let whole = &caps[0];
-        let word = &caps[1];
-        let possessive = caps.get(2).map_or("", |m| m.as_str());
+        let Some(word) = caps.get(2) else {
+            return whole.to_string(); // a `SAID_RIGHT` phrase
+        };
+        let possessive = caps.get(3).map_or("", |m| m.as_str());
         let (_, said) = MISPRONOUNCED
             .iter()
-            .find(|(listed, _)| *listed == word)
+            .find(|(listed, _)| *listed == word.as_str())
             .expect("the regex is built from the list");
         format!(r#"<span aria-label="{said}{possessive}">{whole}</span>"#)
     })
@@ -164,6 +187,16 @@ mod tests {
         "<p>Stonetop's heroes.</p>",
         r#"<p role="text"><span aria-label="Stone-top's">Stonetop's</span> heroes.</p>"#;
         "a possessive is kept inside the span and its label, so it is not said as a separate s"
+    )]
+    #[test_case(
+        "<p>Per a compact with the Forest Folk.</p>",
+        r#"<p role="text">Per a <span aria-label="com-pact">compact</span> with the Forest Folk.</p>"#;
+        "compact is the noun, which the voice has to be told"
+    )]
+    #[test_case(
+        "<ul><li>compact & sturdy</li><li>compact &amp; sturdy</li></ul>",
+        r#"<ul role="none"><li>compact & sturdy</li><li>compact &amp; sturdy</li></ul>"#;
+        "compact the adjective is already said right and is left alone"
     )]
     #[test_case(
         "<p>A sane choice.</p>",
